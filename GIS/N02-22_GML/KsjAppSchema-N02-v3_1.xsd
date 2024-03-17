@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:ksj="http://nlftp.mlit.go.jp/ksj/schemas/ksj-app" xmlns:gml="http://www.opengis.net/gml/3.2.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="https://nlftp.mlit.go.jp/ksj/jpgis/xsd/KsjAppSchema.xsd" elementFormDefault="qualified">
+  <!-- 外部参照 -->
+  <xsd:import namespace="http://www.opengis.net/gml/3.2.1" schemaLocation="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19136_Schemas/gml.xsd" />
+  <!-- 基底要素 -->
+  <xsd:element name="Dataset">
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="gml:AbstractFeatureType">
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="gml:AbstractGML" />
+            <xsd:element ref="gml:CompositeValue" />
+          </xsd:choice>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <!--要素定義 -->
+  <xsd:element name="Railway" type="ksj:RailwayType" abstract="true" substitutionGroup="gml:AbstractFeature" />
+  <xsd:complexType name="RailwayType" abstract="true">
+    <xsd:annotation>
+      <xsd:documentation>鉄道</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <xsd:element name="location" type="gml:CurvePropertyType">
+            <xsd:annotation>
+              <xsd:documentation>場所</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="railwayType" type="ksj:RailwayTypeCodeType">
+            <xsd:annotation>
+              <xsd:documentation>鉄道区分</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="serviceProviderType" type="ksj:ServiceProviderTypeCodeType">
+            <xsd:annotation>
+              <xsd:documentation>事業者種別 </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="railwayLineName" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>路線名</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="operationCompany" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>運営会社</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RailwayPropertyType">
+    <xsd:sequence minOccurs="0">
+      <xsd:element ref="ksj:Railway" />
+    </xsd:sequence>
+    <xsd:attributeGroup ref="gml:AssociationAttributeGroup" />
+    <xsd:attributeGroup ref="gml:OwnershipAttributeGroup" />
+  </xsd:complexType>
+  <xsd:complexType name="RailwayMemberType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractMemberType">
+        <xsd:sequence minOccurs="0">
+          <xsd:element ref="ksj:Railway" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="gml:AssociationAttributeGroup" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="RailroadSection" type="ksj:RailroadSectionType" substitutionGroup="ksj:Railway" />
+  <xsd:complexType name="RailroadSectionType">
+    <xsd:annotation>
+      <xsd:documentation>鉄道区間 </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ksj:RailwayType">
+        <xsd:sequence>
+          <xsd:element name="station" type="ksj:StationPropertyType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RailroadSectionPropertyType">
+    <xsd:sequence minOccurs="0">
+      <xsd:element ref="ksj:RailroadSection" />
+    </xsd:sequence>
+    <xsd:attributeGroup ref="gml:AssociationAttributeGroup" />
+    <xsd:attributeGroup ref="gml:OwnershipAttributeGroup" />
+  </xsd:complexType>
+  <xsd:complexType name="RailroadSectionMemberType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractMemberType">
+        <xsd:sequence minOccurs="0">
+          <xsd:element ref="ksj:RailroadSection" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="gml:AssociationAttributeGroup" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Station" type="ksj:StationType" substitutionGroup="ksj:Railway" />
+  <xsd:complexType name="StationType">
+    <xsd:annotation>
+      <xsd:documentation>駅</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ksj:RailwayType">
+        <xsd:sequence>
+          <xsd:element name="stationName" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>駅名</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="stationCode" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>駅コード</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="groupCode" type="xsd:string">
+            <xsd:annotation>
+              <xsd:documentation>グループコード</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="railroadSection" type="ksj:RailroadSectionPropertyType" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="StationPropertyType">
+    <xsd:sequence minOccurs="0">
+      <xsd:element ref="ksj:Station" />
+    </xsd:sequence>
+    <xsd:attributeGroup ref="gml:AssociationAttributeGroup" />
+    <xsd:attributeGroup ref="gml:OwnershipAttributeGroup" />
+  </xsd:complexType>
+  <xsd:complexType name="StationMemberType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractMemberType">
+        <xsd:sequence minOccurs="0">
+          <xsd:element ref="ksj:Station" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="gml:AssociationAttributeGroup" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:simpleType name="ServiceProviderTypeCodeType">
+    <xsd:annotation>
+      <xsd:documentation>事業者種別コード </xsd:documentation>
+    </xsd:annotation>
+    <xsd:union memberTypes="ksj:ServiceProviderTypeCodeEnumType ksj:ServiceProviderTypeCodeOtherType" />
+  </xsd:simpleType>
+  <xsd:simpleType name="ServiceProviderTypeCodeEnumType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>新幹線</gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="2">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>JR在来線</gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="3">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>公営鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="4">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>民営鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="5">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>第三セクター</gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ServiceProviderTypeCodeOtherType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="other: \w{2,}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RailwayTypeCodeType">
+    <xsd:annotation>
+      <xsd:documentation>鉄道区分コード </xsd:documentation>
+    </xsd:annotation>
+    <xsd:union memberTypes="ksj:RailwayTypeCodeEnumType ksj:RailwayTypeCodeOtherType" />
+  </xsd:simpleType>
+  <xsd:simpleType name="RailwayTypeCodeEnumType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="11">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>普通鉄道JR </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="12">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>普通鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="13">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>鋼索鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="14">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>懸垂式鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="15">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>跨座式鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="16">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>案内軌条式鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="17">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>無軌条鉄道 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="21">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>軌道</gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="22">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>懸垂式モノレール </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="23">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>跨座式モノレール </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="24">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>案内軌条式 </gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="25">
+        <xsd:annotation>
+          <xsd:appinfo>
+            <gml:description>浮上式</gml:description>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RailwayTypeCodeOtherType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="other: \w{2,}" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>
