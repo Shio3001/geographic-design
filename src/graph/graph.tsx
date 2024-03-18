@@ -16,25 +16,22 @@ class Graph {
   }
 
   pushNode = (node: GraphNode) => {
-    if (!this.graph.has(node.node_name)) {
-      this.graph.set(node.node_name, node);
-      console.log("node追加 : 新規追加", node.node_name);
+    if (!this.graph.has(node.node_id)) {
+      this.graph.set(node.node_id, node);
     } else {
-      const c_node = this.graph.get(node.node_name);
+      const c_node = this.graph.get(node.node_id);
 
       for (let i = 0; i < node.link_id_list.length; i++) {
         const link_id = node.link_id_list[i];
         c_node.pushLinkNode(link_id);
       }
-      this.graph.set(node.node_name, c_node);
-
-      console.log("node追加 : 既存追加", node.node_name);
+      this.graph.set(node.node_id, c_node);
     }
 
     for (let i = 0; i < node.link_id_list.length; i++) {
       const link_id = node.link_id_list[i];
       const link_node = this.graph.get(link_id);
-      link_node.pushLinkNode(node.node_name);
+      link_node.pushLinkNode(node.node_id);
       this.graph.set(link_id, link_node);
     }
   };

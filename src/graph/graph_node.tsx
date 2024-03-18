@@ -7,35 +7,34 @@ import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 
 class GraphNode {
-  node_name: string;
-  node_id: number;
+  node_id: string;
 
   x: number;
   y: number;
 
   link_id_list: Array<string>;
   constructor() {
-    this.node_name = "";
-    this.node_id = 0;
+    this.node_id = "";
     this.x = 0;
     this.y = 0;
     this.link_id_list = [];
   }
 
-  pushLinkNode = (link_node_name: string) => {
-    this.link_id_list.push(link_node_name);
+  pushLinkNode = (link_node_id: string) => {
+    this.link_id_list.push(link_node_id);
   };
 
-  setName = (name: string) => {
-    this.node_name = name;
+  setId = (id: string) => {
+    this.node_id = id;
   };
 
-  setNameByPos = (x: number, y: number) => {
-    const xs = String(x);
-    const ys = String(y);
-
-    const name = xs + "p" + ys;
-    this.node_name = name;
+  setIdByPos = (x: string, y: string) => {
+    // const xs = String(x);
+    // const ys = String(y);
+    // const xs = String(x);
+    // const ys = String(y);
+    const name = x + "p" + y;
+    this.node_id = name;
   };
 
   setX = (x: number) => {

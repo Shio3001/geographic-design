@@ -7,6 +7,10 @@ import SvgKit from "../sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import Graph from "./../../graph/graph";
 import GraphNode from "./../../graph/graph_node";
+import GraphDfs from "./../../graph/graph_dfs";
+import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
+
+import BigNumber from "bignumber.js";
 
 class ParserRailroadSection {
   edit_data: EditData;
@@ -27,6 +31,15 @@ class ParserRailroadSection {
     this.unit_type = unit_type;
     this.graph = new Graph();
   }
+
+  generatePath = (): Array<GraphCoordinateExpression> => {
+    const grah_dfs = new GraphDfs(this.graph);
+    grah_dfs.startDfs();
+
+    const paths = grah_dfs.getProcessedPath();
+
+    return paths;
+  };
 
   coordinateAggregation = () => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
@@ -50,15 +63,22 @@ class ParserRailroadSection {
     for (let i = 0; i < coordinates.length; i++) {
       const coordinate = coordinates[i];
       const node = new GraphNode();
-      node.setNameByPos(coordinate[0], coordinate[1]);
-      node.setPos(coordinate[0], coordinate[1]);
+
+      const coordinate0 = new BigNumber(coordinate[0]);
+      const coordinate1 = new BigNumber(coordinate[1]);
+
+      const c0_100000 = coordinate0.times(100000).toNumber();
+      const c1_100000 = coordinate1.times(100000).toNumber();
+
+      node.setIdByPos(coordinate[0], coordinate[1]);
+      node.setPos(c0_100000, c1_100000);
 
       if (i >= 1) {
         node.pushLinkNode(before_node);
       }
 
       this.graph.pushNode(node);
-      before_node = node.node_name;
+      before_node = node.node_id;
     }
 
     console.log(this.graph);
