@@ -4,7 +4,15 @@ import { createRoot } from "react-dom/client";
 import PulldownMenu from "../../common/PulldownMenu/pulldown_menu";
 
 import { getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
-import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr } from "./../../gis_scipt/gis_unique_data";
+import {
+  searchUniqueKey,
+  getArrayIndexNum,
+  getArrayIndexStr,
+  searchUniqueIndex,
+  logicalAnd,
+  searchUniquePropertie,
+  searchUniqueKeyBySearchKey,
+} from "./../../gis_scipt/gis_unique_data";
 
 import { AppContext } from "./../../app_context";
 import LayerData from "../ctrl_dataflow/edit_data/layer_data";
@@ -57,10 +65,18 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
+
+  const getLineViewOptions = () => {
+    const unit_id = layer.getUnitId();
+    const view_lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", layer.layer_infomation["railway"], "N02_003");
+
+    return view_lines;
+  };
+
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, railway)} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={lines} selected={getArrayIndexStr(lines, line)} />
+      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(lines, line)} />
     </>
   );
 };
@@ -101,10 +117,16 @@ const PullRapperStation = (props: PullRapper) => {
     setRailway(layer_line);
     layer.updateLayerElement("line", layer_line);
   };
+  const getLineViewOptions = () => {
+    const unit_id = layer.getUnitId();
+    const view_lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", layer.layer_infomation["railway"], "N02_003");
+
+    return view_lines;
+  };
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, railway)} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={lines} selected={getArrayIndexStr(lines, line)} />
+      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(lines, line)} />
     </>
   );
 };
