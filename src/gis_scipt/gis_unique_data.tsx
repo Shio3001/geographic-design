@@ -2,6 +2,45 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUni
 
 import { setupGisInfo, getGisInfo } from "./route_setup";
 
+export const getGeometry = (unit_id: string, features_index: number) => {
+  const gis_info = getGisInfo();
+  const gis_unit = gis_info.gis_data[unit_id];
+  return gis_unit.features[features_index].geometry;
+};
+
+export const searchGisConditional = (unit_id: string, conditional: { [key: string]: string }): Array<number> => {
+  const gis_info = getGisInfo();
+  const gis_unit = gis_info.gis_data[unit_id];
+
+  const search_list: Array<number> = [];
+
+  for (let i = 0; i < gis_unit.features.length; i++) {
+    const properties = gis_unit.features[i].properties as { [key: string]: string };
+
+    const conditional_keys = Object.keys(conditional);
+
+    let search_conditional_flag = true;
+
+    for (let k = 0; k < conditional_keys.length; k++) {
+      const conditional_key = conditional_keys[k];
+      const conditional_value = conditional[conditional_key];
+
+      const propertie_value = properties[conditional_key];
+
+      if (propertie_value != conditional_value) {
+        search_conditional_flag = false;
+        break;
+      }
+    }
+
+    if (search_conditional_flag) {
+      search_list.push(i);
+    }
+  }
+
+  return search_list;
+};
+
 export const getArrayIndexNum = (array: Array<number>, target: number): number => {
   for (let i = 0; i < array.length; i++) {
     if (array[i] == target) {

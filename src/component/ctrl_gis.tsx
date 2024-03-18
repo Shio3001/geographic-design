@@ -13,6 +13,8 @@ import { AppContext } from "./../app_context";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
+import Parser from "./../parser/parser";
+
 const CtrlGis = () => {
   const [update, setUpdata] = useState<boolean>(false);
   const AppContextValue = useContext(AppContext);
@@ -26,12 +28,15 @@ const CtrlGis = () => {
     console.log("[APPCTR] Update");
   }, [update]);
 
-  const flowUp = () => {};
+  const flowUpRendering = () => {
+    const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+    parser.parser();
+  };
 
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
-        <Preview />
+        <Preview /> <Button flowUp={flowUpRendering} text={"描画"} />
         <CtrlLayers />
       </CtrlGisContext.Provider>
     </div>

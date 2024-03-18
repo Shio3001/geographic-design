@@ -22,9 +22,6 @@ const CtrlLayers = () => {
   console.log("layers_order", layers_order);
 
   const buildComponent = () => {
-    // const layers_order = AppContextValue.app_state.edit_data.layers_order;
-    console.log("layers_order", layers_order);
-
     const component = [];
 
     for (let i = 0; i < layers_order.length; i++) {
@@ -34,17 +31,6 @@ const CtrlLayers = () => {
     return component;
   };
 
-  return (
-    <div className="ctrl_layers">{buildComponent()}</div>
-
-    // <div className="ctrl_layers">
-    //   <>
-    //     {AppContextValue.app_state.edit_data.layers_order.map((layer_uuid, index) => {
-    //       //   <CtrlLayer key={index} layer_uuid={layer_uuid} />;
-    //       <div className="test"></div>;
-    //     })}
-    //   </>
-    // </div>
-  );
+  return <div className="ctrl_layers">{buildComponent()}</div>;
 };
 export default CtrlLayers;
