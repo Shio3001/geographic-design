@@ -2,6 +2,23 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUni
 
 import { setupGisInfo, getGisInfo } from "./route_setup";
 
+export const getArrayIndexNum = (array: Array<number>, target: number): number => {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == target) {
+      return i;
+    }
+  }
+  return -1;
+};
+export const getArrayIndexStr = (array: Array<string>, target: string): number => {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == target) {
+      return i;
+    }
+  }
+  return -1;
+};
+
 export const getFeatures = (current_unit: string, features_index: number) => {
   const gis_info = getGisInfo();
   const unit_id = gis_info.units[current_unit].unit_id;

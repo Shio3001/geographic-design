@@ -9,38 +9,40 @@ import CtrlGis from "./component/ctrl_gis";
 
 // import PulldownMenu from "./common/PulldownMenu/PulldownMenu";
 import CtrlBlock from "./component/ctrl_layer/ctrl_layer";
-
-type AppContextValue = {
-  gis_info: TypeGISInfo;
-
-  updateDOM: Function;
-};
-
-export const AppContext = createContext<AppContextValue>({} as AppContextValue);
+import EditData from "./component/ctrl_dataflow/edit_data/edit_data";
+import { AppContext, TypeAppState, TypeAppReducerAction } from "./app_context";
+import LayerData from "./component/ctrl_dataflow/edit_data/layer_data";
 
 const App = () => {
-  const [update, setUpdata] = useState<boolean>(false);
-  const [gis_info, setGisInfo] = useState<TypeGISInfo>();
+  // const [gis_info, setGisInfo] = useState<TypeGISInfo>(setupGisInfo());
+  // const [edit_data, setEditData] = useState<EditData>(new EditData());
 
-  const updateDOM = () => {
-    //強制再レンダリング関数
-    setUpdata(update ? false : true);
+  const reducerApp = (state: TypeAppState, action: TypeAppReducerAction) => {
+    if (action.action_type == "update") {
+      console.log("reducerApp", state, action.update_state);
+      action.update_state.update = !action.update_state.update;
+      return action.update_state;
+    }
+    if (action.action_type == "render") {
+    }
+    state.update = !state.update;
+    return state;
   };
 
-  useEffect(() => {
-    console.log("[APP---] Update");
-  }, [update]);
+  const [app_state, dispatchAppState] = useReducer(reducerApp, {
+    gis_info: setupGisInfo(),
+    edit_data: new EditData(5),
+    update: false,
+  });
 
-  useEffect(() => {
-    setGisInfo(setupGisInfo());
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <AppContext.Provider
         value={{
-          updateDOM: updateDOM,
-          gis_info: gis_info,
+          app_state: app_state,
+          dispatchAppState: dispatchAppState,
         }}
       >
         <CtrlGis />

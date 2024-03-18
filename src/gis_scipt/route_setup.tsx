@@ -37,9 +37,6 @@ export const setupGisInfo = (): TypeGISInfo => {
   const N02_22_RailroadSection_json_type = N02_22_RailroadSection_json as TypeJsonGISRailroadSection;
   const N02_22_Station_json_type = N02_22_Station_json as TypeJsonGISStation;
 
-  gis_info.gis_data["Unnecessary"] = N02_22_RailroadSection_json_type;
-  gis_info.units["Unnecessary"] = { unit_id: "Unnecessary", unit_type: "Unnecessary", name: "未選択", grouping_size: 0 };
-
   gis_info.gis_data["2022_rail"] = N02_22_RailroadSection_json_type;
   gis_info.units["2022_rail"] = { unit_id: "2022_rail", unit_type: "RailroadSection", name: "2022年路線データ", grouping_size: 2 };
 

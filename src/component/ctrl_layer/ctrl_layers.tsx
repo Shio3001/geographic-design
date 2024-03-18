@@ -1,38 +1,50 @@
 import * as React from "react";
 const { useContext, useReducer, createContext, useState, useEffect } = React;
-import { createRoot } from "react-dom/client";
 
-import PulldownMenu from "../../common/PulldownMenu/pulldown_menu";
-import CtrlLayerPull from "./ctrl_layer_pull";
 import CtrlLayer from "./ctrl_layer";
-import TextBox from "../../common/textbox/textbox";
-import NumberBox from "../../common/numberbox/numberbox";
+import { AppContext } from "./../../app_context";
+import { CtrlGisContext } from "./../ctrl_gis_context";
 
-import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
+const Ctest = () => {
+  return <div className="test-C"></div>;
+};
 
 const CtrlLayers = () => {
-  const [layer_length, setLayerLength] = useState(0);
-  const flowUpLayerLength = (length: number) => {
-    setLayerLength(length);
-  };
+  const AppContextValue = useContext(AppContext);
+  const CtrlGisContextValue = useContext(CtrlGisContext);
 
-  const buildComponentLayer = () => {
-    const components = [];
+  useEffect(() => {
+    console.log("ctrl", AppContextValue.app_state.edit_data.layers_order);
+  }, [AppContextValue.app_state.update]);
 
-    for (let i = 0; i < layer_length; i++) {
-      components.push(<CtrlLayer key={i} />);
+  const lo = AppContextValue.app_state.edit_data.layers_order;
+
+  console.log("lo", lo);
+
+  const buildComponent = () => {
+    const layers_order = AppContextValue.app_state.edit_data.layers_order;
+    console.log("layers_order", layers_order);
+
+    const component = [];
+
+    for (let i = 0; i < layers_order.length; i++) {
+      component.push(<CtrlLayer layer_uuid={layers_order[i]} />);
     }
 
-    return components;
+    return component;
   };
 
   return (
-    <>
-      <NumberBox flowUp={flowUpLayerLength} number={layer_length} />{" "}
-      {buildComponentLayer().map((Component, index) => {
-        return Component;
-      })}
-    </>
+    <div className="ctrl_layers">{buildComponent()}</div>
+
+    // <div className="ctrl_layers">
+    //   <>
+    //     {AppContextValue.app_state.edit_data.layers_order.map((layer_uuid, index) => {
+    //       //   <CtrlLayer key={index} layer_uuid={layer_uuid} />;
+    //       <div className="test"></div>;
+    //     })}
+    //   </>
+    // </div>
   );
 };
 export default CtrlLayers;
