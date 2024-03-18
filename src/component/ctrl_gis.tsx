@@ -61,6 +61,7 @@ const CtrlGis = () => {
         <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} />
         <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} />
         <CtrlLayers />
+        <p>{preview}</p>
       </CtrlGisContext.Provider>
     </div>
   );
