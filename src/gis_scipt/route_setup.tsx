@@ -6,7 +6,7 @@ const N02_22_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-22_Stati
 // import N02_22_RailroadSection_json from "./GSI_GIS/N02-22_RailroadSection.json";
 // import N02_22_Station_json from "./GSI_GIS/N02-22_Station.json";
 
-const gis_info: TypeGISInfo = { units: {}, gis_data: {} };
+const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {} };
 let gis_info_load_flag = false;
 
 export const getKeysGisUnitIDs = () => {
@@ -38,10 +38,12 @@ export const setupGisInfo = (): TypeGISInfo => {
   const N02_22_Station_json_type = N02_22_Station_json as TypeJsonGISStation;
 
   gis_info.gis_data["2022_rail"] = N02_22_RailroadSection_json_type;
-  gis_info.units["2022_rail"] = { unit_id: "2022_rail", unit_type: "RailroadSection", name: "2022年路線データ", grouping_size: 2 };
+  gis_info.units["2022_rail"] = { unit_id: "2022_rail", name: "2022年路線データ", grouping_size: 2 };
 
   gis_info.gis_data["2022_station"] = N02_22_Station_json_type;
-  gis_info.units["2022_station"] = { unit_id: "2022_station", unit_type: "Station", name: "2022年駅データ", grouping_size: 2 };
+  gis_info.units["2022_station"] = { unit_id: "2022_station", name: "2022年駅データ", grouping_size: 2 };
+  gis_info.id_type["2022_rail"] = "RailroadSection";
+  gis_info.id_type["2022_station"] = "Station";
   gis_info_load_flag = true;
   return gis_info;
 };

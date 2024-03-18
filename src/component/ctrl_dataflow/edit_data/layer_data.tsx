@@ -10,21 +10,20 @@ const getUUID = () => {
 };
 
 class LayerData {
-  unit_type: string;
+  // unit_type: string;
   unit_id: string;
 
   layer_uuid: string;
   layer_infomation: { [key: string]: string };
 
   constructor() {
-    this.unit_type = "";
+    // this.unit_type = "";
     this.unit_id = "";
     this.layer_uuid = getUUID();
     this.layer_infomation = {};
   }
 
-  setUnit = (unit_id: string, unit_type: string) => {
-    this.unit_type = unit_type;
+  setUnit = (unit_id: string) => {
     this.unit_id = unit_id;
   };
   updateLayerInfomation = (layer_infomation: { [key: string]: string }) => {
@@ -33,6 +32,9 @@ class LayerData {
   updateLayerElement = (key: string, value: string) => {
     this.layer_infomation[key] = value;
   };
+  clearLayerElement = () => {
+    this.layer_infomation = {};
+  };
 
   setKeys = (keys: Array<string>) => {
     for (let i = 0; i < keys.length; i++) {
@@ -40,8 +42,11 @@ class LayerData {
     }
   };
 
-  getUnitType = () => {
-    return this.unit_type;
+  // getUnitType = () => {
+  //   return this.unit_type;
+  // };
+  getUnitId = () => {
+    return this.unit_id;
   };
   getElement = (key: string) => {
     return this.layer_infomation[key];

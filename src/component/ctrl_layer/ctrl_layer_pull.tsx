@@ -17,7 +17,7 @@ const PullRapperUnnecessary = (props: PullRapper) => {
 
 const PullRapperRailroadSection = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
-  const layer = AppContextValue.app_state.edit_data.getLayer(props.layer_uuid);
+  const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
 
   const [railway, setRailway] = useState(layer.getElement("railway"));
   const [line, setLine] = useState(layer.getElement("line"));
@@ -32,16 +32,30 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     setLine(layer_line);
   }, [props.layer_uuid]);
 
+  useEffect(() => {
+    if (!layer.layer_infomation["railway"]) {
+      flowUpUnitRailway(0);
+    }
+    if (!layer.layer_infomation["line"]) {
+      flowUpUnitLine(0);
+    }
+  }, [props.layer_uuid]);
   const flowUpUnitRailway = (index: number) => {
     const layer_railway = railways[index];
     setRailway(layer_railway);
     layer.updateLayerElement("railway", layer_railway);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
   const flowUpUnitLine = (index: number) => {
     const layer_line = lines[index];
     setRailway(layer_line);
     layer.updateLayerElement("line", layer_line);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
   return (
     <>
@@ -53,7 +67,7 @@ const PullRapperRailroadSection = (props: PullRapper) => {
 
 const PullRapperStation = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
-  const layer = AppContextValue.app_state.edit_data.getLayer(props.layer_uuid);
+  const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
 
   const [railway, setRailway] = useState(layer.getElement("railway"));
   const [line, setLine] = useState(layer.getElement("line"));
@@ -68,6 +82,14 @@ const PullRapperStation = (props: PullRapper) => {
     setLine(layer_line);
   }, [props.layer_uuid]);
 
+  useEffect(() => {
+    if (!layer.layer_infomation["railway"]) {
+      flowUpUnitRailway(0);
+    }
+    if (!layer.layer_infomation["line"]) {
+      flowUpUnitLine(0);
+    }
+  }, [props.layer_uuid]);
   const flowUpUnitRailway = (index: number) => {
     const layer_railway = railways[index];
     setRailway(layer_railway);
@@ -92,17 +114,29 @@ type propsCtrlLayerPull = {
 };
 const CtrlLayerPull = (props: propsCtrlLayerPull) => {
   const AppContextValue = useContext(AppContext);
-  const layer = AppContextValue.app_state.edit_data.getLayer(props.layer_uuid);
-  const unit_type = layer.unit_type;
+  const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
+
+  const unit_id = layer.unit_id;
+
+  const unit_type = AppContextValue.gis_info.id_type[unit_id];
+
   switch (unit_type) {
     case "RailroadSection": {
-      return <PullRapperRailroadSection layer_uuid={props.layer_uuid} />;
+      return (
+        <>
+          <PullRapperRailroadSection layer_uuid={props.layer_uuid} />
+        </>
+      );
     }
     case "Station": {
-      return <PullRapperStation layer_uuid={props.layer_uuid} />;
+      return (
+        <>
+          <PullRapperStation layer_uuid={props.layer_uuid} />
+        </>
+      );
     }
     default:
-      break;
+      return <></>;
   }
 };
 export default CtrlLayerPull;

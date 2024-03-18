@@ -6,7 +6,9 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGISInf
 import EditData from "./component/ctrl_dataflow/edit_data/edit_data";
 
 export type AppContextValue = {
-  app_state: TypeAppState;
+  gis_info: TypeGISInfo;
+  edit_data: EditData;
+  update: boolean;
   dispatchAppState: Function;
 };
 
@@ -18,7 +20,7 @@ export type TypeAppState = {
 
 export type TypeAppReducerAction = {
   action_type: string;
-  update_state?: TypeAppState;
+  update_state?: TypeGISInfo | EditData | boolean;
 };
 
 export const AppContext = createContext<AppContextValue>({} as AppContextValue);

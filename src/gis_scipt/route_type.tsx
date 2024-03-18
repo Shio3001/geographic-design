@@ -18,7 +18,7 @@ export type TypeJsonGISStation = {
   }>;
 };
 
-export type TypeGisUnit = { unit_id: string; name: string; unit_type: string; grouping_size: number };
+export type TypeGisUnit = { unit_id: string; name: string; grouping_size: number };
 export type TypeGisUnits = { [key: string]: TypeGisUnit };
 export type TypeGisData = { [key: string]: TypeJsonGISRailroadSection | TypeJsonGISStation };
-export type TypeGISInfo = { units: TypeGisUnits; gis_data: TypeGisData };
+export type TypeGISInfo = { units: TypeGisUnits; gis_data: TypeGisData; id_type: { [key: string]: string } };
