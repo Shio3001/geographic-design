@@ -23,11 +23,18 @@ class EditData {
 
     for (let i = 0; i < layer_number; i++) {
       const layer_d: LayerData = new LayerData();
-      layer_d.setUnit("2022_rail", "RailroadSection");
+      layer_d.setUnit("2022_rail");
       this.layers_order.push(layer_d.layer_uuid);
       this.layers[layer_d.layer_uuid] = layer_d;
     }
   }
+
+  deleteLayerByUUID(uuid: string) {
+    const new_layers_order = this.layers_order.filter((n) => n !== uuid);
+    delete this.layers[uuid];
+    this.layers_order = new_layers_order;
+  }
+
   setUnits = (units: TypeGisUnits) => {
     this.units = units;
   };

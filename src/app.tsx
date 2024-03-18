@@ -18,30 +18,34 @@ const App = () => {
   // const [edit_data, setEditData] = useState<EditData>(new EditData());
 
   const reducerApp = (state: TypeAppState, action: TypeAppReducerAction) => {
-    if (action.action_type == "update") {
-      console.log("reducerApp", state, action.update_state);
-      action.update_state.update = !action.update_state.update;
-      return action.update_state;
+    if (action.action_type == "update_gis_info") {
+      console.log("reducerApp [update_gis_info]:", action.update_state, state.edit_data, state.update);
+      return { gis_info: action.update_state, edit_data: state.edit_data, update: state.update };
     }
-    if (action.action_type == "render") {
+    if (action.action_type == "update_edit_data") {
+      console.log("reducerApp [update_gis_info]:", state.gis_info, action.update_state, state.update);
+      return { gis_info: state.gis_info, edit_data: action.update_state, update: state.update };
     }
-    state.update = !state.update;
+    if (action.action_type == "update_flag") {
+      console.log("reducerApp [update_flag]:", state.gis_info, state.gis_info, !state.update);
+      return { gis_info: state.gis_info, edit_data: state.gis_info, update: !state.update };
+    }
     return state;
   };
 
   const [app_state, dispatchAppState] = useReducer(reducerApp, {
     gis_info: setupGisInfo(),
-    edit_data: new EditData(5),
+    edit_data: new EditData(1),
     update: false,
   });
-
-  useEffect(() => {}, []);
 
   return (
     <>
       <AppContext.Provider
         value={{
-          app_state: app_state,
+          gis_info: app_state.gis_info as TypeGISInfo,
+          edit_data: app_state.edit_data as EditData,
+          update: app_state.update as boolean,
           dispatchAppState: dispatchAppState,
         }}
       >

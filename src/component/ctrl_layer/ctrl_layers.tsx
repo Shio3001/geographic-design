@@ -14,21 +14,21 @@ const CtrlLayers = () => {
   const CtrlGisContextValue = useContext(CtrlGisContext);
 
   useEffect(() => {
-    console.log("ctrl", AppContextValue.app_state.edit_data.layers_order);
-  }, [AppContextValue.app_state.update]);
+    console.log("ctrl", AppContextValue.edit_data.layers_order);
+  }, [AppContextValue.update]);
 
-  const lo = AppContextValue.app_state.edit_data.layers_order;
+  const layers_order = AppContextValue.edit_data.layers_order;
 
-  console.log("lo", lo);
+  console.log("layers_order", layers_order);
 
   const buildComponent = () => {
-    const layers_order = AppContextValue.app_state.edit_data.layers_order;
+    // const layers_order = AppContextValue.app_state.edit_data.layers_order;
     console.log("layers_order", layers_order);
 
     const component = [];
 
     for (let i = 0; i < layers_order.length; i++) {
-      component.push(<CtrlLayer layer_uuid={layers_order[i]} />);
+      component.push(<CtrlLayer key={i} layer_uuid={layers_order[i]} />);
     }
 
     return component;
