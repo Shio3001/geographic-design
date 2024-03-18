@@ -3,9 +3,6 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUni
 const N02_22_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_GIS/N02-22_RailroadSection.json");
 const N02_22_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-22_Station.json");
 
-// import N02_22_RailroadSection_json from "./GSI_GIS/N02-22_RailroadSection.json";
-// import N02_22_Station_json from "./GSI_GIS/N02-22_Station.json";
-
 const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {} };
 let gis_info_load_flag = false;
 
