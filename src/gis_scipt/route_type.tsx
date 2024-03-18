@@ -1,3 +1,6 @@
+export type TypeJsonCoordinate = Array<number>;
+export type TypeJsonCoordinates = Array<TypeJsonCoordinate>;
+
 export type TypeJsonGISRailroadSection = {
   type: string;
   name: string;
@@ -5,7 +8,7 @@ export type TypeJsonGISRailroadSection = {
   features: Array<{
     type: string;
     properties: { N02_001: number; N02_002: number; N02_003: string; N02_004: string };
-    geometry: { type: string; coordinates: Array<Array<number>> };
+    geometry: { type: string; coordinates: TypeJsonCoordinates };
   }>;
 };
 export type TypeJsonGISStation = {
@@ -14,7 +17,7 @@ export type TypeJsonGISStation = {
   features: Array<{
     type: string;
     properties: { N02_001: string; N02_002: string; N02_003: string; N02_004: string; N02_005: string; N02_005c: string; N02_005g: string };
-    geometry: { type: string; coordinates: Array<Array<number>> };
+    geometry: { type: string; coordinates: TypeJsonCoordinates };
   }>;
 };
 
