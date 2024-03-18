@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Shio3001/RouteAnimation#readme",
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@webpack-cli/generators": "^3.0.7",
@@ -38,6 +39,8 @@
   },
   "dependencies": {
     "@types/node": "^20.11.28",
-    "html-webpack-plugin": "^5.6.0"
+    "html-webpack-plugin": "^5.6.0",
+    "lodash": "^4.17.21",
+    "uuidjs": "^5.0.1"
   }
 }

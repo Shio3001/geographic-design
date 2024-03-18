@@ -6,10 +6,11 @@ type props = {
   flowUp: Function;
   view_options: Array<string>;
   unselected?: boolean;
+  selected?: number;
 };
 
 const PulldownMenu = (props: props) => {
-  const [selectIndex, setSelectIndex] = useState(-1);
+  const [selectIndex, setSelectIndex] = useState(!props.selected ? -1 : props.selected);
 
   const onChangeEvent = (event: any) => {
     console.log(event, event.target.value);
@@ -20,35 +21,18 @@ const PulldownMenu = (props: props) => {
     props.flowUp(value);
   };
 
-  if (!props.unselected) {
-    return (
-      <>
-        <select value={selectIndex} onChange={onChangeEvent}>
-          <option value={-1}>未選択</option>
-          {props.view_options.map((view, index) => {
-            return (
-              <option key={index} value={index}>
-                {view}
-              </option>
-            );
-          })}
-        </select>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <select value={selectIndex} onChange={onChangeEvent}>
-          {props.view_options.map((view, index) => {
-            return (
-              <option key={index} value={index}>
-                {view}
-              </option>
-            );
-          })}
-        </select>
-      </>
-    );
-  }
+  return (
+    <>
+      <select value={selectIndex} onChange={onChangeEvent}>
+        {props.view_options.map((view, index) => {
+          return (
+            <option key={index} value={index}>
+              {view}
+            </option>
+          );
+        })}
+      </select>
+    </>
+  );
 };
 export default PulldownMenu;

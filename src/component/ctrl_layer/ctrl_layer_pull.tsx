@@ -4,50 +4,102 @@ import { createRoot } from "react-dom/client";
 import PulldownMenu from "../../common/PulldownMenu/pulldown_menu";
 
 import { getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
-import { searchUniqueKey } from "./../../gis_scipt/gis_unique_data";
-type PullRapper = { unit_id: string };
-type propsCtrlLayerPull = {
-  unit_id: string;
-  unit_type: string;
-};
+import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr } from "./../../gis_scipt/gis_unique_data";
+
+import { AppContext } from "./../../app_context";
+import LayerData from "../ctrl_dataflow/edit_data/layer_data";
+
+type PullRapper = { layer_uuid: string };
 
 const PullRapperUnnecessary = (props: PullRapper) => {
   return <></>;
 };
 
 const PullRapperRailroadSection = (props: PullRapper) => {
-  const flowUpUnitRailway = (index: number) => {};
-  const flowUpUnitLine = (index: number) => {};
+  const AppContextValue = useContext(AppContext);
+  const layer = AppContextValue.app_state.edit_data.getLayer(props.layer_uuid);
+
+  const [railway, setRailway] = useState(layer.getElement("railway"));
+  const [line, setLine] = useState(layer.getElement("line"));
+
+  const railways = searchUniqueKey(layer.unit_id, "N02_004");
+  const lines = searchUniqueKey(layer.unit_id, "N02_003");
+
+  useEffect(() => {
+    const layer_railway = layer.getElement("railway");
+    const layer_line = layer.getElement("line");
+    setRailway(layer_railway);
+    setLine(layer_line);
+  }, [props.layer_uuid]);
+
+  const flowUpUnitRailway = (index: number) => {
+    const layer_railway = railways[index];
+    setRailway(layer_railway);
+    layer.updateLayerElement("railway", layer_railway);
+  };
+
+  const flowUpUnitLine = (index: number) => {
+    const layer_line = lines[index];
+    setRailway(layer_line);
+    layer.updateLayerElement("line", layer_line);
+  };
   return (
     <>
-      <PulldownMenu flowUp={flowUpUnitRailway} view_options={searchUniqueKey(props.unit_id, "N02_004")} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={searchUniqueKey(props.unit_id, "N02_003")} />
+      <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, railway)} />
+      <PulldownMenu flowUp={flowUpUnitLine} view_options={lines} selected={getArrayIndexStr(lines, line)} />
     </>
   );
 };
 
 const PullRapperStation = (props: PullRapper) => {
-  const flowUpUnitRailway = (index: number) => {};
-  const flowUpUnitLine = (index: number) => {};
+  const AppContextValue = useContext(AppContext);
+  const layer = AppContextValue.app_state.edit_data.getLayer(props.layer_uuid);
 
+  const [railway, setRailway] = useState(layer.getElement("railway"));
+  const [line, setLine] = useState(layer.getElement("line"));
+
+  const railways = searchUniqueKey(layer.unit_id, "N02_004");
+  const lines = searchUniqueKey(layer.unit_id, "N02_003");
+
+  useEffect(() => {
+    const layer_railway = layer.getElement("railway");
+    const layer_line = layer.getElement("line");
+    setRailway(layer_railway);
+    setLine(layer_line);
+  }, [props.layer_uuid]);
+
+  const flowUpUnitRailway = (index: number) => {
+    const layer_railway = railways[index];
+    setRailway(layer_railway);
+    layer.updateLayerElement("railway", layer_railway);
+  };
+
+  const flowUpUnitLine = (index: number) => {
+    const layer_line = lines[index];
+    setRailway(layer_line);
+    layer.updateLayerElement("line", layer_line);
+  };
   return (
     <>
-      <PulldownMenu flowUp={flowUpUnitRailway} view_options={searchUniqueKey(props.unit_id, "N02_004")} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={searchUniqueKey(props.unit_id, "N02_003")} />
+      <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, railway)} />
+      <PulldownMenu flowUp={flowUpUnitLine} view_options={lines} selected={getArrayIndexStr(lines, line)} />
     </>
   );
 };
 
+type propsCtrlLayerPull = {
+  layer_uuid: string;
+};
 const CtrlLayerPull = (props: propsCtrlLayerPull) => {
-  switch (props.unit_type) {
-    case "Unnecessary": {
-      return <PullRapperUnnecessary unit_id={props.unit_id} />;
-    }
+  const AppContextValue = useContext(AppContext);
+  const layer = AppContextValue.app_state.edit_data.getLayer(props.layer_uuid);
+  const unit_type = layer.unit_type;
+  switch (unit_type) {
     case "RailroadSection": {
-      return <PullRapperRailroadSection unit_id={props.unit_id} />;
+      return <PullRapperRailroadSection layer_uuid={props.layer_uuid} />;
     }
     case "Station": {
-      return <PullRapperStation unit_id={props.unit_id} />;
+      return <PullRapperStation layer_uuid={props.layer_uuid} />;
     }
     default:
       break;
