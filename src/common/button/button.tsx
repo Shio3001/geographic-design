@@ -7,7 +7,7 @@ type props = {
   text: string;
 };
 
-const NumberBox = (props: props) => {
+const Button = (props: props) => {
   const onClickEvent = (event: any) => {
     props.flowUp();
   };
@@ -18,4 +18,4 @@ const NumberBox = (props: props) => {
     </>
   );
 };
-export default NumberBox;
+export default Button;

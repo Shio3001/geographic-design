@@ -10,10 +10,15 @@ class EditData {
   layers_order: Array<string>;
   layer_length: number;
 
+  width: number;
+  height: number;
+
   constructor(layer_number?: number) {
     this.layer_length = 0;
     this.layers_order = [];
     this.layers = {};
+    this.width = 1000;
+    this.height = 1000;
 
     if (!layer_number) {
       layer_number = 0;

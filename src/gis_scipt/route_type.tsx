@@ -1,5 +1,10 @@
-export type TypeJsonCoordinate = Array<number>;
+export type TypeJsonCoordinate = Array<string>; //数値誤差を防ぐため文字列型
 export type TypeJsonCoordinates = Array<TypeJsonCoordinate>;
+
+export type TypePosition = {
+  x: number;
+  y: number;
+};
 
 export type TypeJsonGISRailroadSection = {
   type: string;

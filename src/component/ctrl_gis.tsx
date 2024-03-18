@@ -9,6 +9,7 @@ import Preview from "./preview/preview";
 import { CtrlGisContext } from "./ctrl_gis_context";
 
 import Button from "./../common/button/button";
+import NumberBox from "./../common/numberbox/numberbox";
 import { AppContext } from "./../app_context";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
@@ -31,12 +32,27 @@ const CtrlGis = () => {
   const flowUpRendering = () => {
     const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
     parser.parser();
+    parser.scaling();
+  };
+
+  const flowUpWidth = (value: number) => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.width = value;
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+  const flowUpHeight = (value: number) => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.height = value;
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
-        <Preview /> <Button flowUp={flowUpRendering} text={"描画"} />
+        <Preview />
+        <Button flowUp={flowUpRendering} text={"描画"} />
+        <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} />
+        <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} />
         <CtrlLayers />
       </CtrlGisContext.Provider>
     </div>
