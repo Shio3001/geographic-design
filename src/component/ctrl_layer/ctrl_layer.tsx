@@ -2,7 +2,7 @@ import * as React from "react";
 const { useContext, useReducer, createContext, useState, useEffect } = React;
 import { createRoot } from "react-dom/client";
 
-import PulldownMenu from "../../common/PulldownMenu/pulldown_menu";
+import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
 import Button from "../../common/button/button";
 
 import CtrlLayerPull from "./ctrl_layer_pull";
@@ -21,9 +21,6 @@ type props = {
 const CtrlLayer = (props: props) => {
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
-  // const edit_data = AppContextValue.edit_data;
-  // const layer = edit_data.getLayer(props.layer_uuid);
-  // const [unit_id, setUnitId] = useState(layer.getUnitId());
 
   const flowUpAdd = () => {
     const nlayer: LayerData = new LayerData();

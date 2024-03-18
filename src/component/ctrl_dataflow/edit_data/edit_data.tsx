@@ -6,13 +6,11 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUni
 import LayerData from "./layer_data";
 
 class EditData {
-  units: TypeGisUnits;
   layers: { [name: string]: LayerData };
   layers_order: Array<string>;
   layer_length: number;
 
   constructor(layer_number?: number) {
-    this.units;
     this.layer_length = 0;
     this.layers_order = [];
     this.layers = {};
@@ -34,10 +32,6 @@ class EditData {
     delete this.layers[uuid];
     this.layers_order = new_layers_order;
   }
-
-  setUnits = (units: TypeGisUnits) => {
-    this.units = units;
-  };
 
   setLayer = (layer: LayerData) => {
     this.layers[layer.layer_uuid] = layer;
