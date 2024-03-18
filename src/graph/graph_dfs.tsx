@@ -17,10 +17,12 @@ class GraphDfs {
 
   processed_path: Array<GraphCoordinateExpression>;
   processing_path: Array<GraphCoordinateExpression>;
+  is_searched_count: number;
 
   constructor(graph: Graph) {
     this.graph_container = graph;
     this.is_searched_nodes = new Map();
+    this.is_searched_count = 0;
     this.termination_point = [];
     this.processed_path = [];
     this.processing_path = [];
@@ -59,13 +61,14 @@ class GraphDfs {
   };
 
   dfs = (current_node_id: string): boolean => {
-    console.log("深さ優先探索", current_node_id);
+    console.log("深さ優先探索", current_node_id, this.is_searched_count, this.graph_container.graph.size);
     if (this.is_searched_nodes.get(current_node_id)) {
       return false;
     }
 
     const current_nodet = this.graph_container.graph.get(current_node_id);
     this.is_searched_nodes.set(current_node_id, true);
+    this.is_searched_count++;
     const link_id_list = current_nodet!.link_id_list;
 
     let branch_flag = link_id_list.length >= 3;

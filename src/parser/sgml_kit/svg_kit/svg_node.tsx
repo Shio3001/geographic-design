@@ -1,13 +1,13 @@
 import EditData from "../../../component/ctrl_dataflow/edit_data/edit_data";
 import LayerData from "../../../component/ctrl_dataflow/edit_data/layer_data";
-import { TypeGISInfo } from "../../../gis_scipt/route_type";
+import { TypeGISInfo, TypeSVGCommand } from "../../../gis_scipt/route_type";
 
 class SvgNode {
   tag: string;
   children: Array<number>;
   element: string;
   attributes: { [key: string]: string };
-  svg_command: Array<Array<string>>;
+  svg_command: Array<TypeSVGCommand>;
   //   svg_path_command { }
 
   constructor() {
@@ -27,11 +27,11 @@ class SvgNode {
     return text;
   };
 
-  pushSvgCommand = (command: string, x?: number, y?: number) => {
-    const xs = !x ? "none" : String(x);
-    const ys = !y ? "none" : String(y);
+  pushSvgCommand = (command: string, x: number, y: number) => {
+    const xs = String(x);
+    const ys = String(y);
 
-    const c = [command, xs, ys];
+    const c: TypeSVGCommand = { command: command, x: xs, y: ys };
     this.svg_command.push(c);
   };
 
@@ -44,12 +44,46 @@ class SvgNode {
   linkChild = (c_index: number) => {
     this.children.push(c_index);
   };
+
   pushAttribute = (k: string, v: string) => {
     this.attributes[k] = v;
   };
 
+  pushAttributeNum = (k: string, v: number) => {
+    this.attributes[k] = v.toString();
+  };
+  generateSvgCommand = (): string => {
+    if (this.svg_command.length == 0) {
+      return "";
+    }
+
+    let command = "";
+
+    command += "d=" + '"';
+
+    for (let i = 0; i < this.svg_command.length; i++) {
+      const current_svg_command = this.svg_command[i];
+      let at = " ";
+      at += current_svg_command.command;
+
+      if (current_svg_command.x != "none") {
+        at += " ";
+        at += current_svg_command.x;
+      }
+      if (current_svg_command.y != "none") {
+        at += " ";
+        at += current_svg_command.y;
+      }
+
+      command += at;
+    }
+    command += '"';
+
+    return command;
+  };
+
   generateStartTag = (): string => {
-    return "<" + this.tag + " " + this.generateAttributeTag() + " " + ">";
+    return "<" + this.tag + " " + this.generateAttributeTag() + " " + this.generateSvgCommand() + " " + ">";
   };
   generateElementTag = (): string => {
     return this.element;
@@ -77,7 +111,7 @@ class SvgNode {
       const key = keys[i];
       const val = this.attributes[key];
 
-      const at = " " + key + " = " + val + " ";
+      const at = " " + key + " = " + '"' + val + '"' + " ";
       attribute += at;
     }
 

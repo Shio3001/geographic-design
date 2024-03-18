@@ -4,6 +4,7 @@ import { TypeGISInfo, TypePosition } from "../gis_scipt/route_type";
 import ParserRailroadSection from "./parser_unit/railroad_section";
 import ParserStation from "./parser_unit/station";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
+import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
 import path from "path";
 import BigNumber from "bignumber.js";
@@ -18,6 +19,13 @@ class Parser {
     this.gis_info = gis_info;
     this.svg_kit = new SvgKit();
     this.graph_coordinate_list = [];
+    const new_svg_node = new SvgNode();
+    new_svg_node.setTag("svg");
+    new_svg_node.pushAttribute("xmlns", "http://www.w3.org/2000/svg");
+    new_svg_node.pushAttributeNum("width", edit_data.width);
+    new_svg_node.pushAttributeNum("height", edit_data.height);
+
+    this.svg_kit.pushNode(new_svg_node);
   }
 
   parser = () => {
@@ -35,8 +43,36 @@ class Parser {
 
     const graph_coordinate_expression = this.switchParserLayer(layer_uuid);
     this.graph_coordinate_list = this.graph_coordinate_list.concat(graph_coordinate_expression);
-
     console.log("parserLayer", this.graph_coordinate_list, graph_coordinate_expression);
+  };
+
+  toSVG = () => {
+    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
+      const coordinates = this.graph_coordinate_list[i].coordinates;
+
+      if (coordinates.length == 0) {
+        continue;
+      }
+
+      const new_svg_node = new SvgNode();
+
+      new_svg_node.setTag("path");
+      new_svg_node.pushAttribute("stroke", "black");
+      new_svg_node.pushAttribute("stroke-width", "2");
+      new_svg_node.pushAttribute("fill", "none");
+      const coordinate0 = coordinates[0];
+      new_svg_node.pushSvgCommand("M", coordinate0.x, coordinate0.y);
+
+      for (let j = 0; j < coordinates.length; j++) {
+        const coordinate = coordinates[j];
+        new_svg_node.pushSvgCommand("L", coordinate.x, coordinate.y);
+      }
+      const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
+      this.svg_kit.pushChild(0, new_svg_node_index);
+    }
+
+    const svg = this.svg_kit.svg_tree[0].generate(this.svg_kit.svg_tree);
+    return svg;
   };
 
   scaling = () => {
@@ -52,8 +88,21 @@ class Parser {
     console.log("縮小率", reduction_rate_min, reduction_rate_x, reduction_rate_y, this.edit_data.width, this.edit_data.height, right_bottom);
 
     this.moveCoordinateReduction(reduction_rate_min);
+    this.invertedCoordinate();
 
     console.log("scaling", this.graph_coordinate_list);
+  };
+
+  invertedCoordinate = () => {
+    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
+      const coordinates = this.graph_coordinate_list[i].coordinates;
+
+      for (let j = 0; j < coordinates.length; j++) {
+        const coordinate = coordinates[j];
+
+        coordinate.y = this.edit_data.height - coordinate.y;
+      }
+    }
   };
 
   moveCoordinateReduction = (reduction_rate: number) => {
@@ -62,8 +111,8 @@ class Parser {
 
       for (let j = 0; j < coordinates.length; j++) {
         const coordinate = coordinates[j];
-        coordinate.x = BigNumber(coordinate.x).times(BigNumber(reduction_rate)).toNumber();
-        coordinate.y = BigNumber(coordinate.y).times(BigNumber(reduction_rate)).toNumber();
+        coordinate.x = Math.round(BigNumber(coordinate.x).times(BigNumber(reduction_rate)).toNumber());
+        coordinate.y = Math.round(BigNumber(coordinate.y).times(BigNumber(reduction_rate)).toNumber());
       }
     }
   };

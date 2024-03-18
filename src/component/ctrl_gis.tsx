@@ -18,6 +18,9 @@ import Parser from "./../parser/parser";
 
 const CtrlGis = () => {
   const [update, setUpdata] = useState<boolean>(false);
+
+  const [preview, setPreview] = useState<string>("<div></div>");
+
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
   const updateDOM = () => {
@@ -33,6 +36,10 @@ const CtrlGis = () => {
     const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
     parser.parser();
     parser.scaling();
+    const svg = parser.toSVG();
+    setPreview(svg);
+
+    console.log("svg", svg);
   };
 
   const flowUpWidth = (value: number) => {
@@ -49,7 +56,7 @@ const CtrlGis = () => {
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
-        <Preview />
+        <Preview preview_width={AppContextValue.edit_data.width} preview_height={AppContextValue.edit_data.height} svg_data={preview} />
         <Button flowUp={flowUpRendering} text={"描画"} />
         <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} />
         <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} />

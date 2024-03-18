@@ -6,6 +6,12 @@ export type TypePosition = {
   y: number;
 };
 
+export type TypeSVGCommand = {
+  command: string;
+  x: string;
+  y: string;
+};
+
 export type TypeJsonGISRailroadSection = {
   type: string;
   name: string;
