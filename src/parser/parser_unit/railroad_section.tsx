@@ -70,7 +70,14 @@ class ParserRailroadSection {
       const c0_100000 = coordinate0.times(100000).toNumber();
       const c1_100000 = coordinate1.times(100000).toNumber();
 
-      node.setIdByPos(coordinate[0], coordinate[1]);
+      const c0_10dp = coordinate0.toString();
+      const c1_10dp = coordinate1.toString();
+      console.log("c0_10-c1_10", coordinate0, coordinate1, c0_10dp, c1_10dp);
+
+      // const c0_10 = String(coordinate0);
+      // const c1_10 = String(coordinate1);
+
+      node.setIdByPos(c0_10dp, c1_10dp);
       node.setPos(c0_100000, c1_100000);
 
       if (i >= 1) {

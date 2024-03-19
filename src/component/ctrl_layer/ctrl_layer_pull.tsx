@@ -50,11 +50,9 @@ const PullRapperRailroadSection = (props: PullRapper) => {
   const flowUpUnitRailway = (index: number) => {
     const layer_railway = railways[index];
     layer.updateLayerElement("railway", layer_railway);
+    layer.updateLayerElement("line", getLineViewOptions()[0]);
+
     const edit_data = AppContextValue.edit_data;
-
-    const layer_line = getLineViewOptions()[0];
-    layer.updateLayerElement("line", layer_line);
-
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
@@ -77,7 +75,7 @@ const PullRapperRailroadSection = (props: PullRapper) => {
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(lines, layer.getElement("line"))} />
+      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
     </>
   );
 };
@@ -109,10 +107,9 @@ const PullRapperStation = (props: PullRapper) => {
   const flowUpUnitRailway = (index: number) => {
     const layer_railway = railways[index];
     layer.updateLayerElement("railway", layer_railway);
-    const edit_data = AppContextValue.edit_data;
+    layer.updateLayerElement("line", getLineViewOptions()[0]);
 
-    const layer_line = getLineViewOptions()[0];
-    layer.updateLayerElement("line", layer_line);
+    const edit_data = AppContextValue.edit_data;
 
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
@@ -136,7 +133,7 @@ const PullRapperStation = (props: PullRapper) => {
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(lines, layer.getElement("line"))} />
+      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
     </>
   );
 };

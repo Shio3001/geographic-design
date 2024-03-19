@@ -32,11 +32,11 @@ class EditData {
     }
   }
 
-  deleteLayerByUUID(uuid: string) {
+  deleteLayerByUUID = (uuid: string) => {
     const new_layers_order = this.layers_order.filter((n) => n !== uuid);
     delete this.layers[uuid];
     this.layers_order = new_layers_order;
-  }
+  };
 
   setLayer = (layer: LayerData) => {
     this.layers[layer.layer_uuid] = layer;
