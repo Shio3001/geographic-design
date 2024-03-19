@@ -46,29 +46,59 @@ class Parser {
     console.log("parserLayer", this.graph_coordinate_list, graph_coordinate_expression);
   };
 
+  toSVGPoint = (gce: GraphCoordinateExpression) => {
+    //<circle cx="100" cy="100" r="90" stroke="black" stroke-width="1" fill="blue"></circle>
+
+    const coordinates = gce.coordinates;
+    for (let j = 0; j < coordinates.length; j++) {
+      const coordinate = coordinates[j];
+      const new_svg_node = new SvgNode();
+      new_svg_node.setTag("circle");
+      new_svg_node.pushAttributeNum("cx", coordinate.x);
+      new_svg_node.pushAttributeNum("cy", coordinate.y);
+      new_svg_node.pushAttributeNum("r", 4);
+      new_svg_node.pushAttribute("stroke", "none");
+      new_svg_node.pushAttribute("stroke-width", "0");
+      new_svg_node.pushAttribute("fill", "black");
+      const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
+      this.svg_kit.pushChild(0, new_svg_node_index);
+    }
+  };
+
+  toSVGPath = (gce: GraphCoordinateExpression) => {
+    const new_svg_node = new SvgNode();
+    const coordinates = gce.coordinates;
+    new_svg_node.setTag("path");
+    new_svg_node.pushAttribute("stroke", "black");
+    new_svg_node.pushAttribute("stroke-width", "2");
+    new_svg_node.pushAttribute("fill", "none");
+    const coordinate0 = coordinates[0];
+    new_svg_node.pushSvgCommand("M", coordinate0.x, coordinate0.y);
+
+    for (let j = 0; j < coordinates.length; j++) {
+      const coordinate = coordinates[j];
+      new_svg_node.pushSvgCommand("L", coordinate.x, coordinate.y);
+    }
+
+    const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
+    this.svg_kit.pushChild(0, new_svg_node_index);
+  };
+
   toSVG = () => {
     for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const coordinates = this.graph_coordinate_list[i].coordinates;
+      const gce = this.graph_coordinate_list[i];
+      const coordinates = gce.coordinates;
 
       if (coordinates.length == 0) {
         continue;
       }
 
-      const new_svg_node = new SvgNode();
-
-      new_svg_node.setTag("path");
-      new_svg_node.pushAttribute("stroke", "black");
-      new_svg_node.pushAttribute("stroke-width", "2");
-      new_svg_node.pushAttribute("fill", "none");
-      const coordinate0 = coordinates[0];
-      new_svg_node.pushSvgCommand("M", coordinate0.x, coordinate0.y);
-
-      for (let j = 0; j < coordinates.length; j++) {
-        const coordinate = coordinates[j];
-        new_svg_node.pushSvgCommand("L", coordinate.x, coordinate.y);
+      if (gce.getType() == "path") {
+        this.toSVGPath(gce);
       }
-      const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
-      this.svg_kit.pushChild(0, new_svg_node_index);
+      if (gce.getType() == "point") {
+        this.toSVGPoint(gce);
+      }
     }
 
     const svg = this.svg_kit.svg_tree[0].generate(this.svg_kit.svg_tree);
@@ -189,8 +219,10 @@ class Parser {
         return paths;
       }
       case "Station": {
-        const parser_station_section = new ParserStation(this.edit_data, this.gis_info);
-        return;
+        const parser_station_section = new ParserStation(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        parser_station_section.coordinateAggregation();
+        const points = parser_station_section.generatePoint();
+        return points;
       }
       default:
         break;
