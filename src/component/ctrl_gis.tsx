@@ -3,6 +3,8 @@ const { useContext, useReducer, createContext, useState, useEffect } = React;
 import { createRoot } from "react-dom/client";
 
 import CtrlLayers from "./ctrl_layer/ctrl_layers";
+import CtrlLayerAdd from "./ctrl_layer/ctrl_layer_add";
+
 import Preview from "./preview/preview";
 // import CtrlDaraFlow from "./ctrl_dataflow/ctrl_dataflow";
 // import CtrlDaraFlowContext from "./ctrl_dataflow/ctrl_dataflow_context";
@@ -61,6 +63,7 @@ const CtrlGis = () => {
         <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} />
         <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} />
         <CtrlLayers />
+        <CtrlLayerAdd />
         <p>{preview}</p>
       </CtrlGisContext.Provider>
     </div>
