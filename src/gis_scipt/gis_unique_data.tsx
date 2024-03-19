@@ -50,12 +50,20 @@ export const getArrayIndexNum = (array: Array<number>, target: number): number =
   return -1;
 };
 export const getArrayIndexStr = (array: Array<string>, target: string): number => {
+  console.log("getArrayIndexStr", array, target);
+
+  if (!target) {
+    console.log("getArrayIndexStr-under", target);
+    return 0;
+  }
+
   for (let i = 0; i < array.length; i++) {
     if (array[i] == target) {
+      console.log("getArrayIndexStr-get", i);
       return i;
     }
   }
-  return -1;
+  return 0;
 };
 
 export const getFeatures = (current_unit: string, features_index: number) => {
