@@ -146,7 +146,6 @@ const CtrlLayerPull = (props: propsCtrlLayerPull) => {
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
 
   const unit_id = layer.unit_id;
-
   const unit_type = AppContextValue.gis_info.id_type[unit_id];
 
   switch (unit_type) {

@@ -89,7 +89,7 @@ class Parser {
 
     this.moveCoordinateReduction(reduction_rate_min);
     this.invertedCoordinate();
-
+    this.moveCoordinateOrigin(this.searchCoordinateLeftTop());
     console.log("scaling", this.graph_coordinate_list);
   };
 

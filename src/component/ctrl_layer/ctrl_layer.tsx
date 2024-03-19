@@ -51,7 +51,11 @@ const CtrlLayer = (props: props) => {
       <div className="ctrl_layer_pull_down_lateral">
         <Button flowUp={flowUpAdd} text={"下に追加"}></Button>
         <Button flowUp={flowUpDelete} text={"削除"}></Button>
-        <PulldownMenu flowUp={flowUpUnitName} view_options={getNamesGisUnitIDs()} selected={0} />
+        <PulldownMenu
+          flowUp={flowUpUnitName}
+          view_options={getNamesGisUnitIDs()}
+          selected={getArrayIndexStr(getKeysGisUnitIDs(), AppContextValue.edit_data.layers[props.layer_uuid].unit_id)}
+        />
         <CtrlLayerPull layer_uuid={props.layer_uuid} />
       </div>
     </div>

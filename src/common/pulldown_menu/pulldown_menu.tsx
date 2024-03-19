@@ -31,7 +31,7 @@ const PulldownMenu = (props: props) => {
         {props.view_options.map((view, index) => {
           return (
             <option key={index} value={index}>
-              {view}
+              {index}. {view}
             </option>
           );
         })}
