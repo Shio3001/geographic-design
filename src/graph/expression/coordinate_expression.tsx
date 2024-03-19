@@ -12,12 +12,18 @@ class GraphCoordinateExpression {
   coordinates: Array<TypePosition>;
   type: string; //path or point
   pos_ids: Map<string, Array<number>>;
+  debug_message: Array<string>;
 
   constructor(type: string) {
     this.coordinates = [];
     this.pos_ids = new Map();
     this.type = type;
+    this.debug_message = [];
   }
+
+  pushDebugMessage = (text: string, node: GraphNode) => {
+    this.debug_message.push(text + " x:" + String(node.x) + " y: " + String(node.y));
+  };
 
   getType = () => {
     return this.type;

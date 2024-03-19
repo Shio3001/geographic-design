@@ -139,7 +139,7 @@ class Parser {
       for (let j = 0; j < coordinates.length; j++) {
         const coordinate = coordinates[j];
 
-        coordinate.y = this.edit_data.height - coordinate.y;
+        coordinate.y = BigNumber(this.edit_data.height).minus(BigNumber(coordinate.y)).toNumber();
       }
     }
   };
