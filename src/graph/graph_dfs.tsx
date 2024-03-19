@@ -10,12 +10,17 @@ import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 
+type TypeProcessingPathStack = {
+  depth: number;
+  path: GraphCoordinateExpression;
+  route_node: Map<string, boolean>;
+};
+
 class GraphDfs {
   graph_container: Graph;
-  termination_point: Array<string>;
 
   processed_path: Array<GraphCoordinateExpression>;
-  processing_path_stack: Array<{ depth: number; path: GraphCoordinateExpression; route_node: Map<string, boolean> }>;
+  processing_path_stack: Array<TypeProcessingPathStack>;
 
   is_searched_nodes: Map<string, boolean>;
   dfs_stack: Array<string>;
@@ -23,7 +28,7 @@ class GraphDfs {
   constructor(graph: Graph) {
     this.graph_container = graph;
     this.is_searched_nodes = new Map();
-    this.termination_point = [];
+
     this.processed_path = [];
     this.processing_path_stack = [];
     this.dfs_stack = [];
@@ -33,33 +38,79 @@ class GraphDfs {
     return this.processed_path;
   };
 
+  debugNode = () => {
+    const node_keys = this.graph_container.graph.keys();
+    console.log("debugNode ", this.graph_container.graph, this.graph_container.graph.size);
+    for (const key of node_keys) {
+      const node = this.graph_container.graph.get(key);
+
+      console.log("debugNodeK ", key);
+
+      for (let j = 0; j < node.link_id_list.length; j++) {
+        const link_node_id = node.link_id_list[j];
+        const link_node = this.graph_container.graph.get(link_node_id);
+
+        this.pushProcessing(0);
+        this.pushCoordinate(node.x, node.y);
+        this.pushCoordinate(link_node.x, link_node.y);
+        this.popProcessing();
+      }
+    }
+  };
+
   startDfs = () => {
     const node_keys = this.graph_container.graph.keys();
 
-    for (let key in node_keys) {
+    const termination_point = this.getTerminationPointID();
+    // const termination_even_point = this.getTerminationEvenPointID();
+
+    console.log("termination_point", termination_point);
+
+    this.graph_container.graph.forEach(function (node, key) {
+      console.log("termination_point -alllinks", key, node.link_id_list);
+    });
+    this.graph_container.graph.forEach(function (node, key) {
+      if (node.link_id_list.length == 1 || node.link_id_list.length >= 3) {
+        console.log("termination_point -graph", key, node.link_id_list);
+      }
+    });
+
+    for (const key of node_keys) {
       this.is_searched_nodes.set(key, false);
     }
 
-    this.termination_point = this.getTerminationPointID();
+    console.log("termination_point", termination_point);
+    for (let i = 0; i < termination_point.length; i++) {
+      const termination_point_node_id = termination_point[i];
+      const termination_point_node = this.graph_container.graph.get(termination_point_node_id);
 
-    for (let i = 0; i < this.termination_point.length; i++) {
-      const start_node_id = this.termination_point[i];
+      this.is_searched_nodes.set(termination_point_node_id, true);
 
-      if (this.is_searched_nodes.get(start_node_id)) {
-        continue;
+      for (let j = 0; j < termination_point_node.link_id_list.length; j++) {
+        const link_node_id = termination_point_node.link_id_list[j];
+        const link_node = this.graph_container.graph.get(link_node_id);
+
+        if (this.is_searched_nodes.get(link_node_id)) {
+          continue;
+        }
+
+        console.log("termination_point -link", termination_point_node_id, link_node_id);
+
+        this.pushProcessing(0);
+        this.pushCoordinate(termination_point_node.x, termination_point_node.y);
+        // this.pushCoordinate(link_node.x, link_node.y);
+        this.dfs(link_node_id);
+        this.popProcessing();
       }
-
-      this.pushProcessing(0);
-
-      this.dfs(start_node_id);
-      this.popProcessing();
     }
 
     console.log("処理済みパス", this.processed_path.length, this.processed_path);
   };
 
   pushProcessing = (depth: number) => {
-    this.processing_path_stack.push({ depth: depth, path: new GraphCoordinateExpression("path"), route_node: new Map() });
+    const s: TypeProcessingPathStack = { depth: depth, path: new GraphCoordinateExpression("path"), route_node: new Map() };
+    this.processing_path_stack.push(s);
+    console.log("link_id_list_length push processing_path_stack", this.processing_path_stack.length);
   };
 
   pushProcessingRouteNode = (node_id: string) => {
@@ -73,6 +124,7 @@ class GraphDfs {
   popProcessing = () => {
     this.processed_path.push(this.processing_path_stack[this.processing_path_stack.length - 1].path);
     this.processing_path_stack.pop();
+    console.log("link_id_list_length pop processing_path_stack", this.processing_path_stack.length);
   };
   popDepthProcessing = (depth: number) => {
     const length = this.processing_path_stack.length;
@@ -83,6 +135,7 @@ class GraphDfs {
 
       if (processing_path.depth >= depth) {
         this.popProcessing();
+        break;
       } else {
         break;
       }
@@ -104,9 +157,10 @@ class GraphDfs {
     this.dfs_stack.push(start_node_id);
     this.is_searched_nodes.set(start_node_id, true);
 
+    console.log("termination_point -search start", start_node_id, this.graph_container.graph.get(start_node_id).link_id_list);
+
     while (this.dfs_stack.length > 0) {
       const depth = this.dfs_stack.length;
-      this.popDepthProcessing(depth);
       console.log(
         "DFS | ",
         depth,
@@ -119,33 +173,35 @@ class GraphDfs {
 
       const current_node_id = this.popDfsStack();
       const current_node = this.graph_container.graph.get(current_node_id);
-      this.is_searched_nodes.set(current_node_id, true);
-      this.pushProcessingRouteNode(current_node_id);
       const link_id_list = current_node.link_id_list;
       const link_id_list_length = link_id_list.length;
 
+      console.log("termination_point -search", current_node_id, link_id_list);
+
+      this.pushProcessingRouteNode(current_node_id);
       this.pushCoordinate(current_node.x, current_node.y);
 
       let new_search_count = 0;
 
+      this.is_searched_nodes.set(current_node_id, true);
+
       for (let j = 0; j < link_id_list_length; j++) {
         const nv = link_id_list[j];
+        const nv_node = this.graph_container.graph.get(nv);
 
-        if (this.is_searched_nodes.get(nv) && !this.hasProcessingRouteNode(nv)) {
-          const nv_node = this.graph_container.graph.get(nv);
+        if (this.getTerminationPointID().includes(nv_node.node_id) && !this.is_searched_nodes.get(nv)) {
           this.pushCoordinate(nv_node.x, nv_node.y);
+          continue;
+        }
+        if (this.getTerminationPointID().includes(nv_node.node_id)) {
           continue;
         }
 
         if (this.is_searched_nodes.get(nv)) {
           continue;
         }
-        if (new_search_count >= 1) {
-          this.pushProcessing(depth);
-        }
 
         this.dfs_stack.push(nv);
-        new_search_count++;
       }
     }
 
@@ -209,6 +265,18 @@ class GraphDfs {
     // }
   };
 
+  getTerminationEvenPointID = (): Array<string> => {
+    const t_id: Array<string> = [];
+
+    this.graph_container.graph.forEach(function (node, key) {
+      if (node.link_id_list.length != 2 && node.link_id_list.length % 2 == 0) {
+        t_id.push(key);
+      }
+    });
+
+    return t_id;
+  };
+
   getTerminationPointID = (): Array<string> => {
     const t_id: Array<string> = [];
     let loop_candidacy = ""; //ループ状になってた時は循環してしまう。そのため起点が存在しない。その場合用の候補
@@ -217,7 +285,7 @@ class GraphDfs {
       if (node.link_id_list.length == 2 && !loop_candidacy) {
         loop_candidacy = key;
       }
-      if (node.link_id_list.length == 1) {
+      if (node.link_id_list.length == 1 || node.link_id_list.length >= 3) {
         t_id.push(key);
       }
     });
