@@ -12,16 +12,22 @@ class GraphNode {
   x: number;
   y: number;
 
-  link_id_list: Array<string>;
+  next_link_id_list: Array<string>;
+  bidirectional_link_id_list: Array<string>;
   constructor() {
     this.node_id = "";
     this.x = 0;
     this.y = 0;
-    this.link_id_list = [];
+    this.next_link_id_list = [];
+    this.bidirectional_link_id_list = [];
   }
 
-  pushLinkNode = (link_node_id: string) => {
-    this.link_id_list.push(link_node_id);
+  pushNextLinkNode = (link_node_id: string) => {
+    this.next_link_id_list.push(link_node_id);
+  };
+
+  pushBidirectionalLinkNode = (link_node_id: string) => {
+    this.bidirectional_link_id_list.push(link_node_id);
   };
 
   setId = (id: string) => {

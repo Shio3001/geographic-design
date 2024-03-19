@@ -10,11 +10,6 @@ import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 
-type TypeProcessingPathStack = {
-  path: GraphCoordinateExpression;
-  route_node: Map<string, boolean>;
-};
-
 class GraphCalculation {
   graph_container: Graph;
 
@@ -43,14 +38,13 @@ class GraphCalculation {
 
       console.log("debugNodeK ", key);
 
-      for (let j = 0; j < node.link_id_list.length; j++) {
-        const link_node_id = node.link_id_list[j];
+      for (let j = 0; j < node.bidirectional_link_id_list.length; j++) {
+        const link_node_id = node.bidirectional_link_id_list[j];
         const link_node = this.graph_container.graph.get(link_node_id);
 
-        // this.pushProcessing();
-        // this.pushCoordinate(node.x, node.y);
-        // this.pushCoordinate(link_node.x, link_node.y);
-        // this.popProcessing();
+        const index = this.pushProcessed();
+        this.pushCoordinate(index, node.x, node.y);
+        this.pushCoordinate(index, link_node.x, link_node.y);
       }
     }
   };
@@ -64,11 +58,21 @@ class GraphCalculation {
     console.log("termination_point", termination_point);
 
     this.graph_container.graph.forEach(function (node, key) {
-      console.log("termination_point -alllinks", key, node.link_id_list);
+      console.log("termination_point -alllinks", key, node.bidirectional_link_id_list, node.next_link_id_list);
     });
     this.graph_container.graph.forEach(function (node, key) {
-      if (node.link_id_list.length == 1 || node.link_id_list.length >= 3) {
-        console.log("termination_point -graph", key, node.link_id_list);
+      if (node.bidirectional_link_id_list.length == 1) {
+        console.log("termination_point -graph1", key, node.bidirectional_link_id_list, node.next_link_id_list);
+      }
+    });
+    this.graph_container.graph.forEach(function (node, key) {
+      if (node.bidirectional_link_id_list.length >= 3) {
+        console.log("termination_point -graph3", key, node.bidirectional_link_id_list, node.next_link_id_list);
+      }
+    });
+    this.graph_container.graph.forEach(function (node, key) {
+      if (node.next_link_id_list.length != 1) {
+        console.log("termination_point -graph_!1", key, node.bidirectional_link_id_list, node.next_link_id_list);
       }
     });
 
@@ -79,10 +83,11 @@ class GraphCalculation {
     console.log("termination_point", termination_point);
     for (let i = 0; i < termination_point.length; i++) {
       const termination_point_node_id = termination_point[i];
+      const termination_point_node = this.graph_container.graph.get(termination_point_node_id);
       if (this.isValidNodePath(termination_point_node_id)) {
         continue;
       }
-      const p_index = this.pushProcessed();
+      const p_index = this.pushProcessedPos(termination_point_node_id, termination_point_node.x, termination_point_node.y);
       this.node_path.set(termination_point_node_id, p_index);
       this.dfs(termination_point_node_id);
     }
@@ -94,6 +99,11 @@ class GraphCalculation {
     const g = new GraphCoordinateExpression("path");
     this.processed_path.push(g);
     return this.processed_path.length - 1;
+  };
+  pushProcessedPos = (node_id: string, x: number, y: number) => {
+    const path_index = this.pushProcessed();
+    this.processed_path[path_index].pushCoordinateId(node_id, x, y);
+    return path_index;
   };
 
   pushCoordinate = (path_index: number, x: number, y: number) => {
@@ -120,18 +130,24 @@ class GraphCalculation {
     this.bfs_que = [];
     this.bfs_que.push(start_node_id);
 
-    console.log("termination_point -search start", start_node_id, this.graph_container.graph.get(start_node_id).link_id_list);
+    // const start_node = this.graph_container.graph.get(start_node_id);
+    // const start_node_path = this.node_path.get(start_node_id);
+    // this.pushCoordinateId(start_node_path, start_node_id, start_node.x, start_node.y);
+
+    console.log("termination_point -search start", start_node_id);
 
     while (this.bfs_que.length > 0) {
       const que_length = this.bfs_que.length;
 
       const current_node_id = this.popDfsStack();
       const current_node = this.graph_container.graph.get(current_node_id);
-      const link_id_list = current_node.link_id_list;
+      const link_id_list = current_node.bidirectional_link_id_list;
       const link_id_list_length = link_id_list.length;
       const current_node_path = this.node_path.get(current_node_id);
+
       this.pushCoordinateId(current_node_path, current_node_id, current_node.x, current_node.y);
-      console.log("termination_point -search", current_node_id, link_id_list);
+      this.processed_path[current_node_path].pushDebugMessage("標準 : " + current_node_id, current_node);
+      console.log("termination_point -search", link_id_list_length, current_node_id, link_id_list);
 
       let link_count = 0;
 
@@ -143,50 +159,44 @@ class GraphCalculation {
           continue;
         }
 
-        const next_node_path = link_count >= 1 ? this.pushProcessed() : current_node_path;
-
-        if (this.isValidNodePath(nv_id) && !this.hasCoordinateId(current_node_path, nv_id)) {
+        if (this.isValidNodePath(nv_id) && this.node_path.get(nv_id) != this.node_path.get(current_node_id)) {
           this.pushCoordinateId(current_node_path, nv_id, nv_node.x, nv_node.y);
+          this.processed_path[current_node_path].pushDebugMessage("終端 : " + nv_id, nv_node);
           continue;
         }
         if (this.isValidNodePath(nv_id)) {
           continue;
         }
-        link_count++;
+        const next_node_path = link_id_list_length >= 3 ? this.pushProcessed() : current_node_path;
 
-        this.node_path.set(nv_id, next_node_path);
+        if (next_node_path != current_node_path) {
+          this.processed_path[next_node_path].pushDebugMessage("新規分岐により生成", nv_node);
+          this.pushCoordinateId(next_node_path, current_node_id, current_node.x, current_node.y);
+          this.processed_path[next_node_path].pushDebugMessage("新規分岐 : " + nv_id, nv_node);
+        }
+
+        link_count++;
+        // this.pushCoordinateId(next_node_path, nv_id, nv_node.x, nv_node.y);
+        this.node_path.set(nv_id, current_node_path);
         this.bfs_que.push(nv_id);
       }
     }
-  };
-
-  getTerminationEvenPointID = (): Array<string> => {
-    const t_id: Array<string> = [];
-
-    this.graph_container.graph.forEach(function (node, key) {
-      if (node.link_id_list.length != 2 && node.link_id_list.length % 2 == 0) {
-        t_id.push(key);
-      }
-    });
-
-    return t_id;
   };
 
   getTerminationPointID = (): Array<string> => {
     const t_id: Array<string> = [];
     let loop_candidacy = ""; //ループ状になってた時は循環してしまう。そのため起点が存在しない。その場合用の候補
 
-    this.graph_container.graph.forEach(function (node, key) {
-      if (node.link_id_list.length == 2 && !loop_candidacy) {
-        loop_candidacy = key;
-      }
-      if (node.link_id_list.length == 1 || node.link_id_list.length >= 3) {
-        t_id.push(key);
-      }
-    });
+    const itr_node_keys = this.graph_container.graph.keys();
+    const node_keys = Array.from(itr_node_keys);
 
-    if (t_id.length == 0) {
-      t_id.push(loop_candidacy);
+    for (let i = 0; i < node_keys.length; i++) {
+      const node_key = node_keys[i];
+      const node = this.graph_container.graph.get(node_key);
+      if (node.bidirectional_link_id_list.length == 1 && node.next_link_id_list.length == 1) {
+        t_id.push(node_key);
+        continue;
+      }
     }
 
     return t_id;

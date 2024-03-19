@@ -9,6 +9,7 @@ import Graph from "./../../graph/graph";
 import GraphNode from "./../../graph/graph_node";
 import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
+import GraphOptimization from "./../../graph/graph_optimization";
 
 import BigNumber from "bignumber.js";
 
@@ -36,7 +37,11 @@ class ParserRailroadSection {
     const grah_calc = new GraphCalculation(this.graph); // grah_dfs.debugNode();
 
     grah_calc.startCalc();
+    // grah_calc.debugNode();
     const grah_paths = grah_calc.getProcessedPath();
+
+    const graph_optimization = new GraphOptimization(grah_paths);
+    graph_optimization.graphBranchPointSplit();
 
     return grah_paths;
   };
@@ -58,7 +63,7 @@ class ParserRailroadSection {
   };
 
   parseCoordinatesToGraph = (coordinates: TypeJsonCoordinates) => {
-    let before_node = "";
+    let before_node_id = "";
 
     for (let i = 0; i < coordinates.length; i++) {
       const coordinate = coordinates[i];
@@ -70,8 +75,8 @@ class ParserRailroadSection {
       const c0_100000 = coordinate0.times(100000).toNumber();
       const c1_100000 = coordinate1.times(100000).toNumber();
 
-      const c0_10dp = coordinate0.toString();
-      const c1_10dp = coordinate1.toString();
+      const c0_10dp = coordinate0.times(100000).dp(0).toString();
+      const c1_10dp = coordinate1.times(100000).dp(0).toString();
       console.log("c0_10-c1_10", coordinate0, coordinate1, c0_10dp, c1_10dp);
 
       // const c0_10 = String(coordinate0);
@@ -81,11 +86,15 @@ class ParserRailroadSection {
       node.setPos(c0_100000, c1_100000);
 
       if (i >= 1) {
-        node.pushLinkNode(before_node);
+        const before_node = this.graph.graph.get(before_node_id);
+        before_node.pushNextLinkNode(node.node_id);
+        before_node.pushBidirectionalLinkNode(node.node_id);
+        node.pushBidirectionalLinkNode(before_node_id);
+        this.graph.graph.set(before_node_id, before_node);
       }
 
       this.graph.pushNode(node);
-      before_node = node.node_id;
+      before_node_id = node.node_id;
     }
 
     console.log(this.graph);
