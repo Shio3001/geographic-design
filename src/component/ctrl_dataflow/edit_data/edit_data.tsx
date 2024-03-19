@@ -13,13 +13,15 @@ class EditData {
   width: number;
   height: number;
 
+  filename: string;
+
   constructor(layer_number?: number) {
     this.layer_length = 0;
     this.layers_order = [];
     this.layers = {};
     this.width = 1000;
     this.height = 1000;
-
+    this.filename = "animation";
     if (!layer_number) {
       layer_number = 0;
     }
@@ -36,6 +38,10 @@ class EditData {
     const new_layers_order = this.layers_order.filter((n) => n !== uuid);
     delete this.layers[uuid];
     this.layers_order = new_layers_order;
+  };
+
+  setFileName = (filename: string) => {
+    this.filename = filename;
   };
 
   setLayer = (layer: LayerData) => {

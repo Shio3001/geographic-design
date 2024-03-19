@@ -12,6 +12,7 @@ import { CtrlGisContext } from "./ctrl_gis_context";
 
 import Button from "./../common/button/button";
 import NumberBox from "./../common/numberbox/numberbox";
+import TextBox from "./../common/textbox/textbox";
 import { AppContext } from "./../app_context";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
@@ -42,6 +43,12 @@ const CtrlGis = () => {
     setPreview(svg);
 
     console.log("svg", svg);
+    return svg;
+  };
+
+  const flowUpOutputSVG = () => {
+    const svg = flowUpRendering();
+    AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
   };
 
   const flowUpWidth = (value: number) => {
@@ -55,11 +62,19 @@ const CtrlGis = () => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpFileName = (value: string) => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setFileName(value);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
         <Preview preview_width={AppContextValue.edit_data.width} preview_height={AppContextValue.edit_data.height} svg_data={preview} />
         <Button flowUp={flowUpRendering} text={"描画"} />
+        <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
+        <TextBox flowUp={flowUpFileName} text={"output_animation"} />
         <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} />
         <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} />
         <CtrlLayers />

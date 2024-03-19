@@ -39,6 +39,26 @@ const App = () => {
     update: false,
   });
 
+  const fileExportCommon = (jsonData: any, fileName: string, typeText: string, extension: string) => {
+    //typeについてhttps://asahi-net.jp/support/guide/homepage/0017.html
+    const blob = new Blob([jsonData], { type: typeText });
+    const aTag = document.createElement("a");
+    aTag.href = URL.createObjectURL(blob);
+    aTag.target = "_blank";
+    aTag.download = fileName + "." + extension;
+    aTag.click();
+    URL.revokeObjectURL(aTag.href);
+  };
+
+  const fileExportText = (filename: string, text: string) => {
+    fileExportCommon(text, filename, "text/svg", "svg");
+  };
+
+  // const fileExportDataCentral = () => {
+  //   const jsonDataCentral = JSON.stringify(this.DataCentral, null, "\t");
+  //   fileExportCommon(jsonDataCentral, "animation.svg", "application/json", "json");
+  // };
+
   return (
     <>
       <AppContext.Provider
@@ -47,6 +67,7 @@ const App = () => {
           edit_data: app_state.edit_data as EditData,
           update: app_state.update as boolean,
           dispatchAppState: dispatchAppState,
+          fileExportText: fileExportText,
         }}
       >
         <CtrlGis />
