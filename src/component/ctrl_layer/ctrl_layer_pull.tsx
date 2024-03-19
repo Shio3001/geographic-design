@@ -3,6 +3,8 @@ const { useContext, useReducer, createContext, useState, useEffect } = React;
 import { createRoot } from "react-dom/client";
 import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
 
+import CheckBox from "./../../common/checkbox/checkbox";
+
 import { getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 import {
   searchUniqueKey,
@@ -45,6 +47,9 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     if (!layer.layer_infomation["line"]) {
       flowUpUnitLine(0);
     }
+    if (!layer.layer_infomation["path_optimize"]) {
+      flowUpPathOptimize(true);
+    }
   }, [props.layer_uuid]);
 
   const flowUpUnitRailway = (index: number) => {
@@ -72,10 +77,28 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     return view_lines;
   };
 
+  const flowUpPathOptimize = (check: boolean) => {
+    console.log("flowUpPathOptimize", check);
+    layer.updateLayerElement("path_optimize", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const getCheckedPathOptimize = () => {
+    if (!("path_optimize" in layer.layer_infomation)) {
+      return false;
+    }
+
+    const c = layer.getElement("path_optimize");
+    return c == "ok";
+  };
+
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
       <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
+      <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化と結合"} checked={getCheckedPathOptimize()} />
     </>
   );
 };

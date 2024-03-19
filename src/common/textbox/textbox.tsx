@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 type props = {
   flowUp: Function;
   text: string;
+  label_text: string;
 };
 
 const TextBox = (props: props) => {
@@ -21,7 +22,10 @@ const TextBox = (props: props) => {
 
   return (
     <>
-      <input type="text" value={text} onChange={onChangeEvent}></input>
+      <div className="number_box">
+        <p>{props.label_text}</p>
+        <input type="text" value={text} onChange={onChangeEvent}></input>
+      </div>
     </>
   );
 };
