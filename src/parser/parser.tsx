@@ -1,6 +1,7 @@
 import EditData from "../component/ctrl_dataflow/edit_data/edit_data";
 import LayerData from "../component/ctrl_dataflow/edit_data/layer_data";
 import { TypeGISInfo, TypePosition } from "../gis_scipt/route_type";
+import { getRandomInt } from "../gis_scipt/route_setup";
 import ParserRailroadSection from "./parser_unit/railroad_section";
 import ParserStation from "./parser_unit/station";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
@@ -69,7 +70,15 @@ class Parser {
     const new_svg_node = new SvgNode();
     const coordinates = gce.coordinates;
     new_svg_node.setTag("path");
-    new_svg_node.pushAttribute("stroke", "black");
+
+    const r = String(getRandomInt(0, 255));
+    const g = String(getRandomInt(0, 255));
+    const b = String(getRandomInt(0, 255));
+
+    const rgb = "rgb(" + r + "," + g + "," + b + ")";
+
+    new_svg_node.pushAttribute("stroke", rgb);
+
     new_svg_node.pushAttribute("stroke-width", "2");
     new_svg_node.pushAttribute("fill", "none");
     const coordinate0 = coordinates[0];

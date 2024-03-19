@@ -35,6 +35,7 @@ class ParserRailroadSection {
   generatePath = (): Array<GraphCoordinateExpression> => {
     const grah_dfs = new GraphDfs(this.graph);
     grah_dfs.startDfs();
+    // grah_dfs.debugNode();
 
     const paths = grah_dfs.getProcessedPath();
 
@@ -77,7 +78,7 @@ class ParserRailroadSection {
       // const c0_10 = String(coordinate0);
       // const c1_10 = String(coordinate1);
 
-      node.setIdByPos(c0_10dp, c1_10dp);
+      node.setIdByPos(c1_10dp, c0_10dp);
       node.setPos(c0_100000, c1_100000);
 
       if (i >= 1) {
