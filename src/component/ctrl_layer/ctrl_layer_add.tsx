@@ -68,8 +68,6 @@ const CtrlLayerAdd = () => {
         const railway = searchUniqueKey(unit_id, "N02_004")[ctrl_layer_add.classification1];
         const lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", railway, "N02_003");
 
-        console.log("flowUpAdd", railway, lines);
-
         const edit_data = AppContextValue.edit_data;
         for (let i in lines) {
           const line = lines[i];
@@ -78,7 +76,6 @@ const CtrlLayerAdd = () => {
           nlayer.updateLayerElement("railway", railway);
           nlayer.updateLayerElement("line", line);
           edit_data.addLayer(nlayer);
-          console.log("flowUpAdd nlayer", line, nlayer);
         }
 
         AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
@@ -88,13 +85,17 @@ const CtrlLayerAdd = () => {
         const railway = searchUniqueKey(unit_id, "N02_004")[ctrl_layer_add.classification1];
         const lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", railway, "N02_003");
         const edit_data = AppContextValue.edit_data;
-        for (let line in lines) {
+        console.log("flowUpAdd", railway, lines);
+
+        for (let i in lines) {
+          const line = lines[i];
           const nlayer: LayerData = new LayerData();
           nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
           nlayer.updateLayerElement("railway", railway);
           nlayer.updateLayerElement("line", line);
           edit_data.addLayer(nlayer);
         }
+        console.log("flowUpAdd--", edit_data);
 
         AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
         return;
@@ -106,6 +107,7 @@ const CtrlLayerAdd = () => {
 
   const flowUp0 = (index: number) => {
     dispatchCtrlLayerAdd({ action_type: "unit_id", action_data: index });
+    dispatchCtrlLayerAdd({ action_type: "classification1", action_data: 0 });
   };
 
   const flowUp1 = (index: number) => {
