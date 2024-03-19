@@ -11,9 +11,11 @@ import GraphNode from "../graph_node";
 class GraphCoordinateExpression {
   coordinates: Array<TypePosition>;
   type: string; //path or point
+  pos_ids: Map<string, Array<number>>;
 
   constructor(type: string) {
     this.coordinates = [];
+    this.pos_ids = new Map();
     this.type = type;
   }
 
@@ -21,9 +23,33 @@ class GraphCoordinateExpression {
     return this.type;
   };
 
-  pushCoordinate = (x: number, y: number) => {
-    this.coordinates.push({ x: x, y: y });
+  pushPosIds = (id: string, index: number) => {
+    if (this.pos_ids.has(id)) {
+      const p = this.pos_ids.get(id);
+      p.push(index);
+      this.pos_ids.set(id, p);
+    } else {
+      this.pos_ids.set(id, [index]);
+    }
   };
+
+  pushCoordinate = (x: number, y: number) => {
+    const xs = String(x);
+    const ys = String(y);
+    const id = xs + "g" + ys;
+
+    const index = this.coordinates.push({ x: x, y: y });
+    this.pushPosIds(id, index);
+  };
+
+  pushCoordinateId = (id: string, x: number, y: number) => {
+    const index = this.coordinates.push({ x: x, y: y });
+    this.pushPosIds(id, index);
+  };
+
+  hasPosId(id: string) {
+    return this.pos_ids.has(id);
+  }
 }
 
 export default GraphCoordinateExpression;

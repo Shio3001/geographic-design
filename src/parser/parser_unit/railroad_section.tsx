@@ -7,7 +7,7 @@ import SvgKit from "../sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import Graph from "./../../graph/graph";
 import GraphNode from "./../../graph/graph_node";
-import GraphDfs from "./../../graph/graph_dfs";
+import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 
 import BigNumber from "bignumber.js";
@@ -33,13 +33,12 @@ class ParserRailroadSection {
   }
 
   generatePath = (): Array<GraphCoordinateExpression> => {
-    const grah_dfs = new GraphDfs(this.graph);
-    grah_dfs.startDfs();
-    // grah_dfs.debugNode();
+    const grah_calc = new GraphCalculation(this.graph); // grah_dfs.debugNode();
 
-    const paths = grah_dfs.getProcessedPath();
+    grah_calc.startCalc();
+    const grah_paths = grah_calc.getProcessedPath();
 
-    return paths;
+    return grah_paths;
   };
 
   coordinateAggregation = () => {
