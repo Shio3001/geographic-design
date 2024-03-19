@@ -23,7 +23,7 @@ const App = () => {
       return { gis_info: action.update_state, edit_data: state.edit_data, update: state.update };
     }
     if (action.action_type == "update_edit_data") {
-      console.log("reducerApp [update_gis_info]:", state.gis_info, action.update_state, state.update);
+      console.log("reducerApp [update_edit_data]:", state.gis_info, action.update_state, state.update);
       return { gis_info: state.gis_info, edit_data: action.update_state, update: state.update };
     }
     if (action.action_type == "update_flag") {

@@ -1,10 +1,11 @@
 import * as React from "react";
-const { useContext, useReducer, createContext, useState, useEffect } = React;
+const { useContext, useReducer, createContext, useState, useEffect, useRef } = React;
 import { createRoot } from "react-dom/client";
 
 type props = {
   flowUp: Function;
   number: number;
+  label_text: string;
 };
 
 const NumberBox = (props: props) => {
@@ -21,7 +22,10 @@ const NumberBox = (props: props) => {
 
   return (
     <>
-      <input type="text" value={text} onChange={onChangeEvent}></input>
+      <div className="number_box">
+        <p>{props.label_text}</p>
+        <input type="text" value={text} onChange={onChangeEvent}></input>
+      </div>
     </>
   );
 };

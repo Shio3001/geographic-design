@@ -74,9 +74,9 @@ const CtrlGis = () => {
         <Preview preview_width={AppContextValue.edit_data.width} preview_height={AppContextValue.edit_data.height} svg_data={preview} />
         <Button flowUp={flowUpRendering} text={"描画"} />
         <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
-        <TextBox flowUp={flowUpFileName} text={"output_animation"} />
-        <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} />
-        <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} />
+        <TextBox flowUp={flowUpFileName} text={"output_animation"} label_text="svg出力ファイル名" />
+        <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
+        <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
         <CtrlLayers />
         <CtrlLayerAdd />
         <p>{preview}</p>
