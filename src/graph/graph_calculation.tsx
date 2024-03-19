@@ -9,18 +9,67 @@ import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
+import { node } from "webpack";
+
+class GraphCalculationNodePath {
+  node_paths: Map<string, Array<number>>;
+
+  constructor() {
+    this.node_paths = new Map();
+  }
+
+  getPaths = (node_id: string) => {
+    const paths = this.node_paths.get(node_id);
+    return paths;
+  };
+
+  isValidNode = (node_id: string) => {
+    const paths = this.node_paths.get(node_id);
+
+    for (let path of paths) {
+      if (path >= 0) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  otheGroupPath = (node_id_1: string, node_id_2: string) => {
+    const paths_1 = this.node_paths.get(node_id_1);
+    const paths_2 = this.node_paths.get(node_id_2);
+
+    for (let p1 of paths_1) {
+      for (let p2 of paths_2) {
+        if (p1 == p2) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
+  pushNode = (node_id: string, path_id: number) => {
+    if (this.node_paths.has(node_id)) {
+      const node = this.node_paths.get(node_id);
+      node.push(path_id);
+      this.node_paths.set(node_id, node);
+    } else {
+      this.node_paths.set(node_id, [path_id]);
+    }
+  };
+}
 
 class GraphCalculation {
   graph_container: Graph;
 
   processed_path: Array<GraphCoordinateExpression>;
 
-  node_path: Map<string, number>;
   bfs_que: Array<string>;
+  node_path: GraphCalculationNodePath;
 
   constructor(graph: Graph) {
     this.graph_container = graph;
-    this.node_path = new Map();
+    this.node_path = new GraphCalculationNodePath();
 
     this.processed_path = [];
     this.bfs_que = [];
@@ -77,7 +126,7 @@ class GraphCalculation {
     });
 
     for (const key of node_keys) {
-      this.node_path.set(key, -1);
+      this.node_path.pushNode(key, -1);
     }
 
     console.log("termination_point", termination_point);
@@ -88,7 +137,7 @@ class GraphCalculation {
         continue;
       }
       const p_index = this.pushProcessedPos(termination_point_node_id, termination_point_node.x, termination_point_node.y);
-      this.node_path.set(termination_point_node_id, p_index);
+      this.node_path.pushNode(termination_point_node_id, p_index);
       this.dfs(termination_point_node_id);
     }
 
@@ -122,7 +171,7 @@ class GraphCalculation {
   };
 
   isValidNodePath = (node_id: string) => {
-    return this.node_path.get(node_id) >= 0;
+    return this.node_path.isValidNode(node_id);
   };
 
   dfs = (start_node_id: string) => {
@@ -143,10 +192,13 @@ class GraphCalculation {
       const current_node = this.graph_container.graph.get(current_node_id);
       const link_id_list = current_node.bidirectional_link_id_list;
       const link_id_list_length = link_id_list.length;
-      const current_node_path = this.node_path.get(current_node_id);
+      const current_node_paths = this.node_path.getPaths(current_node_id);
 
-      this.pushCoordinateId(current_node_path, current_node_id, current_node.x, current_node.y);
-      this.processed_path[current_node_path].pushDebugMessage("標準 : " + current_node_id, current_node);
+      for (let current_node_path of current_node_paths) {
+        this.pushCoordinateId(current_node_path, current_node_id, current_node.x, current_node.y);
+        this.processed_path[current_node_path].pushDebugMessage("標準 : " + current_node_id, current_node);
+      }
+
       console.log("termination_point -search", link_id_list_length, current_node_id, link_id_list);
 
       let link_count = 0;
@@ -159,7 +211,7 @@ class GraphCalculation {
           continue;
         }
 
-        if (this.isValidNodePath(nv_id) && this.node_path.get(nv_id) != this.node_path.get(current_node_id)) {
+        if (this.isValidNodePath(nv_id) && this.node_path.otheGroupPath(nv_id, current_node_id)) {
           this.pushCoordinateId(current_node_path, nv_id, nv_node.x, nv_node.y);
           this.processed_path[current_node_path].pushDebugMessage("終端 : " + nv_id, nv_node);
           continue;
@@ -177,7 +229,7 @@ class GraphCalculation {
 
         link_count++;
         // this.pushCoordinateId(next_node_path, nv_id, nv_node.x, nv_node.y);
-        this.node_path.set(nv_id, current_node_path);
+        this.node_path.pushNode(nv_id, current_node_path);
         this.bfs_que.push(nv_id);
       }
     }
