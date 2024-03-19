@@ -71,9 +71,9 @@ class Parser {
     const coordinates = gce.coordinates;
     new_svg_node.setTag("path");
 
-    const r = String(getRandomInt(0, 255));
-    const g = String(getRandomInt(0, 255));
-    const b = String(getRandomInt(0, 255));
+    const r = String(getRandomInt(50, 200));
+    const g = String(getRandomInt(50, 200));
+    const b = String(getRandomInt(50, 200));
 
     const rgb = "rgb(" + r + "," + g + "," + b + ")";
 

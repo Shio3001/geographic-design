@@ -31,8 +31,6 @@ class GraphNode {
   setIdByPos = (x: string, y: string) => {
     // const xs = String(x);
     // const ys = String(y);
-    // const xs = String(x);
-    // const ys = String(y);
     const name = x + "p" + y;
     this.node_id = name;
   };
