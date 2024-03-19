@@ -19,11 +19,19 @@ class GraphCalculationNodePath {
   }
 
   getPaths = (node_id: string) => {
+    if (!this.node_paths.has(node_id)) {
+      return [];
+    }
+
     const paths = this.node_paths.get(node_id);
     return paths;
   };
 
   isValidNode = (node_id: string) => {
+    if (!this.node_paths.has(node_id)) {
+      return false;
+    }
+
     const paths = this.node_paths.get(node_id);
 
     for (let path of paths) {
@@ -35,6 +43,12 @@ class GraphCalculationNodePath {
   };
 
   otheGroupPath = (node_id_1: string, node_id_2: string) => {
+    if (!this.node_paths.has(node_id_1)) {
+      return false;
+    }
+    if (!this.node_paths.has(node_id_2)) {
+      return false;
+    }
     const paths_1 = this.node_paths.get(node_id_1);
     const paths_2 = this.node_paths.get(node_id_2);
 
@@ -125,9 +139,9 @@ class GraphCalculation {
       }
     });
 
-    for (const key of node_keys) {
-      this.node_path.pushNode(key, -1);
-    }
+    // for (const key of node_keys) {
+    //   this.node_path.pushNode(key, -1);
+    // }
 
     console.log("termination_point", termination_point);
     for (let i = 0; i < termination_point.length; i++) {
@@ -175,13 +189,16 @@ class GraphCalculation {
   };
 
   dfs = (start_node_id: string) => {
-    console.log("幅優先探索", start_node_id, this.graph_container.graph.size);
+    console.log("幅優先探索", start_node_id, this.node_path, this.graph_container.graph);
     this.bfs_que = [];
     this.bfs_que.push(start_node_id);
 
-    // const start_node = this.graph_container.graph.get(start_node_id);
-    // const start_node_path = this.node_path.get(start_node_id);
-    // this.pushCoordinateId(start_node_path, start_node_id, start_node.x, start_node.y);
+    const start_node = this.graph_container.graph.get(start_node_id);
+    const start_node_paths = this.node_path.getPaths(start_node_id);
+
+    for (let start_node_path of start_node_paths) {
+      this.pushCoordinateId(start_node_path, start_node_id, start_node.x, start_node.y);
+    }
 
     console.log("termination_point -search start", start_node_id);
 
@@ -194,42 +211,27 @@ class GraphCalculation {
       const link_id_list_length = link_id_list.length;
       const current_node_paths = this.node_path.getPaths(current_node_id);
 
-      for (let current_node_path of current_node_paths) {
-        this.pushCoordinateId(current_node_path, current_node_id, current_node.x, current_node.y);
-        this.processed_path[current_node_path].pushDebugMessage("標準 : " + current_node_id, current_node);
-      }
-
       console.log("termination_point -search", link_id_list_length, current_node_id, link_id_list);
-
-      let link_count = 0;
 
       for (let j = 0; j < link_id_list_length; j++) {
         const nv_id = link_id_list[j];
         const nv_node = this.graph_container.graph.get(nv_id);
 
-        if (nv_id == current_node_id) {
+        if (this.node_path.otheGroupPath(current_node_id, nv_id)) {
           continue;
         }
 
-        if (this.isValidNodePath(nv_id) && this.node_path.otheGroupPath(nv_id, current_node_id)) {
-          this.pushCoordinateId(current_node_path, nv_id, nv_node.x, nv_node.y);
-          this.processed_path[current_node_path].pushDebugMessage("終端 : " + nv_id, nv_node);
-          continue;
+        if (link_id_list_length >= 3) {
+          const path_index = this.pushProcessedPos(current_node_id, current_node.x, current_node.y);
+          this.pushCoordinateId(path_index, nv_id, nv_node.x, nv_node.y);
+          this.node_path.pushNode(current_node_id, path_index);
+          this.node_path.pushNode(nv_id, path_index);
+        } else {
+          for (let current_node_path of current_node_paths) {
+            this.pushCoordinateId(current_node_path, nv_id, nv_node.x, nv_node.y);
+            this.node_path.pushNode(nv_id, current_node_path);
+          }
         }
-        if (this.isValidNodePath(nv_id)) {
-          continue;
-        }
-        const next_node_path = link_id_list_length >= 3 ? this.pushProcessed() : current_node_path;
-
-        if (next_node_path != current_node_path) {
-          this.processed_path[next_node_path].pushDebugMessage("新規分岐により生成", nv_node);
-          this.pushCoordinateId(next_node_path, current_node_id, current_node.x, current_node.y);
-          this.processed_path[next_node_path].pushDebugMessage("新規分岐 : " + nv_id, nv_node);
-        }
-
-        link_count++;
-        // this.pushCoordinateId(next_node_path, nv_id, nv_node.x, nv_node.y);
-        this.node_path.pushNode(nv_id, current_node_path);
         this.bfs_que.push(nv_id);
       }
     }
