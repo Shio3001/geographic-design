@@ -10,6 +10,7 @@ export type AppContextValue = {
   edit_data: EditData;
   update: boolean;
   dispatchAppState: Function;
+  fileExportText: Function;
 };
 
 export type TypeAppState = {
