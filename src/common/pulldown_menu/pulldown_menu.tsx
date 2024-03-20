@@ -7,6 +7,7 @@ type props = {
   view_options: Array<string>;
   unselected?: boolean;
   selected: number;
+  label_text?: string;
 };
 
 const PulldownMenu = (props: props) => {
@@ -27,6 +28,7 @@ const PulldownMenu = (props: props) => {
 
   return (
     <>
+      <p>{props.label_text}</p>
       <select value={props.selected} onChange={onChangeEvent}>
         {props.view_options.map((view, index) => {
           return (

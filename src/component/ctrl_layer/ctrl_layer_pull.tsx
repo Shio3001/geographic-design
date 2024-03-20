@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
 
 import CheckBox from "./../../common/checkbox/checkbox";
+import NumberBox from "./../../common/numberbox/numberbox";
 
 import { getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 import {
@@ -50,6 +51,9 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     if (!layer.layer_infomation["path_optimize"]) {
       flowUpPathOptimize(true);
     }
+    if (!layer.layer_infomation["path_optimize_closed_type"]) {
+      flowUpPathOptimizeClosedPathType(2);
+    }
   }, [props.layer_uuid]);
 
   const flowUpUnitRailway = (index: number) => {
@@ -93,12 +97,33 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     const c = layer.getElement("path_optimize");
     return c == "ok";
   };
+  const flowUpPathOptimizeClosedPathType = (index: number) => {
+    // const path_optimize_closed_type = getCheckedPathOptimizeClosedPathType()[index];
+    layer.updateLayerElement("path_optimize_closed_type", String(index));
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+  const getCheckedPathOptimizeClosedPathType = () => {
+    return ["なし", "最短経路優先(破棄)", "最長経路優先(破棄)", "最短経路優先(分離)", "最長経路優先(分離)", "環状閉路構築"];
+  };
+
+  const flowUpPathOptimizeCycleProcessingThreshold = () => {};
+  const getCheckedPathOptimizeCycleProcessingThreshold = () => {};
 
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
       <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
       <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化と結合"} checked={getCheckedPathOptimize()} />
+      <PulldownMenu
+        flowUp={flowUpPathOptimizeClosedPathType}
+        view_options={getCheckedPathOptimizeClosedPathType()}
+        selected={Number(typeof layer.getElement("path_optimize_closed_type") == "undefined" ? 0 : Number(layer.getElement("path_optimize_closed_type")))}
+        label_text="閉路処理方式"
+      />
+      <NumberBox flowUp={flowUpPathOptimizeCycleProcessingThreshold} number={AppContextValue.edit_data.width} label_text="閉路処理最大長(単位:m)" />
+      <NumberBox flowUp={flowUpPathOptimizeCycleProcessingThreshold} number={AppContextValue.edit_data.width} label_text="分岐線削除最大長(単位:m)" />
     </>
   );
 };

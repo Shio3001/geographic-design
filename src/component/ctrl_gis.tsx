@@ -72,11 +72,15 @@ const CtrlGis = () => {
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
         <Preview preview_width={AppContextValue.edit_data.width} preview_height={AppContextValue.edit_data.height} svg_data={preview} />
-        <Button flowUp={flowUpRendering} text={"描画"} />
-        <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
-        <TextBox flowUp={flowUpFileName} text={"output_animation"} label_text="svg出力ファイル名" />
-        <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
-        <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
+
+        <div className="ctrl_gis_options">
+          <Button flowUp={flowUpRendering} text={"描画"} />
+          <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
+          <TextBox flowUp={flowUpFileName} text={"output_animation"} label_text="svg出力ファイル名" />
+          <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
+          <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
+        </div>
+
         <CtrlLayers />
         <CtrlLayerAdd />
         <p>{preview}</p>
