@@ -9,6 +9,8 @@ import { toNumber } from "lodash";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import BigNumber from "bignumber.js";
 
+import * as GEOGRAPHIC_CONSTANT from "./../../geographic_constant";
+
 class ParserStation {
   edit_data: EditData;
   gis_info: TypeGISInfo;
@@ -54,11 +56,11 @@ class ParserStation {
       const coordinate0 = new BigNumber(coordinate[0]);
       const coordinate1 = new BigNumber(coordinate[1]);
 
-      const c0_100000 = coordinate0.times(100000).toNumber();
-      const c1_100000 = coordinate1.times(100000).toNumber();
+      const c0_exp = coordinate0.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).toNumber();
+      const c1_exp = coordinate1.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).toNumber();
 
       const p: GraphCoordinateExpression = new GraphCoordinateExpression("point");
-      p.pushCoordinate(c0_100000, c1_100000);
+      p.pushCoordinate(c0_exp, c1_exp);
       this.points.push(p);
     }
   };

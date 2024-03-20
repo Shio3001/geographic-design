@@ -93,7 +93,9 @@ class GraphCalculation {
   pushProcessed = () => {
     const g = new GraphCoordinateExpression("path");
     this.processed_path.push(g);
-    return this.processed_path.length - 1;
+    const path_index = this.processed_path.length - 1;
+    this.processed_path[path_index].setCoordinateExpressionId(path_index);
+    return path_index;
   };
   pushProcessedPos = (node_id: string, x: number, y: number) => {
     const path_index = this.pushProcessed();

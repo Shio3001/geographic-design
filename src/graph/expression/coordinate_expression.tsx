@@ -13,13 +13,50 @@ class GraphCoordinateExpression {
   type: string; //path or point
   pos_ids: Map<string, Array<number>>;
   debug_message: Array<string>;
+  pos_order: Array<string>;
+  coordinate_expression_id: number;
 
   constructor(type: string) {
     this.coordinates = [];
     this.pos_ids = new Map();
     this.type = type;
     this.debug_message = [];
+    this.pos_order = [];
   }
+
+  setCoordinateExpressionId = (id: number) => {
+    this.coordinate_expression_id = id;
+  };
+
+  pythagorean = (ap: TypePosition, bp: TypePosition) => {
+    const x = bp.x - ap.x;
+    const y = bp.y - ap.y;
+    const t = x ** 2 + y ** 2;
+    const r = Math.sqrt(t);
+    return r;
+  };
+
+  getDistance = () => {
+    let d_sum = 0;
+    console.log("get-distance-all", this.pos_order, this.coordinates, this.pos_ids);
+
+    for (let i = 1; i < this.coordinates.length; i++) {
+      const c1 = this.coordinates[i - 1];
+      const c2 = this.coordinates[i];
+
+      const d = this.pythagorean(c1, c2);
+      d_sum += d;
+    }
+
+    return d_sum;
+  };
+
+  getFirstNodeId = () => {
+    return this.pos_order[0];
+  };
+  getLastNodeId = () => {
+    return this.pos_order[this.pos_order.length - 1];
+  };
 
   pushDebugMessage = (text: string, node: GraphNode) => {
     this.debug_message.push(text + " x:" + String(node.x) + " y: " + String(node.y));
@@ -30,6 +67,7 @@ class GraphCoordinateExpression {
   };
 
   pushPosIds = (id: string, index: number) => {
+    // this.pos_ids.set(id, index);
     if (this.pos_ids.has(id)) {
       const p = this.pos_ids.get(id);
       p.push(index);
@@ -37,6 +75,7 @@ class GraphCoordinateExpression {
     } else {
       this.pos_ids.set(id, [index]);
     }
+    this.pos_order.push(id);
   };
 
   pushCoordinate = (x: number, y: number) => {
