@@ -9,73 +9,10 @@ import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
-import { node } from "webpack";
-
-class GraphCalculationNodePath {
-  node_paths: Map<string, Array<number>>;
-
-  constructor() {
-    this.node_paths = new Map();
-  }
-
-  getPaths = (node_id: string) => {
-    if (!this.node_paths.has(node_id)) {
-      return [];
-    }
-
-    const paths = this.node_paths.get(node_id);
-    return paths;
-  };
-
-  isValidNode = (node_id: string) => {
-    if (!this.node_paths.has(node_id)) {
-      return false;
-    }
-
-    const paths = this.node_paths.get(node_id);
-
-    for (let path of paths) {
-      if (path >= 0) {
-        return true;
-      }
-    }
-    return false;
-  };
-
-  otheGroupPath = (node_id_1: string, node_id_2: string) => {
-    if (!this.node_paths.has(node_id_1)) {
-      return false;
-    }
-    if (!this.node_paths.has(node_id_2)) {
-      return false;
-    }
-    const paths_1 = this.node_paths.get(node_id_1);
-    const paths_2 = this.node_paths.get(node_id_2);
-
-    for (let p1 of paths_1) {
-      for (let p2 of paths_2) {
-        if (p1 == p2) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
-  pushNode = (node_id: string, path_id: number) => {
-    if (this.node_paths.has(node_id)) {
-      const node = this.node_paths.get(node_id);
-      node.push(path_id);
-      this.node_paths.set(node_id, node);
-    } else {
-      this.node_paths.set(node_id, [path_id]);
-    }
-  };
-}
+import GraphCalculationNodePath from "./graph_calculation_node_path";
 
 class GraphCalculation {
   graph_container: Graph;
-
   processed_path: Array<GraphCoordinateExpression>;
 
   bfs_que: Array<string>;
@@ -121,21 +58,16 @@ class GraphCalculation {
     console.log("termination_point", termination_point);
 
     this.graph_container.graph.forEach(function (node, key) {
-      console.log("termination_point -alllinks", key, node.bidirectional_link_id_list, node.next_link_id_list);
+      console.log("termination_point -alllinks", key, node.bidirectional_link_id_list);
     });
     this.graph_container.graph.forEach(function (node, key) {
       if (node.bidirectional_link_id_list.length == 1) {
-        console.log("termination_point -graph1", key, node.bidirectional_link_id_list, node.next_link_id_list);
+        console.log("termination_point -graph1", key, node.bidirectional_link_id_list);
       }
     });
     this.graph_container.graph.forEach(function (node, key) {
       if (node.bidirectional_link_id_list.length >= 3) {
-        console.log("termination_point -graph3", key, node.bidirectional_link_id_list, node.next_link_id_list);
-      }
-    });
-    this.graph_container.graph.forEach(function (node, key) {
-      if (node.next_link_id_list.length != 1) {
-        console.log("termination_point -graph_!1", key, node.bidirectional_link_id_list, node.next_link_id_list);
+        console.log("termination_point -graph3", key, node.bidirectional_link_id_list);
       }
     });
 
@@ -247,7 +179,7 @@ class GraphCalculation {
     for (let i = 0; i < node_keys.length; i++) {
       const node_key = node_keys[i];
       const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length == 1 && node.next_link_id_list.length == 1) {
+      if (node.bidirectional_link_id_list.length == 1) {
         t_id.push(node_key);
         continue;
       }

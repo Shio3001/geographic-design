@@ -1,0 +1,21 @@
+.ctrl_gis_options {
+  display: flex;
+}
+.ctrl_gis_options p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.ctrl_layers p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ctrl_layer_pull_down_lateral {
+  display: flex;
+  height: 24px;
+}
+
+.ctrl_layer_add {
+  display: flex;
+  height: 24px;
+}

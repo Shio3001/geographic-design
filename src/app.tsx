@@ -12,6 +12,7 @@ import CtrlBlock from "./component/ctrl_layer/ctrl_layer";
 import EditData from "./component/ctrl_dataflow/edit_data/edit_data";
 import { AppContext, TypeAppState, TypeAppReducerAction } from "./app_context";
 import LayerData from "./component/ctrl_dataflow/edit_data/layer_data";
+import "./component/style/ctrl_gis.css";
 
 const App = () => {
   // const [gis_info, setGisInfo] = useState<TypeGISInfo>(setupGisInfo());

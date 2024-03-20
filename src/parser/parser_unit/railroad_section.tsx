@@ -40,8 +40,8 @@ class ParserRailroadSection {
     // grah_calc.debugNode();
     const grah_paths = grah_calc.getProcessedPath();
 
-    const graph_optimization = new GraphOptimization(grah_paths);
-    graph_optimization.graphBranchPointSplit();
+    // const graph_optimization = new GraphOptimization(this.graph, grah_paths);
+    // graph_optimization.graphBranchPointSplit();
 
     return grah_paths;
   };
@@ -86,11 +86,7 @@ class ParserRailroadSection {
       node.setPos(c0_100000, c1_100000);
 
       if (i >= 1) {
-        const before_node = this.graph.graph.get(before_node_id);
-        before_node.pushNextLinkNode(node.node_id);
-        before_node.pushBidirectionalLinkNode(node.node_id);
         node.pushBidirectionalLinkNode(before_node_id);
-        this.graph.graph.set(before_node_id, before_node);
       }
 
       this.graph.pushNode(node);
