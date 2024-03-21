@@ -10,7 +10,7 @@ import GraphNode from "./../../graph/graph_node";
 import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import GraphOptimization from "./../../graph/graph_optimization";
-import * as GEOGRAPHIC_CONSTANT from "./../../geographic_constant";
+import * as GEO from "./../../geographic_constant";
 
 import BigNumber from "bignumber.js";
 
@@ -73,11 +73,11 @@ class ParserRailroadSection {
       const coordinate0 = new BigNumber(coordinate[0]);
       const coordinate1 = new BigNumber(coordinate[1]);
 
-      const c0_exp = coordinate0.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).toNumber();
-      const c1_exp = coordinate1.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).toNumber();
+      const c0_exp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LONGITUDE_KM1_BIGNUMBER).toNumber();
+      const c1_exp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LATITUDE_KM1_BIGNUMBER).toNumber();
 
-      const c0_exp_dp = coordinate0.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
-      const c1_exp_dp = coordinate1.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
+      const c0_exp_dp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
+      const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
       console.log("c0_10-c1_10", coordinate0, coordinate1, c0_exp_dp, c1_exp_dp);
 
       // const c0_10 = String(coordinate0);

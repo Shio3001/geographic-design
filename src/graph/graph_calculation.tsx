@@ -43,8 +43,8 @@ class GraphCalculation {
         const link_node = this.graph_container.graph.get(link_node_id);
 
         const index = this.pushProcessed();
-        this.pushCoordinate(index, node.x, node.y);
-        this.pushCoordinate(index, link_node.x, link_node.y);
+        // this.pushCoordinate(index, node.x, node.y);
+        // this.pushCoordinate(index, link_node.x, link_node.y);
       }
     }
   };
@@ -103,9 +103,6 @@ class GraphCalculation {
     return path_index;
   };
 
-  pushCoordinate = (path_index: number, x: number, y: number) => {
-    this.processed_path[path_index].pushCoordinate(x, y);
-  };
   pushCoordinateId = (path_index: number, node_id: string, x: number, y: number) => {
     this.processed_path[path_index].pushCoordinateId(node_id, x, y);
   };

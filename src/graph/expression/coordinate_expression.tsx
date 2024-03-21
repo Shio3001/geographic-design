@@ -78,15 +78,6 @@ class GraphCoordinateExpression {
     this.pos_order.push(id);
   };
 
-  pushCoordinate = (x: number, y: number) => {
-    const xs = String(x);
-    const ys = String(y);
-    const id = xs + "g" + ys;
-
-    const index = this.coordinates.push({ x: x, y: y });
-    this.pushPosIds(id, index);
-  };
-
   pushCoordinateId = (id: string, x: number, y: number) => {
     const index = this.coordinates.push({ x: x, y: y });
     this.pushPosIds(id, index);
