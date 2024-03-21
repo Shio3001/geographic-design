@@ -38,8 +38,18 @@ class PathContact {
     this.routes = include_path_contact.routes.concat(this.routes);
   };
 
+  replaceRoute = (routes: Array<number>) => {
+    this.routes = [];
+    this.routes = this.routes.concat(routes);
+  };
+
   pushRoute = (route: number) => {
     this.routes.push(route);
+  };
+  pushRoutes = (routes: Array<number>) => {
+    for (let route of routes) {
+      this.routes.push(route);
+    }
   };
   setDistance = (dis: number) => {
     this.distance = dis;
@@ -81,9 +91,10 @@ class GraphRoute extends Graph {
     const node_1 = this.route.get(node_id_1);
     const path_contacts = node_1.get(node_id_2);
 
-    let min_path_contact = path_contacts[0];
-    for (let i = 1; i < path_contacts.length; i++) {
-      if (min_path_contact.distance > path_contacts[i].distance) {
+    let min_distance = Number.MAX_SAFE_INTEGER;
+    let min_path_contact;
+    for (let i = 0; i < path_contacts.length; i++) {
+      if (min_distance > path_contacts[i].distance) {
         min_path_contact = path_contacts[i];
       }
     }
@@ -97,11 +108,14 @@ class GraphRoute extends Graph {
       const node_id_1 = nodes[i];
       const new_map_a: TypeGraphRouteNode = new Map();
       for (let j = 0; j < nodes_length; j++) {
+        const node_id_2 = nodes[j];
         if (i == j) {
+          const dummy_path = new PathContact();
+          dummy_path.setDistance(-1);
+          dummy_path.coordinate_expression_id = -2;
+          new_map_a.set(node_id_2, [dummy_path]);
           continue;
         }
-
-        const node_id_2 = nodes[j];
         new_map_a.set(node_id_2, []);
       }
       this.route.set(node_id_1, new_map_a);
@@ -251,34 +265,53 @@ class GraphOptimization {
 
       console.log("graph_extraction_container-dijkstra-b", fixed_node_id, current_id);
 
-      if (fixed_node_id == current_id) {
-        for (let link_node_id of link_id_list) {
-          enqueqe(link_node_id);
-        }
-        continue;
-      }
-
       const current_route_node = this.graph_extraction_container.getMinPathContact(fixed_node_id, current_id);
 
       for (let link_node_id of link_id_list) {
-        if (fixed_node_id == link_node_id) {
+        // const link_node = this.graph_extraction_container.graph.get(link_node_id);
+        console.log(
+          "graph_extraction_container-dijkstra-c",
+          fixed_node_id,
+          current_id,
+          link_node_id,
+          this.graph_extraction_container.getPathContacts(fixed_node_id, current_id)
+        );
+
+        const paths_fixed_link = this.graph_extraction_container.getPathContacts(fixed_node_id, link_node_id);
+        const path_current_link = this.graph_extraction_container.getMinPathContact(current_id, link_node_id);
+        const path_current_link_gce_id = path_current_link.getCoordinateExpressionId();
+
+        if (current_route_node.distance < 0) {
+          enqueqe(link_node_id);
           continue;
         }
 
-        // const link_node = this.graph_extraction_container.graph.get(link_node_id);
-        const paths_fixed_link = this.graph_extraction_container.getPathContacts(fixed_node_id, link_node_id);
-        const path_current_link = this.graph_extraction_container.getMinPathContact(current_id, link_node_id);
-
         const distance = current_route_node.distance + path_current_link.distance;
-        console.log("graph_extraction_container-dijkstra-c", fixed_node_id, current_id, link_node_id);
+
+        const newRoute = () => {
+          const new_path_contact = new PathContact();
+          new_path_contact.setDistance(distance);
+
+          if (path_current_link_gce_id == -1) {
+            new_path_contact.replaceRoute(path_current_link.routes);
+
+            return new_path_contact;
+          }
+
+          new_path_contact.pushRoute(path_current_link_gce_id);
+          new_path_contact.includeRoute(current_route_node);
+
+          return new_path_contact;
+        };
 
         //次の場所がまだ未探索
         if (paths_fixed_link.length == 0) {
-          const new_path_contact = new PathContact();
-          new_path_contact.setDistance(distance);
-          new_path_contact.pushRoute(path_current_link.getCoordinateExpressionId());
+          //   const new_path_contact = new PathContact();
+          //   new_path_contact.setDistance(distance);
+          //   new_path_contact.pushRoute(path_current_link_gce_id);
+          //   new_path_contact.includeRoute(current_route_node);
 
-          new_path_contact.includeRoute(current_route_node);
+          const new_path_contact = newRoute();
 
           this.graph_extraction_container.pushSemiRoute(fixed_node_id, link_node_id, new_path_contact);
           enqueqe(link_node_id);
@@ -287,22 +320,28 @@ class GraphOptimization {
         const path_min_fixed_link = this.graph_extraction_container.getMinPathContact(fixed_node_id, link_node_id);
 
         if (path_min_fixed_link.distance < distance) {
-          const new_path_contact = new PathContact();
-          new_path_contact.setDistance(distance);
-          new_path_contact.pushRoute(path_current_link.getCoordinateExpressionId());
-          new_path_contact.includeRoute(current_route_node);
+          if (current_route_node.routes[current_route_node.routes.length - 1] == path_current_link_gce_id) {
+            continue;
+          }
 
+          //   const new_path_contact = new PathContact();
+          //   new_path_contact.setDistance(distance);
+          //   new_path_contact.pushRoute(path_current_link_gce_id);
+          //   new_path_contact.includeRoute(current_route_node);
+          const new_path_contact = newRoute();
           this.graph_extraction_container.pushSemiRoute(fixed_node_id, link_node_id, new_path_contact);
           continue;
         }
 
         if (path_min_fixed_link.distance >= distance) {
-          const new_path_contact = new PathContact();
-          new_path_contact.setDistance(distance);
-          new_path_contact.pushRoute(path_current_link.getCoordinateExpressionId());
-
-          new_path_contact.includeRoute(current_route_node);
-
+          if (current_route_node.routes[current_route_node.routes.length - 1] == path_current_link_gce_id) {
+            continue;
+          }
+          //   const new_path_contact = new PathContact();
+          //   new_path_contact.setDistance(distance);
+          //   new_path_contact.pushRoute(path_current_link_gce_id);
+          //   new_path_contact.includeRoute(current_route_node);
+          const new_path_contact = newRoute();
           this.graph_extraction_container.pushSemiRoute(fixed_node_id, link_node_id, new_path_contact);
           enqueqe(link_node_id);
           continue;
