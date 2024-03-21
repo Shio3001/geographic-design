@@ -9,7 +9,6 @@ import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
-import { node } from "webpack";
 
 class GraphCalculationNodePath {
   node_paths: Map<string, Array<number>>;

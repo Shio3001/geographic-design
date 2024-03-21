@@ -35,19 +35,23 @@ const CtrlGis = () => {
     console.log("[APPCTR] Update");
   }, [update]);
 
-  const flowUpRendering = () => {
+  const rendering = () => {
     const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
     parser.parser();
     parser.scaling();
     const svg = parser.toSVG();
-    setPreview(svg);
-
-    console.log("svg", svg);
     return svg;
   };
 
-  const flowUpOutputSVG = () => {
-    const svg = flowUpRendering();
+  const flowUpRendering = async () => {
+    const svg = await rendering();
+    setPreview(svg);
+    console.log("svg", svg);
+  };
+
+  const flowUpOutputSVG = async () => {
+    const svg = await rendering();
+    setPreview(svg);
     AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
   };
 
@@ -68,6 +72,12 @@ const CtrlGis = () => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpDecimalPlace = (value: string) => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.decimal_place = Number(value);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
@@ -79,6 +89,7 @@ const CtrlGis = () => {
           <TextBox flowUp={flowUpFileName} text={"output_animation"} label_text="svg出力ファイル名" />
           <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
           <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
+          <NumberBox flowUp={flowUpDecimalPlace} number={AppContextValue.edit_data.decimal_place} label_text="精度(少数桁数)" />
         </div>
 
         <CtrlLayers />
