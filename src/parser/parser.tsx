@@ -129,7 +129,20 @@ class Parser {
     this.moveCoordinateReduction(reduction_rate_min);
     this.invertedCoordinate();
     this.moveCoordinateOrigin(this.searchCoordinateLeftTop());
+    this.decimalPlaceRound();
     console.log("scaling", this.graph_coordinate_list);
+  };
+
+  decimalPlaceRound = () => {
+    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
+      const coordinates = this.graph_coordinate_list[i].coordinates;
+
+      for (let j = 0; j < coordinates.length; j++) {
+        const coordinate = coordinates[j];
+        coordinate.x = BigNumber(coordinate.x).dp(this.edit_data.decimal_place).toNumber();
+        coordinate.y = BigNumber(coordinate.y).dp(this.edit_data.decimal_place).toNumber();
+      }
+    }
   };
 
   invertedCoordinate = () => {
@@ -150,8 +163,8 @@ class Parser {
 
       for (let j = 0; j < coordinates.length; j++) {
         const coordinate = coordinates[j];
-        coordinate.x = Math.round(BigNumber(coordinate.x).times(BigNumber(reduction_rate)).toNumber());
-        coordinate.y = Math.round(BigNumber(coordinate.y).times(BigNumber(reduction_rate)).toNumber());
+        coordinate.x = BigNumber(coordinate.x).times(BigNumber(reduction_rate)).toNumber();
+        coordinate.y = BigNumber(coordinate.y).times(BigNumber(reduction_rate)).toNumber();
       }
     }
   };
@@ -162,8 +175,8 @@ class Parser {
 
       for (let j = 0; j < coordinates.length; j++) {
         const coordinate = coordinates[j];
-        coordinate.x = Math.round(coordinate.x - left_top.x);
-        coordinate.y = Math.round(coordinate.y - left_top.y);
+        coordinate.x = coordinate.x - left_top.x;
+        coordinate.y = coordinate.y - left_top.y;
       }
     }
   };

@@ -10,6 +10,7 @@ import GraphNode from "./../../graph/graph_node";
 import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import GraphOptimization from "./../../graph/graph_optimization";
+import GraphClosedPath from "./../../graph/graph_closed_path";
 import * as GEO from "./../../geographic_constant";
 
 import BigNumber from "bignumber.js";
@@ -44,7 +45,11 @@ class ParserRailroadSection {
     const graph_optimization = new GraphOptimization(this.graph, grah_paths);
     graph_optimization.generateGraphExtraction();
 
-    return grah_paths;
+    const graph_close_path_process = new GraphClosedPath(graph_optimization);
+    const delete_pats = graph_close_path_process.searchDeleteClosedPath(true);
+    // graph_close_path_process.deleteClosedPath(delete_pats);
+
+    return graph_close_path_process.graph_optimization.processed_path;
   };
 
   coordinateAggregation = () => {

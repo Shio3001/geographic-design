@@ -10,82 +10,29 @@ import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
-import { link } from "fs";
-import { node } from "webpack";
+import PathContact from "./expression/path_contact";
 
-class PathContact {
-  distance: number;
-  routes: Array<number>;
-  coordinate_expression_id: number;
-  arrived_nodes: Array<string>;
+import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
 
-  constructor() {
-    this.distance = -1;
-    this.routes = [];
-    this.coordinate_expression_id = -1; //基本的に-1 ただし、デフォルトパスはcoordinate_expression_idが挿入
-    this.arrived_nodes = [];
-  }
-
-  pushArrivedNode = (node: string) => {
-    this.arrived_nodes.push(node);
-  };
-
-  isArrivedNode = (node: string) => {
-    return this.arrived_nodes.includes(node);
-  };
-
-  includeArrivedNode = (pc: PathContact) => {
-    let arr: Array<string> = [];
-    arr = arr.concat(this.arrived_nodes);
-    arr = arr.concat(pc.arrived_nodes);
-    this.arrived_nodes = arr;
-  };
-
-  setCoordinateExpressionId = (id: number) => {
-    this.coordinate_expression_id = id;
-  };
-
-  getCoordinateExpressionId = () => {
-    return this.coordinate_expression_id;
-  };
-  hasCoordinateExpressionId = () => {
-    return this.coordinate_expression_id >= 0;
-  };
-
-  includeRoute = (include_path_contact: PathContact) => {
-    let arr: Array<number> = [];
-    arr = arr.concat(this.routes);
-    arr = arr.concat(include_path_contact.routes);
-
-    this.routes = arr;
-  };
-
-  replaceRoute = (routes: Array<number>) => {
-    this.routes = [];
-    this.routes = this.routes.concat(routes);
-  };
-
-  pushRoute = (route: number) => {
-    this.routes.push(route);
-  };
-  pushRoutes = (routes: Array<number>) => {
-    for (let route of routes) {
-      this.routes.push(route);
-    }
-  };
-  setDistance = (dis: number) => {
-    this.distance = dis;
-  };
-}
-
-type TypeGraphRouteNode = Map<string, Array<PathContact>>;
-type TypeGraphRoute = Map<string, TypeGraphRouteNode>;
 class Route {
   route: TypeGraphRoute;
 
   constructor() {
     this.route = new Map();
   }
+
+  getBranchNodes = () => {
+    const branch_ids = [];
+
+    for (let outside_node_id of this.route.keys()) {
+      const outside_node = this.route.get(outside_node_id);
+      if (outside_node.size >= 3) {
+        branch_ids.push(outside_node_id);
+      }
+    }
+
+    return branch_ids;
+  };
 
   getNodeKeys = () => {
     return this.route.keys();
@@ -245,8 +192,8 @@ class Route {
 class GraphOptimization {
   graph_container: Graph;
   graph_extraction_container: Graph;
-  graph_route: Route;
   graph_next: Route;
+  graph_route: Route;
   processed_path: Array<GraphCoordinateExpression>;
   terminal_node_id_list: Array<string>;
 
@@ -254,8 +201,8 @@ class GraphOptimization {
     this.graph_container = graph_container;
     this.processed_path = processed_path;
     this.graph_extraction_container = new Graph();
-    this.graph_route = new Route();
     this.graph_next = new Route();
+    this.graph_route = new Route();
     this.terminal_node_id_list = this.getTerminalNode();
   }
 
@@ -281,7 +228,7 @@ class GraphOptimization {
   };
 
   generateGraphExtraction = () => {
-    // this.graph_next.buildNextPaths(this.terminal_node_id_list);
+    // this.graph_route.buildNextPaths(this.terminal_node_id_list);
     console.log("graph_extraction_container-sta", this.graph_extraction_container, this.processed_path);
 
     for (let path of this.processed_path) {
@@ -309,7 +256,7 @@ class GraphOptimization {
       new_l_node.pushBidirectionalLinkNode(f_id);
       this.graph_extraction_container.pushNode(new_l_node);
 
-      this.graph_route.pushRoute(f_id, l_id, pc);
+      this.graph_next.pushRoute(f_id, l_id, pc);
     }
 
     console.log("graph_extraction_container-setup", this.graph_extraction_container);
@@ -359,7 +306,7 @@ class GraphOptimization {
         }
 
         const link_node = this.graph_extraction_container.graph.get(link_node_id);
-        const link_contact = this.graph_route.getPathContact(current_id, link_node_id);
+        const link_contact = this.graph_next.getPathContact(current_id, link_node_id);
 
         const calc_distance = link_contact.distance + dijkstra_graph.get(current_id);
 
@@ -373,8 +320,8 @@ class GraphOptimization {
         new_contact.setDistance(calc_distance);
         new_contact.setCoordinateExpressionId(-3);
 
-        if (this.graph_next.hasPathContact(fixed_node_id, current_id)) {
-          const fixed_contact = this.graph_next.getMinPathContact(fixed_node_id, current_id);
+        if (this.graph_route.hasPathContact(fixed_node_id, current_id)) {
+          const fixed_contact = this.graph_route.getMinPathContact(fixed_node_id, current_id);
           new_contact.includeRoute(fixed_contact);
           new_contact.includeArrivedNode(fixed_contact);
 
@@ -385,11 +332,11 @@ class GraphOptimization {
         new_contact.pushRoute(link_contact.coordinate_expression_id);
         new_contact.pushArrivedNode(link_node_id);
 
-        this.graph_next.pushSemiRoute(fixed_node_id, link_node_id, new_contact);
+        this.graph_route.pushSemiRoute(fixed_node_id, link_node_id, new_contact);
         continue;
       }
     }
-    console.log("graph_extraction_container-dijkstra-z", fixed_node_id, dijkstra_que, dijkstra_graph, this.graph_route, this.graph_next);
+    console.log("graph_extraction_container-dijkstra-z", fixed_node_id, dijkstra_que, dijkstra_graph, this.graph_next, this.graph_route);
   };
 }
 

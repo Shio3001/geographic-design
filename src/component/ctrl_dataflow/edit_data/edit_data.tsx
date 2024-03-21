@@ -12,6 +12,7 @@ class EditData {
 
   width: number;
   height: number;
+  decimal_place: number;
 
   filename: string;
 
@@ -21,6 +22,7 @@ class EditData {
     this.layers = {};
     this.width = 1000;
     this.height = 1000;
+    this.decimal_place = 3;
     this.filename = "animation";
     if (!layer_number) {
       layer_number = 0;
