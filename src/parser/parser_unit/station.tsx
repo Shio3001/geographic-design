@@ -9,7 +9,7 @@ import { toNumber } from "lodash";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import BigNumber from "bignumber.js";
 
-import * as GEOGRAPHIC_CONSTANT from "./../../geographic_constant";
+import * as GEO from "./../../geographic_constant";
 
 class ParserStation {
   edit_data: EditData;
@@ -56,11 +56,16 @@ class ParserStation {
       const coordinate0 = new BigNumber(coordinate[0]);
       const coordinate1 = new BigNumber(coordinate[1]);
 
-      const c0_exp = coordinate0.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).toNumber();
-      const c1_exp = coordinate1.times(GEOGRAPHIC_CONSTANT.EXPANSION_CONSTANT_BIGNUMBER).toNumber();
+      const c0_exp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LONGITUDE_KM1_BIGNUMBER).toNumber();
+      const c1_exp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LATITUDE_KM1_BIGNUMBER).toNumber();
+
+      const c0_exp_dp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
+      const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
+
+      const name = c0_exp_dp + "p" + c1_exp_dp;
 
       const p: GraphCoordinateExpression = new GraphCoordinateExpression("point");
-      p.pushCoordinate(c0_exp, c1_exp);
+      p.pushCoordinateId(name, c0_exp, c1_exp);
       this.points.push(p);
     }
   };
