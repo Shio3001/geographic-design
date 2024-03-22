@@ -46,10 +46,16 @@ class ParserRailroadSection {
     graph_optimization.generateGraphExtraction();
 
     const graph_close_path_process = new GraphClosedPath(graph_optimization);
-    const delete_pats = graph_close_path_process.searchDeleteClosedPath(true);
-    // graph_close_path_process.deleteClosedPath(delete_pats);
 
-    return graph_close_path_process.graph_optimization.processed_path;
+    const current_layer = this.edit_data.layers[this.layer_uuid];
+
+    if (current_layer.getElement("path_optimize") == "ok") {
+      graph_close_path_process.searchDeleteClosedPath(true);
+      graph_close_path_process.deleteClosedPath();
+    }
+
+    const paths_array = Array.from(graph_close_path_process.graph_optimization.processed_path.values());
+    return paths_array;
   };
 
   coordinateAggregation = () => {

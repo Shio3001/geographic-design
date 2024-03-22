@@ -13,7 +13,7 @@ import GraphCalculationNodePath from "./graph_calculation_node_path";
 
 class GraphCalculation {
   graph_container: Graph;
-  processed_path: Array<GraphCoordinateExpression>;
+  processed_path: Map<number, GraphCoordinateExpression>;
 
   bfs_que: Array<string>;
   node_path: GraphCalculationNodePath;
@@ -22,7 +22,7 @@ class GraphCalculation {
     this.graph_container = graph;
     this.node_path = new GraphCalculationNodePath();
 
-    this.processed_path = [];
+    this.processed_path = new Map();
     this.bfs_que = [];
   }
 
@@ -87,27 +87,32 @@ class GraphCalculation {
       this.dfs(termination_point_node_id);
     }
 
-    console.log("処理済みパス", this.processed_path.length, this.processed_path);
+    console.log("処理済みパス", this.processed_path.size, this.processed_path);
   };
 
   pushProcessed = () => {
     const g = new GraphCoordinateExpression("path");
-    this.processed_path.push(g);
-    const path_index = this.processed_path.length - 1;
-    this.processed_path[path_index].setCoordinateExpressionId(path_index);
-    return path_index;
+    const path_id = this.processed_path.size;
+    g.setCoordinateExpressionId(path_id);
+
+    this.processed_path.set(path_id, g);
+    return path_id;
   };
   pushProcessedPos = (node_id: string, x: number, y: number) => {
     const path_index = this.pushProcessed();
-    this.processed_path[path_index].pushCoordinateId(node_id, x, y);
+    const g = this.processed_path.get(path_index);
+    g.pushCoordinateId(node_id, x, y);
+    this.processed_path.set(path_index, g);
     return path_index;
   };
 
   pushCoordinateId = (path_index: number, node_id: string, x: number, y: number) => {
-    this.processed_path[path_index].pushCoordinateId(node_id, x, y);
+    const g = this.processed_path.get(path_index);
+    g.pushCoordinateId(node_id, x, y);
+    this.processed_path.set(path_index, g);
   };
   hasCoordinateId = (path_index: number, node_id: string) => {
-    return this.processed_path[path_index].hasPosId(node_id);
+    return this.processed_path.get(path_index).hasPosId(node_id);
   };
   popDfsStack = () => {
     const v = this.bfs_que[this.bfs_que.length - 1];

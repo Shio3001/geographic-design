@@ -21,6 +21,19 @@ class Route {
     this.route = new Map();
   }
 
+  getTerminal = () => {
+    const branch_ids = [];
+
+    for (let outside_node_id of this.route.keys()) {
+      const outside_node = this.route.get(outside_node_id);
+      if (outside_node.size == 1) {
+        branch_ids.push(outside_node_id);
+      }
+    }
+
+    return branch_ids;
+  };
+
   getBranchNodes = () => {
     const branch_ids = [];
 
@@ -194,10 +207,10 @@ class GraphOptimization {
   graph_extraction_container: Graph;
   graph_next: Route;
   graph_route: Route;
-  processed_path: Array<GraphCoordinateExpression>;
+  processed_path: Map<number, GraphCoordinateExpression>;
   terminal_node_id_list: Array<string>;
 
-  constructor(graph_container: Graph, processed_path: Array<GraphCoordinateExpression>) {
+  constructor(graph_container: Graph, processed_path: Map<number, GraphCoordinateExpression>) {
     this.graph_container = graph_container;
     this.processed_path = processed_path;
     this.graph_extraction_container = new Graph();
@@ -217,7 +230,7 @@ class GraphOptimization {
       nodes.push(n_id);
     };
 
-    for (let path of this.processed_path) {
+    for (let path of this.processed_path.values()) {
       const f_id = path.getFirstNodeId();
       const l_id = path.getLastNodeId();
 
@@ -231,7 +244,7 @@ class GraphOptimization {
     // this.graph_route.buildNextPaths(this.terminal_node_id_list);
     console.log("graph_extraction_container-sta", this.graph_extraction_container, this.processed_path);
 
-    for (let path of this.processed_path) {
+    for (let path of this.processed_path.values()) {
       const d = path.getDistance();
       const f_id = path.getFirstNodeId();
       const l_id = path.getLastNodeId();

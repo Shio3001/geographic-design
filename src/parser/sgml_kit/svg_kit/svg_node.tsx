@@ -8,6 +8,7 @@ class SvgNode {
   element: string;
   attributes: { [key: string]: string };
   svg_command: Array<TypeSVGCommand>;
+  svg_comment: Array<string>;
   //   svg_path_command { }
 
   constructor() {
@@ -16,14 +17,16 @@ class SvgNode {
     this.element = "";
     this.attributes = {};
     this.svg_command = [];
+    this.svg_comment = [];
   }
 
   generate = (svg_tree: Array<SvgNode>): string => {
+    const comm = this.generateComment();
     const start = this.generateStartTag();
     const element = this.generateElementTag();
     const children_node = this.generateChildren(svg_tree);
     const end = this.generateEndTag();
-    const text = start + " " + element + " " + children_node + " " + end + " ";
+    const text = comm + " " + start + " " + element + " " + children_node + " " + end + " ";
     return text;
   };
 
@@ -49,6 +52,9 @@ class SvgNode {
     this.attributes[k] = v;
   };
 
+  pushComment = (comment: string) => {
+    this.svg_comment.push(comment);
+  };
   pushAttributeNum = (k: string, v: number) => {
     this.attributes[k] = v.toString();
   };
@@ -90,6 +96,20 @@ class SvgNode {
   };
   generateEndTag = (): string => {
     return "</" + this.tag + ">";
+  };
+  generateComment = (): string => {
+    let coment_text = "";
+
+    for (let i = 0; i < this.svg_comment.length; i++) {
+      const comment = this.svg_comment[i];
+
+      //<!--次のsvg要素でのviewBoxの範囲-->
+
+      const at = "<!--" + comment + "-->\n";
+      coment_text += at;
+    }
+
+    return coment_text;
   };
   generateChildren = (svg_tree: Array<SvgNode>): string => {
     let text = " ";
