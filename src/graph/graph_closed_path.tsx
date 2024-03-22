@@ -12,7 +12,7 @@ import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphOptimization from "./graph_optimization";
 import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
 import PathContact from "./expression/path_contact";
-import { table } from "console";
+import * as _ from "lodash"; // lodashをインポート
 
 type TypePathIndex = {
   path: PathContact;
@@ -21,11 +21,22 @@ type TypePathIndex = {
 
 class GraphClosedPath {
   graph_optimization: GraphOptimization;
+
+  delete_paths: Array<PathContact>;
+  keep_paths: Array<PathContact>;
   constructor(graph_optimization: GraphOptimization) {
     this.graph_optimization = graph_optimization;
+    this.delete_paths = [];
+    this.keep_paths = [];
   }
 
-  selectionClosedPath = (path_contacts: Array<PathContact>, longeast: boolean) => {
+  selectionClosedPath = (
+    path_contacts: Array<PathContact>,
+    longeast: boolean
+  ): {
+    closed: Array<PathContact>;
+    keep: Array<PathContact>;
+  } => {
     const getLengthMax = () => {
       let length_max = 0;
       for (let path_contact of path_contacts) {
@@ -72,49 +83,73 @@ class GraphClosedPath {
     const length_min = getLengthMin();
     const length_max = getLengthMax();
 
-    const getBranch = () => {
-      for (let i = 0; i < length_min; i++) {
-        const base = path_contacts[0].routes[i];
-        for (let path_index = 1; path_index < path_contacts.length; path_index++) {
-          const current = path_contacts[path_index].routes[i];
-
-          if (base != current) {
-            return i;
-          }
-        }
-      }
-      return path_contacts.length;
-    };
-
-    const branch = getBranch();
-    if (branch == length_max) {
-      return [];
+    if (path_contacts.length == 0) {
+      return { closed: [], keep: [] };
     }
 
-    const delete_path = longeast ? getOtherPath(getLongestPath()) : getOtherPath(getShortestPath());
+    const keep_path = longeast ? getLongestPath() : getShortestPath();
+    const delete_paths = getOtherPath(keep_path);
 
-    const closed = delete_path.filter((element, index) => index >= branch);
-    console.log("deleteClosedPathLong", delete_path, closed, branch);
-    return closed;
+    const closed: Array<PathContact> = [];
+
+    // for (let i = 0; i < delete_paths.length; i++) {
+    //   const delete_path = delete_paths[i];
+    //   closed.push(delete_path);
+    // }
+
+    // console.log("deleteClosedPathLong", closed);
+    return { closed: [], keep: [keep_path.path] };
   };
 
   //最長距離優先(切り捨て破棄)
   searchDeleteClosedPath = (long: boolean) => {
-    let delete_path_ids: Array<number> = [];
-    const branch_nodes = this.graph_optimization.graph_next.getBranchNodes();
-    for (let i = 0; i < branch_nodes.length; i++) {
-      const i_id = branch_nodes[i];
-      for (let j = i + 1; j < branch_nodes.length; j++) {
-        const j_id = branch_nodes[j];
+    let delete_candidacy_path_ids: Array<PathContact> = [];
+    let keep_path_ids: Array<PathContact> = [];
+    const terminal_nodes = this.graph_optimization.graph_next.getTerminal();
+    for (let i = 0; i < terminal_nodes.length; i++) {
+      const i_id = terminal_nodes[i];
+      for (let j = i + 1; j < terminal_nodes.length; j++) {
+        const j_id = terminal_nodes[j];
         const path_contacts = this.graph_optimization.graph_route.getPathContacts(i_id, j_id);
         const d = this.selectionClosedPath(path_contacts, long);
-        // delete_path_ids = delete_path_ids.concat(d);
+        delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
+        keep_path_ids = keep_path_ids.concat(d.keep);
       }
     }
-    console.log("delete_path_ids", delete_path_ids);
-    return delete_path_ids;
+
+    console.log("delete_path_ids", delete_candidacy_path_ids, keep_path_ids);
+
+    this.delete_paths = delete_candidacy_path_ids;
+    this.keep_paths = keep_path_ids;
   };
-  deleteClosedPath = (delete_path_ids: Array<PathContact>) => {
+  deleteClosedPath = () => {
+    console.log("deleteClosedPath -start", this.delete_paths, this.keep_paths);
+
+    const getKeepRoutes = () => {
+      let arr: Array<number> = [];
+
+      for (let keep_path of this.keep_paths) {
+        console.log("deleteClosedPath -getKeepRoutes loop", keep_path, arr);
+
+        arr = arr.concat(keep_path.routes);
+      }
+
+      return arr;
+    };
+    const keep_routes = getKeepRoutes();
+    const paths = this.graph_optimization.processed_path;
+    console.log("deleteClosedPath -getKeepRoutes", keep_routes);
+
+    for (let delete_path of paths.values()) {
+      console.log("deleteClosedPath -delete", delete_path, keep_routes, this.keep_paths);
+
+      if (keep_routes.includes(delete_path.coordinate_expression_id)) {
+        continue;
+      }
+
+      this.graph_optimization.processed_path.delete(delete_path.coordinate_expression_id);
+    }
+
     // const new_processed_path = this.graph_optimization.processed_path.filter((element, index) => !delete_path_ids.includes(index));
   };
 }

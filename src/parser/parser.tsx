@@ -69,6 +69,7 @@ class Parser {
   toSVGPath = (gce: GraphCoordinateExpression) => {
     const new_svg_node = new SvgNode();
     const coordinates = gce.coordinates;
+    new_svg_node.pushComment(String(gce.coordinate_expression_id));
     new_svg_node.setTag("path");
 
     const r = String(getRandomInt(50, 200));
@@ -78,7 +79,6 @@ class Parser {
     const rgb = "rgb(" + r + "," + g + "," + b + ")";
 
     new_svg_node.pushAttribute("stroke", rgb);
-
     new_svg_node.pushAttribute("stroke-width", "2");
     new_svg_node.pushAttribute("fill", "none");
     const coordinate0 = coordinates[0];
