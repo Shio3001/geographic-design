@@ -9,16 +9,14 @@ import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 import GraphNode from "../graph_node";
 
 class GraphCoordinateExpression {
-  coordinates: Array<TypePosition>;
+  coordinates: Map<string,TypePosition>;
   type: string; //path or point
-  pos_ids: Map<string, Array<number>>;
   debug_message: Array<string>;
   pos_order: Array<string>;
   coordinate_expression_id: number;
 
   constructor(type: string) {
-    this.coordinates = [];
-    this.pos_ids = new Map();
+    this.coordinates = new Map();
     this.type = type;
     this.debug_message = [];
     this.pos_order = [];
@@ -38,11 +36,11 @@ class GraphCoordinateExpression {
 
   getDistance = () => {
     let d_sum = 0;
-    console.log("get-distance-all", this.pos_order, this.coordinates, this.pos_ids);
+    console.log("get-distance-all", this.pos_order, this.coordinates);
 
-    for (let i = 1; i < this.coordinates.length; i++) {
-      const c1 = this.coordinates[i - 1];
-      const c2 = this.coordinates[i];
+    for (let i = 1; i < this.pos_order.length; i++) {
+      const c1 = this.coordinates.get(this.pos_order[i - 1]);
+      const c2 = this.coordinates.get(this.pos_order[i]);
 
       const d = this.pythagorean(c1, c2);
       d_sum += d;
@@ -66,18 +64,21 @@ class GraphCoordinateExpression {
     return this.type;
   };
 
-  pushPosIds = (id: string, index: number) => {
+  pushPosIdsIndex = (id: string, index: number) => {
+    this.pos_order.splice(index , 0 , id)
+  };
+  pushPosIds = (id: string) => {
     this.pos_order.push(id);
   };
 
   pushCoordinateId = (id: string, x: number, y: number) => {
-    const index = this.coordinates.push({ x: x, y: y });
-    this.pushPosIds(id, index);
+    this.coordinates.set(id,{ x: x, y: y });
+    this.pushPosIds(id);
   };
 
-  hasPosId(id: string) {
-    return this.pos_ids.has(id);
-  }
+  // hasPosId(id: string) {
+  //   return this.pos_ids.has(id);
+  // }
 }
 
 export default GraphCoordinateExpression;

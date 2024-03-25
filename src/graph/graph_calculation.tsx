@@ -111,9 +111,7 @@ class GraphCalculation {
     g.pushCoordinateId(node_id, x, y);
     this.processed_path.set(path_index, g);
   };
-  hasCoordinateId = (path_index: number, node_id: string) => {
-    return this.processed_path.get(path_index).hasPosId(node_id);
-  };
+
   popDfsStack = () => {
     const v = this.bfs_que[this.bfs_que.length - 1];
     this.bfs_que.pop();
