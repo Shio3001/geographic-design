@@ -22,11 +22,9 @@ type TypePathIndex = {
 class GraphClosedPath {
   graph_optimization: GraphOptimization;
 
-  delete_paths: Array<PathContact>;
   keep_paths: Array<PathContact>;
   constructor(graph_optimization: GraphOptimization) {
     this.graph_optimization = graph_optimization;
-    this.delete_paths = [];
     this.keep_paths = [];
   }
 
@@ -119,11 +117,10 @@ class GraphClosedPath {
 
     console.log("delete_path_ids", delete_candidacy_path_ids, keep_path_ids);
 
-    this.delete_paths = delete_candidacy_path_ids;
     this.keep_paths = keep_path_ids;
   };
   deleteClosedPath = () => {
-    console.log("deleteClosedPath -start", this.delete_paths, this.keep_paths);
+    console.log("deleteClosedPath -start", this.keep_paths);
 
     const getKeepRoutes = () => {
       let arr: Array<number> = [];
