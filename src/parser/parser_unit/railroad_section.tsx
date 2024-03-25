@@ -37,6 +37,8 @@ class ParserRailroadSection {
 
   generatePath = (): Array<GraphCoordinateExpression> => {
     const grah_calc = new GraphCalculation(this.graph); // grah_dfs.debugNode();
+    const current_layer = this.edit_data.layers[this.layer_uuid];
+    const path_optimize_flag = current_layer.getElement("path_optimize") == "ok";
 
     grah_calc.startCalc();
     // grah_calc.debugNode();
@@ -47,9 +49,8 @@ class ParserRailroadSection {
 
     const graph_close_path_process = new GraphClosedPath(graph_optimization);
 
-    const current_layer = this.edit_data.layers[this.layer_uuid];
 
-    if (current_layer.getElement("path_optimize") == "ok") {
+    if (path_optimize_flag) {
       graph_close_path_process.searchDeleteClosedPath(true);
       graph_close_path_process.deleteClosedPath();
     }

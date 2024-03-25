@@ -67,14 +67,6 @@ class GraphCoordinateExpression {
   };
 
   pushPosIds = (id: string, index: number) => {
-    // this.pos_ids.set(id, index);
-    if (this.pos_ids.has(id)) {
-      const p = this.pos_ids.get(id);
-      p.push(index);
-      this.pos_ids.set(id, p);
-    } else {
-      this.pos_ids.set(id, [index]);
-    }
     this.pos_order.push(id);
   };
 
