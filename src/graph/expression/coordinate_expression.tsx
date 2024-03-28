@@ -8,6 +8,8 @@ import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 
 import GraphNode from "../graph_node";
 
+import {calcPythagorean} from "./../../mathematical/angle"
+
 class GraphCoordinateExpression {
   coordinates: Map<string,TypePosition>;
   type: string; //path or point
@@ -26,13 +28,7 @@ class GraphCoordinateExpression {
     this.coordinate_expression_id = id;
   };
 
-  pythagorean = (ap: TypePosition, bp: TypePosition) => {
-    const x = bp.x - ap.x;
-    const y = bp.y - ap.y;
-    const t = x ** 2 + y ** 2;
-    const r = Math.sqrt(t);
-    return r;
-  };
+
 
   getDistance = () => {
     let d_sum = 0;
@@ -42,7 +38,7 @@ class GraphCoordinateExpression {
       const c1 = this.coordinates.get(this.pos_order[i - 1]);
       const c2 = this.coordinates.get(this.pos_order[i]);
 
-      const d = this.pythagorean(c1, c2);
+      const d = calcPythagorean(c1, c2);
       d_sum += d;
     }
 
