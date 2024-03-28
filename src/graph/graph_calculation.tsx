@@ -10,6 +10,7 @@ import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
+import * as _ from "lodash"; // lodashをインポート
 
 class GraphCalculation {
   graph_container: Graph;
@@ -49,10 +50,42 @@ class GraphCalculation {
     }
   };
 
+  loopLinePoint = (termination_point_branch_1:Array<string> ,termination_point_branch_2:Array<string> ) => {
+    const branch2node_id = termination_point_branch_2[0]
+    const branch2node = this.graph_container.graph.get(branch2node_id);
+
+    const branch2node_copy1 = _.cloneDeep(branch2node);      
+    const branch2node_copy2 = _.cloneDeep(branch2node);
+
+    branch2node_copy1.bidirectional_link_id_list = [branch2node.bidirectional_link_id_list[0]]
+    branch2node_copy2.bidirectional_link_id_list = [branch2node.bidirectional_link_id_list[1]]
+    const old_copy2_id = branch2node_copy2.node_id
+    const new_copy2_id = old_copy2_id + "c";
+    branch2node_copy2.node_id = new_copy2_id;
+
+    this.graph_container.graph.set(branch2node_copy1.node_id , branch2node_copy1);
+    this.graph_container.graph.set(branch2node_copy2.node_id , branch2node_copy2);
+
+    const branch2_link_node_copy2 = this.graph_container.graph.get(branch2node.bidirectional_link_id_list[1]);
+    branch2_link_node_copy2.bidirectional_link_id_list = branch2_link_node_copy2.bidirectional_link_id_list.filter((element , index) => element != old_copy2_id)
+    branch2_link_node_copy2.bidirectional_link_id_list.push(new_copy2_id)
+
+    console.log("環状閉路分割",branch2node_copy1,branch2node_copy2,branch2_link_node_copy2,old_copy2_id,new_copy2_id)
+  }
+
   startCalc = () => {
     const node_keys = this.graph_container.graph.keys();
+    const termination_point_branch_1 = this.getPointID(1);
+    const termination_point_branch_2 = this.getPointID(2);
+
+    //大阪環状線のように、単一データでループする路線に終起点を強制的に生成する処理
+    if (termination_point_branch_1.length == 0 && termination_point_branch_2.length > 0){
+      this.loopLinePoint(termination_point_branch_1,termination_point_branch_2)
+    }
+
 
     const termination_point = this.getTerminationPointID();
+
     // const termination_even_point = this.getTerminationEvenPointID();
 
     console.log("termination_point", termination_point);
@@ -170,10 +203,24 @@ class GraphCalculation {
       }
     }
   };
-
   getTerminationPointID = (): Array<string> => {
+
+    if (this.graph_container.graph.size == 0){
+      return;
+    }
+
+    let bn:Array<string> = []
+    let branch = 1;
+
+    while(bn.length == 0){
+      bn = this.getPointID(branch);
+      branch++;
+    }
+
+    return bn;
+  }
+  getPointID = (branch : number): Array<string> => {
     const t_id: Array<string> = [];
-    let loop_candidacy = ""; //ループ状になってた時は循環してしまう。そのため起点が存在しない。その場合用の候補
 
     const itr_node_keys = this.graph_container.graph.keys();
     const node_keys = Array.from(itr_node_keys);
@@ -181,7 +228,7 @@ class GraphCalculation {
     for (let i = 0; i < node_keys.length; i++) {
       const node_key = node_keys[i];
       const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length == 1) {
+      if (node.bidirectional_link_id_list.length == branch) {
         t_id.push(node_key);
         continue;
       }
