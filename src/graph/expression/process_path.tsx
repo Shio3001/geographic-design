@@ -1,4 +1,5 @@
 import GraphCoordinateExpression from "./coordinate_expression";
+import * as _ from "lodash"; // lodashをインポート
 
 class ProcessPath {
   path: Map<number, GraphCoordinateExpression>;
@@ -8,7 +9,8 @@ class ProcessPath {
   }
 
   joinPath = (path_id_1: number,path_id_2: number) => {
-
+    const path_1 = _.cloneDeep(this.path.get(path_id_1));
+    const path_2 = _.cloneDeep(this.path.get(path_id_2));
   }
 
 
