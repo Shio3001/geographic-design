@@ -7,7 +7,7 @@ import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 
 import GraphNode from "./graph_node";
-import Graph from "./graph";
+import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 
 
