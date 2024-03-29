@@ -116,33 +116,36 @@ class GraphOptimization {
         }
 
         const link_node = this.graph_extraction_container.graph.get(link_node_id);
-        const link_contact = this.graph_next.getPathContact(current_id, link_node_id);
+        const link_contacts = this.graph_next.getPathContacts(current_id, link_node_id);
 
-        const calc_distance = link_contact.distance + dijkstra_graph.get(current_id);
+        for (let link_contact of link_contacts){
+          const calc_distance = link_contact.distance + dijkstra_graph.get(current_id);
 
-        const graph_distance = dijkstra_graph.get(link_node_id);
-
-        if (graph_distance >= calc_distance) {
-          dijkstra_graph.set(link_node_id, calc_distance);
-          enqueqe(link_node_id);
-        }
-        const new_contact = new PathContact();
-        new_contact.setDistance(calc_distance);
-        new_contact.setCoordinateExpressionId(-3);
-
-        if (this.graph_route.hasPathContact(fixed_node_id, current_id)) {
-          const fixed_contact = this.graph_route.getMinPathContact(fixed_node_id, current_id);
-          new_contact.includeRoute(fixed_contact);
-          new_contact.includeArrivedNode(fixed_contact);
-
-          if (fixed_contact.isArrivedNode(link_node_id)) {
-            continue;
+          const graph_distance = dijkstra_graph.get(link_node_id);
+  
+          if (graph_distance >= calc_distance) {
+            dijkstra_graph.set(link_node_id, calc_distance);
+            enqueqe(link_node_id);
           }
+          const new_contact = new PathContact();
+          new_contact.setDistance(calc_distance);
+          new_contact.setCoordinateExpressionId(-3);
+  
+          if (this.graph_route.hasPathContact(fixed_node_id, current_id)) {
+            const fixed_contact = this.graph_route.getMinPathContact(fixed_node_id, current_id);
+            new_contact.includeRoute(fixed_contact);
+            new_contact.includeArrivedNode(fixed_contact);
+  
+            if (fixed_contact.isArrivedNode(link_node_id)) {
+              continue;
+            }
+          }
+          new_contact.pushRoute(link_contact.coordinate_expression_id);
+          new_contact.pushArrivedNode(link_node_id);
+  
+          this.graph_route.pushSemiRoute(fixed_node_id, link_node_id, new_contact);
         }
-        new_contact.pushRoute(link_contact.coordinate_expression_id);
-        new_contact.pushArrivedNode(link_node_id);
 
-        this.graph_route.pushSemiRoute(fixed_node_id, link_node_id, new_contact);
         continue;
       }
     }
