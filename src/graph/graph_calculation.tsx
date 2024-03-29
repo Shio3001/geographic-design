@@ -13,9 +13,11 @@ import GraphCalculationNodePath from "./graph_calculation_node_path";
 import * as _ from "lodash"; // lodashをインポート
 import { caclcAngleByPosition } from "./../mathematical/angle";
 
+import ProcessPath from "./expression/process_path"
+
 class GraphCalculation {
   graph_container: Graph;
-  processed_path: Map<number, GraphCoordinateExpression>;
+  processed_path: ProcessPath;
 
   bfs_que: Array<string>;
   node_path: GraphCalculationNodePath;
@@ -24,7 +26,7 @@ class GraphCalculation {
     this.graph_container = graph;
     this.node_path = new GraphCalculationNodePath();
 
-    this.processed_path = new Map();
+    this.processed_path = new ProcessPath();
     this.bfs_que = [];
   }
 
@@ -44,7 +46,7 @@ class GraphCalculation {
         const link_node_id = node.bidirectional_link_id_list[j];
         const link_node = this.graph_container.graph.get(link_node_id);
 
-        const index = this.pushProcessed();
+        const index = this.processed_path.pushProcessed();
         // this.pushCoordinate(index, node.x, node.y);
         // this.pushCoordinate(index, link_node.x, link_node.y);
       }
@@ -201,57 +203,12 @@ class GraphCalculation {
       if (this.isValidNodePath(termination_point_node_id)) {
         continue;
       }
-      const p_index = this.pushProcessedPos(termination_point_node_id, termination_point_node.x, termination_point_node.y);
+      const p_index = this.processed_path.pushProcessedPos(termination_point_node_id, termination_point_node.x, termination_point_node.y);
       this.node_path.pushNode(termination_point_node_id, p_index);
       this.dfs(termination_point_node_id);
     }
 
-    console.log("dfs", this.processed_path.size, this.processed_path, this.node_path);
-  };
-
-  isAdjoinProcessed = (path_id: number, node_id_1: string, node_id_2: string) => {
-    const c_path = this.processed_path.get(path_id);
-    let node_index_1 = -100;
-    let node_index_2 = -102;
-
-    for (let i = 0; i < c_path.pos_order.length; i++) {
-      if (node_id_1 == c_path.pos_order[i]) {
-        node_index_1 = i;
-      }
-      if (node_id_2 == c_path.pos_order[i]) {
-        node_index_2 = i;
-      }
-    }
-
-    const dif = Math.abs(node_index_1 - node_index_2);
-    const ans = dif == 1;
-
-    console.log("termination_point -isAdjoinProcessed" , dif , node_index_1 , node_index_2,ans,path_id , node_id_1 , node_id_2 ,this.processed_path)
-
-
-    return ans
-  };
-
-  pushProcessed = () => {
-    const g = new GraphCoordinateExpression("path");
-    const path_id = this.processed_path.size;
-    g.setCoordinateExpressionId(path_id);
-
-    this.processed_path.set(path_id, g);
-    return path_id;
-  };
-  pushProcessedPos = (node_id: string, x: number, y: number) => {
-    const path_index = this.pushProcessed();
-    const g = this.processed_path.get(path_index);
-    g.pushCoordinateId(node_id, x, y);
-    this.processed_path.set(path_index, g);
-    return path_index;
-  };
-
-  pushCoordinateId = (path_index: number, node_id: string, x: number, y: number) => {
-    const g = this.processed_path.get(path_index);
-    g.pushCoordinateId(node_id, x, y);
-    this.processed_path.set(path_index, g);
+    console.log("dfs", this.processed_path.path.size, this.processed_path, this.node_path);
   };
 
   popDfsStack = () => {
@@ -275,7 +232,7 @@ class GraphCalculation {
     const start_node_paths = this.node_path.getPaths(start_node_id);
 
     for (let start_node_path of start_node_paths) {
-      this.pushCoordinateId(start_node_path, start_node_id, start_node.x, start_node.y);
+      this.processed_path.pushCoordinateId(start_node_path, start_node_id, start_node.x, start_node.y);
     }
 
     console.log("termination_point -search start", start_node_id);
@@ -297,24 +254,15 @@ class GraphCalculation {
 
         const group = this.node_path.otheGroupPath(current_node_id, nv_id);
 
-        //接続先がすでに通っているノードであっても、折り返しではなく循環であれば許容する
-        if (group >= 0 && !this.isAdjoinProcessed(group, current_node_id, nv_id)) {          
-          
-          console.log("termination_point -group0p-a" , this.isAdjoinProcessed(group, current_node_id, nv_id) ,nv_id ,current_node_id )
-
-          this.separationLinkNode(nv_id ,[current_node_id], "d");
-          continue;
-        }
-
-        //接続先がすでに通っているノードで、折り返しであれば許容しない
+        //接続先がすでに通っているノードであれば許容しない
         if (group >= 0) {
           continue;
         }
 
         //分岐点であれば区切る
         if (link_id_list_length >= 3) {
-          const path_index = this.pushProcessedPos(current_node_id, current_node.x, current_node.y);
-          this.pushCoordinateId(path_index, nv_id, nv_node.x, nv_node.y);
+          const path_index = this.processed_path.pushProcessedPos(current_node_id, current_node.x, current_node.y);
+          this.processed_path.pushCoordinateId(path_index, nv_id, nv_node.x, nv_node.y);
           this.node_path.pushNode(current_node_id, path_index);
           this.node_path.pushNode(nv_id, path_index);
         }
@@ -322,7 +270,7 @@ class GraphCalculation {
         //区切らない
         else {
           for (let current_node_path of current_node_paths) {
-            this.pushCoordinateId(current_node_path, nv_id, nv_node.x, nv_node.y);
+            this.processed_path.pushCoordinateId(current_node_path, nv_id, nv_node.x, nv_node.y);
             this.node_path.pushNode(nv_id, current_node_path);
           }
         }

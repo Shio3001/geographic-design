@@ -55,7 +55,7 @@ class ParserRailroadSection {
       graph_close_path_process.deleteClosedPath();
     }
 
-    const paths_array = Array.from(graph_close_path_process.graph_optimization.processed_path.values());
+    const paths_array = Array.from(graph_close_path_process.graph_optimization.processed_path.path.values());
     return paths_array;
   };
 
