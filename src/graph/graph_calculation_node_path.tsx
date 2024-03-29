@@ -10,6 +10,8 @@ import GraphNode from "./graph_node";
 import Graph from "./graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 
+
+//nodeがどの第2段階path(GraphCalculationNodePath)に所属しているのかを保有する
 class GraphCalculationNodePath {
   node_paths: Map<string, Array<number>>;
 
@@ -43,10 +45,10 @@ class GraphCalculationNodePath {
 
   otheGroupPath = (node_id_1: string, node_id_2: string) => {
     if (!this.node_paths.has(node_id_1)) {
-      return false;
+      return -1;
     }
     if (!this.node_paths.has(node_id_2)) {
-      return false;
+      return -1;
     }
     const paths_1 = this.node_paths.get(node_id_1);
     const paths_2 = this.node_paths.get(node_id_2);
@@ -54,11 +56,11 @@ class GraphCalculationNodePath {
     for (let p1 of paths_1) {
       for (let p2 of paths_2) {
         if (p1 == p2) {
-          return true;
+          return p1;
         }
       }
     }
-    return false;
+    return -1;
   };
 
   pushNode = (node_id: string, path_id: number) => {

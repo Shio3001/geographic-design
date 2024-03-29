@@ -205,10 +205,14 @@ class Route {
 class GraphOptimization {
   graph_container: Graph;
   graph_extraction_container: Graph;
+
+  //複数ルート構築用データ格納場所
   graph_next: Route;
+
+  //複数ルート決定後データ格納場所
   graph_route: Route;
+
   processed_path: Map<number, GraphCoordinateExpression>;
-  terminal_node_id_list: Array<string>;
 
   constructor(graph_container: Graph, processed_path: Map<number, GraphCoordinateExpression>) {
     this.graph_container = graph_container;
@@ -216,29 +220,7 @@ class GraphOptimization {
     this.graph_extraction_container = new Graph();
     this.graph_next = new Route();
     this.graph_route = new Route();
-    this.terminal_node_id_list = this.getTerminalNode();
   }
-
-  getTerminalNode = () => {
-    const keys = this.graph_container.graph.keys();
-    const nodes: Array<string> = [];
-
-    const pushNode = (n_id: string) => {
-      if (nodes.includes(n_id)) {
-        return;
-      }
-      nodes.push(n_id);
-    };
-
-    for (let path of this.processed_path.values()) {
-      const f_id = path.getFirstNodeId();
-      const l_id = path.getLastNodeId();
-
-      pushNode(f_id);
-      pushNode(l_id);
-    }
-    return nodes;
-  };
 
   generateGraphExtraction = () => {
     // this.graph_route.buildNextPaths(this.terminal_node_id_list);
@@ -279,7 +261,7 @@ class GraphOptimization {
       this.extractionDijkstra(node_key);
     }
 
-    console.log("graph_extraction_container-end", this.graph_extraction_container);
+    console.log("graph_extraction_container-end", this.graph_extraction_container,this.graph_route);
   };
 
   //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
