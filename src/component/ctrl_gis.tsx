@@ -43,8 +43,8 @@ const CtrlGis = () => {
     return svg;
   };
 
-  const flowUpRendering = async () => {
-    const svg = await rendering();
+  const flowUpRendering = () => {
+    const svg = rendering();
     setPreview(svg);
     console.log("svg", svg);
   };
@@ -54,6 +54,7 @@ const CtrlGis = () => {
     setPreview(svg);
     AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
   };
+
 
   const flowUpWidth = (value: number) => {
     const edit_data = AppContextValue.edit_data;
