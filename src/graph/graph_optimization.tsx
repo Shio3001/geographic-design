@@ -13,6 +13,7 @@ import GraphCalculationNodePath from "./graph_calculation_node_path";
 import PathContact from "./expression/path_contact";
 
 import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
+import ProcessPath from "./expression/process_path"
 
 class Route {
   route: TypeGraphRoute;
@@ -212,9 +213,9 @@ class GraphOptimization {
   //複数ルート決定後データ格納場所
   graph_route: Route;
 
-  processed_path: Map<number, GraphCoordinateExpression>;
+  processed_path: ProcessPath;
 
-  constructor(graph_container: Graph, processed_path: Map<number, GraphCoordinateExpression>) {
+  constructor(graph_container: Graph, processed_path: ProcessPath) {
     this.graph_container = graph_container;
     this.processed_path = processed_path;
     this.graph_extraction_container = new Graph();
@@ -226,7 +227,7 @@ class GraphOptimization {
     // this.graph_route.buildNextPaths(this.terminal_node_id_list);
     console.log("graph_extraction_container-sta", this.graph_extraction_container, this.processed_path);
 
-    for (let path of this.processed_path.values()) {
+    for (let path of this.processed_path.path.values()) {
       const d = path.getDistance();
       const f_id = path.getFirstNodeId();
       const l_id = path.getLastNodeId();

@@ -137,14 +137,14 @@ class GraphClosedPath {
     const paths = this.graph_optimization.processed_path;
     console.log("deleteClosedPath -getKeepRoutes", keep_routes);
 
-    for (let delete_path of paths.values()) {
+    for (let delete_path of paths.path.values()) {
       console.log("deleteClosedPath -delete", delete_path, keep_routes, this.keep_paths);
 
       if (keep_routes.includes(delete_path.coordinate_expression_id)) {
         continue;
       }
 
-      this.graph_optimization.processed_path.delete(delete_path.coordinate_expression_id);
+      this.graph_optimization.processed_path.path.delete(delete_path.coordinate_expression_id);
     }
 
     // const new_processed_path = this.graph_optimization.processed_path.filter((element, index) => !delete_path_ids.includes(index));
