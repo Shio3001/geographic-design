@@ -7,7 +7,7 @@ import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 
 import GraphNode from "./graph_node";
-import Graph from "./graph";
+import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
 import * as _ from "lodash"; // lodashをインポート
@@ -126,7 +126,7 @@ class GraphCalculation {
     };
 
 
-    let even_point_list = this.getEvenBranchPointID();
+    let even_point_list = this.graph_container.getEvenBranchPointID();
 
     while (even_point_list.length > 0) {
       const even_point_id = even_point_list[0];
@@ -135,7 +135,7 @@ class GraphCalculation {
 
       console.log("even_point_list", even_point_list);
 
-      even_point_list = this.getEvenBranchPointID();
+      even_point_list = this.graph_container.getEvenBranchPointID();
     }
   };
 
@@ -162,8 +162,8 @@ class GraphCalculation {
 
   startCalc = () => {
     const node_keys = this.graph_container.graph.keys();
-    const termination_point_branch_1 = this.getPointID(1);
-    const termination_point_branch_2 = this.getPointID(2);
+    const termination_point_branch_1 = this.graph_container.getPointID(1);
+    const termination_point_branch_2 = this.graph_container.getPointID(2);
 
     this.intersectionExtraction();
 
@@ -172,7 +172,7 @@ class GraphCalculation {
       this.loopLinePoint(termination_point_branch_1, termination_point_branch_2);
     }
 
-    const termination_point = this.getTerminationPointID();
+    const termination_point = this.graph_container.getTerminationPointID();
 
     // const termination_even_point = this.getTerminationEvenPointID();
 
@@ -279,111 +279,7 @@ class GraphCalculation {
       }
     }
   };
-  getTerminationPointID = (): Array<string> => {
-    if (this.graph_container.graph.size == 0) {
-      return [];
-    }
 
-    let bn: Array<string> = [];
-    let branch = 1;
-
-    while (bn.length == 0) {
-      bn = this.getPointID(branch);
-      branch++;
-    }
-
-    return bn;
-  };
-
-  getOddBranchPointID = (): Array<string> => {
-    const t_id: Array<string> = [];
-
-    const itr_node_keys = this.graph_container.graph.keys();
-    const node_keys = Array.from(itr_node_keys);
-
-    for (let i = 0; i < node_keys.length; i++) {
-      const node_key = node_keys[i];
-      const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length % 2 == 1 && node.bidirectional_link_id_list.length >= 3) {
-        t_id.push(node_key);
-        continue;
-      }
-    }
-
-    return t_id;
-  };
-
-  getEvenBranchPointID = (): Array<string> => {
-    const t_id: Array<string> = [];
-
-    const itr_node_keys = this.graph_container.graph.keys();
-    const node_keys = Array.from(itr_node_keys);
-
-    for (let i = 0; i < node_keys.length; i++) {
-      const node_key = node_keys[i];
-      const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length % 2 == 0 && node.bidirectional_link_id_list.length >= 4) {
-        t_id.push(node_key);
-        continue;
-      }
-    }
-
-    return t_id;
-  };
-
-  getOddPointID = (): Array<string> => {
-    const t_id: Array<string> = [];
-
-    const itr_node_keys = this.graph_container.graph.keys();
-    const node_keys = Array.from(itr_node_keys);
-
-    for (let i = 0; i < node_keys.length; i++) {
-      const node_key = node_keys[i];
-      const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length % 2 == 1) {
-        t_id.push(node_key);
-        continue;
-      }
-    }
-
-    return t_id;
-  };
-
-  getEvenPointID = (): Array<string> => {
-    const t_id: Array<string> = [];
-
-    const itr_node_keys = this.graph_container.graph.keys();
-    const node_keys = Array.from(itr_node_keys);
-
-    for (let i = 0; i < node_keys.length; i++) {
-      const node_key = node_keys[i];
-      const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length % 2 == 0) {
-        t_id.push(node_key);
-        continue;
-      }
-    }
-
-    return t_id;
-  };
-
-  getPointID = (branch: number): Array<string> => {
-    const t_id: Array<string> = [];
-
-    const itr_node_keys = this.graph_container.graph.keys();
-    const node_keys = Array.from(itr_node_keys);
-
-    for (let i = 0; i < node_keys.length; i++) {
-      const node_key = node_keys[i];
-      const node = this.graph_container.graph.get(node_key);
-      if (node.bidirectional_link_id_list.length == branch) {
-        t_id.push(node_key);
-        continue;
-      }
-    }
-
-    return t_id;
-  };
 }
 
 export default GraphCalculation;

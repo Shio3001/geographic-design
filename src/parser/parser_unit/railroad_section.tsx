@@ -5,7 +5,7 @@ import { searchGisConditional, getGeometry } from "./../../gis_scipt/gis_unique_
 
 import SvgKit from "../sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
-import Graph from "./../../graph/graph";
+import Graph from "../../graph/expression/graph";
 import GraphNode from "./../../graph/graph_node";
 import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
