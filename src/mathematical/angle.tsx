@@ -15,6 +15,13 @@ export const caclcAngleByPosition = (
   return acos;
 };
 
+export const calcPythagoreanSquare = (ap: TypePosition, bp: TypePosition) => {
+    const x = bp.x - ap.x;
+    const y = bp.y - ap.y;
+    const t = x ** 2 + y ** 2;
+    return t;
+  };
+  
 export const calcPythagorean = (ap: TypePosition, bp: TypePosition) => {
   const x = bp.x - ap.x;
   const y = bp.y - ap.y;
