@@ -11,9 +11,9 @@ import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
 import * as _ from "lodash"; // lodashをインポート
-import { caclcAngleByPosition,calcPythagorean,calcPythagoreanSquare } from "./../mathematical/angle";
+import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare } from "./../mathematical/angle";
 
-import ProcessPath from "./expression/process_path"
+import ProcessPath from "./expression/process_path";
 
 class GraphCalculation {
   graph_container: Graph;
@@ -25,7 +25,6 @@ class GraphCalculation {
   constructor(graph: Graph) {
     this.graph_container = graph;
     this.node_path = new GraphCalculationNodePath();
-
     this.processed_path = new ProcessPath();
     this.bfs_que = [];
   }
@@ -58,7 +57,6 @@ class GraphCalculation {
     const termination_point_branch_1 = this.graph_container.getPointID(1);
     const termination_point_branch_2 = this.graph_container.getPointID(2);
 
-    
     this.graph_container.intersectionExtraction();
 
     //大阪環状線のように、単一データでループする路線に終起点を強制的に生成する処理
@@ -106,7 +104,11 @@ class GraphCalculation {
 
     const relief_separate_count = this.reliefSeparate();
 
-    if (relief_separate_count > 0){
+    if (relief_separate_count > 0) {
+      console.log("始点間距離計測(D) -relief_separate_count", relief_separate_count);
+      this.node_path = new GraphCalculationNodePath();
+      this.processed_path = new ProcessPath();
+      this.bfs_que = [];
       this.startCalc();
     }
   };
@@ -180,48 +182,62 @@ class GraphCalculation {
     }
   };
 
+  reliefSeparateTerminalPoint = (terminal_point_id: string, count: number) => {
+    const terminal_point = this.graph_container.graph.get(terminal_point_id);
+    for (const path of this.processed_path.path.values()) {
+      console.log("始点間距離計測(J)", terminal_point, path);
+
+      if (path.coordinates.has(terminal_point_id)) {
+        continue;
+      }
+
+      for (let k = 1; k < path.pos_order.length; k++) {
+        const pos1_id = path.pos_order[k - 1];
+        const pos2_id = path.pos_order[k];
+        const pos1 = path.coordinates.get(pos1_id);
+        const pos2 = path.coordinates.get(pos2_id);
+        const posd = calcPythagoreanSquare(pos1, pos2);
+        const d = calcPythagoreanSquare(pos1, { x: terminal_point.x, y: terminal_point.y });
+
+        console.log("始点間距離計測(K)", terminal_point, pos1, pos2);
+
+        if (d <= posd) {
+          terminal_point.bidirectional_link_id_list.push(pos1_id);
+          terminal_point.bidirectional_link_id_list.push(pos2_id);
+          this.graph_container.replaceLinkNode(pos1_id, pos2_id, terminal_point_id);
+          this.graph_container.replaceLinkNode(pos2_id, pos1_id, terminal_point_id);
+
+          console.log(
+            "始点間距離計測(D)",
+            terminal_point,
+            this.graph_container.graph.get(terminal_point_id),
+            pos1,
+            this.graph_container.graph.get(pos1_id),
+            pos2,
+            this.graph_container.graph.get(pos2_id),
+            count
+          );
+
+          count++;
+          return count;
+        }
+      }
+    }
+    return count;
+  };
 
   reliefSeparate = () => {
     const terminal_points = this.graph_container.getPointID(1);
 
     let count = 0;
 
-    for (const terminal_point_id of terminal_points){
-      const terminal_point = this.graph_container.graph.get(terminal_point_id);
-      for (const path of this.processed_path.path.values()){
-        console.log("始点間距離計測(J)",terminal_point,path);
-
-        if (path.coordinates.has(terminal_point_id)){
-          continue;
-        }
-
-        for (let k = 1 ; k < path.pos_order.length;k++){
-          const pos1_id = path.pos_order[k-1];
-          const pos2_id = path.pos_order[k];
-          const pos1 = path.coordinates.get(pos1_id);
-          const pos2 = path.coordinates.get(pos2_id);
-          const posd = calcPythagoreanSquare(pos1,pos2)
-          const d = calcPythagoreanSquare(pos1,{x:terminal_point.x , y:terminal_point.y})
-
-          console.log("始点間距離計測(K)",terminal_point,pos1,pos2);
-
-          if (d <= posd){
-            terminal_point.bidirectional_link_id_list.push(pos1_id);
-            terminal_point.bidirectional_link_id_list.push(pos2_id);
-            this.graph_container.replaceLinkNode(pos1_id , pos2_id ,terminal_point_id );
-            this.graph_container.replaceLinkNode(pos2_id , pos1_id ,terminal_point_id );
-
-            console.log("始点間距離計測(D)",terminal_point,pos1,pos2,count);
-
-            count ++;
-          } 
-        }
-      }
+    for (const terminal_point_id of terminal_points) {
+      const rv_count = this.reliefSeparateTerminalPoint(terminal_point_id, count);
+      count = rv_count;
     }
 
     return count;
-  }
-
+  };
 }
 
 export default GraphCalculation;
