@@ -6,10 +6,9 @@ import { searchGisConditional, getGeometry } from "../gis_scipt/gis_unique_data"
 import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 
-import GraphNode from "./graph_node";
+import GraphNode from "./expression/graph_node";
 import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
-
 
 //nodeがどの第2段階path(GraphCalculationNodePath)に所属しているのかを保有する
 class GraphCalculationNodePath {

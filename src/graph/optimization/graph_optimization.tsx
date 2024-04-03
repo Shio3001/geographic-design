@@ -1,24 +1,23 @@
-import EditData from "../component/ctrl_dataflow/edit_data/edit_data";
-import LayerData from "../component/ctrl_dataflow/edit_data/layer_data";
-import { TypeGISInfo } from "../gis_scipt/route_type";
-import { searchGisConditional, getGeometry } from "../gis_scipt/gis_unique_data";
+import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
+import LayerData from "../../component/ctrl_dataflow/edit_data/layer_data";
+import { TypeGISInfo } from "../../gis_scipt/route_type";
+import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
 
-import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
-import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
+import SvgKit from "../../parser/sgml_kit/svg_kit/svg_kit";
+import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 
-import GraphNode from "./graph_node";
-import Graph from "./expression/graph";
-import GraphCoordinateExpression from "./expression/coordinate_expression";
-import GraphCalculationNodePath from "./graph_calculation_node_path";
-import PathContact from "./expression/path_contact";
+import GraphNode from "../expression/graph_node";
+import Graph from "../expression/graph";
+import GraphCoordinateExpression from "../expression/coordinate_expression";
+import GraphCalculationNodePath from "../graph_calculation_node_path";
+import PathContact from "../expression/path_contact";
 
-import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
-import ProcessPath from "./expression/process_path"
-import Route from "./expression/route"
-
+import { TypeGraphRoute, TypeGraphRouteNode } from "../expression/graph_type";
+import ProcessPath from "../expression/process_path";
+import Route from "../expression/route";
 
 class GraphOptimization {
-  graph_container: Graph;
+  // graph_container: Graph;
   graph_extraction_container: Graph;
 
   //複数ルート構築用データ格納場所
@@ -27,27 +26,27 @@ class GraphOptimization {
   //複数ルート決定後データ格納場所
   graph_route: Route;
 
-  processed_path: ProcessPath;
+  // processed_path: ProcessPath;
 
-  constructor(graph_container: Graph, processed_path: ProcessPath) {
-    this.graph_container = graph_container;
-    this.processed_path = processed_path;
+  constructor() {
+    // this.graph_container = graph_container;
+    // this.processed_path = processed_path;
     this.graph_extraction_container = new Graph();
     this.graph_next = new Route();
     this.graph_route = new Route();
   }
 
-  generateGraphExtraction = () => {
+  generateGraphExtraction = (graph_container: Graph, processed_path: ProcessPath) => {
     // this.graph_route.buildNextPaths(this.terminal_node_id_list);
-    console.log("graph_extraction_container-sta", this.graph_extraction_container, this.processed_path);
+    console.log("graph_extraction_container-sta", this.graph_extraction_container, processed_path);
 
-    for (let path of this.processed_path.path.values()) {
+    for (let path of processed_path.path.values()) {
       const d = path.getDistance();
       const f_id = path.getFirstNodeId();
       const l_id = path.getLastNodeId();
 
-      const f_node = this.graph_container.graph.get(f_id);
-      const l_node = this.graph_container.graph.get(l_id);
+      const f_node = graph_container.graph.get(f_id);
+      const l_node = graph_container.graph.get(l_id);
 
       const pc = new PathContact();
       pc.setDistance(d);
@@ -76,7 +75,9 @@ class GraphOptimization {
       this.extractionDijkstra(node_key);
     }
 
-    console.log("graph_extraction_container-end", this.graph_extraction_container,this.graph_route);
+    console.log("graph_extraction_container-end", this.graph_extraction_container, this.graph_route);
+
+    return this.graph_next;
   };
 
   //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
@@ -118,11 +119,11 @@ class GraphOptimization {
         const link_node = this.graph_extraction_container.graph.get(link_node_id);
         const link_contacts = this.graph_next.getPathContacts(current_id, link_node_id);
 
-        for (let link_contact of link_contacts){
+        for (let link_contact of link_contacts) {
           const calc_distance = link_contact.distance + dijkstra_graph.get(current_id);
 
           const graph_distance = dijkstra_graph.get(link_node_id);
-  
+
           if (graph_distance >= calc_distance) {
             dijkstra_graph.set(link_node_id, calc_distance);
             enqueqe(link_node_id);
@@ -130,19 +131,19 @@ class GraphOptimization {
           const new_contact = new PathContact();
           new_contact.setDistance(calc_distance);
           new_contact.setCoordinateExpressionId(-3);
-  
+
           if (this.graph_route.hasPathContact(fixed_node_id, current_id)) {
             const fixed_contact = this.graph_route.getMinPathContact(fixed_node_id, current_id);
             new_contact.includeRoute(fixed_contact);
             new_contact.includeArrivedNode(fixed_contact);
-  
+
             if (fixed_contact.isArrivedNode(link_node_id)) {
               continue;
             }
           }
           new_contact.pushRoute(link_contact.coordinate_expression_id);
           new_contact.pushArrivedNode(link_node_id);
-  
+
           this.graph_route.pushSemiRoute(fixed_node_id, link_node_id, new_contact);
         }
 

@@ -6,10 +6,10 @@ import { searchGisConditional, getGeometry } from "./../../gis_scipt/gis_unique_
 import SvgKit from "../sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import Graph from "../../graph/expression/graph";
-import GraphNode from "./../../graph/graph_node";
+import GraphNode from "../../graph/expression/graph_node";
 import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
-import GraphOptimization from "./../../graph/graph_optimization";
+import GraphOptimization from "../../graph/optimization/graph_optimization";
 import GraphClosedPath from "./../../graph/graph_closed_path";
 import * as GEO from "./../../geographic_constant";
 
@@ -42,20 +42,19 @@ class ParserRailroadSection {
 
     grah_calc.startCalc();
     // grah_calc.debugNode();
-    const grah_paths = grah_calc.getProcessedPath();
+    let grah_paths = grah_calc.getProcessedPath();
 
-    const graph_optimization = new GraphOptimization(this.graph, grah_paths);
-    graph_optimization.generateGraphExtraction();
+    const graph_optimization = new GraphOptimization();
+    graph_optimization.generateGraphExtraction(this.graph, grah_paths);
 
     const graph_close_path_process = new GraphClosedPath(graph_optimization);
 
-
     if (path_optimize_flag) {
       graph_close_path_process.searchDeleteClosedPath(true);
-      graph_close_path_process.deleteClosedPath();
+      grah_paths = graph_close_path_process.deleteClosedPath(grah_paths);
     }
 
-    const paths_array = Array.from(graph_close_path_process.graph_optimization.processed_path.path.values());
+    const paths_array = Array.from(grah_paths.path.values());
     return paths_array;
   };
 

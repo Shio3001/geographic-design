@@ -8,11 +8,40 @@ class ProcessPath {
     this.path = new Map();
   }
 
-  joinPath = (path_id_1: number,path_id_2: number) => {
+  joinPath = (path_id_1: number, path_id_2: number) => {
     const path_1 = _.cloneDeep(this.path.get(path_id_1));
     const path_2 = _.cloneDeep(this.path.get(path_id_2));
-  }
 
+    // 継 継
+    if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
+    }
+
+    // 継 反
+    else if (path_1.getLastNodeId() == path_2.getLastNodeId()) {
+      path_2.reversePosOrder();
+    }
+
+    // 反 継
+    else if (path_1.getFirstNodeId() == path_2.getFirstNodeId()) {
+      path_1.reversePosOrder();
+    }
+
+    // 反 反
+    else if (path_1.getFirstNodeId() == path_2.getLastNodeId()) {
+      path_1.reversePosOrder();
+      path_2.reversePosOrder();
+    } else {
+      return false;
+    }
+
+    path_1.includePathOrder(path_2, 1);
+
+    // this.path.delete(path_1.coordinate_expression_id);
+    this.path.delete(path_2.coordinate_expression_id);
+    this.path.set(path_1.coordinate_expression_id, path_1);
+
+    return true;
+  };
 
   isAdjoinProcessed = (path_id: number, node_id_1: string, node_id_2: string) => {
     const c_path = this.path.get(path_id);

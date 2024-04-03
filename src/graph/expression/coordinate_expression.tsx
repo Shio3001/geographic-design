@@ -6,12 +6,12 @@ import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_da
 import SvgKit from "../../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 
-import GraphNode from "../graph_node";
+import GraphNode from "./graph_node";
 
-import {calcPythagorean} from "./../../mathematical/angle"
+import { calcPythagorean } from "../../mathematical/dimension_two";
 
 class GraphCoordinateExpression {
-  coordinates: Map<string,TypePosition>;
+  coordinates: Map<string, TypePosition>;
   type: string; //path or point
   debug_message: Array<string>;
   pos_order: Array<string>;
@@ -24,11 +24,29 @@ class GraphCoordinateExpression {
     this.pos_order = [];
   }
 
+  includePathOrder = (include_path: GraphCoordinateExpression, order_index: number) => {
+    const join_order = include_path.pos_order.filter((element, index) => order_index >= index);
+    this.pos_order = this.pos_order.concat(join_order);
+
+    for (let include_path_coordinate_id of include_path.coordinates.keys()) {
+      this.coordinates.set(include_path_coordinate_id, include_path.coordinates.get(include_path_coordinate_id));
+    }
+  };
+  includePath = (include_path: GraphCoordinateExpression) => {
+    this.pos_order = this.pos_order.concat(include_path.pos_order);
+
+    for (let include_path_coordinate_id of include_path.coordinates.keys()) {
+      this.coordinates.set(include_path_coordinate_id, include_path.coordinates.get(include_path_coordinate_id));
+    }
+  };
+
   setCoordinateExpressionId = (id: number) => {
     this.coordinate_expression_id = id;
   };
 
-
+  reversePosOrder = () => {
+    this.pos_order = this.pos_order.reverse();
+  };
 
   getDistance = () => {
     let d_sum = 0;
@@ -61,14 +79,14 @@ class GraphCoordinateExpression {
   };
 
   pushPosIdsIndex = (id: string, index: number) => {
-    this.pos_order.splice(index , 0 , id)
+    this.pos_order.splice(index, 0, id);
   };
   pushPosIds = (id: string) => {
     this.pos_order.push(id);
   };
 
   pushCoordinateId = (id: string, x: number, y: number) => {
-    this.coordinates.set(id,{ x: x, y: y });
+    this.coordinates.set(id, { x: x, y: y });
     this.pushPosIds(id);
   };
 

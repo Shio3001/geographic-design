@@ -5,9 +5,9 @@ import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_da
 
 import SvgKit from "../../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
-import { caclcAngleByPosition } from "./../../mathematical/angle";
+import { caclcAngleByPosition } from "../../mathematical/dimension_two";
 
-import GraphNode from "../graph_node";
+import GraphNode from "./graph_node";
 import * as _ from "lodash"; // lodashをインポート
 
 class Graph {
@@ -35,7 +35,8 @@ class Graph {
       link_node.pushBidirectionalLinkNode(node.node_id);
       this.graph.set(link_id, link_node);
     }
-  };  getTerminationPointID = (): Array<string> => {
+  };
+  getTerminationPointID = (): Array<string> => {
     if (this.graph.size == 0) {
       return [];
     }
@@ -141,7 +142,6 @@ class Graph {
     return t_id;
   };
 
-
   replaceLinkNode = (node_id: string, old_id: string, new_id: string) => {
     const node = this.graph.get(node_id);
 
@@ -153,14 +153,18 @@ class Graph {
   };
 
   //even_point_idで指定しているノードの接続先のうち、extraction_link_id_listのみと共に分離する
-  separationLinkNode = (even_point_id: string, extraction_link_id_list: Array<string>,symbol:string) => {
+  separationLinkNode = (even_point_id: string, extraction_link_id_list: Array<string>, symbol: string) => {
     const even_point_node = this.graph.get(even_point_id);
 
     const event_point_node_copy1 = _.cloneDeep(even_point_node);
     const event_point_node_copy2 = _.cloneDeep(even_point_node);
 
-    event_point_node_copy1.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element, index) => extraction_link_id_list.includes(element));
-    event_point_node_copy2.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element, index) => !extraction_link_id_list.includes(element));
+    event_point_node_copy1.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element, index) =>
+      extraction_link_id_list.includes(element)
+    );
+    event_point_node_copy2.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter(
+      (element, index) => !extraction_link_id_list.includes(element)
+    );
 
     const old_copy1_id = even_point_node.node_id;
     const new_copy1_id = old_copy1_id + symbol;
@@ -189,7 +193,11 @@ class Graph {
           const b_link_in_id = b_link_list[j];
           const b_link_in_node = this.graph.get(b_link_in_id);
 
-          const c_radian = caclcAngleByPosition({ x: even_point_node.x, y: even_point_node.y }, { x: b_link_out_node.x, y: b_link_out_node.y }, { x: b_link_in_node.x, y: b_link_in_node.y });
+          const c_radian = caclcAngleByPosition(
+            { x: even_point_node.x, y: even_point_node.y },
+            { x: b_link_out_node.x, y: b_link_out_node.y },
+            { x: b_link_in_node.x, y: b_link_in_node.y }
+          );
 
           if (max_radian < c_radian) {
             max_radian = c_radian;
@@ -201,13 +209,12 @@ class Graph {
       return extraction_id_list;
     };
 
-
     let even_point_list = this.getEvenBranchPointID();
 
     while (even_point_list.length > 0) {
       const even_point_id = even_point_list[0];
       const extraction_link_id_list = extraction(even_point_id);
-      this.separationLinkNode(even_point_id, extraction_link_id_list,"s");
+      this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
 
       console.log("even_point_list", even_point_list);
 
@@ -235,7 +242,6 @@ class Graph {
 
     console.log("環状閉路分割", branch2node_copy1, branch2node_copy2, old_copy2_id, new_copy2_id);
   };
-
 }
 
 export default Graph;

@@ -6,12 +6,13 @@ import { searchGisConditional, getGeometry } from "../gis_scipt/gis_unique_data"
 import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 
-import GraphNode from "./graph_node";
+import GraphNode from "./expression/graph_node";
 import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
-import GraphOptimization from "./graph_optimization";
+import GraphOptimization from "./optimization/graph_optimization";
 import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
 import PathContact from "./expression/path_contact";
+import ProcessPath from "./expression/process_path";
 import * as _ from "lodash"; // lodashをインポート
 
 type TypePathIndex = {
@@ -119,7 +120,7 @@ class GraphClosedPath {
 
     this.keep_paths = keep_path_ids;
   };
-  deleteClosedPath = () => {
+  deleteClosedPath = (processed_path: ProcessPath) => {
     console.log("deleteClosedPath -start", this.keep_paths);
 
     const getKeepRoutes = () => {
@@ -134,18 +135,19 @@ class GraphClosedPath {
       return arr;
     };
     const keep_routes = getKeepRoutes();
-    const paths = this.graph_optimization.processed_path;
     console.log("deleteClosedPath -getKeepRoutes", keep_routes);
 
-    for (let delete_path of paths.path.values()) {
+    for (let delete_path of processed_path.path.values()) {
       console.log("deleteClosedPath -delete", delete_path, keep_routes, this.keep_paths);
 
       if (keep_routes.includes(delete_path.coordinate_expression_id)) {
         continue;
       }
 
-      this.graph_optimization.processed_path.path.delete(delete_path.coordinate_expression_id);
+      processed_path.path.delete(delete_path.coordinate_expression_id);
     }
+
+    return processed_path;
 
     // const new_processed_path = this.graph_optimization.processed_path.filter((element, index) => !delete_path_ids.includes(index));
   };
