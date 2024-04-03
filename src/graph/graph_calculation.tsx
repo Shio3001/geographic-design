@@ -6,12 +6,12 @@ import { searchGisConditional, getGeometry } from "../gis_scipt/gis_unique_data"
 import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
 
-import GraphNode from "./graph_node";
+import GraphNode from "./expression/graph_node";
 import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
 import * as _ from "lodash"; // lodashをインポート
-import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare } from "./../mathematical/angle";
+import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity } from "../mathematical/dimension_two";
 
 import ProcessPath from "./expression/process_path";
 
@@ -182,7 +182,9 @@ class GraphCalculation {
     }
   };
 
-  reliefSeparateTerminalPoint = (terminal_point_id: string, count: number) => {
+  reliefSeparateTerminalPoint = (terminal_point_id: string) => {
+    let count = 0;
+
     const terminal_point = this.graph_container.graph.get(terminal_point_id);
     for (const path of this.processed_path.path.values()) {
       console.log("始点間距離計測(J)", terminal_point, path);
@@ -204,6 +206,8 @@ class GraphCalculation {
         if (d <= posd) {
           terminal_point.bidirectional_link_id_list.push(pos1_id);
           terminal_point.bidirectional_link_id_list.push(pos2_id);
+          const cg = calcCenterGravity(terminal_point.getPos(), pos1, pos2);
+          terminal_point.setPos(cg.x, cg.y);
           this.graph_container.replaceLinkNode(pos1_id, pos2_id, terminal_point_id);
           this.graph_container.replaceLinkNode(pos2_id, pos1_id, terminal_point_id);
 
@@ -232,8 +236,8 @@ class GraphCalculation {
     let count = 0;
 
     for (const terminal_point_id of terminal_points) {
-      const rv_count = this.reliefSeparateTerminalPoint(terminal_point_id, count);
-      count = rv_count;
+      const rv_count = this.reliefSeparateTerminalPoint(terminal_point_id);
+      count += rv_count;
     }
 
     return count;

@@ -115,15 +115,15 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
       <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
-      <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化と結合"} checked={getCheckedPathOptimize()} />
+      <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化"} checked={getCheckedPathOptimize()} />
+      <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの結合"} checked={getCheckedPathOptimize()} />
+      <CheckBox flowUp={flowUpPathOptimize} label_text={"座標補正"} checked={getCheckedPathOptimize()} />
       <PulldownMenu
         flowUp={flowUpPathOptimizeClosedPathType}
         view_options={getCheckedPathOptimizeClosedPathType()}
         selected={Number(typeof layer.getElement("path_optimize_closed_type") == "undefined" ? 0 : Number(layer.getElement("path_optimize_closed_type")))}
         label_text="閉路処理方式"
       />
-      <NumberBox flowUp={flowUpPathOptimizeCycleProcessingThreshold} number={AppContextValue.edit_data.width} label_text="閉路処理最大長(単位:m)" />
-      <NumberBox flowUp={flowUpPathOptimizeCycleProcessingThreshold} number={AppContextValue.edit_data.width} label_text="分岐線削除最大長(単位:m)" />
     </>
   );
 };

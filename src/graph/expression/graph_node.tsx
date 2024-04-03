@@ -1,10 +1,10 @@
-import EditData from "../component/ctrl_dataflow/edit_data/edit_data";
-import LayerData from "../component/ctrl_dataflow/edit_data/layer_data";
-import { TypeGISInfo } from "../gis_scipt/route_type";
-import { searchGisConditional, getGeometry } from "../gis_scipt/gis_unique_data";
+import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
+import LayerData from "../../component/ctrl_dataflow/edit_data/layer_data";
+import { TypeGISInfo } from "../../gis_scipt/route_type";
+import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
 
-import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
-import SvgNode from "../parser/sgml_kit/svg_kit/svg_node";
+import SvgKit from "../../parser/sgml_kit/svg_kit/svg_kit";
+import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 
 class GraphNode {
   node_id: string;
@@ -46,6 +46,10 @@ class GraphNode {
   setPos = (x: number, y: number) => {
     this.x = x;
     this.y = y;
+  };
+
+  getPos = () => {
+    return { x: this.x, y: this.y };
   };
 }
 
