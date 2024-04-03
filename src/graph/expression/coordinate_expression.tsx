@@ -9,6 +9,7 @@ import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 import GraphNode from "./graph_node";
 
 import { calcPythagorean } from "../../mathematical/dimension_two";
+import * as _ from "lodash"; // lodashをインポート
 
 class GraphCoordinateExpression {
   coordinates: Map<string, TypePosition>;
@@ -25,12 +26,27 @@ class GraphCoordinateExpression {
   }
 
   includePathOrder = (include_path: GraphCoordinateExpression, order_index: number) => {
-    const join_order = include_path.pos_order.filter((element, index) => order_index >= index);
+    const ol = _.cloneDeep(this.pos_order);
+    const join_order = include_path.pos_order.filter((element, index) => index >= order_index);
     this.pos_order = this.pos_order.concat(join_order);
 
     for (let include_path_coordinate_id of include_path.coordinates.keys()) {
       this.coordinates.set(include_path_coordinate_id, include_path.coordinates.get(include_path_coordinate_id));
     }
+
+    console.log(
+      "includePathFunction",
+      this.coordinate_expression_id,
+      include_path.coordinate_expression_id,
+      "更新前",
+      ol,
+      "更新後",
+      _.cloneDeep(this.pos_order),
+      "追加",
+      include_path.pos_order,
+      "追加抽出",
+      join_order
+    );
   };
   includePath = (include_path: GraphCoordinateExpression) => {
     this.pos_order = this.pos_order.concat(include_path.pos_order);

@@ -12,18 +12,68 @@ import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphOptimization from "./optimization/graph_optimization";
 import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
 import PathContact from "./expression/path_contact";
+import ProcessPath from "./expression/process_path";
+
 import * as _ from "lodash"; // lodashをインポート
+import Route from "./expression/route";
 
 class GraphPathJoin {
-  graph_optimization: GraphOptimization;
-  constructor(graph_optimization: GraphOptimization) {
-    this.graph_optimization = graph_optimization;
+  constructor() {
     // graph_optimization.processed_path.path.get(1).
   }
 
-  joinContinuity = () => {};
+  joinLong = (graph_route: Route) => {
+    const join_routes: Array<Array<number>> = [];
+    let queqe: Array<number> = [];
 
-  join = () => {};
+    const enqueqe = (eq: Array<number>) => {
+      queqe = queqe.concat(eq);
+    };
+    const hasQueque = (eq: Array<number>) => {
+      for (let e of eq) {
+        if (queqe.includes(e)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    const path_contacts = graph_route.getAllSortPathContact(true);
+
+    if (path_contacts.length == 0) {
+      return [];
+    }
+
+    for (const path_contact of path_contacts) {
+      const has_que = hasQueque(path_contact.routes);
+
+      if (has_que) {
+        continue;
+      }
+
+      enqueqe(path_contact.routes);
+      join_routes.push(path_contact.routes);
+    }
+
+    console.log("join_routes", join_routes);
+
+    return join_routes;
+  };
+
+  joinContinuity = (join_routes: Array<Array<number>>, process_path: ProcessPath) => {
+    console.log("includePathFunction -join_routes", join_routes, process_path);
+
+    for (let join_route of join_routes) {
+      const p0_id = join_route[0];
+      //   const p0 = process_path.path.get(p0_id);
+
+      for (let r = 1; r < join_route.length; r++) {
+        const r_id = join_route[r];
+        process_path.joinPath(p0_id, r_id);
+        // process_path.path.delete(r);
+      }
+    }
+  };
 }
 
 export default GraphPathJoin;
