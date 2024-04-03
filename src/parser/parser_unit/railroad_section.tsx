@@ -11,9 +11,9 @@ import GraphCalculation from "../../graph/graph_calculation";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import GraphOptimization from "../../graph/optimization/graph_optimization";
 import GraphClosedPath from "./../../graph/graph_closed_path";
-import * as GEO from "./../../geographic_constant";
-
+import GraphPathJoin from "./../../graph/graph_join";
 import BigNumber from "bignumber.js";
+import * as GEO from "./../../geographic_constant";
 
 class ParserRailroadSection {
   edit_data: EditData;
@@ -39,6 +39,7 @@ class ParserRailroadSection {
     const grah_calc = new GraphCalculation(this.graph); // grah_dfs.debugNode();
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_optimize_flag = current_layer.getElement("path_optimize") == "ok";
+    const path_join_flag = current_layer.getElement("path_join") == "ok";
 
     grah_calc.startCalc();
     // grah_calc.debugNode();
@@ -47,11 +48,23 @@ class ParserRailroadSection {
     const graph_optimization = new GraphOptimization();
     graph_optimization.generateGraphExtraction(this.graph, grah_paths);
 
-    const graph_close_path_process = new GraphClosedPath(graph_optimization);
+    const graph_extraction_container = graph_optimization.generateGraphExtraction(this.graph, grah_paths);
+
+    const graph_close_path_process = new GraphClosedPath();
+    const graph_path_join = new GraphPathJoin();
 
     if (path_optimize_flag) {
-      graph_close_path_process.searchDeleteClosedPath(true);
+      const graph_next = graph_optimization.generateNext(grah_paths);
+      const graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
+      graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route);
       grah_paths = graph_close_path_process.deleteClosedPath(grah_paths);
+    }
+
+    if (path_join_flag) {
+      const graph_next = graph_optimization.generateNext(grah_paths);
+      const graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
+      const join_routes = graph_path_join.joinLong(graph_route);
+      graph_path_join.joinContinuity(join_routes, grah_paths);
     }
 
     const paths_array = Array.from(grah_paths.path.values());

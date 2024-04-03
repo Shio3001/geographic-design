@@ -10,22 +10,15 @@ import GraphNode from "./expression/graph_node";
 import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphOptimization from "./optimization/graph_optimization";
-import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
+import { TypeGraphRoute, TypeGraphRouteNode, TypePathIndex } from "./expression/graph_type";
 import PathContact from "./expression/path_contact";
 import ProcessPath from "./expression/process_path";
 import * as _ from "lodash"; // lodashをインポート
-
-type TypePathIndex = {
-  path: PathContact;
-  index: number;
-};
+import Route from "./expression/route";
 
 class GraphClosedPath {
-  graph_optimization: GraphOptimization;
-
   keep_paths: Array<PathContact>;
-  constructor(graph_optimization: GraphOptimization) {
-    this.graph_optimization = graph_optimization;
+  constructor() {
     this.keep_paths = [];
   }
 
@@ -101,15 +94,15 @@ class GraphClosedPath {
   };
 
   //最長距離優先(切り捨て破棄)
-  searchDeleteClosedPath = (long: boolean) => {
+  searchDeleteClosedPath = (long: boolean, graph_next: Route, graph_route: Route) => {
     let delete_candidacy_path_ids: Array<PathContact> = [];
     let keep_path_ids: Array<PathContact> = [];
-    const terminal_nodes = this.graph_optimization.graph_next.getTerminal();
+    const terminal_nodes = graph_next.getTerminal();
     for (let i = 0; i < terminal_nodes.length; i++) {
       const i_id = terminal_nodes[i];
       for (let j = i + 1; j < terminal_nodes.length; j++) {
         const j_id = terminal_nodes[j];
-        const path_contacts = this.graph_optimization.graph_route.getPathContacts(i_id, j_id);
+        const path_contacts = graph_route.getPathContacts(i_id, j_id);
         const d = this.selectionClosedPath(path_contacts, long);
         delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
         keep_path_ids = keep_path_ids.concat(d.keep);

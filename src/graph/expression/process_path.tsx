@@ -9,32 +9,37 @@ class ProcessPath {
   }
 
   joinPath = (path_id_1: number, path_id_2: number) => {
-    const path_1 = _.cloneDeep(this.path.get(path_id_1));
-    const path_2 = _.cloneDeep(this.path.get(path_id_2));
+    const path_1 = this.path.get(path_id_1);
+    const path_2 = this.path.get(path_id_2);
 
     // 継 継
     if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
+      console.log("includePathFunction 継 継");
     }
 
     // 継 反
     else if (path_1.getLastNodeId() == path_2.getLastNodeId()) {
+      console.log("includePathFunction 継 反");
       path_2.reversePosOrder();
     }
 
     // 反 継
     else if (path_1.getFirstNodeId() == path_2.getFirstNodeId()) {
+      console.log("includePathFunction 反 継");
       path_1.reversePosOrder();
     }
 
     // 反 反
     else if (path_1.getFirstNodeId() == path_2.getLastNodeId()) {
+      console.log("includePathFunction 反 反");
       path_1.reversePosOrder();
       path_2.reversePosOrder();
     } else {
       return false;
     }
+    console.log("includePathFunction 接続", _.cloneDeep(path_1), _.cloneDeep(path_2));
 
-    path_1.includePathOrder(path_2, 1);
+    path_1.includePathOrder(path_2, 0);
 
     // this.path.delete(path_1.coordinate_expression_id);
     this.path.delete(path_2.coordinate_expression_id);

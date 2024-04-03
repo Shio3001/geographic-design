@@ -48,6 +48,9 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     if (!layer.layer_infomation["line"]) {
       flowUpUnitLine(0);
     }
+    if (!layer.layer_infomation["path_join"]) {
+      flowUpPathJoin(true);
+    }
     if (!layer.layer_infomation["path_optimize"]) {
       flowUpPathOptimize(true);
     }
@@ -81,6 +84,23 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     return view_lines;
   };
 
+  const flowUpPathJoin = (check: boolean) => {
+    console.log("flowUpPathJoin", check);
+    layer.updateLayerElement("path_join", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const getCheckedPathJoin = () => {
+    if (!("path_join" in layer.layer_infomation)) {
+      return false;
+    }
+
+    const c = layer.getElement("path_join");
+    return c == "ok";
+  };
+
   const flowUpPathOptimize = (check: boolean) => {
     console.log("flowUpPathOptimize", check);
     layer.updateLayerElement("path_optimize", check ? "ok" : "no");
@@ -108,15 +128,12 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     return ["なし", "最短経路優先(破棄)", "最長経路優先(破棄)", "最短経路優先(分離)", "最長経路優先(分離)", "環状閉路構築"];
   };
 
-  const flowUpPathOptimizeCycleProcessingThreshold = () => {};
-  const getCheckedPathOptimizeCycleProcessingThreshold = () => {};
-
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
       <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
       <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化"} checked={getCheckedPathOptimize()} />
-      <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの結合"} checked={getCheckedPathOptimize()} />
+      <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />
       <CheckBox flowUp={flowUpPathOptimize} label_text={"座標補正"} checked={getCheckedPathOptimize()} />
       <PulldownMenu
         flowUp={flowUpPathOptimizeClosedPathType}
