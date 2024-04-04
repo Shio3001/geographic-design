@@ -5,10 +5,10 @@ import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_da
 
 import SvgKit from "../../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
-import { caclcAngleByPosition } from "../../mathematical/dimension_two";
+import { caclcAngleByPosition, radian90 } from "../../mathematical/dimension_two";
 
 import GraphNode from "./graph_node";
-import * as _ from "lodash"; // lodashをインポート
+import { copyObject } from "./../../definition";
 
 class Graph {
   graph: Map<string, GraphNode>;
@@ -156,8 +156,8 @@ class Graph {
   separationLinkNode = (even_point_id: string, extraction_link_id_list: Array<string>, symbol: string) => {
     const even_point_node = this.graph.get(even_point_id);
 
-    const event_point_node_copy1 = _.cloneDeep(even_point_node);
-    const event_point_node_copy2 = _.cloneDeep(even_point_node);
+    const event_point_node_copy1 = copyObject(even_point_node);
+    const event_point_node_copy2 = copyObject(even_point_node);
 
     event_point_node_copy1.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element, index) =>
       extraction_link_id_list.includes(element)
@@ -176,6 +176,8 @@ class Graph {
 
     this.graph.set(event_point_node_copy1.node_id, event_point_node_copy1);
     this.graph.set(event_point_node_copy2.node_id, event_point_node_copy2);
+
+    return new_copy1_id;
   };
 
   intersectionExtraction = () => {
@@ -209,12 +211,42 @@ class Graph {
       return extraction_id_list;
     };
 
+    //4つから2つを抽出したとき、のこり2つによって鋭角が形成されていないかをチェック。鋭角であれば処理を中断
+    const isAcuteAngle = (even_point_index: string, extraction_id_list: Array<String>) => {
+      const even_point_node = this.graph.get(even_point_index);
+      const b_link_list = even_point_node.bidirectional_link_id_list;
+
+      const another_extraction_id_list = b_link_list.filter((element, index) => !extraction_id_list.includes(element));
+
+      if (another_extraction_id_list.length != 2) {
+        return false;
+      }
+      const b_link_out_1 = this.graph.get(another_extraction_id_list[0]);
+      const b_link_out_2 = this.graph.get(another_extraction_id_list[1]);
+      const c_radian = caclcAngleByPosition(
+        { x: even_point_node.x, y: even_point_node.y },
+        { x: b_link_out_1.x, y: b_link_out_1.y },
+        { x: b_link_out_2.x, y: b_link_out_2.y }
+      );
+
+      return c_radian <= radian90;
+    };
+
     let even_point_list = this.getEvenBranchPointID();
 
     while (even_point_list.length > 0) {
       const even_point_id = even_point_list[0];
       const extraction_link_id_list = extraction(even_point_id);
-      this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
+      const is_another_acute = isAcuteAngle(even_point_id, extraction_link_id_list);
+      const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
+
+      if (is_another_acute) {
+        const even_node = this.graph.get(even_point_id);
+        const even_new_node = this.graph.get(new_even_point_id);
+
+        even_node.bidirectional_link_id_list.push(new_even_point_id);
+        even_new_node.bidirectional_link_id_list.push(even_point_id);
+      }
 
       console.log("even_point_list", even_point_list);
 
@@ -226,8 +258,8 @@ class Graph {
     const branch2node_id = termination_point_branch_2[0];
     const branch2node = this.graph.get(branch2node_id);
 
-    const branch2node_copy1 = _.cloneDeep(branch2node);
-    const branch2node_copy2 = _.cloneDeep(branch2node);
+    const branch2node_copy1 = copyObject(branch2node);
+    const branch2node_copy2 = copyObject(branch2node);
 
     branch2node_copy1.bidirectional_link_id_list = [branch2node.bidirectional_link_id_list[0]];
     branch2node_copy2.bidirectional_link_id_list = [branch2node.bidirectional_link_id_list[1]];

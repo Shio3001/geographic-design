@@ -35,5 +35,6 @@ export const calcCenterGravity = (A: TypePosition, B: TypePosition, C: TypePosit
 
   return { x: cg_x, y: cg_Y };
 };
+export const radian90 = caclcAngleByPosition({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 });
 
 console.log("test calc abp", caclcAngleByPosition({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }));
