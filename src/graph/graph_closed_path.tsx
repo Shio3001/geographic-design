@@ -13,8 +13,8 @@ import GraphOptimization from "./optimization/graph_optimization";
 import { TypeGraphRoute, TypeGraphRouteNode, TypePathIndex } from "./expression/graph_type";
 import PathContact from "./expression/path_contact";
 import ProcessPath from "./expression/process_path";
-import * as _ from "lodash"; // lodashをインポート
 import Route from "./expression/route";
+import { copyObject } from "./../definition";
 
 class GraphClosedPath {
   keep_paths: Array<PathContact>;
@@ -72,49 +72,47 @@ class GraphClosedPath {
       return result;
     };
 
-    const length_min = getLengthMin();
-    const length_max = getLengthMax();
-
     if (path_contacts.length == 0) {
+      console.log("delete_path_ids -path_contacts0", path_contacts);
       return { closed: [], keep: [] };
     }
 
     const keep_path = longeast ? getLongestPath() : getShortestPath();
-    const delete_paths = getOtherPath(keep_path);
 
-    const closed: Array<PathContact> = [];
+    console.log("delete_path_ids -keep_path", keep_path);
 
-    // for (let i = 0; i < delete_paths.length; i++) {
-    //   const delete_path = delete_paths[i];
-    //   closed.push(delete_path);
-    // }
-
-    // console.log("deleteClosedPathLong", closed);
     return { closed: [], keep: [keep_path.path] };
   };
 
   //最長距離優先(切り捨て破棄)
   searchDeleteClosedPath = (long: boolean, graph_next: Route, graph_route: Route) => {
-    let delete_candidacy_path_ids: Array<PathContact> = [];
+    // let delete_candidacy_path_ids: Array<PathContact> = [];
     let keep_path_ids: Array<PathContact> = [];
-    const terminal_nodes = graph_next.getTerminal();
+    const branch1 = graph_next.getBranch(1);
+    const branch1_flag = branch1.length == 1;
+    const terminal_nodes = branch1_flag ? graph_next.getOddBranch() : branch1;
+    // const branch1_flag = false;
+    // const terminal_nodes = branch1;
+
     for (let i = 0; i < terminal_nodes.length; i++) {
       const i_id = terminal_nodes[i];
       for (let j = i + 1; j < terminal_nodes.length; j++) {
         const j_id = terminal_nodes[j];
         const path_contacts = graph_route.getPathContacts(i_id, j_id);
         const d = this.selectionClosedPath(path_contacts, long);
-        delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
+        // delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
         keep_path_ids = keep_path_ids.concat(d.keep);
       }
     }
 
-    console.log("delete_path_ids", delete_candidacy_path_ids, keep_path_ids);
+    console.log("delete_path_ids", terminal_nodes, graph_next, graph_route, keep_path_ids);
 
     this.keep_paths = keep_path_ids;
+
+    return branch1_flag;
   };
   deleteClosedPath = (processed_path: ProcessPath) => {
-    console.log("deleteClosedPath -start", this.keep_paths);
+    console.log("deleteClosedPath -start", this.keep_paths, copyObject(processed_path));
 
     const getKeepRoutes = () => {
       let arr: Array<number> = [];

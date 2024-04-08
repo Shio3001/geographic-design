@@ -12,7 +12,10 @@ import GraphCoordinateExpression from "./../../graph/expression/coordinate_expre
 import GraphOptimization from "../../graph/optimization/graph_optimization";
 import GraphClosedPath from "./../../graph/graph_closed_path";
 import GraphPathJoin from "./../../graph/graph_join";
+import SharpAngleRemoval from "./../../graph/sharp_angle_removal";
+
 import BigNumber from "bignumber.js";
+
 import * as GEO from "./../../geographic_constant";
 
 class ParserRailroadSection {
@@ -36,10 +39,12 @@ class ParserRailroadSection {
   }
 
   generatePath = (): Array<GraphCoordinateExpression> => {
-    const grah_calc = new GraphCalculation(this.graph); // grah_dfs.debugNode();
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_optimize_flag = current_layer.getElement("path_optimize") == "ok";
     const path_join_flag = current_layer.getElement("path_join") == "ok";
+    const sharp_angle_removal_flag = current_layer.getElement("sharp_angle_removal") == "ok";
+    const original_data_coordinate_correction_flag = current_layer.getElement("original_data_coordinate_correction") == "ok";
+    const grah_calc = new GraphCalculation(this.graph, original_data_coordinate_correction_flag); // grah_dfs.debugNode();
 
     grah_calc.startCalc();
     // grah_calc.debugNode();
@@ -50,21 +55,29 @@ class ParserRailroadSection {
 
     const graph_extraction_container = graph_optimization.generateGraphExtraction(this.graph, grah_paths);
 
-    const graph_close_path_process = new GraphClosedPath();
-    const graph_path_join = new GraphPathJoin();
-
     if (path_optimize_flag) {
-      const graph_next = graph_optimization.generateNext(grah_paths);
-      const graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
-      graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route);
-      grah_paths = graph_close_path_process.deleteClosedPath(grah_paths);
+      let branch1_flag = true;
+
+      while (branch1_flag) {
+        const graph_next = graph_optimization.generateNext(grah_paths);
+        let graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
+
+        // if (sharp_angle_removal_flag) {
+        //   const sharp_angle_removal = new SharpAngleRemoval();
+        //   sharp_angle_removal.sharp_angle_removal();
+        // }
+        const graph_close_path_process = new GraphClosedPath();
+        branch1_flag = graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route);
+        grah_paths = graph_close_path_process.deleteClosedPath(grah_paths);
+      }
     }
 
     if (path_join_flag) {
+      const graph_path_join = new GraphPathJoin();
       const graph_next = graph_optimization.generateNext(grah_paths);
       const graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
       const join_routes = graph_path_join.joinLong(graph_route);
-      graph_path_join.joinContinuity(join_routes, grah_paths);
+      grah_paths = graph_path_join.joinContinuity(join_routes, grah_paths);
     }
 
     const paths_array = Array.from(grah_paths.path.values());

@@ -236,6 +236,7 @@ class Graph {
 
     while (even_point_list.length > 0) {
       const even_point_id = even_point_list[0];
+      const even_node_o = copyObject(this.graph.get(even_point_id));
       const extraction_link_id_list = extraction(even_point_id);
       const is_another_acute = isAcuteAngle(even_point_id, extraction_link_id_list);
       const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
@@ -246,6 +247,17 @@ class Graph {
 
         even_node.bidirectional_link_id_list.push(new_even_point_id);
         even_new_node.bidirectional_link_id_list.push(even_point_id);
+
+        console.log(
+          "is_another_acute",
+          is_another_acute,
+          even_point_id,
+          even_node_o,
+          copyObject(even_node),
+          new_even_point_id,
+          copyObject(even_new_node),
+          copyObject(this.graph.get(new_even_point_id))
+        );
       }
 
       console.log("even_point_list", even_point_list);

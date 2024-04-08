@@ -9,6 +9,32 @@ class Route {
     this.route = new Map();
   }
 
+  getOddBranch = () => {
+    const branch_ids = [];
+
+    for (let outside_node_id of this.route.keys()) {
+      const outside_node = this.route.get(outside_node_id);
+      if (outside_node.size % 2 == 1) {
+        branch_ids.push(outside_node_id);
+      }
+    }
+
+    return branch_ids;
+  };
+
+  getBranch = (branch: number) => {
+    const branch_ids = [];
+
+    for (let outside_node_id of this.route.keys()) {
+      const outside_node = this.route.get(outside_node_id);
+      if (outside_node.size == branch) {
+        branch_ids.push(outside_node_id);
+      }
+    }
+
+    return branch_ids;
+  };
+
   getTerminal = () => {
     const branch_ids = [];
 

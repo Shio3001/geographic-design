@@ -14,7 +14,6 @@ import { TypeGraphRoute, TypeGraphRouteNode } from "./expression/graph_type";
 import PathContact from "./expression/path_contact";
 import ProcessPath from "./expression/process_path";
 
-import * as _ from "lodash"; // lodashをインポート
 import Route from "./expression/route";
 
 class GraphPathJoin {
@@ -22,6 +21,9 @@ class GraphPathJoin {
     // graph_optimization.processed_path.path.get(1).
   }
 
+  //二次元配列の接続状況を返す。重複しないように接続状況を処理する
+  //一次限目：二次限目の列挙
+  //二次限目：ProcessPathの列挙
   joinLong = (graph_route: Route) => {
     const join_routes: Array<Array<number>> = [];
     let queqe: Array<number> = [];
@@ -73,6 +75,8 @@ class GraphPathJoin {
         // process_path.path.delete(r);
       }
     }
+
+    return process_path;
   };
 }
 

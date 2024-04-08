@@ -51,7 +51,7 @@ class GraphOptimization {
 
       graph_next.pushRoute(f_id, l_id, pc);
     }
-    console.log("generate_graph - generateNext", graph_next);
+    console.log("generate_graph - generateNext", processed_path, graph_next);
 
     return graph_next;
   };
@@ -119,7 +119,6 @@ class GraphOptimization {
 
     dijkstra_graph.set(fixed_node_id, 0);
 
-    // const fixed_node = graph_extraction_container.graph.get(fixed_node_id);
     console.log("graph_extraction_container-dijkstra-a", fixed_node_id, dijkstra_que, dijkstra_graph);
 
     while (dijkstra_que.length > 0) {
@@ -140,7 +139,7 @@ class GraphOptimization {
 
           const graph_distance = dijkstra_graph.get(link_node_id);
 
-          if (graph_distance >= calc_distance) {
+          if (graph_distance > calc_distance) {
             dijkstra_graph.set(link_node_id, calc_distance);
             enqueqe(link_node_id);
           }
