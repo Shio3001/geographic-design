@@ -54,6 +54,12 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     if (!layer.layer_infomation["path_optimize"]) {
       flowUpPathOptimize(true);
     }
+    if (!layer.layer_infomation["sharp_angle_removal"]) {
+      flowUpSharpAngleRemoval(true);
+    }
+    if (!layer.layer_infomation["original_data_coordinate_correction"]) {
+      flowUpOriginalDataCoordinateCorrection(true);
+    }
     if (!layer.layer_infomation["path_optimize_closed_type"]) {
       flowUpPathOptimizeClosedPathType(2);
     }
@@ -92,6 +98,22 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpOriginalDataCoordinateCorrection = (check: boolean) => {
+    layer.updateLayerElement("original_data_coordinate_correction", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const getCheckedOriginalDataCoordinateCorrection = () => {
+    if (!("original_data_coordinate_correction" in layer.layer_infomation)) {
+      return false;
+    }
+
+    const c = layer.getElement("original_data_coordinate_correction");
+    return c == "ok";
+  };
+
   const getCheckedPathJoin = () => {
     if (!("path_join" in layer.layer_infomation)) {
       return false;
@@ -128,13 +150,29 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     return ["なし", "最短経路優先(破棄)", "最長経路優先(破棄)", "最短経路優先(分離)", "最長経路優先(分離)", "環状閉路構築"];
   };
 
+  const flowUpSharpAngleRemoval = (check: boolean) => {
+    layer.updateLayerElement("sharp_angle_removal", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+  const getCheckedSharpAngleRemoval = () => {
+    if (!("sharp_angle_removal" in layer.layer_infomation)) {
+      return false;
+    }
+
+    const c = layer.getElement("sharp_angle_removal");
+    return c == "ok";
+  };
+
   return (
     <>
       <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
       <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
       <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化"} checked={getCheckedPathOptimize()} />
       <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />
-      <CheckBox flowUp={flowUpPathOptimize} label_text={"座標補正"} checked={getCheckedPathOptimize()} />
+      <CheckBox flowUp={flowUpOriginalDataCoordinateCorrection} label_text={"座標補正"} checked={getCheckedOriginalDataCoordinateCorrection()} />
+      <CheckBox flowUp={flowUpSharpAngleRemoval} label_text={"鋭角除去"} checked={getCheckedSharpAngleRemoval()} />
       <PulldownMenu
         flowUp={flowUpPathOptimizeClosedPathType}
         view_options={getCheckedPathOptimizeClosedPathType()}

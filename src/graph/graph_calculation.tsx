@@ -10,10 +10,10 @@ import GraphNode from "./expression/graph_node";
 import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
-import * as _ from "lodash"; // lodashをインポート
 import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity } from "../mathematical/dimension_two";
 
 import ProcessPath from "./expression/process_path";
+import { copyObject } from "../definition";
 
 class GraphCalculation {
   graph_container: Graph;
@@ -22,11 +22,14 @@ class GraphCalculation {
   bfs_que: Array<string>;
   node_path: GraphCalculationNodePath;
 
-  constructor(graph: Graph) {
+  original_data_coordinate_correction_flag: boolean;
+
+  constructor(graph: Graph, original_data_coordinate_correction_flag: boolean) {
     this.graph_container = graph;
     this.node_path = new GraphCalculationNodePath();
     this.processed_path = new ProcessPath();
     this.bfs_que = [];
+    this.original_data_coordinate_correction_flag = original_data_coordinate_correction_flag;
   }
 
   getProcessedPath = () => {
@@ -53,22 +56,18 @@ class GraphCalculation {
   };
 
   startCalc = () => {
+    this.graph_container.intersectionExtraction();
+
     const node_keys = this.graph_container.graph.keys();
     const termination_point_branch_1 = this.graph_container.getPointID(1);
     const termination_point_branch_2 = this.graph_container.getPointID(2);
-
-    this.graph_container.intersectionExtraction();
 
     //大阪環状線のように、単一データでループする路線に終起点を強制的に生成する処理
     if (termination_point_branch_1.length == 0 && termination_point_branch_2.length > 0) {
       this.graph_container.loopLinePoint(termination_point_branch_1, termination_point_branch_2);
     }
 
-    const termination_point = this.graph_container.getTerminationPointID();
-
     // const termination_even_point = this.getTerminationEvenPointID();
-
-    console.log("termination_point", termination_point);
 
     this.graph_container.graph.forEach(function (node, key) {
       console.log("termination_point -alllinks", key, node.bidirectional_link_id_list);
@@ -88,7 +87,26 @@ class GraphCalculation {
     //   this.node_path.pushNode(key, -1);
     // }
 
-    console.log("termination_point", termination_point);
+    this.calcTerminationPoint();
+
+    console.log("dfs", this.processed_path.path.size, copyObject(this.processed_path), this.node_path);
+
+    if (this.original_data_coordinate_correction_flag) {
+      const relief_separate_count = this.reliefSeparate();
+
+      if (relief_separate_count > 0) {
+        console.log("始点間距離計測(D) -relief_separate_count", relief_separate_count);
+        this.node_path = new GraphCalculationNodePath();
+        this.processed_path = new ProcessPath();
+        this.bfs_que = [];
+        this.calcTerminationPoint();
+      }
+    }
+  };
+
+  calcTerminationPoint = () => {
+    const termination_point = this.graph_container.getTerminationPointID();
+    console.log("termination_point -start", termination_point);
     for (let i = 0; i < termination_point.length; i++) {
       const termination_point_node_id = termination_point[i];
       const termination_point_node = this.graph_container.graph.get(termination_point_node_id);
@@ -98,18 +116,6 @@ class GraphCalculation {
       const p_index = this.processed_path.pushProcessedPos(termination_point_node_id, termination_point_node.x, termination_point_node.y);
       this.node_path.pushNode(termination_point_node_id, p_index);
       this.dfs(termination_point_node_id);
-    }
-
-    console.log("dfs", this.processed_path.path.size, this.processed_path, this.node_path);
-
-    const relief_separate_count = this.reliefSeparate();
-
-    if (relief_separate_count > 0) {
-      console.log("始点間距離計測(D) -relief_separate_count", relief_separate_count);
-      this.node_path = new GraphCalculationNodePath();
-      this.processed_path = new ProcessPath();
-      this.bfs_que = [];
-      this.startCalc();
     }
   };
 
@@ -187,7 +193,7 @@ class GraphCalculation {
 
     const terminal_point = this.graph_container.graph.get(terminal_point_id);
     for (const path of this.processed_path.path.values()) {
-      console.log("始点間距離計測(J)", terminal_point, path);
+      console.log("始点間距離計測(J)", terminal_point, path, terminal_point.bidirectional_link_id_list.length);
 
       if (path.coordinates.has(terminal_point_id)) {
         continue;
@@ -204,8 +210,15 @@ class GraphCalculation {
         console.log("始点間距離計測(K)", terminal_point, pos1, pos2);
 
         if (d <= posd) {
-          terminal_point.bidirectional_link_id_list.push(pos1_id);
-          terminal_point.bidirectional_link_id_list.push(pos2_id);
+          const ol = copyObject(this.graph_container.graph.get(terminal_point_id));
+
+          if (!terminal_point.bidirectional_link_id_list.includes(pos1_id)) {
+            terminal_point.bidirectional_link_id_list.push(pos1_id);
+          }
+          if (!terminal_point.bidirectional_link_id_list.includes(pos2_id)) {
+            terminal_point.bidirectional_link_id_list.push(pos2_id);
+          }
+
           const cg = calcCenterGravity(terminal_point.getPos(), pos1, pos2);
           terminal_point.setPos(cg.x, cg.y);
           this.graph_container.replaceLinkNode(pos1_id, pos2_id, terminal_point_id);
@@ -214,11 +227,12 @@ class GraphCalculation {
           console.log(
             "始点間距離計測(D)",
             terminal_point,
-            this.graph_container.graph.get(terminal_point_id),
+            ol,
+            copyObject(this.graph_container.graph.get(terminal_point_id)),
             pos1,
-            this.graph_container.graph.get(pos1_id),
+            copyObject(this.graph_container.graph.get(pos1_id)),
             pos2,
-            this.graph_container.graph.get(pos2_id),
+            copyObject(this.graph_container.graph.get(pos2_id)),
             count
           );
 
