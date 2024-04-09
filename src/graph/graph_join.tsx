@@ -21,13 +21,17 @@ class GraphPathJoin {
     // graph_optimization.processed_path.path.get(1).
   }
 
-  getJoinCoordinate = (join_route: Array<number>, process_path: ProcessPath): { order: Array<string>; coordinates: Map<string, TypePosition> } => {
+  getJoinCoordinate = (
+    join_route: Array<number>,
+    process_path: ProcessPath
+  ): { order: Array<string>; coordinates: Map<string, TypePosition>; joint_index: Array<number> } => {
     if (join_route.length == 0) {
-      return { order: [], coordinates: new Map() };
+      return { order: [], coordinates: new Map(), joint_index: [] };
     }
 
     let join_order: Array<string> = [];
     const join_coordinates: Map<string, TypePosition> = new Map();
+    const joint_index: Array<number> = [];
 
     const path0 = process_path.path.get(join_route[0]);
     join_order = join_order.concat(path0.pos_order);
@@ -51,6 +55,8 @@ class GraphPathJoin {
       }
 
       let c_order_1 = c_order.filter((element, index) => index > 0);
+
+      joint_index.push(join_order.length - 1);
       join_order = join_order.concat(c_order_1);
 
       for (let c_key of current_path.coordinates.keys()) {
@@ -58,7 +64,7 @@ class GraphPathJoin {
       }
     }
 
-    return { order: join_order, coordinates: join_coordinates };
+    return { order: join_order, coordinates: join_coordinates, joint_index: joint_index };
   };
 
   //二次元配列の接続状況を返す。重複しないように接続状況を処理する
