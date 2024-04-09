@@ -199,7 +199,7 @@ class GraphCalculation {
         continue;
       }
 
-      for (let k = 1; k < path.pos_order.length; k++) {
+      for (let k = 2; k < path.pos_order.length - 1; k++) {
         const pos1_id = path.pos_order[k - 1];
         const pos2_id = path.pos_order[k];
         const pos1 = path.coordinates.get(pos1_id);
