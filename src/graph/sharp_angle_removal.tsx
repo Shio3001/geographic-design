@@ -28,17 +28,19 @@ class SharpAngleRemoval {
     );
   }
 
-  process_sharp_angle_removal = (join: { order: Array<string>; coordinates: Map<string, TypePosition> }) => {
-    for (let i = 2; i < join.order.length; i++) {
-      const c0_id = join.order[i - 2];
-      const c1_id = join.order[i - 1];
-      const c2_id = join.order[i];
+  process_sharp_angle_removal = (join: { order: Array<string>; coordinates: Map<string, TypePosition>; joint_index: Array<number> }) => {
+    for (let i = 0; i < join.joint_index.length; i++) {
+      const joint_index = join.joint_index[i];
+      const c0_id = join.order[joint_index - 1];
+      const c1_id = join.order[joint_index];
+      const c2_id = join.order[joint_index + 1];
       const c0 = join.coordinates.get(c0_id);
       const c1 = join.coordinates.get(c1_id);
       const c2 = join.coordinates.get(c2_id);
       const c_angle = caclcAngleByPosition(c1, c0, c2);
 
       if (c_angle < radian90 / 2) {
+        console.log("sharp_angle_removal_hold -sharp_angle_removal_hold -process_sharp_angle_removal", c_angle, radian90, radian90 / 2, c0_id, c1_id, c2_id);
         return 0;
       }
     }
@@ -90,6 +92,8 @@ class SharpAngleRemoval {
         this.process_sharp_angle_removal_paths(outside_node_id, inside_node_id);
       }
     }
+
+    return this.graph_route;
     // const join_grah_paths = graph_path_join.joinContinuity(join_routes, grah_paths);
   };
 }

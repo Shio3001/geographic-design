@@ -64,7 +64,7 @@ class ParserRailroadSection {
 
         if (sharp_angle_removal_flag) {
           const sharp_angle_removal = new SharpAngleRemoval(graph_route, grah_paths);
-          sharp_angle_removal.sharp_angle_removal_hold();
+          graph_route = sharp_angle_removal.sharp_angle_removal_hold();
         }
         const graph_close_path_process = new GraphClosedPath();
         branch1_flag = graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route);
