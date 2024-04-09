@@ -1,6 +1,6 @@
 import EditData from "../component/ctrl_dataflow/edit_data/edit_data";
 import LayerData from "../component/ctrl_dataflow/edit_data/layer_data";
-import { TypeGISInfo, TypeJsonCoordinates } from "../gis_scipt/route_type";
+import { TypeGISInfo, TypeJsonCoordinates, TypePosition } from "../gis_scipt/route_type";
 import { searchGisConditional, getGeometry } from "../gis_scipt/gis_unique_data";
 
 import SvgKit from "../parser/sgml_kit/svg_kit/svg_kit";
@@ -20,6 +20,46 @@ class GraphPathJoin {
   constructor() {
     // graph_optimization.processed_path.path.get(1).
   }
+
+  getJoinCoordinate = (join_route: Array<number>, process_path: ProcessPath): { order: Array<string>; coordinates: Map<string, TypePosition> } => {
+    if (join_route.length == 0) {
+      return { order: [], coordinates: new Map() };
+    }
+
+    let join_order: Array<string> = [];
+    const join_coordinates: Map<string, TypePosition> = new Map();
+
+    const path0 = process_path.path.get(join_route[0]);
+    join_order = join_order.concat(path0.pos_order);
+
+    for (let c_key of path0.coordinates.keys()) {
+      join_coordinates.set(c_key, path0.coordinates.get(c_key));
+    }
+
+    for (let route_index = 1; route_index < join_route.length; route_index++) {
+      const route_id = join_route[route_index];
+      const current_path = process_path.path.get(route_id);
+      let c_order = [...current_path.pos_order];
+
+      const join_flag = process_path.getJoinPathCoordinateFlag(join_order, c_order);
+
+      if (join_flag[0] == 1) {
+        join_order = join_order.reverse();
+      }
+      if (join_flag[1] == 1) {
+        c_order = c_order.reverse();
+      }
+
+      let c_order_1 = c_order.filter((element, index) => index > 0);
+      join_order = join_order.concat(c_order_1);
+
+      for (let c_key of current_path.coordinates.keys()) {
+        join_coordinates.set(c_key, current_path.coordinates.get(c_key));
+      }
+    }
+
+    return { order: join_order, coordinates: join_coordinates };
+  };
 
   //二次元配列の接続状況を返す。重複しないように接続状況を処理する
   //一次限目：二次限目の列挙
