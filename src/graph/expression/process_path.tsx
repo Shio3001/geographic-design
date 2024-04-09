@@ -1,4 +1,6 @@
 import GraphCoordinateExpression from "./coordinate_expression";
+import { TypeGISInfo, TypeJsonCoordinates, TypePosition } from "../../gis_scipt/route_type";
+
 import * as _ from "lodash"; // lodashをインポート
 
 class ProcessPath {
@@ -8,9 +10,89 @@ class ProcessPath {
     this.path = new Map();
   }
 
+  getJoinPathCoordinateFlag = (coordinate_order1: Array<string>, coordinate_order2: Array<string>) => {
+    if (coordinate_order1.length < 2) {
+      return [-1, -1];
+    }
+    if (coordinate_order2.length < 2) {
+      return [-1, -1];
+    }
+
+    const getPath1FirstNodeId = () => {
+      return coordinate_order1[0];
+    };
+    const getPath1LastNodeId = () => {
+      return coordinate_order1[coordinate_order1.length - 1];
+    };
+    const getPath2FirstNodeId = () => {
+      return coordinate_order2[0];
+    };
+    const getPath2LastNodeId = () => {
+      return coordinate_order2[coordinate_order1.length - 1];
+    };
+
+    // 継 継
+    if (getPath1LastNodeId() == getPath2FirstNodeId()) {
+      console.log("includePathFunction 継 継");
+      return [0, 0];
+    }
+
+    // 継 反
+    else if (getPath1LastNodeId() == getPath2LastNodeId()) {
+      console.log("includePathFunction 継 反");
+      return [0, 1];
+    }
+
+    // 反 継
+    else if (getPath1FirstNodeId() == getPath2FirstNodeId()) {
+      console.log("includePathFunction 反 継");
+      return [1, 0];
+    }
+
+    // 反 反
+    else if (getPath1FirstNodeId() == getPath2LastNodeId()) {
+      console.log("includePathFunction 反 反");
+      return [1, 1];
+    } else {
+      return [-1, -1];
+    }
+  };
+  getJoinPathFlag = (path_id_1: number, path_id_2: number) => {
+    const path_1 = this.path.get(path_id_1);
+    const path_2 = this.path.get(path_id_2);
+    console.log("includePathFunction 接続(FA)", path_id_1, path_id_2, _.cloneDeep(this.path), _.cloneDeep(path_1), _.cloneDeep(path_2));
+
+    // 継 継
+    if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
+      console.log("includePathFunction 継 継");
+      return [0, 0];
+    }
+
+    // 継 反
+    else if (path_1.getLastNodeId() == path_2.getLastNodeId()) {
+      console.log("includePathFunction 継 反");
+      return [0, 1];
+    }
+
+    // 反 継
+    else if (path_1.getFirstNodeId() == path_2.getFirstNodeId()) {
+      console.log("includePathFunction 反 継");
+      return [1, 0];
+    }
+
+    // 反 反
+    else if (path_1.getFirstNodeId() == path_2.getLastNodeId()) {
+      console.log("includePathFunction 反 反");
+      return [1, 1];
+    } else {
+      return [-1, -1];
+    }
+  };
+
   joinPath = (path_id_1: number, path_id_2: number) => {
     const path_1 = this.path.get(path_id_1);
     const path_2 = this.path.get(path_id_2);
+    console.log("includePathFunction 接続(A)", path_id_1, path_id_2, _.cloneDeep(this.path), _.cloneDeep(path_1), _.cloneDeep(path_2));
 
     // 継 継
     if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
@@ -37,7 +119,7 @@ class ProcessPath {
     } else {
       return false;
     }
-    console.log("includePathFunction 接続", _.cloneDeep(path_1), _.cloneDeep(path_2));
+    console.log("includePathFunction 接続(B)", _.cloneDeep(path_1), _.cloneDeep(path_2), _.cloneDeep(this.path));
 
     path_1.includePathOrder(path_2, 0);
 
