@@ -131,7 +131,6 @@ class GraphOptimization {
           continue;
         }
 
-        const link_node = graph_extraction_container.graph.get(link_node_id);
         const link_contacts = graph_next.getPathContacts(current_id, link_node_id);
 
         for (let link_contact of link_contacts) {
