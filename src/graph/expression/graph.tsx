@@ -8,7 +8,10 @@ import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
 import { caclcAngleByPosition, radian90 } from "../../mathematical/dimension_two";
 
 import GraphNode from "./graph_node";
+import ProcessPath from "./process_path";
+import Route from "./route";
 import { copyObject } from "./../../definition";
+import { indexOf } from "lodash";
 
 class Graph {
   graph: Map<string, GraphNode>;
@@ -142,6 +145,10 @@ class Graph {
     return t_id;
   };
 
+  deleteLinkNode = (node_id: string, old_id: string) => {
+    const node = this.graph.get(node_id);
+    node.bidirectional_link_id_list = node.bidirectional_link_id_list.filter((element, index) => element != old_id);
+  };
   replaceLinkNode = (node_id: string, old_id: string, new_id: string) => {
     const node = this.graph.get(node_id);
 
@@ -150,6 +157,48 @@ class Graph {
         node.bidirectional_link_id_list[i] = new_id;
       }
     }
+  };
+  organizeBranch2s = (graph_next: Route, processed_path: ProcessPath) => {
+    let organize = [];
+
+    let branch2_list = this.getPointID(2);
+    while (branch2_list.length > 0) {
+      const branch2_ndoe_id = branch2_list[0];
+      const branch2_ndoe = this.graph.get(branch2_ndoe_id);
+      const left_link_id = branch2_ndoe.bidirectional_link_id_list[0];
+      const right_link_id = branch2_ndoe.bidirectional_link_id_list[1];
+      const left_path = graph_next.getMinPathContact(branch2_ndoe_id, left_link_id);
+      const right_path = graph_next.getMinPathContact(branch2_ndoe_id, right_link_id);
+
+      processed_path.joinPath(left_path.coordinate_expression_id, right_path.coordinate_expression_id);
+
+      this.organizeBranch2(branch2_ndoe_id, left_link_id, right_link_id);
+
+      organize.push(branch2_ndoe_id);
+      branch2_list = this.getPointID(2);
+    }
+
+    return organize;
+  };
+  organizeBranch2 = (branch2_id: string, left_link_id: string, right_link_id: string) => {
+    const left_node = this.graph.get(left_link_id);
+    const right_node = this.graph.get(right_link_id);
+
+    const right_copy_node = right_node.copyGraphNode();
+    const right_copy_node_id = right_copy_node + "r";
+    right_copy_node.node_id = right_copy_node_id;
+    this.graph.set(right_copy_node_id, right_copy_node);
+
+    //(右) 対へのlinkをdelete
+    this.deleteLinkNode(right_link_id, branch2_id);
+
+    //(右) 対へのlinkを左に置き換え
+    this.replaceLinkNode(right_copy_node_id, branch2_id, left_link_id);
+
+    //(左) 対へのリンクを右Cに置き換え
+    this.replaceLinkNode(left_link_id, branch2_id, right_copy_node_id);
+
+    this.graph.delete(branch2_id);
   };
 
   //even_point_idで指定しているノードの接続先のうち、extraction_link_id_listのみと共に分離する

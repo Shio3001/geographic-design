@@ -20,6 +20,15 @@ class GraphNode {
     this.bidirectional_link_id_list = [];
   }
 
+  copyGraphNode = () => {
+    const cp_node = new GraphNode();
+    cp_node.x = this.x;
+    cp_node.y = this.y;
+    cp_node.node_id = this.node_id;
+    cp_node.bidirectional_link_id_list = [...this.bidirectional_link_id_list];
+    return cp_node;
+  };
+
   pushBidirectionalLinkNode = (link_node_id: string) => {
     this.bidirectional_link_id_list.push(link_node_id);
   };
