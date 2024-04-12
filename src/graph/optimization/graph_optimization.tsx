@@ -100,6 +100,10 @@ class GraphOptimization {
   extractionDijkstra = (graph_extraction_container: Graph, graph_next: Route, graph_route: Route, fixed_node_id: string) => {
     const fixed_node = graph_extraction_container.graph.get(fixed_node_id);
 
+    // if (fixed_node.bidirectional_link_id_list.length == 2) {
+    //   return graph_route;
+    // }
+
     const recursion = (trace_node: Array<string>, trace_route: Array<number>, distance: number) => {
       const recursion_node_id = trace_node[trace_node.length - 1];
       const recursion_node = graph_extraction_container.graph.get(recursion_node_id);
@@ -114,7 +118,6 @@ class GraphOptimization {
 
             const cp_trace_route = [...trace_route];
             cp_trace_route.push(first_route_path.coordinate_expression_id);
-            const first_new_path = new PathContact();
 
             recursion(cp_trace_node, cp_trace_route, first_route_path.distance);
           }
@@ -124,14 +127,17 @@ class GraphOptimization {
 
       const last_trace_node = trace_node[trace_node.length - 2];
 
+      // if (recursion_node.bidirectional_link_id_list.length != 2) {
       const new_path = new PathContact();
       new_path.setCoordinateExpressionId(-3);
       new_path.setDistance(distance);
       new_path.pushRoutes(trace_route);
       graph_route.pushSemiRoute(fixed_node_id, recursion_node_id, new_path);
+      // }
 
       for (let b_link of b_link_list) {
         const current_route_paths = graph_next.getPathContacts(recursion_node_id, b_link);
+
         for (let current_route_path of current_route_paths) {
           if (trace_route.includes(current_route_path.coordinate_expression_id)) {
             continue;

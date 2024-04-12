@@ -2,7 +2,7 @@ import { TypePosition } from "../gis_scipt/route_type";
 
 // https://youta-blog.com/angle-and-rotation-direction/#nbsp
 // 三点から角度(ラジアン)を計算
-export const caclcAngleByPosition = (A: TypePosition, B: TypePosition, C: TypePosition) => {
+export const calcAngleByPosition = (A: TypePosition, B: TypePosition, C: TypePosition) => {
   const calc_top = (B.x - A.x) * (C.x - A.x) + (B.y - A.y) * (C.y - A.y);
   const calc_button1 = calcPythagorean(A, B);
   const calc_button2 = calcPythagorean(A, C);
@@ -35,6 +35,6 @@ export const calcCenterGravity = (A: TypePosition, B: TypePosition, C: TypePosit
 
   return { x: cg_x, y: cg_Y };
 };
-export const radian90 = caclcAngleByPosition({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 });
+export const radian90 = calcAngleByPosition({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 });
 
-console.log("test calc abp", caclcAngleByPosition({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }));
+console.log("test calc abp", calcAngleByPosition({ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 0, y: 1 }));

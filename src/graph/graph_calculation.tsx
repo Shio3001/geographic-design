@@ -10,7 +10,7 @@ import GraphNode from "./expression/graph_node";
 import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
-import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity } from "../mathematical/dimension_two";
+import { calcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity } from "../mathematical/dimension_two";
 import GraphOptimization from "./optimization/graph_optimization";
 import ProcessPath from "./expression/process_path";
 import { copyObject } from "../definition";
@@ -114,6 +114,14 @@ class GraphCalculation {
         return fgp2;
       };
 
+      const getBranch2OtherList = () => {
+        const gp2 = gec.getPointID(2);
+        const fgp2 = gp2.filter(
+          (element, index) => gec.graph.get(element).bidirectional_link_id_list[0] != gec.graph.get(element).bidirectional_link_id_list[1]
+        );
+        return fgp2;
+      };
+
       let branch2_list = getBranch2List();
 
       while (branch2_list.length > 0) {
@@ -132,15 +140,19 @@ class GraphCalculation {
         this.graph_container.deleteLinkNode(branch2_link_id, branch2_id);
         this.graph_container.replaceLinkNode(branch2_id, branch2_link_id, new_id);
 
-        this.node_path = new GraphCalculationNodePath();
-        this.processed_path = new ProcessPath();
-        this.bfs_que = [];
-        this.calcTerminationPoint();
+        this.calcReStart();
 
         gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
         branch2_list = getBranch2List();
       }
     }
+  };
+
+  calcReStart = () => {
+    this.node_path = new GraphCalculationNodePath();
+    this.processed_path = new ProcessPath();
+    this.bfs_que = [];
+    this.calcTerminationPoint();
   };
 
   calcTerminationPoint = () => {

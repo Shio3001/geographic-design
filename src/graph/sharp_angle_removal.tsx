@@ -8,15 +8,17 @@ import { copyObject } from "./../definition";
 
 import { TypePosition } from "./../gis_scipt/route_type";
 import * as _ from "lodash"; // lodashをインポート
-import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity, radian90 } from "../mathematical/dimension_two";
+import { calcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity, radian90 } from "../mathematical/dimension_two";
 
 class SharpAngleRemoval {
   graph_route: Route;
   grah_paths: ProcessPath;
+  graph_container: Graph;
 
-  constructor(graph_route: Route, grah_paths: ProcessPath) {
+  constructor(graph_route: Route, grah_paths: ProcessPath, graph_container: Graph) {
     this.graph_route = graph_route;
     this.grah_paths = grah_paths;
+    this.graph_container = graph_container;
     console.log(
       "sharp_angle_removal_hold -constructor",
       graph_route,
@@ -29,17 +31,27 @@ class SharpAngleRemoval {
   }
 
   process_sharp_angle_removal = (join: { order: Array<string>; coordinates: Map<string, TypePosition>; joint_index: Array<number> }) => {
+    console.log("sharp_angle_removal_hold -process_sharp_angle_removal", join.joint_index, join.order, this.graph_container.graph.keys());
+
     for (let i = 0; i < join.joint_index.length; i++) {
       const joint_index = join.joint_index[i];
       const c0_id = join.order[joint_index - 1];
       const c1_id = join.order[joint_index];
       const c2_id = join.order[joint_index + 1];
+
+      console.log(
+        "sharp_angle_removal_hold -joinorder",
+        c1_id,
+        this.graph_container.graph.get(c1_id),
+        this.graph_container.graph.get(c1_id).bidirectional_link_id_list
+      );
+
       const c0 = join.coordinates.get(c0_id);
       const c1 = join.coordinates.get(c1_id);
       const c2 = join.coordinates.get(c2_id);
-      const c_angle = caclcAngleByPosition(c1, c0, c2);
+      const c_angle = calcAngleByPosition(c1, c0, c2);
 
-      if (c_angle < radian90 / 2) {
+      if (c_angle < radian90) {
         console.log("sharp_angle_removal_hold -sharp_angle_removal_hold -process_sharp_angle_removal", c_angle, radian90, radian90 / 2, c0_id, c1_id, c2_id);
         return 0;
       }
