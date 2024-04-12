@@ -11,7 +11,7 @@ import Graph from "./expression/graph";
 import GraphCoordinateExpression from "./expression/coordinate_expression";
 import GraphCalculationNodePath from "./graph_calculation_node_path";
 import { caclcAngleByPosition, calcPythagorean, calcPythagoreanSquare, calcCenterGravity } from "../mathematical/dimension_two";
-
+import GraphOptimization from "./optimization/graph_optimization";
 import ProcessPath from "./expression/process_path";
 import { copyObject } from "../definition";
 
@@ -100,6 +100,35 @@ class GraphCalculation {
         this.processed_path = new ProcessPath();
         this.bfs_que = [];
         this.calcTerminationPoint();
+      }
+    }
+    if (true) {
+      const graph_optimization = new GraphOptimization();
+      let gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
+      let branch2_list = gec.getPointID(2);
+      while (branch2_list.length > 0) {
+        const branch2_id = branch2_list[0];
+        const branch2_link_id = gec.graph.get(branch2_id).bidirectional_link_id_list[0];
+
+        const brnach_2_g_node = this.graph_container.graph.get(branch2_id);
+        const brnach_2_g_link_node = this.graph_container.graph.get(branch2_link_id);
+        const brnach_2_g_link_copy_node = brnach_2_g_link_node.copyGraphNode();
+        const new_id = brnach_2_g_link_copy_node.node_id + "d";
+
+        brnach_2_g_link_copy_node.node_id = new_id;
+        brnach_2_g_link_copy_node.bidirectional_link_id_list = [branch2_id];
+
+        this.graph_container.graph.set(new_id, brnach_2_g_link_copy_node);
+        this.graph_container.deleteLinkNode(branch2_link_id, branch2_id);
+        this.graph_container.replaceLinkNode(branch2_id, branch2_link_id, new_id);
+
+        this.node_path = new GraphCalculationNodePath();
+        this.processed_path = new ProcessPath();
+        this.bfs_que = [];
+        this.calcTerminationPoint();
+
+        gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
+        branch2_list = gec.getPointID(2);
       }
     }
   };
