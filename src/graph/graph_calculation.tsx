@@ -105,7 +105,17 @@ class GraphCalculation {
     if (true) {
       const graph_optimization = new GraphOptimization();
       let gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
-      let branch2_list = gec.getPointID(2);
+
+      const getBranch2List = () => {
+        const gp2 = gec.getPointID(2);
+        const fgp2 = gp2.filter(
+          (element, index) => gec.graph.get(element).bidirectional_link_id_list[0] == gec.graph.get(element).bidirectional_link_id_list[1]
+        );
+        return fgp2;
+      };
+
+      let branch2_list = getBranch2List();
+
       while (branch2_list.length > 0) {
         const branch2_id = branch2_list[0];
         const branch2_link_id = gec.graph.get(branch2_id).bidirectional_link_id_list[0];
@@ -128,7 +138,7 @@ class GraphCalculation {
         this.calcTerminationPoint();
 
         gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
-        branch2_list = gec.getPointID(2);
+        branch2_list = getBranch2List();
       }
     }
   };
