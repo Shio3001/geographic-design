@@ -51,22 +51,8 @@ class ParserRailroadSection {
     let grah_paths = grah_calc.getProcessedPath();
 
     const graph_optimization = new GraphOptimization();
-    graph_optimization.generateGraphExtraction(this.graph, grah_paths);
 
-    const getGec = () => {
-      let count = 1;
-      let gec;
-      while (count > 0) {
-        gec = graph_optimization.generateGraphExtraction(this.graph, grah_paths);
-        const graph_next = graph_optimization.generateNext(grah_paths);
-        const target = gec.organizeBranch2s(graph_next, grah_paths);
-        count = target.length;
-      }
-
-      return gec;
-    };
-
-    const graph_extraction_container = getGec();
+    const graph_extraction_container = graph_optimization.generateGraphExtraction(this.graph, grah_paths);
 
     if (path_optimize_flag) {
       let branch1_count = 10;
