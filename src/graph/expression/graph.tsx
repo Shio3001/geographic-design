@@ -5,7 +5,7 @@ import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_da
 
 import SvgKit from "../../parser/sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../../parser/sgml_kit/svg_kit/svg_node";
-import { caclcAngleByPosition, radian90 } from "../../mathematical/dimension_two";
+import { calcAngleByPosition, radian90 } from "../../mathematical/dimension_two";
 
 import GraphNode from "./graph_node";
 import ProcessPath from "./process_path";
@@ -158,7 +158,6 @@ class Graph {
       }
     }
   };
-  organizeBranch2s = () => {};
 
   //even_point_idで指定しているノードの接続先のうち、extraction_link_id_listのみと共に分離する
   separationLinkNode = (even_point_id: string, extraction_link_id_list: Array<string>, symbol: string) => {
@@ -203,7 +202,7 @@ class Graph {
           const b_link_in_id = b_link_list[j];
           const b_link_in_node = this.graph.get(b_link_in_id);
 
-          const c_radian = caclcAngleByPosition(
+          const c_radian = calcAngleByPosition(
             { x: even_point_node.x, y: even_point_node.y },
             { x: b_link_out_node.x, y: b_link_out_node.y },
             { x: b_link_in_node.x, y: b_link_in_node.y }
@@ -231,7 +230,7 @@ class Graph {
       }
       const b_link_out_1 = this.graph.get(another_extraction_id_list[0]);
       const b_link_out_2 = this.graph.get(another_extraction_id_list[1]);
-      const c_radian = caclcAngleByPosition(
+      const c_radian = calcAngleByPosition(
         { x: even_point_node.x, y: even_point_node.y },
         { x: b_link_out_1.x, y: b_link_out_1.y },
         { x: b_link_out_2.x, y: b_link_out_2.y }

@@ -47,6 +47,8 @@ class GraphPathJoin {
 
       const join_flag = process_path.getJoinPathCoordinateFlag(join_order, c_order);
 
+      console.log("join_flag", join_flag, route_index, join_route[0], route_id);
+
       if (join_flag[0] == 1) {
         join_order = join_order.reverse();
       }
@@ -63,6 +65,8 @@ class GraphPathJoin {
         join_coordinates.set(c_key, current_path.coordinates.get(c_key));
       }
     }
+
+    console.log("getJoinCoordinate", joint_index);
 
     return { order: join_order, coordinates: join_coordinates, joint_index: joint_index };
   };
