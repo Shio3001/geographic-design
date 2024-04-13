@@ -61,7 +61,7 @@ class ProcessPath {
   getJoinPathFlag = (path_id_1: number, path_id_2: number) => {
     const path_1 = this.path.get(path_id_1);
     const path_2 = this.path.get(path_id_2);
-    console.log("includePathFunction 接続(FA)", path_id_1, path_id_2, _.cloneDeep(this.path), _.cloneDeep(path_1), _.cloneDeep(path_2));
+    console.log("includePathFunction 接続(FA)", path_id_1, path_id_2);
 
     // 継 継
     if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
@@ -93,7 +93,7 @@ class ProcessPath {
   joinPath = (path_id_1: number, path_id_2: number) => {
     const path_1 = this.path.get(path_id_1);
     const path_2 = this.path.get(path_id_2);
-    console.log("includePathFunction 接続(A)", path_id_1, path_id_2, _.cloneDeep(this.path), _.cloneDeep(path_1), _.cloneDeep(path_2));
+    console.log("includePathFunction 接続(A)", path_id_1, path_id_2);
 
     // 継 継
     if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
@@ -120,7 +120,7 @@ class ProcessPath {
     } else {
       return false;
     }
-    console.log("includePathFunction 接続(B)", _.cloneDeep(path_1), _.cloneDeep(path_2), _.cloneDeep(this.path));
+    console.log("includePathFunction 接続(B)");
 
     path_1.includePathOrder(path_2, 0);
 

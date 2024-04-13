@@ -43,14 +43,9 @@ class Parser {
     const unit_type = this.gis_info.id_type[unit_id];
 
     const graph_coordinate_expression = this.switchParserLayer(layer_uuid);
-    this.graph_coordinate_list = this.graph_coordinate_list.concat(
-      graph_coordinate_expression
-    );
-    console.log(
-      "parserLayer",
-      this.graph_coordinate_list,
-      graph_coordinate_expression
-    );
+
+    this.graph_coordinate_list = this.graph_coordinate_list.concat(graph_coordinate_expression);
+    console.log("parserLayer", this.graph_coordinate_list, graph_coordinate_expression);
   };
 
   toSVGPoint = (gce: GraphCoordinateExpression) => {
@@ -134,12 +129,8 @@ class Parser {
       x: right_bottom.x - left_top.x,
       y: right_bottom.y - left_top.y,
     };
-    const reduction_rate_x = BigNumber(this.edit_data.width)
-      .div(BigNumber(new_right_bottom.x))
-      .toNumber();
-    const reduction_rate_y = BigNumber(this.edit_data.height)
-      .div(BigNumber(new_right_bottom.y))
-      .toNumber();
+    const reduction_rate_x = BigNumber(this.edit_data.width).div(BigNumber(new_right_bottom.x)).toNumber();
+    const reduction_rate_y = BigNumber(this.edit_data.height).div(BigNumber(new_right_bottom.y)).toNumber();
     const reduction_rate_min = Math.min(reduction_rate_x, reduction_rate_y);
 
     console.log(
@@ -169,12 +160,8 @@ class Parser {
       const pos_order = gce.pos_order;
 
       for (let coordinate of coordinates.values()) {
-        coordinate.x = BigNumber(coordinate.x)
-          .dp(this.edit_data.decimal_place)
-          .toNumber();
-        coordinate.y = BigNumber(coordinate.y)
-          .dp(this.edit_data.decimal_place)
-          .toNumber();
+        coordinate.x = BigNumber(coordinate.x).dp(this.edit_data.decimal_place).toNumber();
+        coordinate.y = BigNumber(coordinate.y).dp(this.edit_data.decimal_place).toNumber();
       }
     }
   };
@@ -189,9 +176,7 @@ class Parser {
       for (let coordinate of coordinates.values()) {
         // const coordinate = coordinates.get(pos_order[j]);
 
-        coordinate.y = BigNumber(this.edit_data.height)
-          .minus(BigNumber(coordinate.y))
-          .toNumber();
+        coordinate.y = BigNumber(this.edit_data.height).minus(BigNumber(coordinate.y)).toNumber();
       }
     }
   };
@@ -204,12 +189,8 @@ class Parser {
       const pos_order = gce.pos_order;
 
       for (let coordinate of coordinates.values()) {
-        coordinate.x = BigNumber(coordinate.x)
-          .times(BigNumber(reduction_rate))
-          .toNumber();
-        coordinate.y = BigNumber(coordinate.y)
-          .times(BigNumber(reduction_rate))
-          .toNumber();
+        coordinate.x = BigNumber(coordinate.x).times(BigNumber(reduction_rate)).toNumber();
+        coordinate.y = BigNumber(coordinate.y).times(BigNumber(reduction_rate)).toNumber();
       }
     }
   };
@@ -237,7 +218,6 @@ class Parser {
       const pos_order = gce.pos_order;
 
       for (let coordinate of coordinates.values()) {
-
         if (x_min > coordinate.x) {
           x_min = coordinate.x;
         }
@@ -259,7 +239,6 @@ class Parser {
       const pos_order = gce.pos_order;
 
       for (let coordinate of coordinates.values()) {
-
         if (x_max < coordinate.x) {
           x_max = coordinate.x;
         }
@@ -282,26 +261,14 @@ class Parser {
 
     switch (unit_type) {
       case "RailroadSection": {
-        const paraser_railroad_section = new ParserRailroadSection(
-          this.edit_data,
-          this.gis_info,
-          layer_uuid,
-          unit_id,
-          unit_type
-        );
+        const paraser_railroad_section = new ParserRailroadSection(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
         paraser_railroad_section.coordinateAggregation();
         const paths = paraser_railroad_section.generatePath();
 
         return paths;
       }
       case "Station": {
-        const parser_station_section = new ParserStation(
-          this.edit_data,
-          this.gis_info,
-          layer_uuid,
-          unit_id,
-          unit_type
-        );
+        const parser_station_section = new ParserStation(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
         parser_station_section.coordinateAggregation();
         const points = parser_station_section.generatePoint();
         return points;

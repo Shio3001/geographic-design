@@ -95,15 +95,8 @@ class GraphOptimization {
 
     return graph_extraction_container;
   };
-
   //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
   extractionDijkstra = (graph_extraction_container: Graph, graph_next: Route, graph_route: Route, fixed_node_id: string) => {
-    const fixed_node = graph_extraction_container.graph.get(fixed_node_id);
-
-    // if (fixed_node.bidirectional_link_id_list.length == 2) {
-    //   return graph_route;
-    // }
-
     const recursion = (trace_node: Array<string>, trace_route: Array<number>, distance: number) => {
       const recursion_node_id = trace_node[trace_node.length - 1];
       const recursion_node = graph_extraction_container.graph.get(recursion_node_id);
@@ -113,13 +106,16 @@ class GraphOptimization {
         for (let b_link of b_link_list) {
           const first_route_paths = graph_next.getPathContacts(recursion_node_id, b_link);
           for (let first_route_path of first_route_paths) {
-            const cp_trace_node = [...trace_node];
+            const cp_trace_node = trace_node;
             cp_trace_node.push(b_link);
 
-            const cp_trace_route = [...trace_route];
+            const cp_trace_route = trace_route;
             cp_trace_route.push(first_route_path.coordinate_expression_id);
 
             recursion(cp_trace_node, cp_trace_route, first_route_path.distance);
+
+            cp_trace_node.pop();
+            cp_trace_route.pop();
           }
         }
         return;
@@ -143,14 +139,17 @@ class GraphOptimization {
             continue;
           }
 
-          const cp_trace_node = [...trace_node];
+          let cp_trace_node = trace_node;
           cp_trace_node.push(b_link);
 
-          const cp_trace_route = [...trace_route];
+          let cp_trace_route = trace_route;
           cp_trace_route.push(current_route_path.coordinate_expression_id);
 
           const new_distance = distance + current_route_path.distance;
           recursion(cp_trace_node, cp_trace_route, new_distance);
+
+          cp_trace_node.pop();
+          cp_trace_route.pop();
         }
       }
     };
