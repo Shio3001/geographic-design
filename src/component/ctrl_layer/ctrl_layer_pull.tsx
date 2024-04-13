@@ -49,16 +49,16 @@ const PullRapperRailroadSection = (props: PullRapper) => {
       flowUpUnitLine(0);
     }
     if (!layer.layer_infomation["path_join"]) {
-      flowUpPathJoin(true);
+      flowUpPathJoin(false);
     }
     if (!layer.layer_infomation["path_optimize"]) {
       flowUpPathOptimize(true);
     }
     if (!layer.layer_infomation["sharp_angle_removal"]) {
-      flowUpSharpAngleRemoval(true);
+      flowUpSharpAngleRemoval(false);
     }
     if (!layer.layer_infomation["original_data_coordinate_correction"]) {
-      flowUpOriginalDataCoordinateCorrection(true);
+      flowUpOriginalDataCoordinateCorrection(false);
     }
     if (!layer.layer_infomation["path_optimize_closed_type"]) {
       flowUpPathOptimizeClosedPathType(2);
