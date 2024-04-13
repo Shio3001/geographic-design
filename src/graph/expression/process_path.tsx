@@ -28,7 +28,7 @@ class ProcessPath {
       return coordinate_order2[0];
     };
     const getPath2LastNodeId = () => {
-      return coordinate_order2[coordinate_order1.length - 1];
+      return coordinate_order2[coordinate_order2.length - 1];
     };
 
     // 継 継
@@ -54,6 +54,7 @@ class ProcessPath {
       console.log("includePathFunction 反 反");
       return [1, 1];
     } else {
+      console.log("includePathFunction X X ", getPath1FirstNodeId(), getPath1LastNodeId(), getPath2FirstNodeId(), getPath2LastNodeId());
       return [-1, -1];
     }
   };

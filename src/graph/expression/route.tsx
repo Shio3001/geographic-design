@@ -97,6 +97,52 @@ class Route {
     }
     return true;
   };
+
+  getSortPathContact = (sortMode: boolean, node_id_1: string, node_id_2: string) => {
+    //sortMode
+    //  falseになると昇順ソート
+    //  trueにすると降順ソート
+
+    if (!this.route.has(node_id_1)) {
+      return [];
+    }
+
+    const node_1 = this.route.get(node_id_1);
+    if (!node_1.has(node_id_2)) {
+      return [];
+    }
+
+    let A: number;
+    let B: number;
+
+    const path_contacts = node_1.get(node_id_2);
+
+    if (sortMode) {
+      //降順ソート
+      A = -1;
+      B = 1;
+    } else {
+      //昇順ソート
+      A = 1;
+      B = -1;
+    }
+
+    path_contacts.sort(function (first, second) {
+      const Fn = first;
+      const Sn = second;
+      if (Fn.distance > Sn.distance) {
+        return A;
+      } else if (Fn.distance < Sn.distance) {
+        return B;
+      } else {
+        return 0;
+      }
+    });
+
+    console.log("getAllSortPathContact", path_contacts);
+    return path_contacts;
+  };
+
   getAllSortPathContact = (sortMode: boolean) => {
     //sortMode
     //  falseになると昇順ソート
