@@ -36,7 +36,7 @@ const CtrlGis = () => {
     console.log("[APPCTR] Update");
   }, [update]);
 
-  const rendering = () => {
+  const rendering = (file_output: boolean) => {
     const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
     worker.addEventListener(
       "message",
@@ -44,10 +44,17 @@ const CtrlGis = () => {
         console.log("Workerから受け取ったデータは: ", e.data);
         const svg = e.data;
         setPreview(svg);
+        worker.terminate();
+
+        if (file_output) {
+          AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+        }
       },
+
       false
     );
     worker.postMessage({ edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
+
     console.log("rendering");
 
     // const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
@@ -58,13 +65,14 @@ const CtrlGis = () => {
   };
 
   const flowUpRendering = () => {
-    rendering();
+    rendering(false);
     // const svg = rendering();
     // setPreview(svg);
     // console.log("svg", svg);
   };
 
   const flowUpOutputSVG = () => {
+    rendering(true);
     // const svg = rendering();
     // setPreview(svg);
     // AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
