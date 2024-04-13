@@ -15,77 +15,51 @@ import PathContact from "./expression/path_contact";
 import ProcessPath from "./expression/process_path";
 import Route from "./expression/route";
 import { copyObject } from "./../definition";
-
+import SharpAngleRemoval from "./sharp_angle_removal";
 class GraphClosedPath {
   keep_paths: Array<PathContact>;
-  constructor() {
+  sharp_angle_removal_flag: boolean;
+  constructor(sharp_angle_removal_flag: boolean) {
     this.keep_paths = [];
+    this.sharp_angle_removal_flag = sharp_angle_removal_flag;
   }
 
   selectionClosedPath = (
     path_contacts: Array<PathContact>,
-    longeast: boolean
+    longeast: boolean,
+    processed_path: ProcessPath,
+    graph_route: Route
   ): {
     closed: Array<PathContact>;
     keep: Array<PathContact>;
   } => {
-    const getLengthMax = () => {
-      let length_max = 0;
-      for (let path_contact of path_contacts) {
-        length_max = Math.max(path_contact.routes.length, length_max);
-      }
-      return length_max;
-    };
-    const getLengthMin = () => {
-      let length_min = Number.MAX_SAFE_INTEGER;
-      for (let path_contact of path_contacts) {
-        length_min = Math.min(path_contact.routes.length, length_min);
-      }
-      return length_min;
-    };
-    const getLongestPath = (): TypePathIndex => {
-      let distance_max_path = path_contacts[0];
-      let index = 0;
-      for (let i = 1; i < path_contacts.length; i++) {
-        if (distance_max_path.distance < path_contacts[i].distance) {
-          distance_max_path = path_contacts[i];
-          index = i;
-        }
-      }
-      return { path: distance_max_path, index: index };
-    };
-    const getShortestPath = (): TypePathIndex => {
-      let distance_min_path = path_contacts[0];
-      let index = 0;
-
-      for (let i = 1; i < path_contacts.length; i++) {
-        if (distance_min_path.distance > path_contacts[i].distance) {
-          distance_min_path = path_contacts[i];
-          index = i;
-        }
-      }
-      return { path: distance_min_path, index: index };
-    };
-
-    const getOtherPath = (target_path: TypePathIndex) => {
-      const result = path_contacts.filter((element, index) => index != target_path.index);
-      return result;
-    };
-
     if (path_contacts.length == 0) {
       console.log("delete_path_ids -path_contacts0", path_contacts);
       return { closed: [], keep: [] };
     }
+    const sort_paths = graph_route.getAllSortPathContact(longeast);
+    let keep_path = sort_paths[0];
 
-    const keep_path = longeast ? getLongestPath() : getShortestPath();
+    if (this.sharp_angle_removal_flag) {
+      for (let i = 0; i < sort_paths.length; i++) {
+        const c_path = sort_paths[i];
+        const sharp_angle_removal = new SharpAngleRemoval();
+        let p = sharp_angle_removal.hasProcessSharpAngleRemovalPath(c_path.routes, processed_path);
 
-    console.log("delete_path_ids -keep_path", keep_path);
+        if (!p) {
+          keep_path = c_path;
+          break;
+        }
+      }
+    }
 
-    return { closed: [], keep: [keep_path.path] };
+    console.log("delete_path_ids -keep_path", keep_path, sort_paths);
+
+    return { closed: [], keep: [keep_path] };
   };
 
   //最長距離優先(切り捨て破棄)
-  searchDeleteClosedPath = (long: boolean, graph_next: Route, graph_route: Route) => {
+  searchDeleteClosedPath = (long: boolean, graph_next: Route, graph_route: Route, processed_path: ProcessPath) => {
     // let delete_candidacy_path_ids: Array<PathContact> = [];
     let keep_path_ids: Array<PathContact> = [];
     const branch1 = graph_next.getBranch(1);
@@ -99,7 +73,7 @@ class GraphClosedPath {
       for (let j = i + 1; j < terminal_nodes.length; j++) {
         const j_id = terminal_nodes[j];
         const path_contacts = graph_route.getPathContacts(i_id, j_id);
-        const d = this.selectionClosedPath(path_contacts, long);
+        const d = this.selectionClosedPath(path_contacts, long, processed_path, graph_route);
         // delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
         keep_path_ids = keep_path_ids.concat(d.keep);
       }

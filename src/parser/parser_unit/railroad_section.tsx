@@ -61,12 +61,12 @@ class ParserRailroadSection {
         const graph_next = graph_optimization.generateNext(grah_paths);
         let graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
 
-        if (sharp_angle_removal_flag) {
-          const sharp_angle_removal = new SharpAngleRemoval(graph_route, grah_paths, this.graph);
-          graph_route = sharp_angle_removal.sharp_angle_removal_hold();
-        }
-        const graph_close_path_process = new GraphClosedPath();
-        const branch1_flag = graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route);
+        // if (sharp_angle_removal_flag) {
+        //   const sharp_angle_removal = new SharpAngleRemoval(graph_route, grah_paths, this.graph);
+        //   graph_route = sharp_angle_removal.sharpAngleRemovalHold();
+        // }
+        const graph_close_path_process = new GraphClosedPath(sharp_angle_removal_flag);
+        const branch1_flag = graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route, grah_paths);
 
         if (branch1_flag) {
           branch1_count--;
