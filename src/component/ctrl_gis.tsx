@@ -18,6 +18,7 @@ import { AppContext } from "./../app_context";
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
 import Parser from "./../parser/parser";
+// import ParserWebWorker from "./../parser/parser_webworker";
 
 const CtrlGis = () => {
   const [update, setUpdata] = useState<boolean>(false);
@@ -36,25 +37,38 @@ const CtrlGis = () => {
   }, [update]);
 
   const rendering = () => {
-    const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
-    parser.parser();
-    parser.scaling();
-    const svg = parser.toSVG();
-    return svg;
+    const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
+    worker.addEventListener(
+      "message",
+      (e) => {
+        console.log("Workerから受け取ったデータは: ", e.data);
+        const svg = e.data;
+        setPreview(svg);
+      },
+      false
+    );
+    worker.postMessage({ edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
+    console.log("rendering");
+
+    // const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+    // parser.parser();
+    // parser.scaling();
+    // const svg = parser.toSVG();
+    // return svg;
   };
 
   const flowUpRendering = () => {
-    const svg = rendering();
-    setPreview(svg);
-    console.log("svg", svg);
+    rendering();
+    // const svg = rendering();
+    // setPreview(svg);
+    // console.log("svg", svg);
   };
 
-  const flowUpOutputSVG = async () => {
-    const svg = await rendering();
-    setPreview(svg);
-    AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+  const flowUpOutputSVG = () => {
+    // const svg = rendering();
+    // setPreview(svg);
+    // AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
   };
-
 
   const flowUpWidth = (value: number) => {
     const edit_data = AppContextValue.edit_data;

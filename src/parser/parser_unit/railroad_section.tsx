@@ -40,10 +40,10 @@ class ParserRailroadSection {
 
   generatePath = (): Array<GraphCoordinateExpression> => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
-    const path_optimize_flag = current_layer.getElement("path_optimize") == "ok";
-    const path_join_flag = current_layer.getElement("path_join") == "ok";
-    const sharp_angle_removal_flag = current_layer.getElement("sharp_angle_removal") == "ok";
-    const original_data_coordinate_correction_flag = current_layer.getElement("original_data_coordinate_correction") == "ok";
+    const path_optimize_flag = current_layer.layer_infomation["path_optimize"] == "ok";
+    const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
+    const sharp_angle_removal_flag = current_layer.layer_infomation["sharp_angle_removal"] == "ok";
+    const original_data_coordinate_correction_flag = current_layer.layer_infomation["original_data_coordinate_correction"] == "ok";
     const grah_calc = new GraphCalculation(this.graph, original_data_coordinate_correction_flag); // grah_dfs.debugNode();
 
     grah_calc.startCalc();
