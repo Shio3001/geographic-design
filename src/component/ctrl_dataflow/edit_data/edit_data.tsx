@@ -9,12 +9,29 @@ class EditData {
   layers: { [name: string]: LayerData };
   layers_order: Array<string>;
   layer_length: number;
-
   width: number;
   height: number;
   decimal_place: number;
-
   filename: string;
+
+  getLawData = () => {
+    const gld = () => {
+      const rv: { [name: string]: LayerData } = {};
+      for (let l_key of Object.keys(this.layers)) {
+        rv[l_key] = this.layers[l_key].getLawData() as LayerData;
+      }
+      return rv;
+    };
+    return {
+      layers: gld(),
+      layers_order: this.layers_order,
+      layer_length: this.layer_length,
+      width: this.width,
+      height: this.height,
+      decimal_place: this.decimal_place,
+      filename: this.filename,
+    };
+  };
 
   constructor(layer_number?: number) {
     this.layer_length = 0;

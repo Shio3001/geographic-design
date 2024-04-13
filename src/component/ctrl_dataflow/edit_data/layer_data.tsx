@@ -12,9 +12,16 @@ const getUUID = () => {
 class LayerData {
   // unit_type: string;
   unit_id: string;
-
   layer_uuid: string;
   layer_infomation: { [key: string]: string };
+
+  getLawData = () => {
+    return {
+      unit_id: this.unit_id,
+      layer_uuid: this.layer_uuid,
+      layer_infomation: this.layer_infomation,
+    };
+  };
 
   constructor() {
     // this.unit_type = "";
