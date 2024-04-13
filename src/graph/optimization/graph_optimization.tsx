@@ -56,6 +56,16 @@ class GraphOptimization {
     return graph_next;
   };
 
+  generateRouteHalf = (graph_extraction_container: Graph, graph_next: Route, node_key: string) => {
+    let graph_route = new Route();
+    // for (let node_key of graph_extraction_container.graph.keys()) {
+    graph_route = this.extractionDijkstra(graph_extraction_container, graph_next, graph_route, node_key);
+    // }
+
+    console.log("generate_graph - generateRouteHalf", graph_route);
+    return graph_route;
+  };
+
   generateRoute = (graph_extraction_container: Graph, graph_next: Route) => {
     let graph_route = new Route();
     for (let node_key of graph_extraction_container.graph.keys()) {
@@ -123,13 +133,11 @@ class GraphOptimization {
 
       const last_trace_node = trace_node[trace_node.length - 2];
 
-      // if (recursion_node.bidirectional_link_id_list.length != 2) {
       const new_path = new PathContact();
       new_path.setCoordinateExpressionId(-3);
       new_path.setDistance(distance);
       new_path.pushRoutes(trace_route);
       graph_route.pushSemiRoute(fixed_node_id, recursion_node_id, new_path);
-      // }
 
       for (let b_link of b_link_list) {
         const current_route_paths = graph_next.getPathContacts(recursion_node_id, b_link);

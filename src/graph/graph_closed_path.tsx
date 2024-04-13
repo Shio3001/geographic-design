@@ -57,31 +57,38 @@ class GraphClosedPath {
   };
 
   //最長距離優先(切り捨て破棄)
-  searchDeleteClosedPath = (long: boolean, graph_next: Route, graph_route: Route, processed_path: ProcessPath) => {
+  searchDeleteClosedPath = (long: boolean, terminal_nodes: Array<string>, graph_route: Route, processed_path: ProcessPath, i_id: string) => {
     // let delete_candidacy_path_ids: Array<PathContact> = [];
     let keep_path_ids: Array<PathContact> = [];
-    const branch1 = graph_next.getBranch(1);
-    const branch1_flag = branch1.length == 1;
-    const terminal_nodes = branch1_flag ? graph_next.getOddBranch() : branch1;
+
     // const branch1_flag = false;
     // const terminal_nodes = branch1;
 
-    for (let i = 0; i < terminal_nodes.length; i++) {
-      const i_id = terminal_nodes[i];
-      for (let j = i + 1; j < terminal_nodes.length; j++) {
-        const j_id = terminal_nodes[j];
-        const path_contacts = graph_route.getSortPathContact(long, i_id, j_id);
-        const d = this.selectionClosedPath(path_contacts, long, processed_path);
-        // delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
-        keep_path_ids = keep_path_ids.concat(d.keep);
+    // if (!terminal_nodes.includes(i_id)) {
+    //   return;
+    // }
+
+    // for (let i = 0; i < terminal_nodes.length; i++) {
+    //   const i_id = terminal_nodes[i];
+    for (let j = 0; j < terminal_nodes.length; j++) {
+      const j_id = terminal_nodes[j];
+
+      if (i_id == j_id) {
+        continue;
       }
+
+      const path_contacts = graph_route.getSortPathContact(long, i_id, j_id);
+      const d = this.selectionClosedPath(path_contacts, long, processed_path);
+      // delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
+      keep_path_ids = keep_path_ids.concat(d.keep);
     }
+    // }
 
-    console.log("delete_path_ids", terminal_nodes, graph_next, graph_route, keep_path_ids);
+    console.log("delete_path_ids", terminal_nodes, graph_route, keep_path_ids);
 
-    this.keep_paths = keep_path_ids;
+    this.keep_paths = this.keep_paths.concat(keep_path_ids);
 
-    return branch1_flag;
+    return;
   };
   deleteClosedPath = (processed_path: ProcessPath) => {
     console.log("deleteClosedPath -start", this.keep_paths, copyObject(processed_path));

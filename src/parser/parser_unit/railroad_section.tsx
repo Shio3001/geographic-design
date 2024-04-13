@@ -41,15 +41,25 @@ class ParserRailroadSection {
   pathOptimizeLoop = (sharp_angle_removal_flag: boolean, grah_paths: ProcessPath, graph_extraction_container: Graph) => {
     let graph_optimization = new GraphOptimization();
     let graph_next = graph_optimization.generateNext(grah_paths);
-    let graph_route = graph_optimization.generateRoute(graph_extraction_container, graph_next);
+
     let graph_close_path_process = new GraphClosedPath(sharp_angle_removal_flag);
-    const branch1_flag = graph_close_path_process.searchDeleteClosedPath(true, graph_next, graph_route, grah_paths);
+
+    const branch1 = graph_next.getBranch(1);
+    const branch1_flag = branch1.length == 1;
+    const terminal_nodes = branch1_flag ? graph_next.getOddBranch() : branch1;
+
+    for (let node_key of terminal_nodes) {
+      let graph_route = graph_optimization.generateRouteHalf(graph_extraction_container, graph_next, node_key);
+      graph_close_path_process.searchDeleteClosedPath(true, terminal_nodes, graph_route, grah_paths, node_key);
+    }
     grah_paths = graph_close_path_process.deleteClosedPath(grah_paths);
 
     graph_optimization = null;
     graph_next = null;
-    graph_route = null;
-    graph_close_path_process = null;
+    // graph_route = null;
+    // graph_close_path_process = null;
+
+    // const branch1_flag = branch1_flag_count > 0;
 
     return { branch1_flag: branch1_flag, grah_paths: grah_paths };
   };
