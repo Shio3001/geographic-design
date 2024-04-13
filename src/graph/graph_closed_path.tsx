@@ -27,8 +27,7 @@ class GraphClosedPath {
   selectionClosedPath = (
     path_contacts: Array<PathContact>,
     longeast: boolean,
-    processed_path: ProcessPath,
-    graph_route: Route
+    processed_path: ProcessPath
   ): {
     closed: Array<PathContact>;
     keep: Array<PathContact>;
@@ -37,12 +36,12 @@ class GraphClosedPath {
       console.log("delete_path_ids -path_contacts0", path_contacts);
       return { closed: [], keep: [] };
     }
-    const sort_paths = graph_route.getAllSortPathContact(longeast);
-    let keep_path = sort_paths[0];
+
+    let keep_path = path_contacts[0];
 
     if (this.sharp_angle_removal_flag) {
-      for (let i = 0; i < sort_paths.length; i++) {
-        const c_path = sort_paths[i];
+      for (let i = 0; i < path_contacts.length; i++) {
+        const c_path = path_contacts[i];
         const sharp_angle_removal = new SharpAngleRemoval();
         let p = sharp_angle_removal.hasProcessSharpAngleRemovalPath(c_path.routes, processed_path);
 
@@ -51,9 +50,8 @@ class GraphClosedPath {
           break;
         }
       }
+      console.log("delete_path_ids -keep_path", keep_path, path_contacts);
     }
-
-    console.log("delete_path_ids -keep_path", keep_path, sort_paths);
 
     return { closed: [], keep: [keep_path] };
   };
@@ -72,8 +70,8 @@ class GraphClosedPath {
       const i_id = terminal_nodes[i];
       for (let j = i + 1; j < terminal_nodes.length; j++) {
         const j_id = terminal_nodes[j];
-        const path_contacts = graph_route.getPathContacts(i_id, j_id);
-        const d = this.selectionClosedPath(path_contacts, long, processed_path, graph_route);
+        const path_contacts = graph_route.getSortPathContact(long, i_id, j_id);
+        const d = this.selectionClosedPath(path_contacts, long, processed_path);
         // delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
         keep_path_ids = keep_path_ids.concat(d.keep);
       }
