@@ -33,9 +33,9 @@ class GraphClosedPath {
 
   checkDistance = (a_d: number, b_d: number) => {
     if (this.long) {
-      return a_d > b_d;
+      return a_d >= b_d;
     }
-    return a_d < b_d;
+    return a_d <= b_d;
   };
 
   extractionDetermination = (
@@ -170,7 +170,7 @@ class GraphClosedPath {
 
     console.log("extractionDetermination", fixed_node_id, target_node_id, this.sharp_angle_removal_flag, _.cloneDeep(rv_path), _.cloneDeep(sharp_path));
 
-    if (this.sharp_angle_removal_flag && sharp_path != null) {
+    if (this.sharp_angle_removal_flag) {
       return sharp_path;
     }
     return rv_path;

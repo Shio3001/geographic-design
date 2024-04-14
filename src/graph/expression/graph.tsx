@@ -238,7 +238,7 @@ class Graph {
         { x: b_link_out_2.x, y: b_link_out_2.y }
       );
 
-      return c_radian >= radian90;
+      return c_radian <= radian90;
     };
 
     let even_point_list = this.getEvenBranchPointID();
@@ -248,16 +248,17 @@ class Graph {
       const extraction_link_id_list = extraction(even_point_id);
       const is_another_acute = isAcuteAngle(even_point_id, extraction_link_id_list);
 
+      console.log("intersectionExtraction", even_point_id, extraction_link_id_list, is_another_acute);
       if (is_another_acute) {
+        through_ndoe_list.push(even_point_id);
+      } else {
         const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
 
-        const even_node = this.graph.get(even_point_id);
-        const even_new_node = this.graph.get(new_even_point_id);
+        // const even_node = this.graph.get(even_point_id);
+        // const even_new_node = this.graph.get(new_even_point_id);
 
-        even_node.bidirectional_link_id_list.push(new_even_point_id);
-        even_new_node.bidirectional_link_id_list.push(even_point_id);
-      } else {
-        through_ndoe_list.push(even_point_id);
+        // even_node.bidirectional_link_id_list.push(new_even_point_id);
+        // even_new_node.bidirectional_link_id_list.push(even_point_id);
       }
 
       even_point_list = this.getEvenBranchPointID().filter((element, index) => !through_ndoe_list.includes(element));
