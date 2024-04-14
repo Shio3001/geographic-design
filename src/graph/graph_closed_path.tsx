@@ -33,9 +33,9 @@ class GraphClosedPath {
 
   checkDistance = (a_d: number, b_d: number) => {
     if (this.long) {
-      return a_d >= b_d;
+      return a_d > b_d;
     }
-    return a_d <= b_d;
+    return a_d < b_d;
   };
 
   extractionDetermination = (
@@ -88,6 +88,8 @@ class GraphClosedPath {
       const recursion_node_id = trace_node[trace_node.length - 1];
       const recursion_node = graph_extraction_container.graph.get(recursion_node_id);
       const b_link_list = recursion_node.bidirectional_link_id_list;
+
+      console.log(trace_route);
 
       if (trace_node.length < 2) {
         for (let b_link of b_link_list) {

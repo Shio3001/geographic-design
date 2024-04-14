@@ -22,7 +22,7 @@ const TextBox = (props: props) => {
 
   return (
     <>
-      <div className="number_box">
+      <div className="text_box">
         <p>{props.label_text}</p>
         <input type="text" value={text} onChange={onChangeEvent}></input>
       </div>
