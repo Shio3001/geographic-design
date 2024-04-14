@@ -13,6 +13,7 @@ class EditData {
   height: number;
   decimal_place: number;
   filename: string;
+  use_thread: boolean;
 
   getLawData = () => {
     const gld = () => {
@@ -30,6 +31,7 @@ class EditData {
       height: this.height,
       decimal_place: this.decimal_place,
       filename: this.filename,
+      use_thread: this.use_thread,
     };
   };
 
@@ -41,6 +43,7 @@ class EditData {
     this.height = 1000;
     this.decimal_place = 3;
     this.filename = "animation";
+    this.use_thread = true;
     if (!layer_number) {
       layer_number = 0;
     }

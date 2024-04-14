@@ -163,8 +163,8 @@ class Graph {
   separationLinkNode = (even_point_id: string, extraction_link_id_list: Array<string>, symbol: string) => {
     const even_point_node = this.graph.get(even_point_id);
 
-    const event_point_node_copy1 = copyObject(even_point_node);
-    const event_point_node_copy2 = copyObject(even_point_node);
+    const event_point_node_copy1 = even_point_node.copyGraphNode();
+    const event_point_node_copy2 = even_point_node.copyGraphNode();
 
     event_point_node_copy1.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element, index) =>
       extraction_link_id_list.includes(element)

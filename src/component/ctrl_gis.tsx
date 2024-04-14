@@ -13,6 +13,7 @@ import { CtrlGisContext } from "./ctrl_gis_context";
 import Button from "./../common/button/button";
 import NumberBox from "./../common/numberbox/numberbox";
 import TextBox from "./../common/textbox/textbox";
+import CheckBox from "./../common/checkbox/checkbox";
 import { AppContext } from "./../app_context";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
@@ -65,16 +66,30 @@ const CtrlGis = () => {
   };
 
   const flowUpRendering = () => {
-    rendering(false);
-    // const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
-    // parser.parser();
-    // parser.scaling();
-    // const svg = parser.toSVG();
-    // setPreview(svg);
+    const edit_data = AppContextValue.edit_data;
+    if (edit_data.use_thread) {
+      rendering(false);
+    } else {
+      const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+      parser.parser();
+      parser.scaling();
+      const svg = parser.toSVG();
+      setPreview(svg);
+    }
   };
 
   const flowUpOutputSVG = () => {
-    rendering(true);
+    const edit_data = AppContextValue.edit_data;
+    if (edit_data.use_thread) {
+      rendering(true);
+    } else {
+      const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+      parser.parser();
+      parser.scaling();
+      const svg = parser.toSVG();
+      setPreview(svg);
+      AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+    }
     // const svg = rendering();
     // setPreview(svg);
     // AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
@@ -103,6 +118,21 @@ const CtrlGis = () => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpUseThread = (check: boolean) => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.use_thread = check;
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const getCheckedUseThread = () => {
+    if (window.Worker) {
+      const edit_data = AppContextValue.edit_data;
+      return edit_data.use_thread;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
@@ -115,6 +145,7 @@ const CtrlGis = () => {
           <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
           <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
           <NumberBox flowUp={flowUpDecimalPlace} number={AppContextValue.edit_data.decimal_place} label_text="精度(少数桁数)" />
+          <CheckBox flowUp={flowUpUseThread} label_text={"スレッド処理"} checked={getCheckedUseThread()} />
         </div>
 
         <CtrlLayers />
