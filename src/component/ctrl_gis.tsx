@@ -164,7 +164,7 @@ const CtrlGis = () => {
         <a href="https://github.com/Shio3001/RouteAnimation/blob/main/README.md"> README </a>
         <p>
           スレッド処理 <br />
-          ・JavaScript WebWokerを用いて、別スレッドに処理を分離します。 <br />
+          ・JavaScript WebWorker を用いて、別スレッドに処理を分離します。 <br />
           ・別スレッドに処理を分離することで、処理中でも、画面が固まらないようになります。 <br />
           ・OFF にすると、JavaScript がシングルスレッドという都合上、描画ボタンを押してから処理が終了するまで、画面が固まったり真っ白になったります。
           <br />
