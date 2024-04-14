@@ -55,13 +55,13 @@ const PullRapperRailroadSection = (props: PullRapper) => {
       flowUpPathOptimize(true);
     }
     if (!layer.layer_infomation["sharp_angle_removal"]) {
-      flowUpSharpAngleRemoval(true);
+      flowUpSharpAngleRemoval(false);
     }
     if (!layer.layer_infomation["original_data_coordinate_correction"]) {
       flowUpOriginalDataCoordinateCorrection(true);
     }
     if (!layer.layer_infomation["path_optimize_closed_type"]) {
-      flowUpPathOptimizeClosedPathType(2);
+      flowUpPathOptimizeClosedPathType(1);
     }
   }, [props.layer_uuid]);
 
@@ -147,7 +147,7 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
   const getCheckedPathOptimizeClosedPathType = () => {
-    return ["なし", "最短経路優先(破棄)", "最長経路優先(破棄)"];
+    return ["なし", "最短経路優先", "最長経路優先"];
   };
 
   const flowUpSharpAngleRemoval = (check: boolean) => {
