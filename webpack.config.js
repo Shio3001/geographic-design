@@ -4,6 +4,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
+const TerserPlugin = require("terser-webpack-plugin");
 
 const stylesHandler = "style-loader";
 
@@ -52,6 +53,16 @@ const config = {
 module.exports = () => {
   if (isProduction) {
     config.mode = "production";
+
+    config.optimization = {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            compress: { drop_console: true },
+          },
+        }),
+      ],
+    };
   } else {
     config.mode = "development";
   }

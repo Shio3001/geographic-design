@@ -160,6 +160,8 @@ const CtrlGis = () => {
         <CtrlLayers />
         <CtrlLayerAdd />
 
+        <h3>使う前に、README 読んでね！</h3>
+        <a href="https://github.com/Shio3001/RouteAnimation/blob/main/README.md"> README </a>
         <p>
           スレッド処理 <br />
           ・JavaScript WebWokerを用いて、別スレッドに処理を分離します。 <br />
