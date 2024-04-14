@@ -187,8 +187,32 @@ class GraphClosedPath {
     return rv_path;
   };
 
-  //最長距離優先(切り捨て破棄)
-  searchDeleteClosedPath = (terminal_nodes: Array<string>, processed_path: ProcessPath, graph_extraction_container: Graph, graph_next: Route) => {
+  searchDeleteClosedPathShort = (terminal_nodes: Array<string>, processed_path: ProcessPath, graph_extraction_container: Graph, graph_next: Route) => {
+    // let delete_candidacy_path_ids: Array<PathContact> = [];
+    const graph_optimization = new GraphOptimization();
+    const graph_route = graph_optimization.generateRouteShortest(graph_extraction_container, graph_next);
+
+    let keep_path_ids: Array<PathContact> = [];
+    for (let i = 0; i < terminal_nodes.length; i++) {
+      const i_id = terminal_nodes[i];
+      for (let j = i + 1; j < terminal_nodes.length; j++) {
+        const j_id = terminal_nodes[j];
+        const has = graph_route.hasPathContact(i_id, j_id);
+        if (!has) {
+          continue;
+        }
+        const path = graph_route.getMinPathContact(i_id, j_id);
+        if (path == null) {
+          continue;
+        }
+
+        keep_path_ids.push(path);
+      }
+
+      this.keep_paths = this.keep_paths.concat(keep_path_ids);
+    }
+  };
+  searchDeleteClosedPathLong = (terminal_nodes: Array<string>, processed_path: ProcessPath, graph_extraction_container: Graph, graph_next: Route) => {
     // let delete_candidacy_path_ids: Array<PathContact> = [];
     let keep_path_ids: Array<PathContact> = [];
     for (let i = 0; i < terminal_nodes.length; i++) {
@@ -205,6 +229,15 @@ class GraphClosedPath {
       }
 
       this.keep_paths = this.keep_paths.concat(keep_path_ids);
+    }
+  };
+
+  //最長距離優先(切り捨て破棄)
+  searchDeleteClosedPath = (terminal_nodes: Array<string>, processed_path: ProcessPath, graph_extraction_container: Graph, graph_next: Route) => {
+    if (this.long) {
+      this.searchDeleteClosedPathLong(terminal_nodes, processed_path, graph_extraction_container, graph_next);
+    } else {
+      this.searchDeleteClosedPathShort(terminal_nodes, processed_path, graph_extraction_container, graph_next);
     }
   };
   deleteClosedPath = (processed_path: ProcessPath) => {

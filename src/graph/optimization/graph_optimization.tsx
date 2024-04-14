@@ -59,7 +59,7 @@ class GraphOptimization {
   generateRouteHalf = (graph_extraction_container: Graph, graph_next: Route, node_key: string) => {
     let graph_route = new Route();
     // for (let node_key of graph_extraction_container.graph.keys()) {
-    graph_route = this.extractionDijkstra(graph_extraction_container, graph_next, graph_route, node_key);
+    graph_route = this.extractionEnumeration(graph_extraction_container, graph_next, graph_route, node_key);
     // }
 
     console.log("generate_graph - generateRouteHalf", graph_route);
@@ -67,6 +67,16 @@ class GraphOptimization {
   };
 
   generateRoute = (graph_extraction_container: Graph, graph_next: Route) => {
+    let graph_route = new Route();
+    for (let node_key of graph_extraction_container.graph.keys()) {
+      graph_route = this.extractionEnumeration(graph_extraction_container, graph_next, graph_route, node_key);
+    }
+
+    console.log("generate_graph - generateRoute", graph_route);
+    return graph_route;
+  };
+
+  generateRouteShortest = (graph_extraction_container: Graph, graph_next: Route) => {
     let graph_route = new Route();
     for (let node_key of graph_extraction_container.graph.keys()) {
       graph_route = this.extractionDijkstra(graph_extraction_container, graph_next, graph_route, node_key);
@@ -104,10 +114,77 @@ class GraphOptimization {
     console.log("generate_graph - generateGraphExtraction", graph_extraction_container);
 
     return graph_extraction_container;
-  }; //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
+  };
 
   //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
   extractionDijkstra = (graph_extraction_container: Graph, graph_next: Route, graph_route: Route, fixed_node_id: string) => {
+    const dijkstra_que: Array<string> = [];
+    const dijkstra_graph: Map<string, number> = new Map();
+
+    const dequeqe = () => {
+      const v = dijkstra_que[0];
+      dijkstra_que.shift();
+      return v;
+    };
+    const enqueqe = (d: string) => {
+      const length = dijkstra_que.push(d);
+      const index = length - 1;
+      return index;
+    };
+    enqueqe(fixed_node_id);
+
+    for (let grah_node_id of graph_extraction_container.graph.keys()) {
+      dijkstra_graph.set(grah_node_id, Number.MAX_SAFE_INTEGER);
+    }
+
+    dijkstra_graph.set(fixed_node_id, 0);
+
+    console.log("graph_extraction_container-dijkstra-a", fixed_node_id, dijkstra_que, dijkstra_graph);
+
+    while (dijkstra_que.length > 0) {
+      const current_id = dequeqe();
+      const current_node = graph_extraction_container.graph.get(current_id);
+      const link_id_list = current_node.bidirectional_link_id_list;
+
+      for (let link_node_id of link_id_list) {
+        if (current_id == link_node_id || fixed_node_id == link_node_id) {
+          continue;
+        }
+
+        const link_contact = graph_next.getMinPathContact(current_id, link_node_id);
+
+        const calc_distance = link_contact.distance + dijkstra_graph.get(current_id);
+
+        const graph_distance = dijkstra_graph.get(link_node_id);
+
+        if (graph_distance <= calc_distance) {
+          continue;
+        }
+        if (graph_distance > calc_distance) {
+          dijkstra_graph.set(link_node_id, calc_distance);
+          enqueqe(link_node_id);
+        }
+
+        const new_contact = new PathContact();
+        new_contact.setDistance(calc_distance);
+        new_contact.setCoordinateExpressionId(-3);
+
+        if (graph_route.hasPathContact(fixed_node_id, current_id)) {
+          const fixed_contact = graph_route.getMinPathContact(fixed_node_id, current_id);
+          new_contact.includeRoute(fixed_contact);
+        }
+        new_contact.pushRoute(link_contact.coordinate_expression_id);
+        graph_route.setSemiRoute(fixed_node_id, link_node_id, new_contact);
+
+        continue;
+      }
+    }
+    console.log("graph_extraction_container-dijkstra-z", fixed_node_id, dijkstra_que, dijkstra_graph, graph_next, graph_route);
+    return graph_route;
+  };
+
+  //全列挙
+  extractionEnumeration = (graph_extraction_container: Graph, graph_next: Route, graph_route: Route, fixed_node_id: string) => {
     const recursion = (trace_node: Array<string>, trace_route: Array<number>, distance: number) => {
       const recursion_node_id = trace_node[trace_node.length - 1];
       const recursion_node = graph_extraction_container.graph.get(recursion_node_id);

@@ -243,6 +243,17 @@ class Route {
       this.route.set(node_id_1, new_map_a);
     }
   };
+  setSemiRoute = (node_id_1: string, node_id_2: string, path_contact: PathContact) => {
+    if (!this.route.has(node_id_1)) {
+      const new_map: TypeGraphRouteNode = new Map();
+      this.route.set(node_id_1, new_map);
+    }
+
+    const node_1 = this.route.get(node_id_1);
+    const node_1_2 = [path_contact];
+    node_1.set(node_id_2, node_1_2);
+    this.route.set(node_id_1, node_1);
+  };
   pushSemiRoute = (node_id_1: string, node_id_2: string, path_contact: PathContact) => {
     if (!this.route.has(node_id_1)) {
       const new_map: TypeGraphRouteNode = new Map();
