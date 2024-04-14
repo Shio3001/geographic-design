@@ -66,9 +66,11 @@ const CtrlGis = () => {
 
   const flowUpRendering = () => {
     rendering(false);
-    // const svg = rendering();
+    // const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+    // parser.parser();
+    // parser.scaling();
+    // const svg = parser.toSVG();
     // setPreview(svg);
-    // console.log("svg", svg);
   };
 
   const flowUpOutputSVG = () => {

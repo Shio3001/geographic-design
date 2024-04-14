@@ -68,21 +68,6 @@ class GraphCalculation {
     }
 
     // const termination_even_point = this.getTerminationEvenPointID();
-
-    this.graph_container.graph.forEach(function (node, key) {
-      console.log("termination_point -alllinks", key, node.bidirectional_link_id_list);
-    });
-    this.graph_container.graph.forEach(function (node, key) {
-      if (node.bidirectional_link_id_list.length == 1) {
-        console.log("termination_point -graph1", key, node.bidirectional_link_id_list);
-      }
-    });
-    this.graph_container.graph.forEach(function (node, key) {
-      if (node.bidirectional_link_id_list.length >= 3) {
-        console.log("termination_point -graph3", key, node.bidirectional_link_id_list);
-      }
-    });
-
     // for (const key of node_keys) {
     //   this.node_path.pushNode(key, -1);
     // }
@@ -95,7 +80,6 @@ class GraphCalculation {
       const relief_separate_count = this.reliefSeparate();
 
       if (relief_separate_count > 0) {
-        console.log("始点間距離計測(D) -relief_separate_count", relief_separate_count);
         this.node_path = new GraphCalculationNodePath();
         this.processed_path = new ProcessPath();
         this.bfs_que = [];
@@ -157,7 +141,6 @@ class GraphCalculation {
 
   calcTerminationPoint = () => {
     const termination_point = this.graph_container.getTerminationPointID();
-    console.log("termination_point -start", termination_point);
     for (let i = 0; i < termination_point.length; i++) {
       const termination_point_node_id = termination_point[i];
       const termination_point_node = this.graph_container.graph.get(termination_point_node_id);
@@ -183,7 +166,6 @@ class GraphCalculation {
   };
 
   dfs = (start_node_id: string) => {
-    console.log("深さ優先探索", start_node_id, this.node_path, this.graph_container.graph);
     this.bfs_que = [];
     this.bfs_que.push(start_node_id);
 
@@ -194,8 +176,6 @@ class GraphCalculation {
       this.processed_path.pushCoordinateId(start_node_path, start_node_id, start_node.x, start_node.y);
     }
 
-    console.log("termination_point -search start", start_node_id);
-
     while (this.bfs_que.length > 0) {
       const que_length = this.bfs_que.length;
 
@@ -204,8 +184,6 @@ class GraphCalculation {
       const link_id_list = current_node.bidirectional_link_id_list;
       const link_id_list_length = link_id_list.length;
       const current_node_paths = this.node_path.getPaths(current_node_id);
-
-      console.log("termination_point -search", link_id_list_length, current_node_id, link_id_list);
 
       for (let j = 0; j < link_id_list_length; j++) {
         const nv_id = link_id_list[j];
@@ -244,8 +222,6 @@ class GraphCalculation {
 
     const terminal_point = this.graph_container.graph.get(terminal_point_id);
     for (const path of this.processed_path.path.values()) {
-      console.log("始点間距離計測(J)", terminal_point, path, terminal_point.bidirectional_link_id_list.length);
-
       if (path.coordinates.has(terminal_point_id)) {
         continue;
       }
@@ -257,8 +233,6 @@ class GraphCalculation {
         const pos2 = path.coordinates.get(pos2_id);
         const posd = calcPythagoreanSquare(pos1, pos2);
         const d = calcPythagoreanSquare(pos1, { x: terminal_point.x, y: terminal_point.y });
-
-        console.log("始点間距離計測(K)", terminal_point, pos1, pos2);
 
         if (d <= posd) {
           const ol = copyObject(this.graph_container.graph.get(terminal_point_id));
@@ -274,18 +248,6 @@ class GraphCalculation {
           terminal_point.setPos(cg.x, cg.y);
           this.graph_container.replaceLinkNode(pos1_id, pos2_id, terminal_point_id);
           this.graph_container.replaceLinkNode(pos2_id, pos1_id, terminal_point_id);
-
-          console.log(
-            "始点間距離計測(D)",
-            terminal_point,
-            ol,
-            copyObject(this.graph_container.graph.get(terminal_point_id)),
-            pos1,
-            copyObject(this.graph_container.graph.get(pos1_id)),
-            pos2,
-            copyObject(this.graph_container.graph.get(pos2_id)),
-            count
-          );
 
           count++;
           return count;
