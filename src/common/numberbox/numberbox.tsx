@@ -2,6 +2,8 @@ import * as React from "react";
 const { useContext, useReducer, createContext, useState, useEffect, useRef } = React;
 import { createRoot } from "react-dom/client";
 
+import "./numberbox.css";
+
 type props = {
   flowUp: Function;
   number: number;

@@ -147,7 +147,7 @@ const PullRapperRailroadSection = (props: PullRapper) => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
   const getCheckedPathOptimizeClosedPathType = () => {
-    return ["なし", "最短経路優先(破棄)", "最長経路優先(破棄)", "最短経路優先(分離)", "最長経路優先(分離)", "環状閉路構築"];
+    return ["なし", "最短経路優先(破棄)", "最長経路優先(破棄)"];
   };
 
   const flowUpSharpAngleRemoval = (check: boolean) => {

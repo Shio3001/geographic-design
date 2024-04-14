@@ -17,6 +17,7 @@ import ProcessPath from "./../../graph/expression/process_path";
 import BigNumber from "bignumber.js";
 
 import * as GEO from "./../../geographic_constant";
+import { findLastKey } from "lodash";
 
 class ParserRailroadSection {
   edit_data: EditData;
@@ -38,11 +39,18 @@ class ParserRailroadSection {
     this.graph = new Graph();
   }
 
-  pathOptimizeLoop = (sharp_angle_removal_flag: boolean, grah_paths: ProcessPath, graph_extraction_container: Graph) => {
+  pathOptimizeLoop = (long_mode: number, sharp_angle_removal_flag: boolean, grah_paths: ProcessPath, graph_extraction_container: Graph) => {
     let graph_optimization = new GraphOptimization();
     let graph_next = graph_optimization.generateNext(grah_paths);
     graph_optimization = null;
-    let graph_close_path_process = new GraphClosedPath(sharp_angle_removal_flag, true);
+
+    let long = false;
+
+    if (long_mode == 2) {
+      long = true;
+    }
+
+    let graph_close_path_process = new GraphClosedPath(sharp_angle_removal_flag, long);
 
     const branch1 = graph_next.getBranch(1);
     const branch1_flag = branch1.length == 1;
@@ -60,11 +68,11 @@ class ParserRailroadSection {
 
     return { branch1_flag: branch1_flag, grah_paths: grah_paths };
   };
-  pathOptimize = (sharp_angle_removal_flag: boolean, grah_paths: ProcessPath, graph_extraction_container: Graph) => {
+  pathOptimize = (long_mode: number, sharp_angle_removal_flag: boolean, grah_paths: ProcessPath, graph_extraction_container: Graph) => {
     let branch1_count = 10;
 
     while (branch1_count > 0) {
-      const rv = this.pathOptimizeLoop(sharp_angle_removal_flag, grah_paths, graph_extraction_container);
+      const rv = this.pathOptimizeLoop(long_mode, sharp_angle_removal_flag, grah_paths, graph_extraction_container);
       grah_paths = rv.grah_paths;
       if (rv.branch1_flag) {
         branch1_count--;
@@ -98,6 +106,7 @@ class ParserRailroadSection {
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
     const sharp_angle_removal_flag = current_layer.layer_infomation["sharp_angle_removal"] == "ok";
     const original_data_coordinate_correction_flag = current_layer.layer_infomation["original_data_coordinate_correction"] == "ok";
+    const long_mode = Number(current_layer.layer_infomation["path_optimize_closed_type"]);
     const grah_calc = new GraphCalculation(this.graph, original_data_coordinate_correction_flag); // grah_dfs.debugNode();
 
     grah_calc.startCalc();
@@ -109,7 +118,7 @@ class ParserRailroadSection {
     const graph_extraction_container = graph_optimization.generateGraphExtraction(this.graph, grah_paths);
 
     if (path_optimize_flag) {
-      grah_paths = this.pathOptimize(sharp_angle_removal_flag, grah_paths, graph_extraction_container);
+      grah_paths = this.pathOptimize(long_mode, sharp_angle_removal_flag, grah_paths, graph_extraction_container);
     }
 
     if (path_join_flag) {
