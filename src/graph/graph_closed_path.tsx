@@ -16,100 +16,199 @@ import ProcessPath from "./expression/process_path";
 import Route from "./expression/route";
 import { copyObject } from "./../definition";
 import SharpAngleRemoval from "./sharp_angle_removal";
+import _ from "lodash";
+
 class GraphClosedPath {
   keep_paths: Array<PathContact>;
   sharp_angle_removal_flag: boolean;
-  constructor(sharp_angle_removal_flag: boolean) {
+  long: boolean;
+  sharp_angle_cash: Map<number, boolean>;
+  constructor(sharp_angle_removal_flag: boolean, long: boolean) {
     this.keep_paths = [];
     this.sharp_angle_removal_flag = sharp_angle_removal_flag;
+    this.long = long;
+    this.sharp_angle_cash = new Map();
+    console.log("GraphClosedPath");
   }
 
-  selectionClosedPath = (
-    path_contacts: Array<PathContact>,
-    longeast: boolean,
-    processed_path: ProcessPath
-  ): {
-    closed: Array<PathContact>;
-    keep: Array<PathContact>;
-  } => {
-    if (path_contacts.length == 0) {
-      console.log("delete_path_ids -path_contacts0", path_contacts);
-      return { closed: [], keep: [] };
+  checkDistance = (a_d: number, b_d: number) => {
+    if (this.long) {
+      return a_d > b_d;
     }
+    return a_d < b_d;
+  };
 
-    let keep_path = path_contacts[0];
+  extractionDetermination = (
+    graph_extraction_container: Graph,
+    graph_next: Route,
+    processed_path: ProcessPath,
+    fixed_node_id: string,
+    target_node_id: string
+  ) => {
+    let rv_path: PathContact = null;
+    let sharp_path: PathContact = null;
 
-    if (this.sharp_angle_removal_flag) {
-      for (let i = 0; i < path_contacts.length; i++) {
-        const c_path = path_contacts[i];
-        const sharp_angle_removal = new SharpAngleRemoval();
-        let p = sharp_angle_removal.hasProcessSharpAngleRemovalPath(c_path.routes, processed_path);
+    const getSharpAngleCashKey = (last3: Array<number>) => {
+      const key = last3[0] * 100000000 + last3[1] * 10000 + last3[2];
+      return key;
+    };
 
-        if (!p) {
-          keep_path = c_path;
-          break;
+    const pushSharpAngleCash = (last3: Array<number>, is_sharp: boolean) => {
+      this.sharp_angle_cash.set(getSharpAngleCashKey(last3), is_sharp);
+    };
+    const hasSharpAngleCash = (last3: Array<number>) => {
+      return this.sharp_angle_cash.has(getSharpAngleCashKey(last3));
+    };
+    const getSharpAngleCash = (last3: Array<number>) => {
+      return this.sharp_angle_cash.get(getSharpAngleCashKey(last3));
+    };
+
+    const checkSharp = (trace_route: Array<number>) => {
+      if (trace_route.length < 3) {
+        return false;
+      }
+
+      const last3 = [trace_route[trace_route.length - 3], trace_route[trace_route.length - 2], trace_route[trace_route.length - 1]];
+
+      if (hasSharpAngleCash(last3)) {
+        // console.log("last has", last3);
+        return getSharpAngleCash(last3);
+      }
+
+      const sharp_angle_removal = new SharpAngleRemoval();
+      let p = sharp_angle_removal.hasProcessSharpAngleRemovalPath(last3, processed_path);
+      console.log(last3, this.sharp_angle_cash.size);
+
+      pushSharpAngleCash(last3, p);
+      return p;
+    };
+
+    const recursion = (trace_node: Array<string>, trace_route: Array<number>, distance: number, recursion_sharp_angle_removal: boolean) => {
+      const recursion_node_id = trace_node[trace_node.length - 1];
+      const recursion_node = graph_extraction_container.graph.get(recursion_node_id);
+      const b_link_list = recursion_node.bidirectional_link_id_list;
+
+      if (trace_node.length < 2) {
+        for (let b_link of b_link_list) {
+          const first_route_paths = graph_next.getPathContacts(recursion_node_id, b_link);
+          for (let first_route_path of first_route_paths) {
+            const cp_trace_node = trace_node;
+            cp_trace_node.push(b_link);
+
+            const cp_trace_route = trace_route;
+            cp_trace_route.push(first_route_path.coordinate_expression_id);
+
+            recursion(cp_trace_node, cp_trace_route, first_route_path.distance, recursion_sharp_angle_removal);
+
+            cp_trace_node.pop();
+            cp_trace_route.pop();
+          }
+        }
+        return;
+      }
+
+      if (target_node_id == recursion_node_id) {
+        if (rv_path == null || this.checkDistance(distance, rv_path.distance)) {
+          const new_path = new PathContact();
+          new_path.setCoordinateExpressionId(-3);
+          new_path.setDistance(distance);
+          new_path.pushRoutes(trace_route);
+
+          rv_path = new_path;
+        }
+        if (recursion_sharp_angle_removal) {
+          if (checkSharp(trace_route)) {
+            recursion_sharp_angle_removal = false;
+          } else {
+            if (sharp_path == null || this.checkDistance(distance, sharp_path.distance)) {
+              const new_path = new PathContact();
+              new_path.setCoordinateExpressionId(-3);
+              new_path.setDistance(distance);
+              new_path.pushRoutes(trace_route);
+
+              sharp_path = new_path;
+            }
+          }
+        }
+
+        //最短距離経路検索ならこれ以上深くにいく必要はないので、戻る
+        if (!this.long) {
+          return;
         }
       }
-      console.log("delete_path_ids -keep_path", keep_path, path_contacts);
-    }
 
-    return { closed: [], keep: [keep_path] };
+      if (target_node_id != recursion_node_id && recursion_sharp_angle_removal) {
+        if (checkSharp(trace_route)) {
+          recursion_sharp_angle_removal = false;
+        }
+      }
+
+      for (let b_link of b_link_list) {
+        const current_route_paths = graph_next.getPathContacts(recursion_node_id, b_link);
+
+        for (let current_route_path of current_route_paths) {
+          if (trace_route.includes(current_route_path.coordinate_expression_id)) {
+            continue;
+          }
+
+          let cp_trace_node = trace_node;
+          cp_trace_node.push(b_link);
+
+          let cp_trace_route = trace_route;
+          cp_trace_route.push(current_route_path.coordinate_expression_id);
+
+          const new_distance = distance + current_route_path.distance;
+          recursion(cp_trace_node, cp_trace_route, new_distance, recursion_sharp_angle_removal);
+
+          cp_trace_node.pop();
+          cp_trace_route.pop();
+        }
+      }
+    };
+
+    recursion([fixed_node_id], [], 0, this.sharp_angle_removal_flag);
+
+    console.log("extractionDetermination", fixed_node_id, target_node_id, this.sharp_angle_removal_flag, _.cloneDeep(rv_path), _.cloneDeep(sharp_path));
+
+    if (this.sharp_angle_removal_flag && sharp_path != null) {
+      return sharp_path;
+    }
+    return rv_path;
   };
 
   //最長距離優先(切り捨て破棄)
-  searchDeleteClosedPath = (long: boolean, terminal_nodes: Array<string>, graph_route: Route, processed_path: ProcessPath, i_id: string) => {
+  searchDeleteClosedPath = (terminal_nodes: Array<string>, processed_path: ProcessPath, graph_extraction_container: Graph, graph_next: Route) => {
     // let delete_candidacy_path_ids: Array<PathContact> = [];
     let keep_path_ids: Array<PathContact> = [];
+    for (let i = 0; i < terminal_nodes.length; i++) {
+      const i_id = terminal_nodes[i];
+      for (let j = i + 1; j < terminal_nodes.length; j++) {
+        const j_id = terminal_nodes[j];
+        const path = this.extractionDetermination(graph_extraction_container, graph_next, processed_path, i_id, j_id);
 
-    // const branch1_flag = false;
-    // const terminal_nodes = branch1;
+        if (path == null) {
+          continue;
+        }
 
-    // if (!terminal_nodes.includes(i_id)) {
-    //   return;
-    // }
-
-    // for (let i = 0; i < terminal_nodes.length; i++) {
-    //   const i_id = terminal_nodes[i];
-    for (let j = 0; j < terminal_nodes.length; j++) {
-      const j_id = terminal_nodes[j];
-
-      if (i_id == j_id) {
-        continue;
+        keep_path_ids.push(path);
       }
 
-      const path_contacts = graph_route.getSortPathContact(long, i_id, j_id);
-      const d = this.selectionClosedPath(path_contacts, long, processed_path);
-      // delete_candidacy_path_ids = delete_candidacy_path_ids.concat(d.closed);
-      keep_path_ids = keep_path_ids.concat(d.keep);
+      this.keep_paths = this.keep_paths.concat(keep_path_ids);
     }
-    // }
-
-    console.log("delete_path_ids", terminal_nodes, graph_route, keep_path_ids);
-
-    this.keep_paths = this.keep_paths.concat(keep_path_ids);
-
-    return;
   };
   deleteClosedPath = (processed_path: ProcessPath) => {
-    console.log("deleteClosedPath -start", this.keep_paths, copyObject(processed_path));
-
     const getKeepRoutes = () => {
       let arr: Array<number> = [];
 
       for (let keep_path of this.keep_paths) {
-        console.log("deleteClosedPath -getKeepRoutes loop", keep_path, arr);
-
         arr = arr.concat(keep_path.routes);
       }
 
       return arr;
     };
     const keep_routes = getKeepRoutes();
-    console.log("deleteClosedPath -getKeepRoutes", keep_routes);
 
     for (let delete_path of processed_path.path.values()) {
-      console.log("deleteClosedPath -delete", delete_path, keep_routes, this.keep_paths);
-
       if (keep_routes.includes(delete_path.coordinate_expression_id)) {
         continue;
       }

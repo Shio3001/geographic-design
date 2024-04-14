@@ -104,7 +104,8 @@ class GraphOptimization {
     console.log("generate_graph - generateGraphExtraction", graph_extraction_container);
 
     return graph_extraction_container;
-  };
+  }; //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
+
   //ダイクストラ法に基づく、分岐点間の経路探索と各経路の距離決定
   extractionDijkstra = (graph_extraction_container: Graph, graph_next: Route, graph_route: Route, fixed_node_id: string) => {
     const recursion = (trace_node: Array<string>, trace_route: Array<number>, distance: number) => {

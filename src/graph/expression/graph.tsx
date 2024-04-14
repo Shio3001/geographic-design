@@ -188,6 +188,8 @@ class Graph {
   };
 
   intersectionExtraction = () => {
+    const through_ndoe_list: Array<string> = [];
+
     const extraction = (even_point_index: string) => {
       const even_point_node = this.graph.get(even_point_index);
       const b_link_list = even_point_node.bidirectional_link_id_list;
@@ -236,40 +238,29 @@ class Graph {
         { x: b_link_out_2.x, y: b_link_out_2.y }
       );
 
-      return c_radian <= radian90;
+      return c_radian >= radian90;
     };
 
     let even_point_list = this.getEvenBranchPointID();
 
     while (even_point_list.length > 0) {
       const even_point_id = even_point_list[0];
-      const even_node_o = copyObject(this.graph.get(even_point_id));
       const extraction_link_id_list = extraction(even_point_id);
       const is_another_acute = isAcuteAngle(even_point_id, extraction_link_id_list);
-      const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
 
       if (is_another_acute) {
+        const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
+
         const even_node = this.graph.get(even_point_id);
         const even_new_node = this.graph.get(new_even_point_id);
 
         even_node.bidirectional_link_id_list.push(new_even_point_id);
         even_new_node.bidirectional_link_id_list.push(even_point_id);
-
-        console.log(
-          "is_another_acute",
-          is_another_acute,
-          even_point_id,
-          even_node_o,
-          copyObject(even_node),
-          new_even_point_id,
-          copyObject(even_new_node),
-          copyObject(this.graph.get(new_even_point_id))
-        );
+      } else {
+        through_ndoe_list.push(even_point_id);
       }
 
-      console.log("even_point_list", even_point_list);
-
-      even_point_list = this.getEvenBranchPointID();
+      even_point_list = this.getEvenBranchPointID().filter((element, index) => !through_ndoe_list.includes(element));
     }
   };
 
@@ -290,8 +281,6 @@ class Graph {
     this.graph.set(branch2node_copy2.node_id, branch2node_copy2);
 
     this.replaceLinkNode(branch2node.bidirectional_link_id_list[1], old_copy2_id, new_copy2_id);
-
-    console.log("環状閉路分割", branch2node_copy1, branch2node_copy2, old_copy2_id, new_copy2_id);
   };
 }
 

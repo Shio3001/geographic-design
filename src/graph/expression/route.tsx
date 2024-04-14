@@ -175,7 +175,6 @@ class Route {
       }
     });
 
-    console.log("getAllSortPathContact", path_contacts);
     return path_contacts;
   };
 
@@ -186,11 +185,9 @@ class Route {
       const outside_node = this.route.get(outside_node_id);
       for (let inside_node_id of outside_node.keys()) {
         const path_c = outside_node.get(inside_node_id);
-        console.log("getAllPathContact -path_c", path_c, this.route);
         path_contacts = path_contacts.concat(path_c);
       }
     }
-    console.log("getAllPathContact", path_contacts, this.route);
 
     return path_contacts;
   };

@@ -47,8 +47,6 @@ class GraphPathJoin {
 
       const join_flag = process_path.getJoinPathCoordinateFlag(join_order, c_order);
 
-      console.log("join_flag", join_flag, route_index, join_route[0], route_id);
-
       if (join_flag[0] == 1) {
         join_order = join_order.reverse();
       }
@@ -65,8 +63,6 @@ class GraphPathJoin {
         join_coordinates.set(c_key, current_path.coordinates.get(c_key));
       }
     }
-
-    console.log("getJoinCoordinate", joint_index);
 
     return { order: join_order, coordinates: join_coordinates, joint_index: joint_index };
   };
@@ -107,14 +103,10 @@ class GraphPathJoin {
       join_routes.push(path_contact.routes);
     }
 
-    console.log("join_routes", join_routes);
-
     return join_routes;
   };
 
   joinContinuity = (join_routes: Array<Array<number>>, process_path: ProcessPath) => {
-    console.log("includePathFunction -join_routes", join_routes, process_path);
-
     for (let join_route of join_routes) {
       const p0_id = join_route[0];
       //   const p0 = process_path.path.get(p0_id);

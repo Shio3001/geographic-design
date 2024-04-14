@@ -33,20 +33,6 @@ class GraphCoordinateExpression {
     for (let include_path_coordinate_id of include_path.coordinates.keys()) {
       this.coordinates.set(include_path_coordinate_id, include_path.coordinates.get(include_path_coordinate_id));
     }
-
-    console.log(
-      "includePathFunction",
-      this.coordinate_expression_id,
-      include_path.coordinate_expression_id,
-      "更新前",
-      ol,
-      "更新後",
-      _.cloneDeep(this.pos_order),
-      "追加",
-      include_path.pos_order,
-      "追加抽出",
-      join_order
-    );
   };
   includePath = (include_path: GraphCoordinateExpression) => {
     this.pos_order = this.pos_order.concat(include_path.pos_order);
@@ -66,7 +52,6 @@ class GraphCoordinateExpression {
 
   getDistance = () => {
     let d_sum = 0;
-    console.log("get-distance-all", this.pos_order, this.coordinates);
 
     for (let i = 1; i < this.pos_order.length; i++) {
       const c1 = this.coordinates.get(this.pos_order[i - 1]);

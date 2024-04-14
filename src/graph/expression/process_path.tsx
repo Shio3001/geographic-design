@@ -33,57 +33,47 @@ class ProcessPath {
 
     // 継 継
     if (getPath1LastNodeId() == getPath2FirstNodeId()) {
-      console.log("includePathFunction 継 継");
       return [0, 0];
     }
 
     // 継 反
     else if (getPath1LastNodeId() == getPath2LastNodeId()) {
-      console.log("includePathFunction 継 反");
       return [0, 1];
     }
 
     // 反 継
     else if (getPath1FirstNodeId() == getPath2FirstNodeId()) {
-      console.log("includePathFunction 反 継");
       return [1, 0];
     }
 
     // 反 反
     else if (getPath1FirstNodeId() == getPath2LastNodeId()) {
-      console.log("includePathFunction 反 反");
       return [1, 1];
     } else {
-      console.log("includePathFunction X X ", getPath1FirstNodeId(), getPath1LastNodeId(), getPath2FirstNodeId(), getPath2LastNodeId());
       return [-1, -1];
     }
   };
   getJoinPathFlag = (path_id_1: number, path_id_2: number) => {
     const path_1 = this.path.get(path_id_1);
     const path_2 = this.path.get(path_id_2);
-    console.log("includePathFunction 接続(FA)", path_id_1, path_id_2);
 
     // 継 継
     if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
-      console.log("includePathFunction 継 継");
       return [0, 0];
     }
 
     // 継 反
     else if (path_1.getLastNodeId() == path_2.getLastNodeId()) {
-      console.log("includePathFunction 継 反");
       return [0, 1];
     }
 
     // 反 継
     else if (path_1.getFirstNodeId() == path_2.getFirstNodeId()) {
-      console.log("includePathFunction 反 継");
       return [1, 0];
     }
 
     // 反 反
     else if (path_1.getFirstNodeId() == path_2.getLastNodeId()) {
-      console.log("includePathFunction 反 反");
       return [1, 1];
     } else {
       return [-1, -1];
@@ -93,34 +83,28 @@ class ProcessPath {
   joinPath = (path_id_1: number, path_id_2: number) => {
     const path_1 = this.path.get(path_id_1);
     const path_2 = this.path.get(path_id_2);
-    console.log("includePathFunction 接続(A)", path_id_1, path_id_2);
 
     // 継 継
     if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
-      console.log("includePathFunction 継 継");
     }
 
     // 継 反
     else if (path_1.getLastNodeId() == path_2.getLastNodeId()) {
-      console.log("includePathFunction 継 反");
       path_2.reversePosOrder();
     }
 
     // 反 継
     else if (path_1.getFirstNodeId() == path_2.getFirstNodeId()) {
-      console.log("includePathFunction 反 継");
       path_1.reversePosOrder();
     }
 
     // 反 反
     else if (path_1.getFirstNodeId() == path_2.getLastNodeId()) {
-      console.log("includePathFunction 反 反");
       path_1.reversePosOrder();
       path_2.reversePosOrder();
     } else {
       return false;
     }
-    console.log("includePathFunction 接続(B)");
 
     path_1.includePathOrder(path_2, 0);
 
@@ -147,8 +131,6 @@ class ProcessPath {
 
     const dif = Math.abs(node_index_1 - node_index_2);
     const ans = dif == 1;
-
-    console.log("termination_point -isAdjoinProcessed", dif, node_index_1, node_index_2, ans, path_id, node_id_1, node_id_2, this.path);
 
     return ans;
   };
