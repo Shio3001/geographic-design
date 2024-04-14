@@ -27,6 +27,7 @@ class SharpAngleRemoval {
       const c_angle = calcAngleByPosition(c1, c0, c2);
 
       if (c_angle < radian90) {
+        console.log(c_angle, (c_angle * 180) / 3.1415, c0_id, c1_id, c2_id);
         return true;
       }
     }

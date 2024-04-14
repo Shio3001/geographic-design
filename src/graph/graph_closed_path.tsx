@@ -71,13 +71,14 @@ class GraphClosedPath {
       const last3 = [trace_route[trace_route.length - 3], trace_route[trace_route.length - 2], trace_route[trace_route.length - 1]];
 
       if (hasSharpAngleCash(last3)) {
-        // console.log("last has", last3);
         return getSharpAngleCash(last3);
       }
 
       const sharp_angle_removal = new SharpAngleRemoval();
       let p = sharp_angle_removal.hasProcessSharpAngleRemovalPath(last3, processed_path);
-      console.log(last3, this.sharp_angle_cash.size);
+      // if (p) {
+      //   console.log(last3, this.sharp_angle_cash.size);
+      // }
 
       pushSharpAngleCash(last3, p);
       return p;
@@ -143,6 +144,11 @@ class GraphClosedPath {
         }
       }
 
+      const r = trace_node.filter((element, index) => element == trace_node[trace_node.length - 1] && index < trace_node.length - 1);
+      if (r.length > 0) {
+        return;
+      }
+
       for (let b_link of b_link_list) {
         const current_route_paths = graph_next.getPathContacts(recursion_node_id, b_link);
 
@@ -170,7 +176,10 @@ class GraphClosedPath {
 
     console.log("extractionDetermination", fixed_node_id, target_node_id, this.sharp_angle_removal_flag, _.cloneDeep(rv_path), _.cloneDeep(sharp_path));
 
-    if (this.sharp_angle_removal_flag) {
+    // if (this.sharp_angle_removal_flag) {
+    //   return sharp_path;
+    // }
+    if (this.sharp_angle_removal_flag && sharp_path != null) {
       return sharp_path;
     }
     return rv_path;
