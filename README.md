@@ -31,7 +31,7 @@ Adobe Illustrator は、SVG ファイルをそのまま入力、操作するこ�
 
 ### AviUlt
 
-AviUtl もプラグインで SVG 画像は読み込めそう [https://aviutl.info/svg/](https://aviutl.info/svg/) だけど、アニメーションは厳しいかも。けど、路線図アニメーションは簡単になるね
+AviUtl もプラグインで SVG 画像は読み込めそう [AviUtl の易しい使い方【AviUtl】SVG（ベクター画像）を読み込む方法【プラグイン】](https://aviutl.info/svg/) だけど、アニメーションは厳しいかも。けど、路線図アニメーションは簡単になるね
 
 ## 権利情報
 
