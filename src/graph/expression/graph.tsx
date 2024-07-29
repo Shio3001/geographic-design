@@ -182,14 +182,6 @@ class Graph {
       (element) => !extraction_link_id_list.includes(element)
     );
 
-    console.log(
-      "separationLinkNode",
-      even_point_node.bidirectional_link_id_list.length,
-      event_point_node_copy1.bidirectional_link_id_list.length,
-      event_point_node_copy1.bidirectional_link_id_list,
-      extraction_link_id_list.length
-    );
-
     const old_copy1_id = even_point_node.node_id;
     const new_copy1_id = old_copy1_id + symbol;
     event_point_node_copy1.node_id = new_copy1_id;
