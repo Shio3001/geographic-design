@@ -82,7 +82,14 @@ class Graph {
     for (let i = 0; i < node_keys.length; i++) {
       const node_key = node_keys[i];
       const node = this.graph.get(node_key);
+
       if (node.bidirectional_link_id_list.length % 2 == 0 && node.bidirectional_link_id_list.length >= 4) {
+        console.log(
+          "getEvenBranchPointID",
+          node.bidirectional_link_id_list.length,
+          node.bidirectional_link_id_list.length % 2 == 0,
+          node.bidirectional_link_id_list.length >= 4
+        );
         t_id.push(node_key);
         continue;
       }
@@ -166,23 +173,33 @@ class Graph {
     const event_point_node_copy1 = even_point_node.copyGraphNode();
     const event_point_node_copy2 = even_point_node.copyGraphNode();
 
-    event_point_node_copy1.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element, index) =>
-      extraction_link_id_list.includes(element)
-    );
+    // event_point_node_copy1.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter((element) =>
+    //   extraction_link_id_list.includes(element)
+    // );
+
+    event_point_node_copy1.bidirectional_link_id_list = [...extraction_link_id_list];
     event_point_node_copy2.bidirectional_link_id_list = even_point_node.bidirectional_link_id_list.filter(
-      (element, index) => !extraction_link_id_list.includes(element)
+      (element) => !extraction_link_id_list.includes(element)
+    );
+
+    console.log(
+      "separationLinkNode",
+      even_point_node.bidirectional_link_id_list.length,
+      event_point_node_copy1.bidirectional_link_id_list.length,
+      event_point_node_copy1.bidirectional_link_id_list,
+      extraction_link_id_list.length
     );
 
     const old_copy1_id = even_point_node.node_id;
     const new_copy1_id = old_copy1_id + symbol;
     event_point_node_copy1.node_id = new_copy1_id;
 
+    this.graph.set(event_point_node_copy1.node_id, event_point_node_copy1);
+    this.graph.set(event_point_node_copy2.node_id, event_point_node_copy2);
+
     for (let i = 0; i < extraction_link_id_list.length; i++) {
       this.replaceLinkNode(extraction_link_id_list[i], old_copy1_id, new_copy1_id);
     }
-
-    this.graph.set(event_point_node_copy1.node_id, event_point_node_copy1);
-    this.graph.set(event_point_node_copy2.node_id, event_point_node_copy2);
 
     return new_copy1_id;
   };
@@ -243,16 +260,18 @@ class Graph {
 
     let even_point_list = this.getEvenBranchPointID();
 
+    let intersection_extraction_count = 0;
+
     while (even_point_list.length > 0) {
       const even_point_id = even_point_list[0];
       const extraction_link_id_list = extraction(even_point_id);
       const is_another_acute = isAcuteAngle(even_point_id, extraction_link_id_list);
 
-      console.log("intersectionExtraction", even_point_id, extraction_link_id_list, is_another_acute);
+      console.log("intersectionExtraction", even_point_id, extraction_link_id_list, is_another_acute, intersection_extraction_count, even_point_list);
       if (is_another_acute) {
         through_ndoe_list.push(even_point_id);
       } else {
-        const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s");
+        const new_even_point_id = this.separationLinkNode(even_point_id, extraction_link_id_list, "s" + intersection_extraction_count);
 
         // const even_node = this.graph.get(even_point_id);
         // const even_new_node = this.graph.get(new_even_point_id);
@@ -260,6 +279,8 @@ class Graph {
         // even_node.bidirectional_link_id_list.push(new_even_point_id);
         // even_new_node.bidirectional_link_id_list.push(even_point_id);
       }
+
+      intersection_extraction_count++;
 
       even_point_list = this.getEvenBranchPointID().filter((element, index) => !through_ndoe_list.includes(element));
     }
