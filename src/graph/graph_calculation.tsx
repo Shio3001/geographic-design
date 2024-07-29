@@ -86,49 +86,44 @@ class GraphCalculation {
         this.calcTerminationPoint();
       }
     }
-    if (true) {
-      const graph_optimization = new GraphOptimization();
-      let gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
 
-      const getBranch2List = () => {
-        const gp2 = gec.getPointID(2);
-        const fgp2 = gp2.filter(
-          (element, index) => gec.graph.get(element).bidirectional_link_id_list[0] == gec.graph.get(element).bidirectional_link_id_list[1]
-        );
-        return fgp2;
-      };
+    const graph_optimization = new GraphOptimization();
+    let gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
 
-      const getBranch2OtherList = () => {
-        const gp2 = gec.getPointID(2);
-        const fgp2 = gp2.filter(
-          (element, index) => gec.graph.get(element).bidirectional_link_id_list[0] != gec.graph.get(element).bidirectional_link_id_list[1]
-        );
-        return fgp2;
-      };
+    const getBranch2List = () => {
+      const gp2 = gec.getPointID(2);
+      const fgp2 = gp2.filter((element, index) => gec.graph.get(element).bidirectional_link_id_list[0] == gec.graph.get(element).bidirectional_link_id_list[1]);
+      return fgp2;
+    };
 
-      let branch2_list = getBranch2List();
+    const getBranch2OtherList = () => {
+      const gp2 = gec.getPointID(2);
+      const fgp2 = gp2.filter((element, index) => gec.graph.get(element).bidirectional_link_id_list[0] != gec.graph.get(element).bidirectional_link_id_list[1]);
+      return fgp2;
+    };
 
-      while (branch2_list.length > 0) {
-        const branch2_id = branch2_list[0];
-        const branch2_link_id = gec.graph.get(branch2_id).bidirectional_link_id_list[0];
+    let branch2_list = getBranch2List();
 
-        const brnach_2_g_node = this.graph_container.graph.get(branch2_id);
-        const brnach_2_g_link_node = this.graph_container.graph.get(branch2_link_id);
-        const brnach_2_g_link_copy_node = brnach_2_g_link_node.copyGraphNode();
-        const new_id = brnach_2_g_link_copy_node.node_id + "d";
+    while (branch2_list.length > 0) {
+      const branch2_id = branch2_list[0];
+      const branch2_link_id = gec.graph.get(branch2_id).bidirectional_link_id_list[0];
 
-        brnach_2_g_link_copy_node.node_id = new_id;
-        brnach_2_g_link_copy_node.bidirectional_link_id_list = [branch2_id];
+      const brnach_2_g_node = this.graph_container.graph.get(branch2_id);
+      const brnach_2_g_link_node = this.graph_container.graph.get(branch2_link_id);
+      const brnach_2_g_link_copy_node = brnach_2_g_link_node.copyGraphNode();
+      const new_id = brnach_2_g_link_copy_node.node_id + "d";
 
-        this.graph_container.graph.set(new_id, brnach_2_g_link_copy_node);
-        this.graph_container.deleteLinkNode(branch2_link_id, branch2_id);
-        this.graph_container.replaceLinkNode(branch2_id, branch2_link_id, new_id);
+      brnach_2_g_link_copy_node.node_id = new_id;
+      brnach_2_g_link_copy_node.bidirectional_link_id_list = [branch2_id];
 
-        this.calcReStart();
+      this.graph_container.graph.set(new_id, brnach_2_g_link_copy_node);
+      this.graph_container.deleteLinkNode(branch2_link_id, branch2_id);
+      this.graph_container.replaceLinkNode(branch2_id, branch2_link_id, new_id);
 
-        gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
-        branch2_list = getBranch2List();
-      }
+      this.calcReStart();
+
+      gec = graph_optimization.generateGraphExtraction(this.graph_container, this.processed_path);
+      branch2_list = getBranch2List();
     }
   };
 
