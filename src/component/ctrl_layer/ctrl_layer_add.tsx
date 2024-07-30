@@ -9,6 +9,7 @@ import { CtrlGisContext } from "./../ctrl_gis_context";
 import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr, searchUniqueKeyBySearchKey } from "./../../gis_scipt/gis_unique_data";
 import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 import LayerData from "../ctrl_dataflow/edit_data/layer_data";
+import SelectBox from "../../common/selectbox/selectbox";
 
 type TypeCtrlLayerAdd = {
   unit_id_index: number;
@@ -117,8 +118,8 @@ const CtrlLayerAdd = () => {
   return (
     <div className="ctrl_layer_add">
       <Button flowUp={flowUpAdd} text={"一括追加"}></Button>
-      <PulldownMenu flowUp={flowUp0} view_options={getViewOptions1()} selected={ctrl_layer_add.unit_id_index} />
-      <PulldownMenu flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} />
+      <SelectBox flowUp={flowUp0} view_options={getViewOptions1()} selected={ctrl_layer_add.unit_id_index} />
+      <SelectBox flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} />
     </div>
   );
 };

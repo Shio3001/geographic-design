@@ -5,6 +5,7 @@ import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
 
 import CheckBox from "./../../common/checkbox/checkbox";
 import NumberBox from "./../../common/numberbox/numberbox";
+import SelectBox from "../../common/selectbox/selectbox";
 
 import { getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 import {
@@ -167,8 +168,8 @@ const PullRapperRailroadSection = (props: PullRapper) => {
 
   return (
     <>
-      <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
+      <SelectBox flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
+      <SelectBox flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
       <CheckBox flowUp={flowUpPathOptimize} label_text={"パスの最適化"} checked={getCheckedPathOptimize()} />
       <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />
       <CheckBox flowUp={flowUpOriginalDataCoordinateCorrection} label_text={"座標補正"} checked={getCheckedOriginalDataCoordinateCorrection()} />
@@ -235,8 +236,8 @@ const PullRapperStation = (props: PullRapper) => {
 
   return (
     <>
-      <PulldownMenu flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
-      <PulldownMenu flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
+      <SelectBox flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
+      <SelectBox flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
     </>
   );
 };

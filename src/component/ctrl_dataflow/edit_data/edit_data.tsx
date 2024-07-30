@@ -58,7 +58,8 @@ class EditData {
 
   deleteLayerByUUID = (uuid: string) => {
     const new_layers_order = this.layers_order.filter((n) => n !== uuid);
-    delete this.layers[uuid];
+
+    const f = delete this.layers[uuid];
     this.layers_order = new_layers_order;
   };
 
