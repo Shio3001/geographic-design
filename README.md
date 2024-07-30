@@ -4,7 +4,7 @@
 
 地理情報を用いたアニメーションの作成を容易にするソフトウェアです。</br>
 
-アクセスリンク：[https://shio3001.github.io/RouteAnimation/](https://shio3001.github.io/RouteAnimation/)</br>
+アクセスリンク：[https://shio3001.github.io/RouteAnimation/](https://shio3001.github.io/route-animation/)</br>
 
 （任意）</br>
 本ソフトウェアを用いて公開した動画の概要欄に「しおのあそびば （[https://twitter.com/ShioPy0101](https://twitter.com/ShioPy0101)）のソフトウェアを用いて地理情報を用いたアニメーションを作成しました」的なことを書いてくれると、うれしいです。
