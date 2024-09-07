@@ -39,7 +39,7 @@ Adobe Illustrator は、SVG ファイルをそのまま入力、操作するこ�
 3.AE に ai ファイルを投げ込み</br>
 4.ai レイヤーに対して「作成 → ベクトルレイヤーからシェイプを作成」
 
-### AviUlt
+### AviUtl
 
 AviUtl もプラグインで SVG 画像は読み込めそうだけど、アニメーションは厳しいかも。けど、路線図アニメーションは簡単になるね</br>
 [AviUtl の易しい使い方【AviUtl】SVG（ベクター画像）を読み込む方法【プラグイン】](https://aviutl.info/svg/)
