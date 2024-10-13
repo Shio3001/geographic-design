@@ -33,15 +33,11 @@ const SelectBox = (props: props) => {
     const rv: Array<TypeOption> = [];
 
     for (let i = 0; i < view_options.length; i++) {
-      rv.push({ value: i, label: view_options[i] });
+      rv.push({ value: i, label: i + "." + view_options[i] });
     }
 
     return rv;
   };
-
-  // useEffect(() => {
-  //   setSelectIndex(props.selected);
-  // }, [props.selected]);
 
   return (
     <>
