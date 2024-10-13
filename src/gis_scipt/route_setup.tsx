@@ -1,6 +1,8 @@
 import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo } from "./route_type";
 
+const N02_05_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_GIS/N02-05_RailroadSection.json");
 const N02_22_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_GIS/N02-22_RailroadSection.json");
+const N02_05_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-05_Station.json");
 const N02_22_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-22_Station.json");
 
 const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {} };
@@ -31,14 +33,26 @@ export const setupGisInfo = (): TypeGISInfo => {
   console.log(N02_22_RailroadSection_json);
   console.log(N02_22_Station_json);
 
+  const N02_05_RailroadSection_json_type = N02_05_RailroadSection_json as TypeJsonGISRailroadSection;
   const N02_22_RailroadSection_json_type = N02_22_RailroadSection_json as TypeJsonGISRailroadSection;
+  const N02_05_Station_json_type = N02_05_Station_json as TypeJsonGISStation;
   const N02_22_Station_json_type = N02_22_Station_json as TypeJsonGISStation;
+
+  gis_info.gis_data["2005_rail"] = N02_05_RailroadSection_json_type;
+  gis_info.units["2005_rail"] = { unit_id: "2005_rail", name: "2005年路線データ", grouping_size: 2 };
+
+  gis_info.gis_data["2005_station"] = N02_05_Station_json_type;
+  gis_info.units["2005_station"] = { unit_id: "2005_station", name: "2005年駅データ", grouping_size: 2 };
 
   gis_info.gis_data["2022_rail"] = N02_22_RailroadSection_json_type;
   gis_info.units["2022_rail"] = { unit_id: "2022_rail", name: "2022年路線データ", grouping_size: 2 };
 
   gis_info.gis_data["2022_station"] = N02_22_Station_json_type;
   gis_info.units["2022_station"] = { unit_id: "2022_station", name: "2022年駅データ", grouping_size: 2 };
+
+  gis_info.id_type["2005_rail"] = "RailroadSection";
+  gis_info.id_type["2005_station"] = "Station";
+
   gis_info.id_type["2022_rail"] = "RailroadSection";
   gis_info.id_type["2022_station"] = "Station";
   gis_info_load_flag = true;
