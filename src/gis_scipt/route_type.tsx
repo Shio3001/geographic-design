@@ -12,6 +12,19 @@ export type TypeSVGCommand = {
   y: string;
 };
 
+export type TypeJsonCoastPref = {
+  type: string;
+  properties: { pref: string };
+  geometry: { type: string; coordinates: TypeJsonCoordinates };
+};
+
+export type TypeJsonCoast = {
+  type: string;
+  name: string;
+
+  features: Array<TypeJsonCoastPref>;
+};
+
 export type TypeJsonGISRailroadSection = {
   type: string;
   name: string;
@@ -34,5 +47,5 @@ export type TypeJsonGISStation = {
 
 export type TypeGisUnit = { unit_id: string; name: string; grouping_size: number };
 export type TypeGisUnits = { [key: string]: TypeGisUnit };
-export type TypeGisData = { [key: string]: TypeJsonGISRailroadSection | TypeJsonGISStation };
+export type TypeGisData = { [key: string]: TypeJsonGISRailroadSection | TypeJsonGISStation | TypeJsonCoast };
 export type TypeGISInfo = { units: TypeGisUnits; gis_data: TypeGisData; id_type: { [key: string]: string } };
