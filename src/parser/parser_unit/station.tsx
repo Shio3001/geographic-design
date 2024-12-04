@@ -8,7 +8,6 @@ import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import { toNumber } from "lodash";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import BigNumber from "bignumber.js";
-
 import * as GEO from "./../../geographic_constant";
 
 class ParserStation {

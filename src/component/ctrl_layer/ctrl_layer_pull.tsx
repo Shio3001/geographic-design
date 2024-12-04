@@ -19,8 +19,9 @@ import {
 
 import { AppContext } from "./../../app_context";
 import LayerData from "../ctrl_dataflow/edit_data/layer_data";
+import TextBox from "../../common/textbox/textbox";
 
-type PullRapper = { layer_uuid: string };
+type PullRapper = { layer_uuid: string; unit_type: string };
 
 const PullRapperUnnecessary = (props: PullRapper) => {
   return <></>;
@@ -241,6 +242,73 @@ const PullRapperStation = (props: PullRapper) => {
   );
 };
 
+const PullRapperCoast = (props: PullRapper) => {
+  const AppContextValue = useContext(AppContext);
+  const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
+  const [threshold, setThreshold] = useState("20");
+
+  const pref = searchUniqueKey(layer.unit_id, "pref");
+
+  useEffect(() => {
+    return () => {
+      const edit_data = AppContextValue.edit_data;
+      edit_data.setLayer(layer);
+      AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+    };
+  }, [props.unit_type, props.layer_uuid]);
+
+  useEffect(() => {
+    if (!layer.layer_infomation["pref"]) {
+      flowUpUnitPref(0);
+    }
+    if (!layer.layer_infomation["path_join"]) {
+      flowUpPathJoin(false);
+    }
+    if (!layer.layer_infomation["threshold"]) {
+      flowUpUnitThreshold("20");
+    }
+  }, [props.unit_type, props.layer_uuid]);
+
+  const flowUpUnitPref = (index: number) => {
+    const layer_pref = pref[index];
+    layer.updateLayerElement("pref", layer_pref);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpUnitThreshold = (value: string) => {
+    layer.updateLayerElement("threshold", value);
+    setThreshold(value);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpPathJoin = (check: boolean) => {
+    console.log("flowUpPathJoin", check);
+    layer.updateLayerElement("path_join", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+  const getCheckedPathJoin = () => {
+    if (!("path_join" in layer.layer_infomation)) {
+      return false;
+    }
+
+    const c = layer.getElement("path_join");
+    return c == "ok";
+  };
+  return (
+    <>
+      <PulldownMenu flowUp={flowUpUnitPref} view_options={pref} selected={getArrayIndexStr(pref, layer.getElement("pref"))} />
+      <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
+      <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />
+    </>
+  );
+};
+
 type propsCtrlLayerPull = {
   layer_uuid: string;
 };
@@ -250,22 +318,25 @@ const CtrlLayerPull = (props: propsCtrlLayerPull) => {
 
   const unit_id = layer.unit_id;
   const unit_type = AppContextValue.gis_info.id_type[unit_id];
-
   switch (unit_type) {
     case "RailroadSection": {
       return (
         <>
-          <PullRapperRailroadSection layer_uuid={props.layer_uuid} />
+          <PullRapperRailroadSection unit_type={unit_type} layer_uuid={props.layer_uuid} />
         </>
       );
     }
     case "Station": {
       return (
         <>
-          <PullRapperStation layer_uuid={props.layer_uuid} />
+          <PullRapperStation unit_type={unit_type} layer_uuid={props.layer_uuid} />
         </>
       );
     }
+    case "Coast": {
+      return <PullRapperCoast unit_type={unit_type} layer_uuid={props.layer_uuid}></PullRapperCoast>;
+    }
+
     default:
       return <></>;
   }

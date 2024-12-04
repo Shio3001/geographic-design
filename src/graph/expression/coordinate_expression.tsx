@@ -82,6 +82,7 @@ class GraphCoordinateExpression {
   pushPosIdsIndex = (id: string, index: number) => {
     this.pos_order.splice(index, 0, id);
   };
+
   pushPosIds = (id: string) => {
     this.pos_order.push(id);
   };

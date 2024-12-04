@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client";
 type props = {
   flowUp: Function;
   text: string;
-  label_text: string;
+  label_text?: string;
 };
 
 const TextBox = (props: props) => {
@@ -23,7 +23,7 @@ const TextBox = (props: props) => {
   return (
     <>
       <div className="text_box">
-        <p>{props.label_text}</p>
+        {props.label_text ? <label>{props.label_text}</label> : <></>}
         <input type="text" value={text} onChange={onChangeEvent}></input>
       </div>
     </>
