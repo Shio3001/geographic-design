@@ -26,6 +26,8 @@ class ParserCoast {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
     const threshold = Number(current_layer.layer_infomation["threshold"]);
+    const thinoout = Number(current_layer.layer_infomation["thinoout"]);
+
     const geometry_index = searchGisConditional(this.unit_id, {
       pref: current_layer.layer_infomation["pref"],
     });
@@ -108,6 +110,14 @@ class ParserCoast {
           i++;
         }
       }
+
+      if (thinoout > 0) {
+        for (let i = 0; i < sort_paths_array.length; i++) {
+          const last = sort_paths_array[i].pos_order.length - 1;
+          sort_paths_array[i].pos_order = sort_paths_array[i].pos_order.filter((element, index) => index % thinoout == 0 || index == last);
+        }
+      }
+
       //   for (let i = 0; i < sort_paths_array.length; i++) {
       //     console.log("sort_paths_array", i, sort_paths_array[i].pos_order.length);
       //   }
