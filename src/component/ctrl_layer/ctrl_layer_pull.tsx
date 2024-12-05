@@ -246,6 +246,7 @@ const PullRapperCoast = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
   const [threshold, setThreshold] = useState("20");
+  const [thinoout, setThinoout] = useState("0");
 
   const pref = searchUniqueKey(layer.unit_id, "pref");
 
@@ -264,8 +265,12 @@ const PullRapperCoast = (props: PullRapper) => {
     if (!layer.layer_infomation["path_join"]) {
       flowUpPathJoin(false);
     }
+
     if (!layer.layer_infomation["threshold"]) {
       flowUpUnitThreshold("20");
+    }
+    if (!layer.layer_infomation["thinoout"]) {
+      flowUpUnitThreshold("0");
     }
   }, [props.unit_type, props.layer_uuid]);
 
@@ -276,10 +281,17 @@ const PullRapperCoast = (props: PullRapper) => {
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
-
   const flowUpUnitThreshold = (value: string) => {
     layer.updateLayerElement("threshold", value);
     setThreshold(value);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpUnitThinoout = (value: string) => {
+    layer.updateLayerElement("thinoout", value);
+    setThinoout(value);
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
@@ -292,6 +304,7 @@ const PullRapperCoast = (props: PullRapper) => {
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
+
   const getCheckedPathJoin = () => {
     if (!("path_join" in layer.layer_infomation)) {
       return false;
@@ -302,9 +315,10 @@ const PullRapperCoast = (props: PullRapper) => {
   };
   return (
     <>
-      <PulldownMenu flowUp={flowUpUnitPref} view_options={pref} selected={getArrayIndexStr(pref, layer.getElement("pref"))} />
+      <PulldownMenu flowUp={flowUpUnitPref} view_options={pref} selected={getArrayIndexStr(pref, layer.getElement("pref"))} />{" "}
+      <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />{" "}
       <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
-      <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />
+      <TextBox label_text="間引き" text={thinoout} flowUp={flowUpUnitThinoout}></TextBox>{" "}
     </>
   );
 };
