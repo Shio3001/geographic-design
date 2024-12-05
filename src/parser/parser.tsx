@@ -4,6 +4,7 @@ import { TypeGISInfo, TypePosition } from "../gis_scipt/route_type";
 import { getRandomInt } from "../gis_scipt/route_setup";
 import ParserRailroadSection from "./parser_unit/railroad_section";
 import ParserStation from "./parser_unit/station";
+import ParserCoast from "./parser_unit/coast";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
 import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
@@ -45,7 +46,7 @@ class Parser {
     const graph_coordinate_expression = this.switchParserLayer(layer_uuid);
 
     this.graph_coordinate_list = this.graph_coordinate_list.concat(graph_coordinate_expression);
-    console.log("parserLayer", this.graph_coordinate_list, graph_coordinate_expression);
+    console.log("parserLayer", this.edit_data, this.graph_coordinate_list, graph_coordinate_expression);
   };
 
   toSVGPoint = (gce: GraphCoordinateExpression) => {
@@ -272,6 +273,11 @@ class Parser {
         parser_station_section.coordinateAggregation();
         const points = parser_station_section.generatePoint();
         return points;
+      }
+      case "Coast": {
+        const paraser_railroad_section = new ParserCoast(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paths = paraser_railroad_section.generatePath();
+        return paths;
       }
       default:
         break;

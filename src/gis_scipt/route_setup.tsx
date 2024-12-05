@@ -1,9 +1,13 @@
-import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo } from "./route_type";
+import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeJsonCoast, TypeJsonCoastPref, TypeGisUnit, TypeGisUnits, TypeGISInfo } from "./route_type";
 
 const N02_05_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_GIS/N02-05_RailroadSection.json");
 const N02_22_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_GIS/N02-22_RailroadSection.json");
+const N02_23_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_GIS/N02-23_RailroadSection.json");
+
 const N02_05_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-05_Station.json");
 const N02_22_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-22_Station.json");
+const N02_23_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-23_Station.json");
+const Fukui_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Fukui-23_Coast.json");
 
 const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {} };
 let gis_info_load_flag = false;
@@ -35,8 +39,16 @@ export const setupGisInfo = (): TypeGISInfo => {
 
   const N02_05_RailroadSection_json_type = N02_05_RailroadSection_json as TypeJsonGISRailroadSection;
   const N02_22_RailroadSection_json_type = N02_22_RailroadSection_json as TypeJsonGISRailroadSection;
+  const N02_23_RailroadSection_json_type = N02_23_RailroadSection_json as TypeJsonGISRailroadSection;
+
   const N02_05_Station_json_type = N02_05_Station_json as TypeJsonGISStation;
   const N02_22_Station_json_type = N02_22_Station_json as TypeJsonGISStation;
+  const N02_23_Station_json_type = N02_23_Station_json as TypeJsonGISStation;
+
+  let coast23pref: Array<TypeJsonCoastPref> = [];
+  const Fukui_23_Coast_json_type = Fukui_23_Coast as Array<TypeJsonCoastPref>;
+  coast23pref = coast23pref.concat(Fukui_23_Coast_json_type);
+  const coast23: TypeJsonCoast = { type: "FeatureCollection", name: "Fukui-23_Coast", features: coast23pref };
 
   gis_info.gis_data["2005_rail"] = N02_05_RailroadSection_json_type;
   gis_info.units["2005_rail"] = { unit_id: "2005_rail", name: "2005年路線データ", grouping_size: 2 };
@@ -50,11 +62,28 @@ export const setupGisInfo = (): TypeGISInfo => {
   gis_info.gis_data["2022_station"] = N02_22_Station_json_type;
   gis_info.units["2022_station"] = { unit_id: "2022_station", name: "2022年駅データ", grouping_size: 2 };
 
+  gis_info.gis_data["2023_rail"] = N02_23_RailroadSection_json_type;
+  gis_info.units["2023_rail"] = { unit_id: "2022_rail", name: "2023年路線データ", grouping_size: 2 };
+
+  gis_info.gis_data["2023_station"] = N02_23_Station_json_type;
+  gis_info.units["2023_station"] = { unit_id: "2023_station", name: "2023年駅データ", grouping_size: 2 };
+
+  gis_info.gis_data["2023_coast"] = coast23;
+  gis_info.units["2023_coast"] = { unit_id: "2023_coast", name: "2023年海岸線データ", grouping_size: 2 };
+
   gis_info.id_type["2005_rail"] = "RailroadSection";
   gis_info.id_type["2005_station"] = "Station";
 
   gis_info.id_type["2022_rail"] = "RailroadSection";
   gis_info.id_type["2022_station"] = "Station";
+
+  gis_info.id_type["2023_rail"] = "RailroadSection";
+  gis_info.id_type["2023_station"] = "Station";
+
+  gis_info.id_type["2023_coast"] = "Coast";
+  console.log("gis_info_2023_rail", gis_info.gis_data["2023_rail"]);
+  console.log("gis_info_2023_coast", gis_info.gis_data["2023_coast"]);
+
   gis_info_load_flag = true;
   return gis_info;
 };
