@@ -245,8 +245,8 @@ const PullRapperStation = (props: PullRapper) => {
 const PullRapperCoast = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
-  const [threshold, setThreshold] = useState("20");
-  const [thinoout, setThinoout] = useState("0");
+  const [threshold, setThreshold] = useState("100");
+  const [thinoout, setThinoout] = useState("10");
 
   const pref = searchUniqueKey(layer.unit_id, "pref");
 
@@ -263,14 +263,14 @@ const PullRapperCoast = (props: PullRapper) => {
       flowUpUnitPref(0);
     }
     if (!layer.layer_infomation["path_join"]) {
-      flowUpPathJoin(false);
+      flowUpPathJoin(true);
     }
 
     if (!layer.layer_infomation["threshold"]) {
-      flowUpUnitThreshold("20");
+      flowUpUnitThreshold("100");
     }
     if (!layer.layer_infomation["thinoout"]) {
-      flowUpUnitThreshold("0");
+      flowUpUnitThinoout("10");
     }
   }, [props.unit_type, props.layer_uuid]);
 
@@ -281,6 +281,7 @@ const PullRapperCoast = (props: PullRapper) => {
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
+
   const flowUpUnitThreshold = (value: string) => {
     layer.updateLayerElement("threshold", value);
     setThreshold(value);
@@ -307,7 +308,7 @@ const PullRapperCoast = (props: PullRapper) => {
 
   const getCheckedPathJoin = () => {
     if (!("path_join" in layer.layer_infomation)) {
-      return false;
+      return true;
     }
 
     const c = layer.getElement("path_join");

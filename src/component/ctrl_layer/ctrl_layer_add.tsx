@@ -54,6 +54,9 @@ const CtrlLayerAdd = () => {
       case "Station": {
         return searchUniqueKey(unit_id, "N02_004");
       }
+      // case "Coast": {
+      //   return searchUniqueKey(unit_id, "pref");
+      // }
       default:
         return [];
     }
@@ -100,6 +103,25 @@ const CtrlLayerAdd = () => {
         AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
         return;
       }
+
+      case "Coast": {
+        const prefs = searchUniqueKey(unit_id, "pref");
+        const edit_data = AppContextValue.edit_data;
+
+        for (let i in prefs) {
+          const pref = prefs[i];
+          const nlayer: LayerData = new LayerData();
+          nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
+          nlayer.updateLayerElement("pref", pref);
+          nlayer.updateLayerElement("threshold", "100");
+          nlayer.updateLayerElement("thinoout", "10");
+          edit_data.addLayer(nlayer);
+        }
+
+        AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+        return;
+      }
+
       default:
         return;
     }
@@ -118,7 +140,7 @@ const CtrlLayerAdd = () => {
     <div className="ctrl_layer_add">
       <Button flowUp={flowUpAdd} text={"一括追加"}></Button>
       <PulldownMenu flowUp={flowUp0} view_options={getViewOptions1()} selected={ctrl_layer_add.unit_id_index} />
-      <PulldownMenu flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} />
+      {getViewOptions2().length == 0 ? <></> : <PulldownMenu flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} />}
     </div>
   );
 };

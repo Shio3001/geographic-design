@@ -7,7 +7,15 @@ const N02_23_RailroadSection_json: TypeJsonGISRailroadSection = require("./GSI_G
 const N02_05_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-05_Station.json");
 const N02_22_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-22_Station.json");
 const N02_23_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-23_Station.json");
+
 const Fukui_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Fukui-23_Coast.json");
+const Ishikawa_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Ishikawa-23_Coast.json");
+const Toyama_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Toyama-23_Coast.json");
+const Niigata_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Niigata-23_Coast.json");
+
+const Shizuoka_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Shizuoka-23_Coast.json");
+const Aichi_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Aichi-23_Coast.json");
+const Mie_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Mie-23_Coast.json");
 
 const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {} };
 let gis_info_load_flag = false;
@@ -47,7 +55,23 @@ export const setupGisInfo = (): TypeGISInfo => {
 
   let coast23pref: Array<TypeJsonCoastPref> = [];
   const Fukui_23_Coast_json_type = Fukui_23_Coast as Array<TypeJsonCoastPref>;
+  const Ishikawa_23_Coast_json_type = Ishikawa_23_Coast as Array<TypeJsonCoastPref>;
+  const Toyama_23_Coast_json_type = Toyama_23_Coast as Array<TypeJsonCoastPref>;
+  const Niigata_23_Coast_json_type = Niigata_23_Coast as Array<TypeJsonCoastPref>;
+
+  const Shizuoka_23_Coast_json_type = Shizuoka_23_Coast as Array<TypeJsonCoastPref>;
+  const Aichi_23_Coast_json_type = Aichi_23_Coast as Array<TypeJsonCoastPref>;
+  const Mie_23_Coast_json_type = Mie_23_Coast as Array<TypeJsonCoastPref>;
+
   coast23pref = coast23pref.concat(Fukui_23_Coast_json_type);
+  coast23pref = coast23pref.concat(Ishikawa_23_Coast_json_type);
+  coast23pref = coast23pref.concat(Toyama_23_Coast_json_type);
+  coast23pref = coast23pref.concat(Niigata_23_Coast_json_type);
+
+  coast23pref = coast23pref.concat(Shizuoka_23_Coast_json_type);
+  coast23pref = coast23pref.concat(Aichi_23_Coast_json_type);
+  coast23pref = coast23pref.concat(Mie_23_Coast_json_type);
+
   const coast23: TypeJsonCoast = { type: "FeatureCollection", name: "Fukui-23_Coast", features: coast23pref };
 
   gis_info.gis_data["2005_rail"] = N02_05_RailroadSection_json_type;
