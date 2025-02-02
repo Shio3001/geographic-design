@@ -113,7 +113,24 @@ const CtrlLayerAdd = () => {
           const nlayer: LayerData = new LayerData();
           nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
           nlayer.updateLayerElement("pref", pref);
-          nlayer.updateLayerElement("threshold", "100");
+          nlayer.updateLayerElement("threshold", "10000");
+          nlayer.updateLayerElement("thinoout", "10");
+          edit_data.addLayer(nlayer);
+        }
+
+        AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+        return;
+      }
+      case "Lake": {
+        const lakes = searchUniqueKey(unit_id, "lake");
+        const edit_data = AppContextValue.edit_data;
+
+        for (let i in lakes) {
+          const lake = lakes[i];
+          const nlayer: LayerData = new LayerData();
+          nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
+          nlayer.updateLayerElement("lake", lake);
+          nlayer.updateLayerElement("threshold", "0");
           nlayer.updateLayerElement("thinoout", "10");
           edit_data.addLayer(nlayer);
         }
