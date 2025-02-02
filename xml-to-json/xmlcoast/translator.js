@@ -1,7 +1,7 @@
 const fs = require("fs");
 const xml2js = require("xml2js");
 
-const xmlString = fs.readFileSync("./C23-06_18-g.xml", "utf8");
+const xmlString = fs.readFileSync("./C23-06_15-g.xml", "utf8");
 
 const parserGmlCurve = (gml_Curve) => {
   const curve = [];
@@ -36,7 +36,7 @@ const parserCurve = (gml_Curve) => {
   for (let i = 0; i < gml_Curve.length; i++) {
     const feature = {
       type: "Feature",
-      properties: { pref: "福井県" },
+      properties: { pref: "新潟県" },
       geometry: { type: "LineString", coordinates: gml_Curve[i] },
     };
     // console.log(feature);
@@ -59,5 +59,5 @@ xml2js.parseString(xmlString, (err, result) => {
   console.log(parse_gml_Curve);
   const curve_data = parserCurve(parse_gml_Curve);
   const parse_gml_Curve_json = JSON.stringify(curve_data);
-  fs.writeFileSync("Fukui-23_Coast.json", parse_gml_Curve_json);
+  fs.writeFileSync("Niigata-23_Coast.json", parse_gml_Curve_json);
 });

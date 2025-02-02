@@ -217,7 +217,7 @@ export const searchUniqueKey = (unit_id: string, search_properties_key: string):
     pushPropertie(propertie_value);
   }
 
-  console.log(propertie_list);
+  console.log("propertie_list", propertie_list);
 
   return propertie_list;
 };
