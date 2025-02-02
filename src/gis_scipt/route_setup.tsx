@@ -8,14 +8,47 @@ const N02_05_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-05_Stati
 const N02_22_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-22_Station.json");
 const N02_23_Station_json: TypeJsonGISStation = require("./GSI_GIS//N02-23_Station.json");
 
-const Fukui_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Fukui-23_Coast.json");
-const Ishikawa_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Ishikawa-23_Coast.json");
-const Toyama_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Toyama-23_Coast.json");
+const Hokkaido_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Hokkaido-23_Coast.json");
+const Aomori_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Aomori-23_Coast.json");
+const Iwate_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Iwate-23_Coast.json");
+const Miyagi_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Miyagi-23_Coast.json");
+const Akita_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Akita-23_Coast.json");
+const Yamagata_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Yamagata-23_Coast.json");
+const Fukushima_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Fukushima-23_Coast.json");
+const Ibaraki_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Ibaraki-23_Coast.json");
+const Chiba_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Chiba-23_Coast.json");
+const Tokyo_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Tokyo-23_Coast.json");
+const Kanagawa_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Kanagawa-23_Coast.json");
 const Niigata_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Niigata-23_Coast.json");
-
+const Toyama_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Toyama-23_Coast.json");
+const Ishikawa_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Ishikawa-23_Coast.json");
+const Fukui_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Fukui-23_Coast.json");
 const Shizuoka_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Shizuoka-23_Coast.json");
 const Aichi_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Aichi-23_Coast.json");
 const Mie_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Mie-23_Coast.json");
+const Kyoto_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Kyoto-23_Coast.json");
+const Osaka_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Osaka-23_Coast.json");
+const Hyogo_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Hyogo-23_Coast.json");
+const Wakayama_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Wakayama-23_Coast.json");
+const Tottori_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Tottori-23_Coast.json");
+const Shimane_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Shimane-23_Coast.json");
+const Okayama_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Okayama-23_Coast.json");
+const Hiroshima_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Hiroshima-23_Coast.json");
+const Yamaguchi_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Yamaguchi-23_Coast.json");
+const Tokushima_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Tokushima-23_Coast.json");
+const Kagawa_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Kagawa-23_Coast.json");
+const Ehime_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Ehime-23_Coast.json");
+const Kochi_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Kochi-23_Coast.json");
+const Fukuoka_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Fukuoka-23_Coast.json");
+const Saga_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Saga-23_Coast.json");
+const Nagasaki_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Nagasaki-23_Coast.json");
+const Kumamoto_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Kumamoto-23_Coast.json");
+const Oita_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Oita-23_Coast.json");
+const Miyazaki_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Miyazaki-23_Coast.json");
+const Kagoshima_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Kagoshima-23_Coast.json");
+const Okinawa_23_Coast: Array<TypeJsonCoastPref> = require("./GSI_GIS/Okinawa-23_Coast.json");
+
+const lake_05: Array<TypeJsonCoastPref> = require("./GSI_GIS/lake-05.json");
 
 const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {} };
 let gis_info_load_flag = false;
@@ -54,24 +87,57 @@ export const setupGisInfo = (): TypeGISInfo => {
   const N02_23_Station_json_type = N02_23_Station_json as TypeJsonGISStation;
 
   let coast23pref: Array<TypeJsonCoastPref> = [];
-  const Fukui_23_Coast_json_type = Fukui_23_Coast as Array<TypeJsonCoastPref>;
-  const Ishikawa_23_Coast_json_type = Ishikawa_23_Coast as Array<TypeJsonCoastPref>;
-  const Toyama_23_Coast_json_type = Toyama_23_Coast as Array<TypeJsonCoastPref>;
-  const Niigata_23_Coast_json_type = Niigata_23_Coast as Array<TypeJsonCoastPref>;
 
-  const Shizuoka_23_Coast_json_type = Shizuoka_23_Coast as Array<TypeJsonCoastPref>;
-  const Aichi_23_Coast_json_type = Aichi_23_Coast as Array<TypeJsonCoastPref>;
-  const Mie_23_Coast_json_type = Mie_23_Coast as Array<TypeJsonCoastPref>;
+  // const Fukui_23_Coast_json_type = Fukui_23_Coast as Array<TypeJsonCoastPref>;
+  // const Ishikawa_23_Coast_json_type = Ishikawa_23_Coast as Array<TypeJsonCoastPref>;
+  // const Toyama_23_Coast_json_type = Toyama_23_Coast as Array<TypeJsonCoastPref>;
+  // const Niigata_23_Coast_json_type = Niigata_23_Coast as Array<TypeJsonCoastPref>;
+  // const Shizuoka_23_Coast_json_type = Shizuoka_23_Coast as Array<TypeJsonCoastPref>;
+  // const Aichi_23_Coast_json_type = Aichi_23_Coast as Array<TypeJsonCoastPref>;
+  // const Mie_23_Coast_json_type = Mie_23_Coast as Array<TypeJsonCoastPref>;
 
-  coast23pref = coast23pref.concat(Fukui_23_Coast_json_type);
-  coast23pref = coast23pref.concat(Ishikawa_23_Coast_json_type);
-  coast23pref = coast23pref.concat(Toyama_23_Coast_json_type);
-  coast23pref = coast23pref.concat(Niigata_23_Coast_json_type);
-
-  coast23pref = coast23pref.concat(Shizuoka_23_Coast_json_type);
-  coast23pref = coast23pref.concat(Aichi_23_Coast_json_type);
-  coast23pref = coast23pref.concat(Mie_23_Coast_json_type);
-
+  coast23pref = coast23pref.concat(
+    Hokkaido_23_Coast,
+    Aomori_23_Coast,
+    Iwate_23_Coast,
+    Miyagi_23_Coast,
+    Akita_23_Coast,
+    Yamagata_23_Coast,
+    Fukushima_23_Coast,
+    Ibaraki_23_Coast,
+    Chiba_23_Coast,
+    Tokyo_23_Coast,
+    Kanagawa_23_Coast,
+    Niigata_23_Coast,
+    Toyama_23_Coast,
+    Ishikawa_23_Coast,
+    Fukui_23_Coast,
+    Shizuoka_23_Coast,
+    Aichi_23_Coast,
+    Mie_23_Coast,
+    Kyoto_23_Coast,
+    Osaka_23_Coast,
+    Hyogo_23_Coast,
+    Wakayama_23_Coast,
+    Tottori_23_Coast,
+    Shimane_23_Coast,
+    Okayama_23_Coast,
+    Hiroshima_23_Coast,
+    Yamaguchi_23_Coast,
+    Tokushima_23_Coast,
+    Kagawa_23_Coast,
+    Ehime_23_Coast,
+    Kochi_23_Coast,
+    Fukuoka_23_Coast,
+    Saga_23_Coast,
+    Nagasaki_23_Coast,
+    Kumamoto_23_Coast,
+    Oita_23_Coast,
+    Miyazaki_23_Coast,
+    Kagoshima_23_Coast,
+    Okinawa_23_Coast
+  );
+  const lake23: TypeJsonCoast = { type: "FeatureCollection", name: "lake-05", features: lake_05 };
   const coast23: TypeJsonCoast = { type: "FeatureCollection", name: "Fukui-23_Coast", features: coast23pref };
 
   gis_info.gis_data["2005_rail"] = N02_05_RailroadSection_json_type;
@@ -95,6 +161,9 @@ export const setupGisInfo = (): TypeGISInfo => {
   gis_info.gis_data["2023_coast"] = coast23;
   gis_info.units["2023_coast"] = { unit_id: "2023_coast", name: "2023年海岸線データ", grouping_size: 2 };
 
+  gis_info.gis_data["2005_lake"] = lake23;
+  gis_info.units["2005_lake"] = { unit_id: "2005_lake", name: "2005年湖沼データ", grouping_size: 2 };
+
   gis_info.id_type["2005_rail"] = "RailroadSection";
   gis_info.id_type["2005_station"] = "Station";
 
@@ -104,6 +173,7 @@ export const setupGisInfo = (): TypeGISInfo => {
   gis_info.id_type["2023_rail"] = "RailroadSection";
   gis_info.id_type["2023_station"] = "Station";
 
+  gis_info.id_type["2005_lake"] = "Lake";
   gis_info.id_type["2023_coast"] = "Coast";
   console.log("gis_info_2023_rail", gis_info.gis_data["2023_rail"]);
   console.log("gis_info_2023_coast", gis_info.gis_data["2023_coast"]);

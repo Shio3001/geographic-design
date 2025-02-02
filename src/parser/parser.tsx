@@ -5,6 +5,7 @@ import { getRandomInt } from "../gis_scipt/route_setup";
 import ParserRailroadSection from "./parser_unit/railroad_section";
 import ParserStation from "./parser_unit/station";
 import ParserCoast from "./parser_unit/coast";
+import ParserLake from "./parser_unit/lake";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
 import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
@@ -71,10 +72,10 @@ class Parser {
 
   toSVGPath = (gce: GraphCoordinateExpression) => {
     const pos_order = gce.pos_order;
-    const new_svg_node = new SvgNode();
+    const new_svg_node_path = new SvgNode();
     const coordinates = gce.coordinates;
-    new_svg_node.pushComment(String(gce.coordinate_expression_id));
-    new_svg_node.setTag("path");
+    new_svg_node_path.pushComment(String(gce.coordinate_expression_id));
+    new_svg_node_path.setTag("path");
 
     const r = String(getRandomInt(50, 200));
     const g = String(getRandomInt(50, 200));
@@ -82,18 +83,18 @@ class Parser {
 
     const rgb = "rgb(" + r + "," + g + "," + b + ")";
 
-    new_svg_node.pushAttribute("stroke", rgb);
-    new_svg_node.pushAttribute("stroke-width", "2");
-    new_svg_node.pushAttribute("fill", "none");
+    new_svg_node_path.pushAttribute("stroke", rgb);
+    new_svg_node_path.pushAttribute("stroke-width", "2");
+    new_svg_node_path.pushAttribute("fill", "none");
     const coordinate0 = coordinates.get(pos_order[0]);
-    new_svg_node.pushSvgCommand("M", coordinate0.x, coordinate0.y);
+    new_svg_node_path.pushSvgCommand("M", coordinate0.x, coordinate0.y);
 
     for (let j = 0; j < pos_order.length; j++) {
       const coordinate = coordinates.get(pos_order[j]);
-      new_svg_node.pushSvgCommand("L", coordinate.x, coordinate.y);
+      new_svg_node_path.pushSvgCommand("L", coordinate.x, coordinate.y);
     }
 
-    const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
+    const new_svg_node_index = this.svg_kit.pushNode(new_svg_node_path);
     this.svg_kit.pushChild(0, new_svg_node_index);
   };
 
@@ -279,6 +280,12 @@ class Parser {
         const paths = paraser_railroad_section.generatePath();
         return paths;
       }
+      case "Lake": {
+        const paraser_railroad_section = new ParserLake(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paths = paraser_railroad_section.generatePath();
+        return paths;
+      }
+
       default:
         break;
     }

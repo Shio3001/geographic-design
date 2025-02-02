@@ -2,7 +2,7 @@
   "name": "my-webpack-project",
   "version": "1.0.0",
   "description": "My webpack project",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode=development",
@@ -11,7 +11,8 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "deploy": "webpack --mode=production --node-env=production && gh-pages -d dist"
+    "deploy": "webpack --mode=production --node-env=production && gh-pages -d dist",
+    "build:electron": "webpack --mode=production --node-env=production && electron ."
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@webpack-cli/generators": "^3.0.7",
+    "electron": "^34.0.2",
     "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -242,11 +242,93 @@ const PullRapperStation = (props: PullRapper) => {
   );
 };
 
+const PullRapperLake = (props: PullRapper) => {
+  const AppContextValue = useContext(AppContext);
+  const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
+  const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
+  const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
+
+  const lake = searchUniqueKey(layer.unit_id, "lake");
+
+  useEffect(() => {
+    return () => {
+      const edit_data = AppContextValue.edit_data;
+      edit_data.setLayer(layer);
+      AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+    };
+  }, [props.unit_type, props.layer_uuid]);
+
+  useEffect(() => {
+    if (!layer.layer_infomation["lake"]) {
+      flowUpUnitPref(0);
+    }
+    if (!layer.layer_infomation["path_join"]) {
+      flowUpPathJoin(true);
+    }
+
+    if (!layer.layer_infomation["threshold"]) {
+      flowUpUnitThreshold("10000");
+    }
+    if (!layer.layer_infomation["thinoout"]) {
+      flowUpUnitThinoout("10");
+    }
+  }, [props.unit_type, props.layer_uuid]);
+
+  const flowUpUnitPref = (index: number) => {
+    const layer_pref = lake[index];
+    layer.updateLayerElement("lake", layer_pref);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpUnitThreshold = (value: string) => {
+    layer.updateLayerElement("threshold", value);
+    setThreshold(value);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpUnitThinoout = (value: string) => {
+    layer.updateLayerElement("thinoout", value);
+    setThinoout(value);
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpPathJoin = (check: boolean) => {
+    console.log("flowUpPathJoin", check);
+    layer.updateLayerElement("path_join", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const getCheckedPathJoin = () => {
+    if (!("path_join" in layer.layer_infomation)) {
+      return true;
+    }
+
+    const c = layer.getElement("path_join");
+    return c == "ok";
+  };
+  return (
+    <>
+      <PulldownMenu flowUp={flowUpUnitPref} view_options={lake} selected={getArrayIndexStr(lake, layer.getElement("lake"))} />{" "}
+      <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />{" "}
+      <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
+      <TextBox label_text="間引き" text={thinoout} flowUp={flowUpUnitThinoout}></TextBox>{" "}
+    </>
+  );
+};
+
 const PullRapperCoast = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
-  const [threshold, setThreshold] = useState("100");
-  const [thinoout, setThinoout] = useState("10");
+  const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
+  const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
 
   const pref = searchUniqueKey(layer.unit_id, "pref");
 
@@ -267,7 +349,7 @@ const PullRapperCoast = (props: PullRapper) => {
     }
 
     if (!layer.layer_infomation["threshold"]) {
-      flowUpUnitThreshold("100");
+      flowUpUnitThreshold("10000");
     }
     if (!layer.layer_infomation["thinoout"]) {
       flowUpUnitThinoout("10");
@@ -350,6 +432,10 @@ const CtrlLayerPull = (props: propsCtrlLayerPull) => {
     }
     case "Coast": {
       return <PullRapperCoast unit_type={unit_type} layer_uuid={props.layer_uuid}></PullRapperCoast>;
+    }
+
+    case "Lake": {
+      return <PullRapperLake unit_type={unit_type} layer_uuid={props.layer_uuid}></PullRapperLake>;
     }
 
     default:
