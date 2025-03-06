@@ -16,12 +16,12 @@ class Parser {
   edit_data: EditData;
   gis_info: TypeGISInfo;
   svg_kit: SvgKit;
-  graph_coordinate_list: Array<GraphCoordinateExpression>;
+  graph_coordinate_dict: { [key: string]: Array<GraphCoordinateExpression> };
   constructor(edit_data: EditData, gis_info: TypeGISInfo) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
     this.svg_kit = new SvgKit();
-    this.graph_coordinate_list = [];
+    this.graph_coordinate_dict = {};
     const new_svg_node = new SvgNode();
     new_svg_node.setTag("svg");
     new_svg_node.pushAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -38,6 +38,33 @@ class Parser {
       this.parserLayer(layers_order[i]);
     }
   };
+
+  getLayerName = (layer_uuid: string) => {
+    const current_layer = this.edit_data.layers[layer_uuid];
+
+    const unit_id = current_layer.unit_id;
+    const unit_type = this.gis_info.id_type[unit_id];
+
+    switch (unit_type) {
+      case "RailroadSection": {
+        return "鉄道_" + current_layer.layer_infomation["railway"] + "_" + current_layer.layer_infomation["line"];
+      }
+      case "Station": {
+        return "駅_" + current_layer.layer_infomation["railway"] + "_" + current_layer.layer_infomation["line"];
+      }
+      case "Coast": {
+        return "海岸線_" + current_layer.layer_infomation["pref"];
+      }
+      case "Lake": {
+        return "湖_" + current_layer.layer_infomation["lake"];
+      }
+
+      default:
+        break;
+    }
+    return "不明";
+  };
+
   parserLayer = (layer_uuid: string) => {
     const current_layer = this.edit_data.layers[layer_uuid];
 
@@ -46,11 +73,17 @@ class Parser {
 
     const graph_coordinate_expression = this.switchParserLayer(layer_uuid);
 
-    this.graph_coordinate_list = this.graph_coordinate_list.concat(graph_coordinate_expression);
-    console.log("parserLayer", this.edit_data, this.graph_coordinate_list, graph_coordinate_expression);
+    // すでに同じ名前のレイヤーがある場合は追加
+    if (this.graph_coordinate_dict[this.getLayerName(layer_uuid)]) {
+      this.graph_coordinate_dict[this.getLayerName(layer_uuid)].push(...graph_coordinate_expression);
+    } else {
+      this.graph_coordinate_dict[this.getLayerName(layer_uuid)] = graph_coordinate_expression;
+    }
+
+    console.log("parserLayer", this.edit_data, this.graph_coordinate_dict, graph_coordinate_expression);
   };
 
-  toSVGPoint = (gce: GraphCoordinateExpression) => {
+  toSVGPoint = (g_node: SvgNode, gce: GraphCoordinateExpression) => {
     //<circle cx="100" cy="100" r="90" stroke="black" stroke-width="1" fill="blue"></circle>
 
     const pos_order = gce.pos_order;
@@ -67,10 +100,11 @@ class Parser {
       new_svg_node.pushAttribute("fill", "black");
       const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
       this.svg_kit.pushChild(0, new_svg_node_index);
+      g_node.linkChild(new_svg_node_index);
     }
   };
 
-  toSVGPath = (gce: GraphCoordinateExpression) => {
+  toSVGPath = (g_node: SvgNode, gce: GraphCoordinateExpression) => {
     const pos_order = gce.pos_order;
     const new_svg_node_path = new SvgNode();
     const coordinates = gce.coordinates;
@@ -95,28 +129,61 @@ class Parser {
     }
 
     const new_svg_node_index = this.svg_kit.pushNode(new_svg_node_path);
-    this.svg_kit.pushChild(0, new_svg_node_index);
+    g_node.linkChild(new_svg_node_index);
   };
 
   toSVG = () => {
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
-      const coordinates = gce.coordinates;
-      const pos_order = gce.pos_order;
+    const keys = Object.keys(this.graph_coordinate_dict);
 
-      console.log("toSVG", pos_order, coordinates);
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const graph_coordinate_expression = this.graph_coordinate_dict[key];
 
-      if (pos_order.length == 0) {
-        continue;
-      }
+      const g_node = new SvgNode();
 
-      if (gce.getType() == "path") {
-        this.toSVGPath(gce);
-      }
-      if (gce.getType() == "point") {
-        this.toSVGPoint(gce);
+      g_node.setTag("g");
+      g_node.pushAttribute("id", key);
+      const g_node_index = this.svg_kit.pushNode(g_node);
+      this.svg_kit.pushChild(0, g_node_index);
+
+      for (let j = 0; j < graph_coordinate_expression.length; j++) {
+        const gce = graph_coordinate_expression[j];
+        const coordinates = gce.coordinates;
+        const pos_order = gce.pos_order;
+
+        console.log("toSVG", pos_order, coordinates);
+
+        if (pos_order.length == 0) {
+          continue;
+        }
+
+        if (gce.getType() == "path") {
+          this.toSVGPath(g_node, gce);
+        }
+        if (gce.getType() == "point") {
+          this.toSVGPoint(g_node, gce);
+        }
       }
     }
+
+    // for (let i = 0; i <graph_coordinate_list.length; i++) {
+    //   const gce =graph_coordinate_list[i];
+    //   const coordinates = gce.coordinates;
+    //   const pos_order = gce.pos_order;
+
+    //   console.log("toSVG", pos_order, coordinates);
+
+    //   if (pos_order.length == 0) {
+    //     continue;
+    //   }
+
+    //   if (gce.getType() == "path") {
+    //     this.toSVGPath(gce);
+    //   }
+    //   if (gce.getType() == "point") {
+    //     this.toSVGPoint(gce);
+    //   }
+    // }
 
     const svg = this.svg_kit.svg_tree[0].generate(this.svg_kit.svg_tree);
     return svg;
@@ -144,20 +211,21 @@ class Parser {
       this.edit_data.height,
       left_top,
       right_bottom,
-      this.graph_coordinate_list
+      this.graph_coordinate_dict
     );
 
     this.moveCoordinateReduction(reduction_rate_min);
     this.invertedCoordinate();
     this.moveCoordinateOrigin(this.searchCoordinateLeftTop());
     this.decimalPlaceRound();
-    console.log("scaling", this.graph_coordinate_list);
+    console.log("scaling", this.graph_coordinate_dict);
   };
 
   //すべて指定桁数で四捨五入
   decimalPlaceRound = () => {
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
+    const graph_coordinate_list = Object.values(this.graph_coordinate_dict).flat();
+    for (let i = 0; i < graph_coordinate_list.length; i++) {
+      const gce = graph_coordinate_list[i];
       const coordinates = gce.coordinates;
       const pos_order = gce.pos_order;
 
@@ -170,8 +238,9 @@ class Parser {
 
   //上下反転
   invertedCoordinate = () => {
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
+    const graph_coordinate_list = Object.values(this.graph_coordinate_dict).flat();
+    for (let i = 0; i < graph_coordinate_list.length; i++) {
+      const gce = graph_coordinate_list[i];
       const coordinates = gce.coordinates;
       const pos_order = gce.pos_order;
 
@@ -185,8 +254,9 @@ class Parser {
 
   //縮尺調整
   moveCoordinateReduction = (reduction_rate: number) => {
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
+    const graph_coordinate_list = Object.values(this.graph_coordinate_dict).flat();
+    for (let i = 0; i < graph_coordinate_list.length; i++) {
+      const gce = graph_coordinate_list[i];
       const coordinates = gce.coordinates;
       const pos_order = gce.pos_order;
 
@@ -199,8 +269,9 @@ class Parser {
 
   //起点調整
   moveCoordinateOrigin = (left_top: TypePosition) => {
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
+    const graph_coordinate_list = Object.values(this.graph_coordinate_dict).flat();
+    for (let i = 0; i < graph_coordinate_list.length; i++) {
+      const gce = graph_coordinate_list[i];
       const coordinates = gce.coordinates;
       const pos_order = gce.pos_order;
       for (let coordinate of coordinates.values()) {
@@ -213,9 +284,9 @@ class Parser {
   searchCoordinateLeftTop = (): TypePosition => {
     let x_min = Number.MAX_SAFE_INTEGER;
     let y_min = Number.MAX_SAFE_INTEGER;
-
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
+    const graph_coordinate_list = Object.values(this.graph_coordinate_dict).flat();
+    for (let i = 0; i < graph_coordinate_list.length; i++) {
+      const gce = graph_coordinate_list[i];
       const coordinates = gce.coordinates;
       const pos_order = gce.pos_order;
 
@@ -234,9 +305,9 @@ class Parser {
   searchCoordinateRightBottom = (): TypePosition => {
     let x_max = Number.MIN_SAFE_INTEGER;
     let y_max = Number.MIN_SAFE_INTEGER;
-
-    for (let i = 0; i < this.graph_coordinate_list.length; i++) {
-      const gce = this.graph_coordinate_list[i];
+    const graph_coordinate_list = Object.values(this.graph_coordinate_dict).flat();
+    for (let i = 0; i < graph_coordinate_list.length; i++) {
+      const gce = graph_coordinate_list[i];
       const coordinates = gce.coordinates;
       const pos_order = gce.pos_order;
 
