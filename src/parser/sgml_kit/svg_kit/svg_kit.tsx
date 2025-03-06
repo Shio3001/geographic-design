@@ -16,7 +16,8 @@ class SvgKit {
   };
 
   pushChild = (parent_index: number, child_node: number) => {
-    this.svg_tree[parent_index].children.push(child_node);
+    // this.svg_tree[parent_index].children.push(child_node);
+    this.svg_tree[parent_index].linkChild(child_node);
   };
 }
 

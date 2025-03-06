@@ -55,6 +55,7 @@ class SvgNode {
   pushComment = (comment: string) => {
     this.svg_comment.push(comment);
   };
+
   pushAttributeNum = (k: string, v: number) => {
     this.attributes[k] = v.toString();
   };

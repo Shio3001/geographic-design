@@ -113,7 +113,7 @@ const CtrlLayerAdd = () => {
           const nlayer: LayerData = new LayerData();
           nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
           nlayer.updateLayerElement("pref", pref);
-          nlayer.updateLayerElement("threshold", "10000");
+          nlayer.updateLayerElement("threshold", "1000");
           nlayer.updateLayerElement("thinoout", "10");
           edit_data.addLayer(nlayer);
         }
