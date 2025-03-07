@@ -3,7 +3,7 @@ const { useContext, useReducer, createContext, useState, useEffect } = React;
 import { createRoot } from "react-dom/client";
 import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGISInfo } from "./gis_scipt/route_type";
 
-import { setupGisInfo } from "./gis_scipt/route_setup";
+import { getGisInfo, globalStore } from "./gis_scipt/route_setup";
 import CtrlGis from "./component/ctrl_gis";
 // import "./gis_scipt/gis_unique_data";
 
@@ -35,10 +35,28 @@ const App = () => {
   };
 
   const [app_state, dispatchAppState] = useReducer(reducerApp, {
-    gis_info: setupGisInfo(),
+    gis_info: getGisInfo(),
     edit_data: new EditData(1),
     update: false,
   });
+
+  // const [_, forceUpdate] = useState(0);
+
+  useEffect(() => {
+    // const onUpdate = () => forceUpdate((v) => v + 1); // React を更新
+
+    // reducerApp({ action_type: "update_flag" });
+
+    const onUpdate = () => {
+      // getGisInfo()を流す
+      console.log("onUpdate");
+      dispatchAppState({ action_type: "update_gis_info", update_state: getGisInfo() });
+    };
+
+    globalStore.addEventListener("update", onUpdate);
+
+    return () => globalStore.removeEventListener("update", onUpdate);
+  }, []);
 
   const fileExportCommon = (jsonData: any, fileName: string, typeText: string, extension: string) => {
     //typeについてhttps://asahi-net.jp/support/guide/homepage/0017.html
