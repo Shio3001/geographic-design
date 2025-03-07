@@ -157,8 +157,14 @@ const CtrlGis = () => {
           <CheckBox flowUp={flowUpUseThread} label_text={"スレッド処理"} checked={getCheckedUseThread()} />
         </div>
 
-        <CtrlLayers />
-        <CtrlLayerAdd />
+        {AppContextValue.gis_info ? (
+          <>
+            <CtrlLayers />
+            <CtrlLayerAdd />
+          </>
+        ) : (
+          <></>
+        )}
 
         <h3>使う前に、README 読んでね！</h3>
         <a href="https://github.com/Shio3001/RouteAnimation/blob/main/README.md"> README </a>
