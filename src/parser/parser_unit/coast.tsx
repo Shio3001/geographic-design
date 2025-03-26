@@ -28,14 +28,14 @@ class ParserCoast {
     const threshold = Number(current_layer.layer_infomation["threshold"]);
     const thinoout = Number(current_layer.layer_infomation["thinoout"]);
 
-    const geometry_index = searchGisConditional(this.unit_id, {
+    const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
       pref: current_layer.layer_infomation["pref"],
     });
 
     const joinPath = () => {
       const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
       for (let i = 0; i < geometry_index.length; i++) {
-        const current_geometry = getGeometry(this.unit_id, geometry_index[i]);
+        const current_geometry = getGeometry(this.gis_info, this.unit_id, geometry_index[i]);
         const gce = this.parseCoordinates(current_geometry.coordinates);
         const gce_length = gce.pos_order.length;
 
@@ -132,7 +132,7 @@ class ParserCoast {
 
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
-      const current_geometry = getGeometry(this.unit_id, geometry_index[i]);
+      const current_geometry = getGeometry(this.gis_info, this.unit_id, geometry_index[i]);
 
       const cord = current_geometry.coordinates;
 

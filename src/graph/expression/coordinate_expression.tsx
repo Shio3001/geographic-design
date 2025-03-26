@@ -13,6 +13,7 @@ import * as _ from "lodash"; // lodashをインポート
 
 class GraphCoordinateExpression {
   coordinates: Map<string, TypePosition>;
+  coordinates_name: Map<string, string>;
   type: string; //path or point
   debug_message: Array<string>;
   pos_order: Array<string>;
@@ -20,6 +21,7 @@ class GraphCoordinateExpression {
 
   constructor(type: string) {
     this.coordinates = new Map();
+    this.coordinates_name = new Map();
     this.type = type;
     this.debug_message = [];
     this.pos_order = [];
@@ -92,6 +94,11 @@ class GraphCoordinateExpression {
     this.pushPosIds(id);
   };
 
+  pushCoordinateIdName = (id: string, name: string, x: number, y: number) => {
+    this.coordinates.set(id, { x: x, y: y });
+    this.coordinates_name.set(id, name);
+    this.pushPosIds(id);
+  };
   // hasPosId(id: string) {
   //   return this.pos_ids.has(id);
   // }

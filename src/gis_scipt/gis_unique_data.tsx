@@ -2,14 +2,17 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUni
 
 import { setupGisInfo, getGisInfo } from "./route_setup";
 
-export const getGeometry = (unit_id: string, features_index: number) => {
-  const gis_info = getGisInfo();
+export const getProperties = (gis_info: TypeGISInfo, unit_id: string, features_index: number): { [key: string]: string } => {
+  const gis_unit = gis_info.gis_data[unit_id];
+  return gis_unit.features[features_index].properties as { [key: string]: string };
+};
+
+export const getGeometry = (gis_info: TypeGISInfo, unit_id: string, features_index: number) => {
   const gis_unit = gis_info.gis_data[unit_id];
   return gis_unit.features[features_index].geometry;
 };
 
-export const searchGisConditional = (unit_id: string, conditional: { [key: string]: string }): Array<number> => {
-  const gis_info = getGisInfo();
+export const searchGisConditional = (gis_info: TypeGISInfo, unit_id: string, conditional: { [key: string]: string }): Array<number> => {
   const gis_unit = gis_info.gis_data[unit_id];
 
   const search_list: Array<number> = [];
@@ -66,16 +69,15 @@ export const getArrayIndexStr = (array: Array<string>, target: string): number =
   return 0;
 };
 
-export const getFeatures = (current_unit: string, features_index: number) => {
-  const gis_info = getGisInfo();
+export const getFeatures = (gis_info: TypeGISInfo, current_unit: string, features_index: number) => {
   const unit_id = gis_info.units[current_unit].unit_id;
   const current_gis = gis_info.gis_data[unit_id];
   const current_features = current_gis.features[features_index];
   return current_features;
 };
 
-export const getPropertie = (current_unit: string, features_index: number, search_properties_key: string): string => {
-  const current_features = getFeatures(current_unit, features_index);
+export const getPropertie = (gis_info: TypeGISInfo, current_unit: string, features_index: number, search_properties_key: string): string => {
+  const current_features = getFeatures(gis_info, current_unit, features_index);
   const properties = current_features.properties as { [key: string]: string };
   const propertie = properties[search_properties_key];
   return propertie;
@@ -111,12 +113,12 @@ export const logicalAnd = (array1: Array<number>, array2: Array<number>): Array<
 };
 
 export const searchUniqueKeyBySearchKey = (
+  gis_info: TypeGISInfo,
   unit_id: string,
   search_properties_key: string,
   search_propertie_valuie: string,
   request_properties_key: string
 ): Array<string> => {
-  const gis_info = getGisInfo();
   // const unit_id = gis_info.units[current_unit].unit_id;
   const current_gis = gis_info.gis_data[unit_id];
 
@@ -149,8 +151,7 @@ export const searchUniqueKeyBySearchKey = (
   return propertie_list;
 };
 
-export const searchUniquePropertie = (unit_id: string, search_properties_key: string, propertie_value: string): Array<number> => {
-  const gis_info = getGisInfo();
+export const searchUniquePropertie = (gis_info: TypeGISInfo, unit_id: string, search_properties_key: string, propertie_value: string): Array<number> => {
   // const unit_id = gis_info.units[current_unit].unit_id;
   const current_gis = gis_info.gis_data[unit_id];
 
@@ -165,8 +166,7 @@ export const searchUniquePropertie = (unit_id: string, search_properties_key: st
   return features_index_list;
 };
 
-export const searchUniqueIndex = (unit_id: string, search_properties_key: string): Array<number> => {
-  const gis_info = getGisInfo();
+export const searchUniqueIndex = (gis_info: TypeGISInfo, unit_id: string, search_properties_key: string): Array<number> => {
   // const unit_id = gis_info.units[current_unit].unit_id;
   const current_gis = gis_info.gis_data[unit_id];
 
@@ -194,8 +194,7 @@ export const searchUniqueIndex = (unit_id: string, search_properties_key: string
   return propertie_index_list;
 };
 
-export const searchUniqueKey = (unit_id: string, search_properties_key: string): Array<string> => {
-  const gis_info = getGisInfo();
+export const searchUniqueKey = (gis_info: TypeGISInfo, unit_id: string, search_properties_key: string): Array<string> => {
   // const unit_id = gis_info.units[current_unit].unit_id;
   const current_gis = gis_info.gis_data[unit_id];
 

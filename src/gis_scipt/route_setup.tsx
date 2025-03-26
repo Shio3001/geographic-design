@@ -270,6 +270,8 @@ export const setupGisInfo = async () => {
 };
 
 export const getGisInfo = (): TypeGISInfo => {
+  console.log("getGisInfo", gis_info_load_flag);
+
   if (!gis_info_load_flag) {
     setupGisInfo();
     return null;

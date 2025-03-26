@@ -49,10 +49,10 @@ const CtrlLayerAdd = () => {
 
     switch (unit_type) {
       case "RailroadSection": {
-        return searchUniqueKey(unit_id, "N02_004");
+        return searchUniqueKey(getGisInfo(), unit_id, "N02_004");
       }
       case "Station": {
-        return searchUniqueKey(unit_id, "N02_004");
+        return searchUniqueKey(getGisInfo(), unit_id, "N02_004");
       }
       // case "Coast": {
       //   return searchUniqueKey(unit_id, "pref");
@@ -68,8 +68,8 @@ const CtrlLayerAdd = () => {
 
     switch (unit_type) {
       case "RailroadSection": {
-        const railway = searchUniqueKey(unit_id, "N02_004")[ctrl_layer_add.classification1];
-        const lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", railway, "N02_003");
+        const railway = searchUniqueKey(getGisInfo(), unit_id, "N02_004")[ctrl_layer_add.classification1];
+        const lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N02_004", railway, "N02_003");
 
         const edit_data = AppContextValue.edit_data;
         for (let i in lines) {
@@ -85,8 +85,8 @@ const CtrlLayerAdd = () => {
         return;
       }
       case "Station": {
-        const railway = searchUniqueKey(unit_id, "N02_004")[ctrl_layer_add.classification1];
-        const lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", railway, "N02_003");
+        const railway = searchUniqueKey(getGisInfo(), unit_id, "N02_004")[ctrl_layer_add.classification1];
+        const lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N02_004", railway, "N02_003");
         const edit_data = AppContextValue.edit_data;
         console.log("flowUpAdd", railway, lines);
 
@@ -105,7 +105,7 @@ const CtrlLayerAdd = () => {
       }
 
       case "Coast": {
-        const prefs = searchUniqueKey(unit_id, "pref");
+        const prefs = searchUniqueKey(getGisInfo(), unit_id, "pref");
         const edit_data = AppContextValue.edit_data;
 
         for (let i in prefs) {
@@ -122,7 +122,7 @@ const CtrlLayerAdd = () => {
         return;
       }
       case "Lake": {
-        const lakes = searchUniqueKey(unit_id, "lake");
+        const lakes = searchUniqueKey(getGisInfo(), unit_id, "lake");
         const edit_data = AppContextValue.edit_data;
 
         for (let i in lakes) {
