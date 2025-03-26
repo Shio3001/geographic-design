@@ -11,6 +11,7 @@ import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
 import path from "path";
 import BigNumber from "bignumber.js";
+import _ from "lodash";
 
 class Parser {
   edit_data: EditData;
@@ -87,8 +88,13 @@ class Parser {
     //<circle cx="100" cy="100" r="90" stroke="black" stroke-width="1" fill="blue"></circle>
 
     const pos_order = gce.pos_order;
+    const coordinates_name = gce.coordinates_name;
     const coordinates = gce.coordinates;
+
+    const svg_point_map = new Map<string, number>();
+
     for (let j = 0; j < pos_order.length; j++) {
+      const coordinate_name = coordinates_name.get(pos_order[j]);
       const coordinate = coordinates.get(pos_order[j]);
       const new_svg_node = new SvgNode();
       new_svg_node.setTag("circle");
@@ -99,8 +105,25 @@ class Parser {
       new_svg_node.pushAttribute("stroke-width", "0");
       new_svg_node.pushAttribute("fill", "black");
       const new_svg_node_index = this.svg_kit.pushNode(new_svg_node);
-      this.svg_kit.pushChild(0, new_svg_node_index);
-      g_node.linkChild(new_svg_node_index);
+
+      //coordinate_nameがある場合はgタグ以下に追加
+      if (coordinate_name) {
+        if (!svg_point_map.has(coordinate_name)) {
+          const g_svg_node = new SvgNode();
+          g_svg_node.setTag("g");
+          g_svg_node.pushAttribute("id", coordinate_name);
+          g_svg_node.linkChild(new_svg_node_index);
+          const index = this.svg_kit.pushNode(g_svg_node);
+          g_node.linkChild(index);
+          svg_point_map.set(coordinate_name, index);
+        } else {
+          const index = svg_point_map.get(coordinate_name);
+          this.svg_kit.pushChild(index, new_svg_node_index);
+        }
+      } else {
+        // this.svg_kit.pushChild(0, new_svg_node_index);
+        g_node.linkChild(new_svg_node_index);
+      }
     }
   };
 

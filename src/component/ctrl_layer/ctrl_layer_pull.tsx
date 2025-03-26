@@ -6,7 +6,7 @@ import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
 import CheckBox from "./../../common/checkbox/checkbox";
 import NumberBox from "./../../common/numberbox/numberbox";
 
-import { getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
+import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 import {
   searchUniqueKey,
   getArrayIndexNum,
@@ -31,8 +31,8 @@ const PullRapperRailroadSection = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
 
-  const railways = searchUniqueKey(layer.unit_id, "N02_004");
-  const lines = searchUniqueKey(layer.unit_id, "N02_003");
+  const railways = searchUniqueKey(getGisInfo(), layer.unit_id, "N02_004");
+  const lines = searchUniqueKey(getGisInfo(), layer.unit_id, "N02_003");
 
   useEffect(() => {
     return () => {
@@ -86,7 +86,7 @@ const PullRapperRailroadSection = (props: PullRapper) => {
 
   const getLineViewOptions = () => {
     const unit_id = layer.getUnitId();
-    const view_lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", layer.layer_infomation["railway"], "N02_003");
+    const view_lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N02_004", layer.layer_infomation["railway"], "N02_003");
 
     return view_lines;
   };
@@ -188,8 +188,8 @@ const PullRapperStation = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
 
-  const railways = searchUniqueKey(layer.unit_id, "N02_004");
-  const lines = searchUniqueKey(layer.unit_id, "N02_003");
+  const railways = searchUniqueKey(getGisInfo(), layer.unit_id, "N02_004");
+  const lines = searchUniqueKey(getGisInfo(), layer.unit_id, "N02_003");
 
   useEffect(() => {
     return () => {
@@ -229,7 +229,7 @@ const PullRapperStation = (props: PullRapper) => {
 
   const getLineViewOptions = () => {
     const unit_id = layer.getUnitId();
-    const view_lines = searchUniqueKeyBySearchKey(unit_id, "N02_004", layer.layer_infomation["railway"], "N02_003");
+    const view_lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N02_004", layer.layer_infomation["railway"], "N02_003");
 
     return view_lines;
   };
@@ -248,7 +248,7 @@ const PullRapperLake = (props: PullRapper) => {
   const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
   const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
 
-  const lake = searchUniqueKey(layer.unit_id, "lake");
+  const lake = searchUniqueKey(getGisInfo(), layer.unit_id, "lake");
 
   useEffect(() => {
     return () => {
@@ -330,7 +330,7 @@ const PullRapperCoast = (props: PullRapper) => {
   const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
   const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
 
-  const pref = searchUniqueKey(layer.unit_id, "pref");
+  const pref = searchUniqueKey(getGisInfo(), layer.unit_id, "pref");
 
   useEffect(() => {
     return () => {
