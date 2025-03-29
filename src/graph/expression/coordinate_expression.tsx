@@ -13,15 +13,15 @@ import * as _ from "lodash"; // lodashをインポート
 
 class GraphCoordinateExpression {
   coordinates: Map<string, TypePosition>;
-  coordinates_name: Map<string, string>;
+  coordinate_name: string;
   type: string; //path or point
   debug_message: Array<string>;
   pos_order: Array<string>;
   coordinate_expression_id: number;
 
-  constructor(type: string) {
+  constructor(type: string, cn: string = "unknown") {
     this.coordinates = new Map();
-    this.coordinates_name = new Map();
+    this.coordinate_name = cn;
     this.type = type;
     this.debug_message = [];
     this.pos_order = [];
@@ -38,6 +38,7 @@ class GraphCoordinateExpression {
   };
   includePath = (include_path: GraphCoordinateExpression) => {
     this.pos_order = this.pos_order.concat(include_path.pos_order);
+    this.coordinate_name = include_path.coordinate_name;
 
     for (let include_path_coordinate_id of include_path.coordinates.keys()) {
       this.coordinates.set(include_path_coordinate_id, include_path.coordinates.get(include_path_coordinate_id));
@@ -94,11 +95,26 @@ class GraphCoordinateExpression {
     this.pushPosIds(id);
   };
 
-  pushCoordinateIdName = (id: string, name: string, x: number, y: number) => {
-    this.coordinates.set(id, { x: x, y: y });
-    this.coordinates_name.set(id, name);
-    this.pushPosIds(id);
+  getAverage = () => {
+    let x_sum = 0;
+    let y_sum = 0;
+    let count = 0;
+    for (let i = 0; i < this.pos_order.length; i++) {
+      const id = this.pos_order[i];
+      const pos = this.coordinates.get(id);
+      x_sum += pos.x;
+      y_sum += pos.y;
+      count++;
+    }
+    const x_avg = x_sum / count;
+    const y_avg = y_sum / count;
+
+    const np = new GraphCoordinateExpression("point", this.coordinate_name);
+    np.pushCoordinateId(String(x_avg) + "p" + String(y_avg), x_avg, y_avg);
+
+    return np;
   };
+
   // hasPosId(id: string) {
   //   return this.pos_ids.has(id);
   // }

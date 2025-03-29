@@ -87,13 +87,12 @@ class Parser {
     //<circle cx="100" cy="100" r="90" stroke="black" stroke-width="1" fill="blue"></circle>
 
     const pos_order = gce.pos_order;
-    const coordinates_name = gce.coordinates_name;
+    const coordinate_name = gce.coordinate_name;
     const coordinates = gce.coordinates;
 
     const svg_point_map = new Map<string, number>();
 
     for (let j = 0; j < pos_order.length; j++) {
-      const coordinate_name = coordinates_name.get(pos_order[j]);
       const coordinate = coordinates.get(pos_order[j]);
       const new_svg_node = new SvgNode();
       new_svg_node.setTag("circle");

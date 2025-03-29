@@ -17,7 +17,7 @@ class ParserStation {
   layer_uuid: string;
   unit_id: string;
   unit_type: string;
-  points: Array<GraphCoordinateExpression>;
+  points: { [key: string]: GraphCoordinateExpression };
 
   constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
     this.edit_data = edit_data;
@@ -26,11 +26,17 @@ class ParserStation {
     this.layer_uuid = layer_uuid;
     this.unit_id = unit_id;
     this.unit_type = unit_type;
-    this.points = [];
+    this.points = {};
   }
 
   generatePoint = () => {
-    return this.points;
+    const current_layer = this.edit_data.layers[this.layer_uuid];
+    const station_average_flag = current_layer.layer_infomation["station_average"] == "ok";
+    return station_average_flag
+      ? Object.values(this.points).map((element) => {
+          return element.getAverage();
+        })
+      : Object.values(this.points);
   };
 
   coordinateAggregation = () => {
@@ -65,10 +71,16 @@ class ParserStation {
 
       const id = c0_exp_dp + "p" + c1_exp_dp;
 
-      const p: GraphCoordinateExpression = new GraphCoordinateExpression("point");
-      p.pushCoordinateIdName(id, station_name, c0_exp, c1_exp);
+      const p: GraphCoordinateExpression = new GraphCoordinateExpression("point", station_name);
+      p.pushCoordinateId(id, c0_exp, c1_exp);
 
-      this.points.push(p);
+      if (!(station_name in this.points)) {
+        this.points[station_name] = p;
+      } else {
+        this.points[station_name].includePath(p);
+      }
+
+      // this.points.push(p);
     }
   };
 }

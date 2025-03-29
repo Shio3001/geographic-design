@@ -235,10 +235,27 @@ const PullRapperStation = (props: PullRapper) => {
     return view_lines;
   };
 
+  const flowUpStationAverage = (check: boolean) => {
+    layer.updateLayerElement("station_average", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const getCheckedStationAverage = () => {
+    if (!("station_average" in layer.layer_infomation)) {
+      return false;
+    }
+
+    const c = layer.getElement("station_average");
+    return c == "ok";
+  };
+
   return (
     <>
       <SelectBox flowUp={flowUpUnitRailway} view_options={railways} selected={getArrayIndexStr(railways, layer.getElement("railway"))} />
       <SelectBox flowUp={flowUpUnitLine} view_options={getLineViewOptions()} selected={getArrayIndexStr(getLineViewOptions(), layer.getElement("line"))} />
+      <CheckBox flowUp={flowUpStationAverage} label_text={"駅座標平均"} checked={getCheckedStationAverage()} />
     </>
   );
 };

@@ -30,7 +30,9 @@ const CheckBox = (props: props) => {
     <>
       <div className="checkbox-com">
         <input type="checkbox" onChange={onChangeEvent} ref={checkbox_ref}></input>
-        <label>{props.label_text}</label>
+        <label style={{ userSelect: "none" }} onClick={onChangeEvent}>
+          {props.label_text}
+        </label>
       </div>
     </>
   );
