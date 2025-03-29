@@ -15,6 +15,7 @@ import NumberBox from "./../common/numberbox/numberbox";
 import TextBox from "./../common/textbox/textbox";
 import CheckBox from "./../common/checkbox/checkbox";
 import { AppContext } from "./../app_context";
+import LayerData from "./ctrl_dataflow/edit_data/layer_data";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
@@ -142,6 +143,20 @@ const CtrlGis = () => {
     }
   }, []);
 
+  const flowUpLayerAdd = () => {
+    const nlayer: LayerData = new LayerData();
+    const edit_data = AppContextValue.edit_data;
+    nlayer.setUnit("2022_rail");
+    edit_data.addLayer(nlayer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpLayerClear = () => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.clearLayer();
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
@@ -158,12 +173,37 @@ const CtrlGis = () => {
         </div>
 
         {AppContextValue.gis_info ? (
-          <>
-            <CtrlLayers />
-            <CtrlLayerAdd />
-          </>
+          <div style={{ marginLeft: "10px" }}>
+            <div>
+              <h3>レイヤー</h3>
+              <div
+                style={{
+                  overflowY: "scroll",
+                  height: "500px",
+                  backgroundColor: "#eeeeee",
+                }}
+              >
+                <div
+                  style={{
+                    minHeight: "500px",
+                  }}
+                >
+                  <CtrlLayers />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>レイヤー制御</h3>
+              <Button flowUp={flowUpLayerAdd} text={"レイヤー追加"} />
+              <Button flowUp={flowUpLayerClear} text={"すべて削除"} />
+            </div>
+            <div>
+              <h3>レイヤー一括追加</h3>
+              <CtrlLayerAdd />
+            </div>
+          </div>
         ) : (
-          <></>
+          <div>国土数値情報を読み込んでいます・・・</div>
         )}
 
         <h3>使う前に、README 読んでね！</h3>

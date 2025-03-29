@@ -12,6 +12,7 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "deploy": "webpack --mode=production --node-env=production && gh-pages -d dist",
+    "predeploy": "yarn build && cp -r public/* dist/",
     "build:electron": "webpack --mode=production --node-env=production && electron ."
   },
   "repository": {

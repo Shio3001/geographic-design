@@ -22,13 +22,13 @@ const CtrlLayer = (props: props) => {
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
 
-  const flowUpAdd = () => {
-    const nlayer: LayerData = new LayerData();
-    const edit_data = AppContextValue.edit_data;
-    nlayer.setUnit("2022_rail");
-    edit_data.addLayer(nlayer);
-    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
-  };
+  // const flowUpAdd = () => {
+  //   const nlayer: LayerData = new LayerData();
+  //   const edit_data = AppContextValue.edit_data;
+  //   nlayer.setUnit("2022_rail");
+  //   edit_data.addLayer(nlayer);
+  //   AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  // };
   const flowUpDelete = () => {
     const edit_data = AppContextValue.edit_data;
     edit_data.deleteLayerByUUID(props.layer_uuid);
@@ -41,6 +41,14 @@ const CtrlLayer = (props: props) => {
     layer.clearLayerElement();
     layer.setUnit(unit_id_c);
     edit_data.setLayer(layer);
+    edit_data.updateUUID(props.layer_uuid);
+
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
+  const flowUpUnitCopy = () => {
+    const edit_data = AppContextValue.edit_data;
+    edit_data.copyLayer(props.layer_uuid);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
@@ -49,8 +57,9 @@ const CtrlLayer = (props: props) => {
   return (
     <div className="ctrl_layer">
       <div className="ctrl_layer_pull_down_lateral">
-        <Button flowUp={flowUpAdd} text={"下に追加"}></Button>
+        {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
         <Button flowUp={flowUpDelete} text={"削除"}></Button>
+        <Button flowUp={flowUpUnitCopy} text={"複製"}></Button>
         <PulldownMenu
           flowUp={flowUpUnitName}
           view_options={getNamesGisUnitIDs()}
