@@ -3,7 +3,7 @@ const { useContext, useReducer, createContext, useState, useEffect } = React;
 import { createRoot } from "react-dom/client";
 import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo } from "../../../gis_scipt/route_type";
 
-import LayerData from "./layer_data";
+import LayerData, { getUUID } from "./layer_data";
 
 class EditData {
   layers: { [name: string]: LayerData };
@@ -56,6 +56,32 @@ class EditData {
     }
   }
 
+  copyLayer = (layer_uuid: string) => {
+    const layer = this.layers[layer_uuid];
+    const new_layer = layer.deepCopyLayer();
+    this.layers[new_layer.layer_uuid] = new_layer;
+    this.layers_order.push(new_layer.layer_uuid);
+    this.layer_length++;
+    console.log(this);
+  };
+
+  updateUUID = (layer_uuid: string) => {
+    const layer = this.layers[layer_uuid];
+    const new_uuid = layer.updateUUID();
+
+    // 挿入位置は維持する（つまり、layers_orderを変更する）
+
+    // 現在のuuidを見つけたらそれを置き換える
+    const index = this.layers_order.indexOf(layer_uuid);
+    if (index !== -1) {
+      this.layers_order[index] = new_uuid;
+    }
+
+    // keyを置き換える
+    this.layers[new_uuid] = layer;
+    delete this.layers[layer_uuid];
+  };
+
   deleteLayerByUUID = (uuid: string) => {
     const new_layers_order = this.layers_order.filter((n) => n !== uuid);
     delete this.layers[uuid];
@@ -74,6 +100,12 @@ class EditData {
     this.layers[layer.layer_uuid] = layer;
     this.layers_order.push(layer.layer_uuid);
     console.log(this);
+  };
+
+  clearLayer = () => {
+    this.layers = {};
+    this.layers_order = [];
+    this.layer_length = 0;
   };
 
   getLayer = (uuid: string) => {

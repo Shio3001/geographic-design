@@ -11,7 +11,6 @@ import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
 import path from "path";
 import BigNumber from "bignumber.js";
-import _ from "lodash";
 
 class Parser {
   edit_data: EditData;

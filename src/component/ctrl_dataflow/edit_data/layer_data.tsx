@@ -5,7 +5,7 @@ import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUni
 
 import { UUID } from "uuidjs";
 
-const getUUID = () => {
+export const getUUID = () => {
   return String(UUID.generate());
 };
 
@@ -42,11 +42,22 @@ class LayerData {
   clearLayerElement = () => {
     this.layer_infomation = {};
   };
+  updateUUID = () => {
+    this.layer_uuid = getUUID();
+    return this.layer_uuid;
+  };
 
   setKeys = (keys: Array<string>) => {
     for (let i = 0; i < keys.length; i++) {
       this.layer_infomation[keys[i]] = "";
     }
+  };
+
+  deepCopyLayer = () => {
+    const layer = new LayerData();
+    layer.layer_infomation = this.deepCopyLayerInfomation();
+    layer.unit_id = this.unit_id;
+    return layer;
   };
 
   // getUnitType = () => {
@@ -57,6 +68,13 @@ class LayerData {
   };
   getElement = (key: string) => {
     return this.layer_infomation[key];
+  };
+
+  deepCopyLayerInfomation = () => {
+    // layer_infomationだけdeepcopy
+    // newlayerはしない
+
+    return structuredClone(this.layer_infomation);
   };
 }
 

@@ -3,7 +3,6 @@ const { useContext, useReducer, createContext, useState, useEffect } = React;
 import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
 import Button from "../../common/button/button";
 
-import CtrlLayer from "./ctrl_layer";
 import { AppContext } from "./../../app_context";
 import { CtrlGisContext } from "./../ctrl_gis_context";
 import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr, searchUniqueKeyBySearchKey } from "./../../gis_scipt/gis_unique_data";
