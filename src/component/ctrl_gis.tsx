@@ -38,6 +38,34 @@ const CtrlGis = () => {
     console.log("[APPCTR] Update");
   }, [update]);
 
+  const getOutputFileName = () => {
+    const edit_data = AppContextValue.edit_data;
+    const file_name = edit_data.filename;
+
+    if (file_name == "") {
+      const layer_order = edit_data.layers_order;
+
+      console.log("ctrl_gis", edit_data.layers_order, layer_order);
+
+      if (layer_order.length > 6) {
+        const line = edit_data.layers[layer_order[0]].layer_infomation["line"];
+        return "パスデータ_" + line + "ほか" + layer_order.length + "路線";
+      }
+
+      let lines = "パスデータ";
+      for (let layer_id of layer_order) {
+        const line = edit_data.layers[layer_id].layer_infomation["line"];
+
+        lines += "_";
+        lines += line;
+      }
+
+      return lines;
+    }
+
+    return file_name;
+  };
+
   const rendering = (file_output: boolean) => {
     const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
     worker.addEventListener(
@@ -49,7 +77,8 @@ const CtrlGis = () => {
         worker.terminate();
 
         if (file_output) {
-          AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+          const file_name = getOutputFileName();
+          AppContextValue.fileExportText(file_name, svg);
         }
       },
 
@@ -81,6 +110,9 @@ const CtrlGis = () => {
 
   const flowUpOutputSVG = () => {
     const edit_data = AppContextValue.edit_data;
+
+    const file_name = getOutputFileName();
+
     if (edit_data.use_thread) {
       rendering(true);
     } else {
@@ -89,7 +121,7 @@ const CtrlGis = () => {
       parser.scaling();
       const svg = parser.toSVG();
       setPreview(svg);
-      AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+      AppContextValue.fileExportText(file_name, svg);
     }
     // const svg = rendering();
     // setPreview(svg);
@@ -141,6 +173,8 @@ const CtrlGis = () => {
     } else {
       edit_data.use_thread = false;
     }
+
+    flowUpFileName("");
   }, []);
 
   const flowUpLayerAdd = () => {
@@ -165,7 +199,7 @@ const CtrlGis = () => {
         <div className="ctrl_gis_options">
           <Button flowUp={flowUpRendering} text={"描画"} />
           <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
-          <TextBox flowUp={flowUpFileName} text={"output_animation"} label_text="svg出力ファイル名" />
+          <TextBox flowUp={flowUpFileName} text={""} label_text="svg出力ファイル名" />
           <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
           <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
           <NumberBox flowUp={flowUpDecimalPlace} number={AppContextValue.edit_data.decimal_place} label_text="精度(少数桁数)" />

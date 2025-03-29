@@ -3,6 +3,7 @@ const { useContext, useReducer, createContext, useState, useEffect } = React;
 import { createRoot } from "react-dom/client";
 
 import PulldownMenu from "../../common/pulldown_menu/pulldown_menu";
+import SelectBox from "../../common/selectbox/selectbox";
 import Button from "../../common/button/button";
 
 import CtrlLayerPull from "./ctrl_layer_pull";
@@ -55,12 +56,12 @@ const CtrlLayer = (props: props) => {
   useEffect(() => {}, [AppContextValue.update]);
 
   return (
-    <div className="ctrl_layer">
+    <div className="ctrl_layer" style={{ height: "42px" }}>
       <div className="ctrl_layer_pull_down_lateral">
         {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
         <Button flowUp={flowUpDelete} text={"削除"}></Button>
         <Button flowUp={flowUpUnitCopy} text={"複製"}></Button>
-        <PulldownMenu
+        <SelectBox
           flowUp={flowUpUnitName}
           view_options={getNamesGisUnitIDs()}
           selected={getArrayIndexStr(getKeysGisUnitIDs(), AppContextValue.edit_data.layers[props.layer_uuid].unit_id)}
