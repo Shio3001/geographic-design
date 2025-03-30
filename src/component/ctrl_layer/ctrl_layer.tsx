@@ -61,7 +61,7 @@ const CtrlLayer = (props: props) => {
         {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
         <Button flowUp={flowUpDelete} text={"削除"}></Button>
         <Button flowUp={flowUpUnitCopy} text={"複製"}></Button>
-        <PulldownMenu
+        <SelectBox
           flowUp={flowUpUnitName}
           view_options={getNamesGisUnitIDs()}
           selected={getArrayIndexStr(getKeysGisUnitIDs(), AppContextValue.edit_data.layers[props.layer_uuid].unit_id)}
