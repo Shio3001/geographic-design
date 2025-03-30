@@ -6,6 +6,7 @@ import ParserRailroadSection from "./parser_unit/railroad_section";
 import ParserStation from "./parser_unit/station";
 import ParserCoast from "./parser_unit/coast";
 import ParserLake from "./parser_unit/lake";
+import ParserAd from "./parser_unit/ad";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
 import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
@@ -374,6 +375,12 @@ class Parser {
       }
       case "Lake": {
         const paraser_railroad_section = new ParserLake(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paths = await paraser_railroad_section.generatePath();
+        return paths;
+      }
+
+      case "Administrative": {
+        const paraser_railroad_section = new ParserAd(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
         const paths = await paraser_railroad_section.generatePath();
         return paths;
       }

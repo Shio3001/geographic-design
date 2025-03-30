@@ -1,5 +1,5 @@
 import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
-import { TypeGISInfo, TypeJsonCoordinates, TypePosition } from "../../gis_scipt/route_type";
+import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry } from "../../gis_scipt/route_type";
 
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "../../graph/expression/coordinate_expression";
@@ -37,7 +37,7 @@ class ParserLake {
     const joinPath = async () => {
       const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
       for (let i = 0; i < geometry_index.length; i++) {
-        const current_geometry = await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i]);
+        const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
         const gce = this.parseCoordinates(current_geometry.coordinates);
         const gce_length = gce.pos_order.length;
 
@@ -135,7 +135,7 @@ class ParserLake {
 
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
-      const current_geometry = await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i]);
+      const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
 
       const cord = current_geometry.coordinates;
 

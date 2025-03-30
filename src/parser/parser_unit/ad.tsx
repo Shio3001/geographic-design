@@ -1,5 +1,5 @@
 import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
-import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry } from "../../gis_scipt/route_type";
+import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry, TypeGeometry3D } from "../../gis_scipt/route_type";
 
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
@@ -7,7 +7,7 @@ import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_sci
 import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
 
-class ParserCoast {
+class ParserAd {
   edit_data: EditData;
   gis_info: TypeGISInfo;
   layer_uuid: string;
@@ -31,14 +31,17 @@ class ParserCoast {
     const cg = new CashGeometry();
 
     const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
-      pref: current_layer.layer_infomation["pref"],
+      N03_007: current_layer.layer_infomation["administrative"],
     });
+
+    console.log("generatePath", geometry_index, current_layer.layer_infomation);
 
     const joinPath = async () => {
       const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
       for (let i = 0; i < geometry_index.length; i++) {
-        const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
-        const gce = this.parseCoordinates(current_geometry.coordinates);
+        const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
+
+        const gce = this.parseCoordinates(current_geometry.coordinates.flat());
         const gce_length = gce.pos_order.length;
 
         //gce_lengthの数が多い順に挿入する
@@ -54,6 +57,10 @@ class ParserCoast {
         }
       }
       console.log("ParserCoast", path_join_flag, sort_paths_array);
+
+      for (let i = 0; i < sort_paths_array.length; i++) {
+        console.log("sort_paths_array", i, sort_paths_array[i].coordinates, sort_paths_array[i].pos_order.length);
+      }
 
       const concat = () => {
         let cc = 0;
@@ -134,9 +141,9 @@ class ParserCoast {
 
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
-      const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
+      const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
 
-      const cord = current_geometry.coordinates;
+      const cord = current_geometry.coordinates.flat();
 
       if (cord.length < threshold) {
         continue;
@@ -166,10 +173,12 @@ class ParserCoast {
       const id = c0_exp_dp + "p" + c1_exp_dp;
       gce.pushPosIds(id);
       gce.pushCoordinateId(id, c0_exp, c1_exp);
+
+      console.log("parseCoordinates", id, c0_exp, c1_exp, coordinate);
     }
 
     return gce;
   };
 }
 
-export default ParserCoast;
+export default ParserAd;
