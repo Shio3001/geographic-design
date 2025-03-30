@@ -13,7 +13,6 @@ import { CtrlGisContext } from "./../ctrl_gis_context";
 import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr } from "./../../gis_scipt/gis_unique_data";
 
 import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
-import LayerData from "../ctrl_dataflow/edit_data/layer_data";
 
 type props = {
   layer_uuid: string;
