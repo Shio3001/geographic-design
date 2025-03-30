@@ -1,4 +1,4 @@
-import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo, TypeGeometry } from "./route_type";
+import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo, TypeGeometry, TypeGeometry3D } from "./route_type";
 
 import { setupGisInfo, getGisInfo } from "./route_setup";
 
@@ -33,8 +33,8 @@ export const getGeometry = async (cg: CashGeometry, gis_info: TypeGISInfo, unit_
 
   const resolve = (js_data: any) => {
     const resolvetg = Array.isArray(js_data)
-      ? (js_data[features_region_index].geometry as TypeGeometry)
-      : (js_data.features[features_region_index].geometry as TypeGeometry);
+      ? (js_data[features_region_index].geometry as TypeGeometry | TypeGeometry3D)
+      : (js_data.features[features_region_index].geometry as TypeGeometry | TypeGeometry3D);
     return resolvetg;
   };
 

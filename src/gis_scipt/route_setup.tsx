@@ -8,9 +8,10 @@ import {
   TypeGISInfo,
   TypeJsonAd,
   TypeJsonAdPref,
+  TypeMergedAdInfoyMap,
 } from "./route_type";
 
-const gis_info: TypeGISInfo = { units: {}, gis_data: {}, id_type: {}, file_first: {} };
+const gis_info: TypeGISInfo = { adlist: {}, units: {}, gis_data: {}, id_type: {}, file_first: {} };
 let gis_info_load_flag = false;
 
 const prefectures = [
@@ -214,6 +215,8 @@ export const setupGisInfo = async () => {
 
   console.log("gis_info_2023_rail", gis_info.gis_data["2023_rail"]);
   console.log("gis_info_2023_coast", gis_info.gis_data["2023_coast"]);
+
+  gis_info.adlist = (await (await fetch("./merged_municipalities.json")).json()) as TypeMergedAdInfoyMap;
 
   gis_info_load_flag = true;
   globalStore.dispatchEvent(new Event("update")); // React に通知

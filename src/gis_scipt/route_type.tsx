@@ -16,6 +16,10 @@ export type TypeGeometry = {
   type: string;
   coordinates: TypeJsonCoordinates;
 };
+export type TypeGeometry3D = {
+  type: string;
+  coordinates: Array<TypeJsonCoordinates>;
+};
 
 export type TypeJsonCoastPref = {
   type: string;
@@ -80,4 +84,24 @@ export type TypeJsonGISStation = {
 export type TypeGisUnit = { unit_id: string; name: string; grouping_size: number };
 export type TypeGisUnits = { [key: string]: TypeGisUnit };
 export type TypeGisData = { [key: string]: TypeJsonGISRailroadSection | TypeJsonGISStation | TypeJsonCoast | TypeJsonAd };
-export type TypeGISInfo = { units: TypeGisUnits; gis_data: TypeGisData; id_type: { [key: string]: string }; file_first: { [key: string]: number } };
+export type TypeGISInfo = {
+  adlist: TypeMergedAdInfoyMap;
+  units: TypeGisUnits;
+  gis_data: TypeGisData;
+  id_type: { [key: string]: string };
+  file_first: { [key: string]: number };
+};
+
+export type TypeMergedAdInfo = {
+  isPref: boolean;
+  N03_001: string | null;
+  N03_002: string | null;
+  N03_003: string | null;
+  N03_004: string | null;
+  N03_005: string | null;
+  N03_007: string;
+  name_a: string;
+  name_b: string;
+};
+
+export type TypeMergedAdInfoyMap = Record<string, TypeMergedAdInfo>;

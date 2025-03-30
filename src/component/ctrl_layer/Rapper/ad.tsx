@@ -66,14 +66,19 @@ const PullRapperAdministrative = (props: PullRapper) => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
-  const getAdministrativeViewOptions = () => {
+  const getAdministrativeValueOptions = () => {
     const unit_id = layer.getUnitId();
-    const view_lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", layer.layer_infomation["administrative"], "N03_007");
+    const view_lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", layer.layer_infomation["pref"], "N03_007");
     return view_lines;
+  };
+  const getAdministrativeViewOptions = () => {
+    return getAdministrativeValueOptions().map((element: string) => {
+      return AppContextValue.gis_info.adlist[element].name_a;
+    });
   };
 
   const flowUpUnitAdministrative = (index: number) => {
-    const layer_administrative = getAdministrativeViewOptions()[index];
+    const layer_administrative = getAdministrativeValueOptions()[index];
     layer.updateLayerElement("administrative", layer_administrative);
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
@@ -118,7 +123,7 @@ const PullRapperAdministrative = (props: PullRapper) => {
       <SelectBox
         flowUp={flowUpUnitAdministrative}
         view_options={getAdministrativeViewOptions()}
-        selected={getArrayIndexStr(getAdministrativeViewOptions(), layer.getElement("administrative"))}
+        selected={getArrayIndexStr(getAdministrativeValueOptions(), layer.getElement("administrative"))}
       />
       <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />{" "}
       <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
