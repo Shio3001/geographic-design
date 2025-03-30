@@ -1,15 +1,51 @@
-import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo } from "./route_type";
+import { TypeJsonGISRailroadSection, TypeJsonGISStation, TypeGisUnit, TypeGisUnits, TypeGISInfo, TypeGeometry } from "./route_type";
 
 import { setupGisInfo, getGisInfo } from "./route_setup";
+
+export class CashGeometry {
+  cash: Map<string, any>;
+  constructor() {
+    this.cash = new Map();
+  }
+
+  get(path: string): any | undefined {
+    return this.cash.get(path);
+  }
+
+  set(path: string, geometry: any): void {
+    this.cash.set(path, geometry);
+  }
+
+  has(path: string): boolean {
+    return this.cash.has(path);
+  }
+}
 
 export const getProperties = (gis_info: TypeGISInfo, unit_id: string, features_index: number): { [key: string]: string } => {
   const gis_unit = gis_info.gis_data[unit_id];
   return gis_unit.features[features_index].properties as { [key: string]: string };
 };
 
-export const getGeometry = (gis_info: TypeGISInfo, unit_id: string, features_index: number) => {
+export const getGeometry = async (cg: CashGeometry, gis_info: TypeGISInfo, unit_id: string, features_index: number) => {
   const gis_unit = gis_info.gis_data[unit_id];
-  return gis_unit.features[features_index].geometry;
+  const path = gis_unit.features[features_index].geometry as string;
+  const features_region_index = features_index - (gis_info.file_first[path] ?? 0);
+
+  const resolve = (js_data: any) => {
+    const resolvetg = Array.isArray(js_data)
+      ? (js_data[features_region_index].geometry as TypeGeometry)
+      : (js_data.features[features_region_index].geometry as TypeGeometry);
+    return resolvetg;
+  };
+
+  if (cg.has(path)) {
+    return resolve(cg.get(path));
+  }
+
+  const response = await fetch(path);
+  const data = await response.json();
+  cg.set(path, data);
+  return resolve(data);
 };
 
 export const searchGisConditional = (gis_info: TypeGISInfo, unit_id: string, conditional: { [key: string]: string }): Array<number> => {

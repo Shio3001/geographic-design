@@ -3,7 +3,7 @@ import { TypeGISInfo, TypeJsonCoordinates, TypePosition } from "../../gis_scipt/
 
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "../../graph/expression/coordinate_expression";
-import { searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
+import { CashGeometry, searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
 import BigNumber from "bignumber.js";
 import * as GEO from "../../geographic_constant";
 
@@ -22,20 +22,22 @@ class ParserLake {
     this.unit_type = unit_type;
   }
 
-  generatePath = (): Array<GraphCoordinateExpression> => {
+  generatePath = async () => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
     const threshold = Number(current_layer.layer_infomation["threshold"]);
     const thinoout = Number(current_layer.layer_infomation["thinoout"]);
 
+    const cg = new CashGeometry();
+
     const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
       lake: current_layer.layer_infomation["lake"],
     });
 
-    const joinPath = () => {
+    const joinPath = async () => {
       const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
       for (let i = 0; i < geometry_index.length; i++) {
-        const current_geometry = getGeometry(this.gis_info, this.unit_id, geometry_index[i]);
+        const current_geometry = await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i]);
         const gce = this.parseCoordinates(current_geometry.coordinates);
         const gce_length = gce.pos_order.length;
 
@@ -128,12 +130,12 @@ class ParserLake {
 
     //パスの結合処理を行う場合
     if (path_join_flag) {
-      return joinPath();
+      return await joinPath();
     }
 
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
-      const current_geometry = getGeometry(this.gis_info, this.unit_id, geometry_index[i]);
+      const current_geometry = await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i]);
 
       const cord = current_geometry.coordinates;
 

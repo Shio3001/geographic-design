@@ -31,11 +31,11 @@ class Parser {
     this.svg_kit.pushNode(new_svg_node);
   }
 
-  parser = () => {
+  parser = async () => {
     const layers_order = this.edit_data.layers_order;
 
     for (let i = 0; i < layers_order.length; i++) {
-      this.parserLayer(layers_order[i]);
+      await this.parserLayer(layers_order[i]);
     }
   };
 
@@ -65,13 +65,13 @@ class Parser {
     return "不明";
   };
 
-  parserLayer = (layer_uuid: string) => {
+  parserLayer = async (layer_uuid: string) => {
     const current_layer = this.edit_data.layers[layer_uuid];
 
     const unit_id = current_layer.unit_id;
     const unit_type = this.gis_info.id_type[unit_id];
 
-    const graph_coordinate_expression = this.switchParserLayer(layer_uuid);
+    const graph_coordinate_expression = await this.switchParserLayer(layer_uuid);
 
     // すでに同じ名前のレイヤーがある場合は追加
     if (this.graph_coordinate_dict[this.getLayerName(layer_uuid)]) {
@@ -345,7 +345,7 @@ class Parser {
     return { x: x_max, y: y_max };
   };
 
-  switchParserLayer = (layer_uuid: string) => {
+  switchParserLayer = async (layer_uuid: string) => {
     const current_layer = this.edit_data.layers[layer_uuid];
 
     const unit_id = current_layer.unit_id;
@@ -356,25 +356,25 @@ class Parser {
     switch (unit_type) {
       case "RailroadSection": {
         const paraser_railroad_section = new ParserRailroadSection(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
-        paraser_railroad_section.coordinateAggregation();
+        await paraser_railroad_section.coordinateAggregation();
         const paths = paraser_railroad_section.generatePath();
 
         return paths;
       }
       case "Station": {
         const parser_station_section = new ParserStation(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
-        parser_station_section.coordinateAggregation();
+        await parser_station_section.coordinateAggregation();
         const points = parser_station_section.generatePoint();
         return points;
       }
       case "Coast": {
         const paraser_railroad_section = new ParserCoast(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
-        const paths = paraser_railroad_section.generatePath();
+        const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
       case "Lake": {
         const paraser_railroad_section = new ParserLake(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
-        const paths = paraser_railroad_section.generatePath();
+        const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
 
