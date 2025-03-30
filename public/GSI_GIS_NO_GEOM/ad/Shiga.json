@@ -1,0 +1,230 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大津市",
+      "N03_005": null,
+      "N03_007": "25201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "彦根市",
+      "N03_005": null,
+      "N03_007": "25202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "長浜市",
+      "N03_005": null,
+      "N03_007": "25203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "近江八幡市",
+      "N03_005": null,
+      "N03_007": "25204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "草津市",
+      "N03_005": null,
+      "N03_007": "25206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "守山市",
+      "N03_005": null,
+      "N03_007": "25207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "栗東市",
+      "N03_005": null,
+      "N03_007": "25208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "甲賀市",
+      "N03_005": null,
+      "N03_007": "25209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "野洲市",
+      "N03_005": null,
+      "N03_007": "25210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "湖南市",
+      "N03_005": null,
+      "N03_007": "25211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高島市",
+      "N03_005": null,
+      "N03_007": "25212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "東近江市",
+      "N03_005": null,
+      "N03_007": "25213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "米原市",
+      "N03_005": null,
+      "N03_007": "25214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": "蒲生郡",
+      "N03_004": "日野町",
+      "N03_005": null,
+      "N03_007": "25383"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": "蒲生郡",
+      "N03_004": "竜王町",
+      "N03_005": null,
+      "N03_007": "25384"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": "愛知郡",
+      "N03_004": "愛荘町",
+      "N03_005": null,
+      "N03_007": "25425"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": "犬上郡",
+      "N03_004": "豊郷町",
+      "N03_005": null,
+      "N03_007": "25441"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": "犬上郡",
+      "N03_004": "甲良町",
+      "N03_005": null,
+      "N03_007": "25442"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": "犬上郡",
+      "N03_004": "多賀町",
+      "N03_005": null,
+      "N03_007": "25443"
+    }
+  }
+]

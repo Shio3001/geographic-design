@@ -1,0 +1,950 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "長野市",
+      "N03_005": null,
+      "N03_007": "20201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "松本市",
+      "N03_005": null,
+      "N03_007": "20202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "上田市",
+      "N03_005": null,
+      "N03_007": "20203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岡谷市",
+      "N03_005": null,
+      "N03_007": "20204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "飯田市",
+      "N03_005": null,
+      "N03_007": "20205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "諏訪市",
+      "N03_005": null,
+      "N03_007": "20206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "須坂市",
+      "N03_005": null,
+      "N03_007": "20207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "小諸市",
+      "N03_005": null,
+      "N03_007": "20208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "伊那市",
+      "N03_005": null,
+      "N03_007": "20209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "駒ヶ根市",
+      "N03_005": null,
+      "N03_007": "20210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "中野市",
+      "N03_005": null,
+      "N03_007": "20211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大町市",
+      "N03_005": null,
+      "N03_007": "20212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "飯山市",
+      "N03_005": null,
+      "N03_007": "20213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "茅野市",
+      "N03_005": null,
+      "N03_007": "20214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "塩尻市",
+      "N03_005": null,
+      "N03_007": "20215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "佐久市",
+      "N03_005": null,
+      "N03_007": "20217"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "佐久市",
+      "N03_005": null,
+      "N03_007": "20217"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "千曲市",
+      "N03_005": null,
+      "N03_007": "20218"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "東御市",
+      "N03_005": null,
+      "N03_007": "20219"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "安曇野市",
+      "N03_005": null,
+      "N03_007": "20220"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "南佐久郡",
+      "N03_004": "小海町",
+      "N03_005": null,
+      "N03_007": "20303"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "南佐久郡",
+      "N03_004": "川上村",
+      "N03_005": null,
+      "N03_007": "20304"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "南佐久郡",
+      "N03_004": "南牧村",
+      "N03_005": null,
+      "N03_007": "20305"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "南佐久郡",
+      "N03_004": "南相木村",
+      "N03_005": null,
+      "N03_007": "20306"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "南佐久郡",
+      "N03_004": "北相木村",
+      "N03_005": null,
+      "N03_007": "20307"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "南佐久郡",
+      "N03_004": "佐久穂町",
+      "N03_005": null,
+      "N03_007": "20309"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北佐久郡",
+      "N03_004": "軽井沢町",
+      "N03_005": null,
+      "N03_007": "20321"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北佐久郡",
+      "N03_004": "御代田町",
+      "N03_005": null,
+      "N03_007": "20323"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北佐久郡",
+      "N03_004": "立科町",
+      "N03_005": null,
+      "N03_007": "20324"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "小県郡",
+      "N03_004": "青木村",
+      "N03_005": null,
+      "N03_007": "20349"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "小県郡",
+      "N03_004": "長和町",
+      "N03_005": null,
+      "N03_007": "20350"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "諏訪郡",
+      "N03_004": "下諏訪町",
+      "N03_005": null,
+      "N03_007": "20361"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "諏訪郡",
+      "N03_004": "富士見町",
+      "N03_005": null,
+      "N03_007": "20362"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "諏訪郡",
+      "N03_004": "原村",
+      "N03_005": null,
+      "N03_007": "20363"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "辰野町",
+      "N03_005": null,
+      "N03_007": "20382"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "箕輪町",
+      "N03_005": null,
+      "N03_007": "20383"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "飯島町",
+      "N03_005": null,
+      "N03_007": "20384"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "南箕輪村",
+      "N03_005": null,
+      "N03_007": "20385"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "南箕輪村",
+      "N03_005": null,
+      "N03_007": "20385"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "中川村",
+      "N03_005": null,
+      "N03_007": "20386"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上伊那郡",
+      "N03_004": "宮田村",
+      "N03_005": null,
+      "N03_007": "20388"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "松川町",
+      "N03_005": null,
+      "N03_007": "20402"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "高森町",
+      "N03_005": null,
+      "N03_007": "20403"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "阿南町",
+      "N03_005": null,
+      "N03_007": "20404"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "阿智村",
+      "N03_005": null,
+      "N03_007": "20407"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "平谷村",
+      "N03_005": null,
+      "N03_007": "20409"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "根羽村",
+      "N03_005": null,
+      "N03_007": "20410"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "下條村",
+      "N03_005": null,
+      "N03_007": "20411"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "売木村",
+      "N03_005": null,
+      "N03_007": "20412"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "天龍村",
+      "N03_005": null,
+      "N03_007": "20413"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "泰阜村",
+      "N03_005": null,
+      "N03_007": "20414"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "喬木村",
+      "N03_005": null,
+      "N03_007": "20415"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "豊丘村",
+      "N03_005": null,
+      "N03_007": "20416"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下伊那郡",
+      "N03_004": "大鹿村",
+      "N03_005": null,
+      "N03_007": "20417"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "木曽郡",
+      "N03_004": "上松町",
+      "N03_005": null,
+      "N03_007": "20422"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "木曽郡",
+      "N03_004": "南木曽町",
+      "N03_005": null,
+      "N03_007": "20423"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "木曽郡",
+      "N03_004": "木祖村",
+      "N03_005": null,
+      "N03_007": "20425"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "木曽郡",
+      "N03_004": "王滝村",
+      "N03_005": null,
+      "N03_007": "20429"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "木曽郡",
+      "N03_004": "大桑村",
+      "N03_005": null,
+      "N03_007": "20430"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "木曽郡",
+      "N03_004": "木曽町",
+      "N03_005": null,
+      "N03_007": "20432"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "東筑摩郡",
+      "N03_004": "麻績村",
+      "N03_005": null,
+      "N03_007": "20446"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "東筑摩郡",
+      "N03_004": "生坂村",
+      "N03_005": null,
+      "N03_007": "20448"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "東筑摩郡",
+      "N03_004": "山形村",
+      "N03_005": null,
+      "N03_007": "20450"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "東筑摩郡",
+      "N03_004": "朝日村",
+      "N03_005": null,
+      "N03_007": "20451"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "東筑摩郡",
+      "N03_004": "筑北村",
+      "N03_005": null,
+      "N03_007": "20452"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北安曇郡",
+      "N03_004": "池田町",
+      "N03_005": null,
+      "N03_007": "20481"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北安曇郡",
+      "N03_004": "松川村",
+      "N03_005": null,
+      "N03_007": "20482"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北安曇郡",
+      "N03_004": "白馬村",
+      "N03_005": null,
+      "N03_007": "20485"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "北安曇郡",
+      "N03_004": "小谷村",
+      "N03_005": null,
+      "N03_007": "20486"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "埴科郡",
+      "N03_004": "坂城町",
+      "N03_005": null,
+      "N03_007": "20521"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上高井郡",
+      "N03_004": "小布施町",
+      "N03_005": null,
+      "N03_007": "20541"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上高井郡",
+      "N03_004": "高山村",
+      "N03_005": null,
+      "N03_007": "20543"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下高井郡",
+      "N03_004": "山ノ内町",
+      "N03_005": null,
+      "N03_007": "20561"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下高井郡",
+      "N03_004": "木島平村",
+      "N03_005": null,
+      "N03_007": "20562"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下高井郡",
+      "N03_004": "野沢温泉村",
+      "N03_005": null,
+      "N03_007": "20563"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上水内郡",
+      "N03_004": "信濃町",
+      "N03_005": null,
+      "N03_007": "20583"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上水内郡",
+      "N03_004": "小川村",
+      "N03_005": null,
+      "N03_007": "20588"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "上水内郡",
+      "N03_004": "飯綱町",
+      "N03_005": null,
+      "N03_007": "20590"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nagano.json",
+    "properties": {
+      "N03_001": "長野県",
+      "N03_002": null,
+      "N03_003": "下水内郡",
+      "N03_004": "栄村",
+      "N03_005": null,
+      "N03_007": "20602"
+    }
+  }
+]

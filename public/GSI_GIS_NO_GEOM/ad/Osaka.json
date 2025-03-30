@@ -1,0 +1,1718 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "都島区",
+      "N03_007": "27102"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "福島区",
+      "N03_007": "27103"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "此花区",
+      "N03_007": "27104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "西区",
+      "N03_007": "27106"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "港区",
+      "N03_007": "27107"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "港区",
+      "N03_007": "27107"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "港区",
+      "N03_007": "27107"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "大正区",
+      "N03_007": "27108"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "大正区",
+      "N03_007": "27108"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "天王寺区",
+      "N03_007": "27109"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "浪速区",
+      "N03_007": "27111"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "西淀川区",
+      "N03_007": "27113"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "東淀川区",
+      "N03_007": "27114"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "東成区",
+      "N03_007": "27115"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "生野区",
+      "N03_007": "27116"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "旭区",
+      "N03_007": "27117"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "城東区",
+      "N03_007": "27118"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "阿倍野区",
+      "N03_007": "27119"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "住吉区",
+      "N03_007": "27120"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "東住吉区",
+      "N03_007": "27121"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "西成区",
+      "N03_007": "27122"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "淀川区",
+      "N03_007": "27123"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "鶴見区",
+      "N03_007": "27124"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "住之江区",
+      "N03_007": "27125"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "住之江区",
+      "N03_007": "27125"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "住之江区",
+      "N03_007": "27125"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "住之江区",
+      "N03_007": "27125"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "住之江区",
+      "N03_007": "27125"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "平野区",
+      "N03_007": "27126"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "北区",
+      "N03_007": "27127"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪市",
+      "N03_005": "中央区",
+      "N03_007": "27128"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "堺区",
+      "N03_007": "27141"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "堺区",
+      "N03_007": "27141"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "堺区",
+      "N03_007": "27141"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "堺区",
+      "N03_007": "27141"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "中区",
+      "N03_007": "27142"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "東区",
+      "N03_007": "27143"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "西区",
+      "N03_007": "27144"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "南区",
+      "N03_007": "27145"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "北区",
+      "N03_007": "27146"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "堺市",
+      "N03_005": "美原区",
+      "N03_007": "27147"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岸和田市",
+      "N03_005": null,
+      "N03_007": "27202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "豊中市",
+      "N03_005": null,
+      "N03_007": "27203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "豊中市",
+      "N03_005": null,
+      "N03_007": "27203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "池田市",
+      "N03_005": null,
+      "N03_007": "27204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "吹田市",
+      "N03_005": null,
+      "N03_007": "27205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉大津市",
+      "N03_005": null,
+      "N03_007": "27206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉大津市",
+      "N03_005": null,
+      "N03_007": "27206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高槻市",
+      "N03_005": null,
+      "N03_007": "27207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "貝塚市",
+      "N03_005": null,
+      "N03_007": "27208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "貝塚市",
+      "N03_005": null,
+      "N03_007": "27208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "貝塚市",
+      "N03_005": null,
+      "N03_007": "27208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "貝塚市",
+      "N03_005": null,
+      "N03_007": "27208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "貝塚市",
+      "N03_005": null,
+      "N03_007": "27208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "貝塚市",
+      "N03_005": null,
+      "N03_007": "27208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "守口市",
+      "N03_005": null,
+      "N03_007": "27209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "枚方市",
+      "N03_005": null,
+      "N03_007": "27210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "茨木市",
+      "N03_005": null,
+      "N03_007": "27211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "茨木市",
+      "N03_005": null,
+      "N03_007": "27211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "八尾市",
+      "N03_005": null,
+      "N03_007": "27212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉佐野市",
+      "N03_005": null,
+      "N03_007": "27213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "富田林市",
+      "N03_005": null,
+      "N03_007": "27214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "寝屋川市",
+      "N03_005": null,
+      "N03_007": "27215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "寝屋川市",
+      "N03_005": null,
+      "N03_007": "27215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "寝屋川市",
+      "N03_005": null,
+      "N03_007": "27215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "河内長野市",
+      "N03_005": null,
+      "N03_007": "27216"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "松原市",
+      "N03_005": null,
+      "N03_007": "27217"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大東市",
+      "N03_005": null,
+      "N03_007": "27218"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "和泉市",
+      "N03_005": null,
+      "N03_007": "27219"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "和泉市",
+      "N03_005": null,
+      "N03_007": "27219"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "箕面市",
+      "N03_005": null,
+      "N03_007": "27220"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "柏原市",
+      "N03_005": null,
+      "N03_007": "27221"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "羽曳野市",
+      "N03_005": null,
+      "N03_007": "27222"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "羽曳野市",
+      "N03_005": null,
+      "N03_007": "27222"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "門真市",
+      "N03_005": null,
+      "N03_007": "27223"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "摂津市",
+      "N03_005": null,
+      "N03_007": "27224"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "摂津市",
+      "N03_005": null,
+      "N03_007": "27224"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高石市",
+      "N03_005": null,
+      "N03_007": "27225"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高石市",
+      "N03_005": null,
+      "N03_007": "27225"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高石市",
+      "N03_005": null,
+      "N03_007": "27225"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "藤井寺市",
+      "N03_005": null,
+      "N03_007": "27226"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "東大阪市",
+      "N03_005": null,
+      "N03_007": "27227"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉南市",
+      "N03_005": null,
+      "N03_007": "27228"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉南市",
+      "N03_005": null,
+      "N03_007": "27228"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "泉南市",
+      "N03_005": null,
+      "N03_007": "27228"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "四條畷市",
+      "N03_005": null,
+      "N03_007": "27229"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "四條畷市",
+      "N03_005": null,
+      "N03_007": "27229"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "交野市",
+      "N03_005": null,
+      "N03_007": "27230"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大阪狭山市",
+      "N03_005": null,
+      "N03_007": "27231"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "阪南市",
+      "N03_005": null,
+      "N03_007": "27232"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "阪南市",
+      "N03_005": null,
+      "N03_007": "27232"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "阪南市",
+      "N03_005": null,
+      "N03_007": "27232"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "阪南市",
+      "N03_005": null,
+      "N03_007": "27232"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "三島郡",
+      "N03_004": "島本町",
+      "N03_005": null,
+      "N03_007": "27301"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "豊能郡",
+      "N03_004": "豊能町",
+      "N03_005": null,
+      "N03_007": "27321"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "豊能郡",
+      "N03_004": "能勢町",
+      "N03_005": null,
+      "N03_007": "27322"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉北郡",
+      "N03_004": "忠岡町",
+      "N03_005": null,
+      "N03_007": "27341"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "熊取町",
+      "N03_005": null,
+      "N03_007": "27361"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "田尻町",
+      "N03_005": null,
+      "N03_007": "27362"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "田尻町",
+      "N03_005": null,
+      "N03_007": "27362"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "泉南郡",
+      "N03_004": "岬町",
+      "N03_005": null,
+      "N03_007": "27366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "南河内郡",
+      "N03_004": "太子町",
+      "N03_005": null,
+      "N03_007": "27381"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "南河内郡",
+      "N03_004": "河南町",
+      "N03_005": null,
+      "N03_007": "27382"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "南河内郡",
+      "N03_004": "河南町",
+      "N03_005": null,
+      "N03_007": "27382"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "南河内郡",
+      "N03_004": "河南町",
+      "N03_005": null,
+      "N03_007": "27382"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Osaka.json",
+    "properties": {
+      "N03_001": "大阪府",
+      "N03_002": null,
+      "N03_003": "南河内郡",
+      "N03_004": "千早赤阪村",
+      "N03_005": null,
+      "N03_007": "27383"
+    }
+  }
+]

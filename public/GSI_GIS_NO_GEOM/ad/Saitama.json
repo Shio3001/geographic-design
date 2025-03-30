@@ -1,0 +1,974 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "西区",
+      "N03_007": "11101"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "西区",
+      "N03_007": "11101"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "北区",
+      "N03_007": "11102"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "大宮区",
+      "N03_007": "11103"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "見沼区",
+      "N03_007": "11104"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "中央区",
+      "N03_007": "11105"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "桜区",
+      "N03_007": "11106"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "浦和区",
+      "N03_007": "11107"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "南区",
+      "N03_007": "11108"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "緑区",
+      "N03_007": "11109"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さいたま市",
+      "N03_005": "岩槻区",
+      "N03_007": "11110"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "川越市",
+      "N03_005": null,
+      "N03_007": "11201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "熊谷市",
+      "N03_005": null,
+      "N03_007": "11202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "川口市",
+      "N03_005": null,
+      "N03_007": "11203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "行田市",
+      "N03_005": null,
+      "N03_007": "11206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "行田市",
+      "N03_005": null,
+      "N03_007": "11206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "秩父市",
+      "N03_005": null,
+      "N03_007": "11207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "所沢市",
+      "N03_005": null,
+      "N03_007": "11208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "飯能市",
+      "N03_005": null,
+      "N03_007": "11209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "加須市",
+      "N03_005": null,
+      "N03_007": "11210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "本庄市",
+      "N03_005": null,
+      "N03_007": "11211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "東松山市",
+      "N03_005": null,
+      "N03_007": "11212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "春日部市",
+      "N03_005": null,
+      "N03_007": "11214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "狭山市",
+      "N03_005": null,
+      "N03_007": "11215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "羽生市",
+      "N03_005": null,
+      "N03_007": "11216"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "鴻巣市",
+      "N03_005": null,
+      "N03_007": "11217"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "深谷市",
+      "N03_005": null,
+      "N03_007": "11218"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "深谷市",
+      "N03_005": null,
+      "N03_007": "11218"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "上尾市",
+      "N03_005": null,
+      "N03_007": "11219"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "上尾市",
+      "N03_005": null,
+      "N03_007": "11219"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "草加市",
+      "N03_005": null,
+      "N03_007": "11221"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "越谷市",
+      "N03_005": null,
+      "N03_007": "11222"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "蕨市",
+      "N03_005": null,
+      "N03_007": "11223"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "戸田市",
+      "N03_005": null,
+      "N03_007": "11224"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "入間市",
+      "N03_005": null,
+      "N03_007": "11225"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "朝霞市",
+      "N03_005": null,
+      "N03_007": "11227"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "志木市",
+      "N03_005": null,
+      "N03_007": "11228"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "和光市",
+      "N03_005": null,
+      "N03_007": "11229"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "新座市",
+      "N03_005": null,
+      "N03_007": "11230"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "桶川市",
+      "N03_005": null,
+      "N03_007": "11231"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "久喜市",
+      "N03_005": null,
+      "N03_007": "11232"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "久喜市",
+      "N03_005": null,
+      "N03_007": "11232"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "北本市",
+      "N03_005": null,
+      "N03_007": "11233"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "八潮市",
+      "N03_005": null,
+      "N03_007": "11234"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "富士見市",
+      "N03_005": null,
+      "N03_007": "11235"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "三郷市",
+      "N03_005": null,
+      "N03_007": "11237"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "蓮田市",
+      "N03_005": null,
+      "N03_007": "11238"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "坂戸市",
+      "N03_005": null,
+      "N03_007": "11239"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "幸手市",
+      "N03_005": null,
+      "N03_007": "11240"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "鶴ヶ島市",
+      "N03_005": null,
+      "N03_007": "11241"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "日高市",
+      "N03_005": null,
+      "N03_007": "11242"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "吉川市",
+      "N03_005": null,
+      "N03_007": "11243"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "ふじみ野市",
+      "N03_005": null,
+      "N03_007": "11245"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "白岡市",
+      "N03_005": null,
+      "N03_007": "11246"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "北足立郡",
+      "N03_004": "伊奈町",
+      "N03_005": null,
+      "N03_007": "11301"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "入間郡",
+      "N03_004": "三芳町",
+      "N03_005": null,
+      "N03_007": "11324"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "入間郡",
+      "N03_004": "毛呂山町",
+      "N03_005": null,
+      "N03_007": "11326"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "入間郡",
+      "N03_004": "越生町",
+      "N03_005": null,
+      "N03_007": "11327"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "滑川町",
+      "N03_005": null,
+      "N03_007": "11341"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "嵐山町",
+      "N03_005": null,
+      "N03_007": "11342"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "小川町",
+      "N03_005": null,
+      "N03_007": "11343"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "川島町",
+      "N03_005": null,
+      "N03_007": "11346"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "吉見町",
+      "N03_005": null,
+      "N03_007": "11347"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "吉見町",
+      "N03_005": null,
+      "N03_007": "11347"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "鳩山町",
+      "N03_005": null,
+      "N03_007": "11348"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "比企郡",
+      "N03_004": "ときがわ町",
+      "N03_005": null,
+      "N03_007": "11349"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "秩父郡",
+      "N03_004": "横瀬町",
+      "N03_005": null,
+      "N03_007": "11361"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "秩父郡",
+      "N03_004": "皆野町",
+      "N03_005": null,
+      "N03_007": "11362"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "秩父郡",
+      "N03_004": "長瀞町",
+      "N03_005": null,
+      "N03_007": "11363"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "秩父郡",
+      "N03_004": "小鹿野町",
+      "N03_005": null,
+      "N03_007": "11365"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "秩父郡",
+      "N03_004": "東秩父村",
+      "N03_005": null,
+      "N03_007": "11369"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "児玉郡",
+      "N03_004": "美里町",
+      "N03_005": null,
+      "N03_007": "11381"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "児玉郡",
+      "N03_004": "美里町",
+      "N03_005": null,
+      "N03_007": "11381"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "児玉郡",
+      "N03_004": "美里町",
+      "N03_005": null,
+      "N03_007": "11381"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "児玉郡",
+      "N03_004": "美里町",
+      "N03_005": null,
+      "N03_007": "11381"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "児玉郡",
+      "N03_004": "神川町",
+      "N03_005": null,
+      "N03_007": "11383"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "児玉郡",
+      "N03_004": "上里町",
+      "N03_005": null,
+      "N03_007": "11385"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "大里郡",
+      "N03_004": "寄居町",
+      "N03_005": null,
+      "N03_007": "11408"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "南埼玉郡",
+      "N03_004": "宮代町",
+      "N03_005": null,
+      "N03_007": "11442"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "北葛飾郡",
+      "N03_004": "杉戸町",
+      "N03_005": null,
+      "N03_007": "11464"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": "北葛飾郡",
+      "N03_004": "松伏町",
+      "N03_005": null,
+      "N03_007": "11465"
+    }
+  }
+]

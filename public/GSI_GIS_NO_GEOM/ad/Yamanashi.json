@@ -1,0 +1,434 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "甲府市",
+      "N03_005": null,
+      "N03_007": "19201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "富士吉田市",
+      "N03_005": null,
+      "N03_007": "19202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "富士吉田市",
+      "N03_005": null,
+      "N03_007": "19202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "富士吉田市",
+      "N03_005": null,
+      "N03_007": "19202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "都留市",
+      "N03_005": null,
+      "N03_007": "19204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "都留市",
+      "N03_005": null,
+      "N03_007": "19204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "山梨市",
+      "N03_005": null,
+      "N03_007": "19205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大月市",
+      "N03_005": null,
+      "N03_007": "19206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "韮崎市",
+      "N03_005": null,
+      "N03_007": "19207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "南アルプス市",
+      "N03_005": null,
+      "N03_007": "19208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "北杜市",
+      "N03_005": null,
+      "N03_007": "19209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "甲斐市",
+      "N03_005": null,
+      "N03_007": "19210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "笛吹市",
+      "N03_005": null,
+      "N03_007": "19211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "上野原市",
+      "N03_005": null,
+      "N03_007": "19212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "甲州市",
+      "N03_005": null,
+      "N03_007": "19213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "甲州市",
+      "N03_005": null,
+      "N03_007": "19213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "甲州市",
+      "N03_005": null,
+      "N03_007": "19213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "中央市",
+      "N03_005": null,
+      "N03_007": "19214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "西八代郡",
+      "N03_004": "市川三郷町",
+      "N03_005": null,
+      "N03_007": "19346"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南巨摩郡",
+      "N03_004": "早川町",
+      "N03_005": null,
+      "N03_007": "19364"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南巨摩郡",
+      "N03_004": "身延町",
+      "N03_005": null,
+      "N03_007": "19365"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南巨摩郡",
+      "N03_004": "身延町",
+      "N03_005": null,
+      "N03_007": "19365"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南巨摩郡",
+      "N03_004": "南部町",
+      "N03_005": null,
+      "N03_007": "19366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南巨摩郡",
+      "N03_004": "富士川町",
+      "N03_005": null,
+      "N03_007": "19368"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "中巨摩郡",
+      "N03_004": "昭和町",
+      "N03_005": null,
+      "N03_007": "19384"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "道志村",
+      "N03_005": null,
+      "N03_007": "19422"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "西桂町",
+      "N03_005": null,
+      "N03_007": "19423"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "忍野村",
+      "N03_005": null,
+      "N03_007": "19424"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "山中湖村",
+      "N03_005": null,
+      "N03_007": "19425"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "鳴沢村",
+      "N03_005": null,
+      "N03_007": "19429"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "富士河口湖町",
+      "N03_005": null,
+      "N03_007": "19430"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "富士河口湖町",
+      "N03_005": null,
+      "N03_007": "19430"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "富士河口湖町",
+      "N03_005": null,
+      "N03_007": "19430"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "南都留郡",
+      "N03_004": "富士河口湖町",
+      "N03_005": null,
+      "N03_007": "19430"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "北都留郡",
+      "N03_004": "小菅村",
+      "N03_005": null,
+      "N03_007": "19442"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Yamanashi.json",
+    "properties": {
+      "N03_001": "山梨県",
+      "N03_002": null,
+      "N03_003": "北都留郡",
+      "N03_004": "丹波山村",
+      "N03_005": null,
+      "N03_007": "19443"
+    }
+  }
+]

@@ -1,0 +1,3894 @@
+[
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "さっぽろ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "定山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "オタルナイ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "春採湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "富里湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "シューパロ湖（シュウパロ湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "涛沸湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "藻琴湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "リヤウシ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "網走湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "能取湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ウトナイ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "びばい湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "芦別湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "滝里湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "野花南湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "シブノツナイ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "コムケ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "桂沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長節湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "風蓮湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "温根沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "オコタンペ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "支笏湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "千歳湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "橘湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "室蘭工業用水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "えにわ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "青山貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "しのつ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "相沼湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "コックリ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "半月湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三重湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "くりやま湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "暑寒湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "留久貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ホロピリ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "朱鞠内湖（宇津内湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "朱鞠内湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大雪湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "かなやま湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "双珠別湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ポンテシオ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "岩尾内湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小平蘂湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "犬吼湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "パンケ沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ペンケ沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ポロ沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "クッチャロ湖（大沼）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "クッチャロ湖（小沼）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "兜沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "久種湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "チミケップ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "一湖（知床五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "五湖（知床五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "二湖（知床五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "四湖（知床五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三湖（知床五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "涛釣沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "おけと湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "サロマ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "幌内ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "洞爺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "倶多楽湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ポロト湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "厚真ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "二風谷湖（にぶたに湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "新冠湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "幌尻湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "高見湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "うらら湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "幌満湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "さまに湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "豊似湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東雲湖（東小沼）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "然別湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "糠平湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "駒止湖（西小沼）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "サホロ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "岩松湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東大雪湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "伏美湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ホロカヤントウ"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "湧洞沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "生花苗沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長節湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "活込貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "達古武湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "厚岸湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "火散布沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "塘路湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "シラルトロ沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "摩周湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "屈斜路湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "シュンクシタカラ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "次郎湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "阿寒湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "太郎湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "パンケトー"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "知西別湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "羅臼湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "下湯平成湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "野木和湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "廻堰大溜池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "藤ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "虹の湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "十三湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "藤枝溜池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "十和田湖（東湖・中湖・西湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "姉沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小川原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "かわうち湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宇曽利山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田光沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "破池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "牛旁ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "金山ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "糸畑ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "青池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八景ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "日暮ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鶏頭場ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "王池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "落口ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "越口ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "中ノ池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "濁池（十二湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "美山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大沢内溜池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "天間ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田面木沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "市柳沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鷹架沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "尾駮沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "内沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "御所湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "南部片富士湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "豊沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "昭和湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "御釜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "御苗代湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "岩洞湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田瀬湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "錦秋湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "石淵湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "瀬月内ダム湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "井土浦"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "万石浦"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "伊豆沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "花山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "七ヶ宿湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長老湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "釜房湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳥の海"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "七ッ森湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "荒雄湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "浅内沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八郎潟調整池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小安峡湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "太平湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "素波里湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "秋扇湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宝仙湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "須川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "盃湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "明月湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "明星湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "徳良湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "月山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "蛭沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "荒沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八久和ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳥海湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "若郷湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "猪苗代湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "南湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "松川浦"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "羽鳥湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "尾瀬沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大鳥ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥只見湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田子倉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "只見湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "日中ひざわ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "秋元湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小野川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "曽原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "桧原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "沼沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "母畑湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "さくら湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "千波湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "霞ヶ浦"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "牛久沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "菅生沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "竜神湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "笠間湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "北浦"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "外浪逆浦"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "涸沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "夏海湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "西ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "中禅寺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "湯ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "蓼ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "刈込湖（切込湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "深山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "川俣湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "五十里湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八汐湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東古屋湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "りんどう湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "千振湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "梅田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "薗原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "玉原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鮎川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "榛名湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "草木湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳴沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神流湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "妙義湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "碓氷湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "四万湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "照月湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田代湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "バラギ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "野反湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "藤原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ならまた湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "洞元湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥利根湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "赤谷湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "秩父湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "秩父さくら湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "山口貯水池（狭山湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宮沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "名栗湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鎌北湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八丁湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "円良田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "間瀬湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八幡湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "印旛沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八鶴湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "手賀沼"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "高滝湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "市津湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "豊英湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三島湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "亀山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "洞庭湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "村山貯水池（多摩湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥多摩湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "震生湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "丹沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "芦ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宮ヶ瀬湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "津久井湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "城山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥相模湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "相模湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "秋葉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳥屋野潟"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "米山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "内の倉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "乙見湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "瓢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "加茂湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "黒又川第一ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "黒又川第二ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "笠堀湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三面貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "猿田貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "有峰湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "黒部湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "桂湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "刀利ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "河北潟"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "犀川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "内川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大日湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "木場潟"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "北潟湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "柴山潟"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "邑知潟"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "麻那姫湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "笹生川貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "九頭竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "龍ヶ鼻湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "日向湖（三方五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "久々子湖（三方五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "水月湖（三方五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "菅湖（三方五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三方湖（三方五湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "千代田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "能泉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "南伊奈ヶ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "伊奈ヶ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "みずがき湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "本栖湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "精進湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "四尾連湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "雨畑湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奈良田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "天子湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "山中湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "西湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "河口湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白樺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "美笠湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "琅鶴湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "梓湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "美鈴湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "須川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "諏訪湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大沼湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "龍神湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "木崎湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "中綱湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "青木湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "北竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鏡湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "蓼科湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白樺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "沓沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "みどり湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "美笹湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "洞源湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "浅科湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "仙禄湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大月湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "松原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "立岩湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "佐口湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "塩沢湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "女神湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "菅平湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "入笠湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "美和湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "高遠湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "千代田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "もみじ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小渋湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "巣山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "茶臼山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "御岳湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三浦貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "聖湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "すずらん湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "巣鷹湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "野尻湖（芙蓉湖）"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "霊仙寺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "高根乗鞍湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "御母衣湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "朝日貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "阿木川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "保古ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "根ノ上湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "高峰湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "椛ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "竜吟湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "松野湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "丸山蘇水湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥矢作湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "伊自良湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "下小鳥ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東仙峡金山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "水嶺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "明神湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥いび湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "兼山ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白水湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "椿原ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳩山ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "井川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "畑薙湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "赤石ダム湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "駒鳥池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "佐鳴湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "浜名湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田貫湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "一碧湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "松川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "船明ダム湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "猪鼻湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "早霧湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "秋葉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "佐久間湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "水窪湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "いなさ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三河湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "入鹿池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "愛知池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳳来湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "みどり湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥香肌湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "なめり湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "青蓮寺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "ひなち湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "七色貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "田代湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "錫杖湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宮川貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白石湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "琵琶湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "西の湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "平湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "松ノ木内湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "内湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "余呉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "阿蘇海"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "離湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "久美浜湾"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "虹の湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "通天湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "天若湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "知明湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "つくはら湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神戸水道千刈水源池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "金仙寺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "平荘湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "千丈寺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "銀山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "音水湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東条湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "翠明湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "明神湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "本宮湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "富栖湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "まほろば湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "上津ダム湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "室生湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "津風呂湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "風屋貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "池原貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "坂本貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大迫貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "二川ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "合川貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "湖山池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "中海"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "境水道"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "東郷池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "緑水湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "日南湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "猿飛湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宍道湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神西湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "蟠竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "みやび湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "来島湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "児島湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "阿部池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "福林湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "備中湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "美穀湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "旭川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "湯原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "恩原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鳴滝湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "窓竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "青竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "羽高湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "芦田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神竜湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神之瀬湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "弥栄湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小瀬川貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "八千代湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "仙水湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "聖湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神農湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "豊田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小野湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "常盤池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "錦鶏湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "宮野湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "阿武湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "米泉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "五瀬ノ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "山代湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "青海湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "菊川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "菅野湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "向道湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "高瀬湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "中山湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大原湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長安口貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "府中湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長柄湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "満濃池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "えばら湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "白鷺湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "玉川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "黒瀬湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鹿野川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "金砂湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "朝霧湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "面河ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "穴内川ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "魚梁瀬貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "奥物部湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "早明浦湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大森川貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "長沢貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "頓田第二貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "頓田第一貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "三日月湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "北山貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "野岳湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "江津湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "肥後みどりかわ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "蜂の巣湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "梅林湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大江湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "市房ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "芹川ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "神楽女湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "志高湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "禅淡湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "金鱗湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "一ツ瀬ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "野尻湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "小野湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "渡川ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "塚原ダム貯水池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "日向椎葉湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大隅湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "大鶴湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "池田湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "海鼠池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "鰻池"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "薩摩湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "漫湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "クイナ湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "フンガー湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "伊集の湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "福上湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "新川湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "lake": "かんな湖"
+    },
+    "geometry": "GSI_GIS/lake-05.json"
+  }
+]

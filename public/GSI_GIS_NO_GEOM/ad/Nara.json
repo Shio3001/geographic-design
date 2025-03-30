@@ -1,0 +1,482 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "奈良市",
+      "N03_005": null,
+      "N03_007": "29201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大和高田市",
+      "N03_005": null,
+      "N03_007": "29202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大和郡山市",
+      "N03_005": null,
+      "N03_007": "29203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "天理市",
+      "N03_005": null,
+      "N03_007": "29204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "橿原市",
+      "N03_005": null,
+      "N03_007": "29205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "桜井市",
+      "N03_005": null,
+      "N03_007": "29206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "五條市",
+      "N03_005": null,
+      "N03_007": "29207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "御所市",
+      "N03_005": null,
+      "N03_007": "29208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "生駒市",
+      "N03_005": null,
+      "N03_007": "29209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "香芝市",
+      "N03_005": null,
+      "N03_007": "29210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "葛城市",
+      "N03_005": null,
+      "N03_007": "29211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "宇陀市",
+      "N03_005": null,
+      "N03_007": "29212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "山辺郡",
+      "N03_004": "山添村",
+      "N03_005": null,
+      "N03_007": "29322"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "生駒郡",
+      "N03_004": "平群町",
+      "N03_005": null,
+      "N03_007": "29342"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "生駒郡",
+      "N03_004": "三郷町",
+      "N03_005": null,
+      "N03_007": "29343"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "生駒郡",
+      "N03_004": "斑鳩町",
+      "N03_005": null,
+      "N03_007": "29344"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "生駒郡",
+      "N03_004": "安堵町",
+      "N03_005": null,
+      "N03_007": "29345"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "磯城郡",
+      "N03_004": "川西町",
+      "N03_005": null,
+      "N03_007": "29361"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "磯城郡",
+      "N03_004": "三宅町",
+      "N03_005": null,
+      "N03_007": "29362"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "磯城郡",
+      "N03_004": "田原本町",
+      "N03_005": null,
+      "N03_007": "29363"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "宇陀郡",
+      "N03_004": "曽爾村",
+      "N03_005": null,
+      "N03_007": "29385"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "宇陀郡",
+      "N03_004": "御杖村",
+      "N03_005": null,
+      "N03_007": "29386"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "高市郡",
+      "N03_004": "高取町",
+      "N03_005": null,
+      "N03_007": "29401"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "高市郡",
+      "N03_004": "明日香村",
+      "N03_005": null,
+      "N03_007": "29402"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "北葛城郡",
+      "N03_004": "上牧町",
+      "N03_005": null,
+      "N03_007": "29424"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "北葛城郡",
+      "N03_004": "王寺町",
+      "N03_005": null,
+      "N03_007": "29425"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "北葛城郡",
+      "N03_004": "広陵町",
+      "N03_005": null,
+      "N03_007": "29426"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "北葛城郡",
+      "N03_004": "河合町",
+      "N03_005": null,
+      "N03_007": "29427"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "北葛城郡",
+      "N03_004": "河合町",
+      "N03_005": null,
+      "N03_007": "29427"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "吉野町",
+      "N03_005": null,
+      "N03_007": "29441"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "大淀町",
+      "N03_005": null,
+      "N03_007": "29442"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "下市町",
+      "N03_005": null,
+      "N03_007": "29443"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "黒滝村",
+      "N03_005": null,
+      "N03_007": "29444"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "天川村",
+      "N03_005": null,
+      "N03_007": "29446"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "野迫川村",
+      "N03_005": null,
+      "N03_007": "29447"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "十津川村",
+      "N03_005": null,
+      "N03_007": "29449"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "下北山村",
+      "N03_005": null,
+      "N03_007": "29450"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "上北山村",
+      "N03_005": null,
+      "N03_007": "29451"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "川上村",
+      "N03_005": null,
+      "N03_007": "29452"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Nara.json",
+    "properties": {
+      "N03_001": "奈良県",
+      "N03_002": null,
+      "N03_003": "吉野郡",
+      "N03_004": "東吉野村",
+      "N03_005": null,
+      "N03_007": "29453"
+    }
+  }
+]

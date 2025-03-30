@@ -1,0 +1,578 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "岐阜市",
+      "N03_005": null,
+      "N03_007": "21201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大垣市",
+      "N03_005": null,
+      "N03_007": "21202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大垣市",
+      "N03_005": null,
+      "N03_007": "21202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大垣市",
+      "N03_005": null,
+      "N03_007": "21202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高山市",
+      "N03_005": null,
+      "N03_007": "21203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "多治見市",
+      "N03_005": null,
+      "N03_007": "21204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "関市",
+      "N03_005": null,
+      "N03_007": "21205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "中津川市",
+      "N03_005": null,
+      "N03_007": "21206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "美濃市",
+      "N03_005": null,
+      "N03_007": "21207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "瑞浪市",
+      "N03_005": null,
+      "N03_007": "21208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "羽島市",
+      "N03_005": null,
+      "N03_007": "21209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "恵那市",
+      "N03_005": null,
+      "N03_007": "21210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "美濃加茂市",
+      "N03_005": null,
+      "N03_007": "21211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "土岐市",
+      "N03_005": null,
+      "N03_007": "21212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "各務原市",
+      "N03_005": null,
+      "N03_007": "21213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "各務原市",
+      "N03_005": null,
+      "N03_007": "21213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "可児市",
+      "N03_005": null,
+      "N03_007": "21214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "可児市",
+      "N03_005": null,
+      "N03_007": "21214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "山県市",
+      "N03_005": null,
+      "N03_007": "21215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "瑞穂市",
+      "N03_005": null,
+      "N03_007": "21216"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "飛騨市",
+      "N03_005": null,
+      "N03_007": "21217"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "本巣市",
+      "N03_005": null,
+      "N03_007": "21218"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "郡上市",
+      "N03_005": null,
+      "N03_007": "21219"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "下呂市",
+      "N03_005": null,
+      "N03_007": "21220"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "海津市",
+      "N03_005": null,
+      "N03_007": "21221"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "羽島郡",
+      "N03_004": "岐南町",
+      "N03_005": null,
+      "N03_007": "21302"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "羽島郡",
+      "N03_004": "岐南町",
+      "N03_005": null,
+      "N03_007": "21302"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "羽島郡",
+      "N03_004": "笠松町",
+      "N03_005": null,
+      "N03_007": "21303"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "養老郡",
+      "N03_004": "養老町",
+      "N03_005": null,
+      "N03_007": "21341"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "不破郡",
+      "N03_004": "垂井町",
+      "N03_005": null,
+      "N03_007": "21361"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "不破郡",
+      "N03_004": "関ケ原町",
+      "N03_005": null,
+      "N03_007": "21362"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "安八郡",
+      "N03_004": "神戸町",
+      "N03_005": null,
+      "N03_007": "21381"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "安八郡",
+      "N03_004": "輪之内町",
+      "N03_005": null,
+      "N03_007": "21382"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "安八郡",
+      "N03_004": "安八町",
+      "N03_005": null,
+      "N03_007": "21383"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "揖斐郡",
+      "N03_004": "揖斐川町",
+      "N03_005": null,
+      "N03_007": "21401"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "揖斐郡",
+      "N03_004": "大野町",
+      "N03_005": null,
+      "N03_007": "21403"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "揖斐郡",
+      "N03_004": "池田町",
+      "N03_005": null,
+      "N03_007": "21404"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "本巣郡",
+      "N03_004": "北方町",
+      "N03_005": null,
+      "N03_007": "21421"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "坂祝町",
+      "N03_005": null,
+      "N03_007": "21501"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "富加町",
+      "N03_005": null,
+      "N03_007": "21502"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "川辺町",
+      "N03_005": null,
+      "N03_007": "21503"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "七宗町",
+      "N03_005": null,
+      "N03_007": "21504"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "八百津町",
+      "N03_005": null,
+      "N03_007": "21505"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "八百津町",
+      "N03_005": null,
+      "N03_007": "21505"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "白川町",
+      "N03_005": null,
+      "N03_007": "21506"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "加茂郡",
+      "N03_004": "東白川村",
+      "N03_005": null,
+      "N03_007": "21507"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "可児郡",
+      "N03_004": "御嵩町",
+      "N03_005": null,
+      "N03_007": "21521"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gifu.json",
+    "properties": {
+      "N03_001": "岐阜県",
+      "N03_002": null,
+      "N03_003": "大野郡",
+      "N03_004": "白川村",
+      "N03_005": null,
+      "N03_007": "21604"
+    }
+  }
+]

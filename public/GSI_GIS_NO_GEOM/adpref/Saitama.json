@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/adpref/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": null,
+      "N03_005": null,
+      "N03_007": "11000"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/adpref/Saitama.json",
+    "properties": {
+      "N03_001": "埼玉県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": null,
+      "N03_005": null,
+      "N03_007": "11000"
+    }
+  }
+]

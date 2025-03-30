@@ -1,0 +1,338 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "宇都宮市",
+      "N03_005": null,
+      "N03_007": "09201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "足利市",
+      "N03_005": null,
+      "N03_007": "09202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "栃木市",
+      "N03_005": null,
+      "N03_007": "09203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "佐野市",
+      "N03_005": null,
+      "N03_007": "09204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "佐野市",
+      "N03_005": null,
+      "N03_007": "09204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "鹿沼市",
+      "N03_005": null,
+      "N03_007": "09205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "日光市",
+      "N03_005": null,
+      "N03_007": "09206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "小山市",
+      "N03_005": null,
+      "N03_007": "09208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "真岡市",
+      "N03_005": null,
+      "N03_007": "09209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "大田原市",
+      "N03_005": null,
+      "N03_007": "09210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "矢板市",
+      "N03_005": null,
+      "N03_007": "09211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "那須塩原市",
+      "N03_005": null,
+      "N03_007": "09213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "那須塩原市",
+      "N03_005": null,
+      "N03_007": "09213"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "さくら市",
+      "N03_005": null,
+      "N03_007": "09214"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "那須烏山市",
+      "N03_005": null,
+      "N03_007": "09215"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "下野市",
+      "N03_005": null,
+      "N03_007": "09216"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "河内郡",
+      "N03_004": "上三川町",
+      "N03_005": null,
+      "N03_007": "09301"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "河内郡",
+      "N03_004": "上三川町",
+      "N03_005": null,
+      "N03_007": "09301"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "芳賀郡",
+      "N03_004": "益子町",
+      "N03_005": null,
+      "N03_007": "09342"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "芳賀郡",
+      "N03_004": "茂木町",
+      "N03_005": null,
+      "N03_007": "09343"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "芳賀郡",
+      "N03_004": "市貝町",
+      "N03_005": null,
+      "N03_007": "09344"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "芳賀郡",
+      "N03_004": "芳賀町",
+      "N03_005": null,
+      "N03_007": "09345"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "下都賀郡",
+      "N03_004": "壬生町",
+      "N03_005": null,
+      "N03_007": "09361"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "下都賀郡",
+      "N03_004": "野木町",
+      "N03_005": null,
+      "N03_007": "09364"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "塩谷郡",
+      "N03_004": "塩谷町",
+      "N03_005": null,
+      "N03_007": "09384"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "塩谷郡",
+      "N03_004": "高根沢町",
+      "N03_005": null,
+      "N03_007": "09386"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "那須郡",
+      "N03_004": "那須町",
+      "N03_005": null,
+      "N03_007": "09407"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Tochigi.json",
+    "properties": {
+      "N03_001": "栃木県",
+      "N03_002": null,
+      "N03_003": "那須郡",
+      "N03_004": "那珂川町",
+      "N03_005": null,
+      "N03_007": "09411"
+    }
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/adpref/Shiga.json",
+    "properties": {
+      "N03_001": "滋賀県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": null,
+      "N03_005": null,
+      "N03_007": "25000"
+    }
+  }
+]

@@ -1,0 +1,446 @@
+[
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "前橋市",
+      "N03_005": null,
+      "N03_007": "10201"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高崎市",
+      "N03_005": null,
+      "N03_007": "10202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "高崎市",
+      "N03_005": null,
+      "N03_007": "10202"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "桐生市",
+      "N03_005": null,
+      "N03_007": "10203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "桐生市",
+      "N03_005": null,
+      "N03_007": "10203"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "伊勢崎市",
+      "N03_005": null,
+      "N03_007": "10204"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "太田市",
+      "N03_005": null,
+      "N03_007": "10205"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "沼田市",
+      "N03_005": null,
+      "N03_007": "10206"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "館林市",
+      "N03_005": null,
+      "N03_007": "10207"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "渋川市",
+      "N03_005": null,
+      "N03_007": "10208"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "藤岡市",
+      "N03_005": null,
+      "N03_007": "10209"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "富岡市",
+      "N03_005": null,
+      "N03_007": "10210"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "安中市",
+      "N03_005": null,
+      "N03_007": "10211"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": null,
+      "N03_004": "みどり市",
+      "N03_005": null,
+      "N03_007": "10212"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "北群馬郡",
+      "N03_004": "榛東村",
+      "N03_005": null,
+      "N03_007": "10344"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "北群馬郡",
+      "N03_004": "吉岡町",
+      "N03_005": null,
+      "N03_007": "10345"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "多野郡",
+      "N03_004": "上野村",
+      "N03_005": null,
+      "N03_007": "10366"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "多野郡",
+      "N03_004": "神流町",
+      "N03_005": null,
+      "N03_007": "10367"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "甘楽郡",
+      "N03_004": "下仁田町",
+      "N03_005": null,
+      "N03_007": "10382"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "甘楽郡",
+      "N03_004": "南牧村",
+      "N03_005": null,
+      "N03_007": "10383"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "甘楽郡",
+      "N03_004": "甘楽町",
+      "N03_005": null,
+      "N03_007": "10384"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "吾妻郡",
+      "N03_004": "中之条町",
+      "N03_005": null,
+      "N03_007": "10421"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "吾妻郡",
+      "N03_004": "長野原町",
+      "N03_005": null,
+      "N03_007": "10424"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "吾妻郡",
+      "N03_004": "嬬恋村",
+      "N03_005": null,
+      "N03_007": "10425"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "吾妻郡",
+      "N03_004": "草津町",
+      "N03_005": null,
+      "N03_007": "10426"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "吾妻郡",
+      "N03_004": "高山村",
+      "N03_005": null,
+      "N03_007": "10428"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "吾妻郡",
+      "N03_004": "東吾妻町",
+      "N03_005": null,
+      "N03_007": "10429"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "利根郡",
+      "N03_004": "片品村",
+      "N03_005": null,
+      "N03_007": "10443"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "利根郡",
+      "N03_004": "川場村",
+      "N03_005": null,
+      "N03_007": "10444"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "利根郡",
+      "N03_004": "昭和村",
+      "N03_005": null,
+      "N03_007": "10448"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "利根郡",
+      "N03_004": "みなかみ町",
+      "N03_005": null,
+      "N03_007": "10449"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "佐波郡",
+      "N03_004": "玉村町",
+      "N03_005": null,
+      "N03_007": "10464"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "邑楽郡",
+      "N03_004": "板倉町",
+      "N03_005": null,
+      "N03_007": "10521"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "邑楽郡",
+      "N03_004": "明和町",
+      "N03_005": null,
+      "N03_007": "10522"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "邑楽郡",
+      "N03_004": "千代田町",
+      "N03_005": null,
+      "N03_007": "10523"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "邑楽郡",
+      "N03_004": "大泉町",
+      "N03_005": null,
+      "N03_007": "10524"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": "GSI_GIS/ad/Gunma.json",
+    "properties": {
+      "N03_001": "群馬県",
+      "N03_002": null,
+      "N03_003": "邑楽郡",
+      "N03_004": "邑楽町",
+      "N03_005": null,
+      "N03_007": "10525"
+    }
+  }
+]
