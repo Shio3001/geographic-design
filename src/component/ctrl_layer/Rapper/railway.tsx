@@ -73,6 +73,7 @@ const PullRapperRailroadSection = (props: PullRapper) => {
   const flowUpUnitLine = (index: number) => {
     const layer_line = getLineViewOptions()[index];
     layer.updateLayerElement("line", layer_line);
+
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });

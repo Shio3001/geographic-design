@@ -54,6 +54,10 @@ const CtrlLayerAdd = () => {
       case "Station": {
         return searchUniqueKey(getGisInfo(), unit_id, "N02_004");
       }
+      case "Administrative": {
+        return searchUniqueKey(getGisInfo(), unit_id, "N03_001");
+      }
+
       // case "Coast": {
       //   return searchUniqueKey(unit_id, "pref");
       // }
@@ -139,6 +143,25 @@ const CtrlLayerAdd = () => {
         return;
       }
 
+      case "Administrative": {
+        const pref = searchUniqueKey(getGisInfo(), unit_id, "N03_001")[ctrl_layer_add.classification1];
+        const administrative = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", pref, "N03_007");
+        const edit_data = AppContextValue.edit_data;
+
+        for (let i in administrative) {
+          const admin = administrative[i];
+          const nlayer: LayerData = new LayerData();
+          nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
+          nlayer.updateLayerElement("pref", pref);
+          nlayer.updateLayerElement("administrative", admin);
+          nlayer.updateLayerElement("threshold", "100");
+          nlayer.updateLayerElement("thinoout", "10");
+          edit_data.addLayer(nlayer);
+        }
+        AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+        return;
+      }
+
       default:
         return;
     }
@@ -157,7 +180,8 @@ const CtrlLayerAdd = () => {
     <div className="ctrl_layer_add">
       <Button flowUp={flowUpAdd} text={"一括追加"}></Button>
       <SelectBox flowUp={flowUp0} view_options={getViewOptions1()} selected={ctrl_layer_add.unit_id_index} />
-      <SelectBox flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} />
+
+      {getViewOptions2().length > 0 ? <SelectBox flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} /> : <div></div>}
     </div>
   );
 };

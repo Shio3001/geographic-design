@@ -115,6 +115,26 @@ class GraphCoordinateExpression {
     return np;
   };
 
+  getSectionPath = (start: number, end: number) => {
+    const np = new GraphCoordinateExpression("path", this.coordinate_name);
+    for (let i = start; i <= end; i++) {
+      const id = this.pos_order[i];
+      const pos = this.coordinates.get(id);
+      np.pushCoordinateId(id, pos.x, pos.y);
+    }
+    return np;
+  };
+
+  removeSectionPath = (start: number, end: number) => {
+    //このpathを削除する
+
+    for (let i = start; i <= end; i++) {
+      const id = this.pos_order[i];
+      this.coordinates.delete(id);
+    }
+    this.pos_order.splice(start, end - start + 1);
+  };
+
   // hasPosId(id: string) {
   //   return this.pos_ids.has(id);
   // }

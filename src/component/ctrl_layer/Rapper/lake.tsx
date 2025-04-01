@@ -58,6 +58,7 @@ const PullRapperLake = (props: PullRapper) => {
   const flowUpUnitPref = (index: number) => {
     const layer_pref = lake[index];
     layer.updateLayerElement("lake", layer_pref);
+
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });

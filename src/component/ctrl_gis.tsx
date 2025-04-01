@@ -42,19 +42,51 @@ const CtrlGis = () => {
     const edit_data = AppContextValue.edit_data;
     const file_name = edit_data.filename;
 
+    const getLayerName = (layer_uuid: string) => {
+      const current_layer = edit_data.layers[layer_uuid];
+
+      const unit_id = current_layer.unit_id;
+      const unit_type = AppContextValue.gis_info.id_type[unit_id];
+
+      switch (unit_type) {
+        case "RailroadSection": {
+          return "鉄道_" + current_layer.layer_infomation["line"];
+        }
+        case "Station": {
+          return "駅_" + current_layer.layer_infomation["line"];
+        }
+        case "Coast": {
+          return "海岸線_" + current_layer.layer_infomation["pref"];
+        }
+        case "Lake": {
+          return "湖_" + current_layer.layer_infomation["lake"];
+        }
+        case "Administrative": {
+          return "行政_" + AppContextValue.gis_info.adlist[current_layer.layer_infomation["administrative"]].name_b;
+        }
+        case "Administrative_pref": {
+          return "行政_" + current_layer.layer_infomation["pref"];
+        }
+
+        default:
+          break;
+      }
+      return "不明";
+    };
+
     if (file_name == "") {
       const layer_order = edit_data.layers_order;
 
       console.log("ctrl_gis", edit_data.layers_order, layer_order);
 
       if (layer_order.length > 6) {
-        const line = edit_data.layers[layer_order[0]].layer_infomation["line"];
-        return "パスデータ_" + line + "ほか" + layer_order.length + "路線";
+        const line = getLayerName(layer_order[0]);
+        return "GEO_" + line + "ほか" + layer_order.length + "データ";
       }
 
-      let lines = "パスデータ";
+      let lines = "GEO";
       for (let layer_id of layer_order) {
-        const line = edit_data.layers[layer_id].layer_infomation["line"];
+        const line = getLayerName(layer_id);
 
         lines += "_";
         lines += line;
@@ -203,7 +235,7 @@ const CtrlGis = () => {
           <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
           <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
           <NumberBox flowUp={flowUpDecimalPlace} number={AppContextValue.edit_data.decimal_place} label_text="精度(少数桁数)" />
-          <CheckBox flowUp={flowUpUseThread} label_text={"スレッド処理"} checked={getCheckedUseThread()} />
+          <CheckBox flowUp={flowUpUseThread} label_text={"スレッド処理"} checked={getCheckedUseThread()} />{" "}
         </div>
 
         {AppContextValue.gis_info ? (

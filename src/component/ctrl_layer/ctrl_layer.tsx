@@ -55,7 +55,7 @@ const CtrlLayer = (props: props) => {
   useEffect(() => {}, [AppContextValue.update]);
 
   return (
-    <div className="ctrl_layer">
+    <div className="ctrl_layer" style={{ height: "42px" }}>
       <div className="ctrl_layer_pull_down_lateral">
         {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
         <Button flowUp={flowUpDelete} text={"削除"}></Button>

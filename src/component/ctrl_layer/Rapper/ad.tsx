@@ -26,7 +26,7 @@ import { PullRapper } from "./helper";
 const PullRapperAdministrative = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
-  const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
+  const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "100");
   const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
 
   const pref = searchUniqueKey(getGisInfo(), layer.unit_id, "N03_001");
@@ -51,10 +51,14 @@ const PullRapperAdministrative = (props: PullRapper) => {
     }
 
     if (!layer.layer_infomation["threshold"]) {
-      flowUpUnitThreshold("10000");
+      flowUpUnitThreshold("100");
     }
     if (!layer.layer_infomation["thinoout"]) {
       flowUpUnitThinoout("10");
+    }
+
+    if (!layer.layer_infomation["remove_duplicate_lines"]) {
+      flowUpUnitRemoveDuplicateLines(true);
     }
   }, [props.unit_type, props.layer_uuid]);
 
@@ -64,6 +68,8 @@ const PullRapperAdministrative = (props: PullRapper) => {
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+
+    flowUpUnitAdministrative(0);
   };
 
   const getAdministrativeValueOptions = () => {
@@ -109,6 +115,13 @@ const PullRapperAdministrative = (props: PullRapper) => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpUnitRemoveDuplicateLines = (check: boolean) => {
+    layer.updateLayerElement("remove_duplicate_lines", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
+
   const getCheckedPathJoin = () => {
     if (!("path_join" in layer.layer_infomation)) {
       return true;
@@ -128,6 +141,7 @@ const PullRapperAdministrative = (props: PullRapper) => {
       <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />{" "}
       <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
       <TextBox label_text="間引き" text={thinoout} flowUp={flowUpUnitThinoout}></TextBox>{" "}
+      <CheckBox flowUp={flowUpUnitRemoveDuplicateLines} label_text={"重複線削除対象"} checked={layer.getElement("remove_duplicate_lines") == "ok"} />{" "}
     </>
   );
 };

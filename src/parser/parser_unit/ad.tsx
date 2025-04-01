@@ -7,6 +7,8 @@ import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_sci
 import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
 
+import { RemoveLineMap } from "./../remove_line_map";
+
 class ParserAd {
   edit_data: EditData;
   gis_info: TypeGISInfo;
@@ -22,11 +24,12 @@ class ParserAd {
     this.unit_type = unit_type;
   }
 
-  generatePath = async () => {
+  generatePath = async (remove_line: RemoveLineMap) => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
     const threshold = Number(current_layer.layer_infomation["threshold"]);
     const thinoout = Number(current_layer.layer_infomation["thinoout"]);
+    const remove_duplicate_lines = current_layer.layer_infomation["remove_duplicate_lines"] == "ok";
 
     const cg = new CashGeometry();
 
@@ -36,23 +39,52 @@ class ParserAd {
 
     console.log("generatePath", geometry_index, current_layer.layer_infomation);
 
+    const duplicate = (line: GraphCoordinateExpression): Array<GraphCoordinateExpression> => {
+      // lineの重複を削除する。必要に応じて分割する
+
+      const lines: Array<GraphCoordinateExpression> = [];
+      let latest = 0;
+
+      for (let i = 0; i < line.pos_order.length - 1; i++) {
+        const coordinate_id_0 = line.pos_order[i];
+        const coordinate_id_1 = line.pos_order[i + 1];
+
+        if (remove_line.hasRemoveLineMap(coordinate_id_0, coordinate_id_1)) {
+          const section_patn = line.getSectionPath(latest, i);
+          lines.push(section_patn);
+          latest = i + 1;
+        }
+
+        remove_line.pushRemoveLineMap(coordinate_id_0, coordinate_id_1);
+      }
+
+      const latest_section_patn = line.getSectionPath(latest, line.pos_order.length - 1);
+      lines.push(latest_section_patn);
+
+      return lines;
+    };
+
     const joinPath = async () => {
       const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
       for (let i = 0; i < geometry_index.length; i++) {
         const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
 
-        const gce = this.parseCoordinates(current_geometry.coordinates.flat());
-        const gce_length = gce.pos_order.length;
+        const pcd = this.parseCoordinates(current_geometry.coordinates.flat());
+        const gced = remove_duplicate_lines ? duplicate(pcd) : [pcd];
 
-        //gce_lengthの数が多い順に挿入する
-        for (let j = 0; j <= sort_paths_array.length; j++) {
-          if (j >= sort_paths_array.length - 1) {
-            sort_paths_array.push(gce);
-            break;
-          }
-          if (sort_paths_array[j].pos_order.length <= gce_length) {
-            sort_paths_array.splice(j, 0, gce);
-            break;
+        for (let j = 0; j < gced.length; j++) {
+          const gce_length = gced[j].pos_order.length;
+
+          //gce_lengthの数が多い順に挿入する
+          for (let k = 0; k <= sort_paths_array.length; k++) {
+            if (k >= sort_paths_array.length - 1) {
+              sort_paths_array.push(gced[j]);
+              break;
+            }
+            if (sort_paths_array[k].pos_order.length <= gce_length) {
+              sort_paths_array.splice(k, 0, gced[j]);
+              break;
+            }
           }
         }
       }
