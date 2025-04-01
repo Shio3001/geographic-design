@@ -5,7 +5,14 @@ import Button from "../../common/button/button";
 
 import { AppContext } from "./../../app_context";
 import { CtrlGisContext } from "./../ctrl_gis_context";
-import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr, searchUniqueKeyBySearchKey } from "./../../gis_scipt/gis_unique_data";
+import {
+  searchUniqueKey,
+  hasUniqueKeyBySearchKey,
+  getArrayIndexNum,
+  getArrayIndexStr,
+  searchUniqueKeyBySearchKey,
+  searchUniqueKeyBySearchKeyArray,
+} from "./../../gis_scipt/gis_unique_data";
 import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 import LayerData from "../ctrl_dataflow/edit_data/layer_data";
 import SelectBox from "../../common/selectbox/selectbox";
@@ -13,6 +20,7 @@ import SelectBox from "../../common/selectbox/selectbox";
 type TypeCtrlLayerAdd = {
   unit_id_index: number;
   classification1: number;
+  classification2: number;
 };
 
 type TypeActionCtrlLayerAdd = {
@@ -26,10 +34,13 @@ const CtrlLayerAdd = () => {
 
   const renaderLayerAdd = (state: TypeCtrlLayerAdd, action: TypeActionCtrlLayerAdd): TypeCtrlLayerAdd => {
     if (action.action_type == "unit_id") {
-      return { unit_id_index: action.action_data, classification1: state.classification1 };
+      return { unit_id_index: action.action_data, classification1: state.classification1, classification2: 0 };
     }
     if (action.action_type == "classification1") {
-      return { unit_id_index: state.unit_id_index, classification1: action.action_data };
+      return { unit_id_index: state.unit_id_index, classification1: action.action_data, classification2: 0 };
+    }
+    if (action.action_type == "classification2") {
+      return { unit_id_index: state.unit_id_index, classification1: state.classification1, classification2: action.action_data };
     }
     return state;
   };
@@ -37,6 +48,7 @@ const CtrlLayerAdd = () => {
   const [ctrl_layer_add, dispatchCtrlLayerAdd] = useReducer(renaderLayerAdd, {
     unit_id_index: 0,
     classification1: 0,
+    classification2: 0,
   });
 
   const getViewOptions1 = () => {
@@ -61,6 +73,34 @@ const CtrlLayerAdd = () => {
       // case "Coast": {
       //   return searchUniqueKey(unit_id, "pref");
       // }
+      default:
+        return [];
+    }
+  };
+
+  const getViewOptions3 = () => {
+    const unit_id = getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index];
+    const unit_type = AppContextValue.gis_info.id_type[unit_id];
+
+    switch (unit_type) {
+      case "Administrative": {
+        const pref = searchUniqueKey(getGisInfo(), unit_id, "N03_001")[ctrl_layer_add.classification1];
+        const city = [
+          ...searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", pref, "N03_002"),
+          ...searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", pref, "N03_003"),
+          ...hasUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", pref, "N03_005", "N03_004"),
+        ].filter((element: string) => {
+          return element != null;
+        });
+        if (city.length == 0) {
+          return [];
+        }
+
+        return [
+          "全選択", //nullを除外
+          ...city,
+        ];
+      }
       default:
         return [];
     }
@@ -145,7 +185,32 @@ const CtrlLayerAdd = () => {
 
       case "Administrative": {
         const pref = searchUniqueKey(getGisInfo(), unit_id, "N03_001")[ctrl_layer_add.classification1];
-        const administrative = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", pref, "N03_007");
+        let administrative = ctrl_layer_add.classification2 == 0 ? searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_001", pref, "N03_007") : [];
+
+        if (administrative.length == 0) {
+          const city = getViewOptions3()[ctrl_layer_add.classification2];
+          console.log("city", city);
+          administrative = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_002", city, "N03_007");
+        }
+        if (administrative.length == 0) {
+          const city = getViewOptions3()[ctrl_layer_add.classification2];
+          administrative = searchUniqueKeyBySearchKeyArray(
+            getGisInfo(),
+            unit_id,
+            [
+              ["N03_001", pref],
+              ["N03_003", city],
+            ],
+            "N03_007"
+          );
+          console.log("city", city, administrative);
+        }
+        if (administrative.length == 0) {
+          const city = getViewOptions3()[ctrl_layer_add.classification2];
+          console.log("city", city);
+          administrative = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "N03_004", city, "N03_007");
+        }
+
         const edit_data = AppContextValue.edit_data;
 
         for (let i in administrative) {
@@ -176,12 +241,16 @@ const CtrlLayerAdd = () => {
     dispatchCtrlLayerAdd({ action_type: "classification1", action_data: index });
   };
 
+  const flowUp2 = (index: number) => {
+    dispatchCtrlLayerAdd({ action_type: "classification2", action_data: index });
+  };
+
   return (
     <div className="ctrl_layer_add">
       <Button flowUp={flowUpAdd} text={"一括追加"}></Button>
       <SelectBox flowUp={flowUp0} view_options={getViewOptions1()} selected={ctrl_layer_add.unit_id_index} />
-
       {getViewOptions2().length > 0 ? <SelectBox flowUp={flowUp1} view_options={getViewOptions2()} selected={ctrl_layer_add.classification1} /> : <div></div>}
+      {getViewOptions3().length > 0 ? <SelectBox flowUp={flowUp2} view_options={getViewOptions3()} selected={ctrl_layer_add.classification2} /> : <div></div>}
     </div>
   );
 };
