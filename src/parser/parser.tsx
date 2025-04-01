@@ -29,6 +29,7 @@ class Parser {
     const new_svg_node = new SvgNode();
     new_svg_node.setTag("svg");
     new_svg_node.pushAttribute("xmlns", "http://www.w3.org/2000/svg");
+    new_svg_node.pushAttribute("xmlns:inkscape", "http://www.inkscape.org/namespaces/inkscape");
     new_svg_node.pushAttributeNum("width", edit_data.width);
     new_svg_node.pushAttributeNum("height", edit_data.height);
 
@@ -145,6 +146,8 @@ class Parser {
 
       g_node.setTag("g");
       g_node.pushAttribute("id", key);
+      g_node.pushAttribute("inkscape:label", key);
+      g_node.pushAttribute("inkscape:groupmode", "layer");
       const g_node_index = this.svg_kit.pushNode(g_node);
       this.svg_kit.pushChild(0, g_node_index);
 

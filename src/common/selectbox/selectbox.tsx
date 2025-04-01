@@ -54,6 +54,7 @@ const SelectBox = (props: props) => {
           }}
           /** SelectBox の id */
           instanceId="search-select-box"
+          menuPortalTarget={document.body}
           value={getSelectBoxOption()[props.selected]}
           options={getSelectBoxOption()}
           onChange={(option) => onChangeEvent(option)}

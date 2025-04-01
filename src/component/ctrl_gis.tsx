@@ -275,13 +275,13 @@ const CtrlGis = () => {
               <div
                 style={{
                   overflowY: "scroll",
-                  height: "500px",
+                  height: "700px",
                   backgroundColor: "#eeeeee",
                 }}
               >
                 <div
                   style={{
-                    minHeight: "500px",
+                    minHeight: "700px",
                   }}
                 >
                   <CtrlLayers />
