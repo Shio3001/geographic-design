@@ -12,12 +12,15 @@ import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
 import path from "path";
 import BigNumber from "bignumber.js";
+import { RemoveLineMap } from "./remove_line_map";
 
 class Parser {
   edit_data: EditData;
   gis_info: TypeGISInfo;
   svg_kit: SvgKit;
   graph_coordinate_dict: { [key: string]: Array<GraphCoordinateExpression> };
+  removeLineMap: RemoveLineMap;
+
   constructor(edit_data: EditData, gis_info: TypeGISInfo) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
@@ -30,6 +33,7 @@ class Parser {
     new_svg_node.pushAttributeNum("height", edit_data.height);
 
     this.svg_kit.pushNode(new_svg_node);
+    this.removeLineMap = new RemoveLineMap();
   }
 
   parser = async () => {
@@ -40,32 +44,6 @@ class Parser {
     }
   };
 
-  getLayerName = (layer_uuid: string) => {
-    const current_layer = this.edit_data.layers[layer_uuid];
-
-    const unit_id = current_layer.unit_id;
-    const unit_type = this.gis_info.id_type[unit_id];
-
-    switch (unit_type) {
-      case "RailroadSection": {
-        return "鉄道_" + current_layer.layer_infomation["railway"] + "_" + current_layer.layer_infomation["line"];
-      }
-      case "Station": {
-        return "駅_" + current_layer.layer_infomation["railway"] + "_" + current_layer.layer_infomation["line"];
-      }
-      case "Coast": {
-        return "海岸線_" + current_layer.layer_infomation["pref"];
-      }
-      case "Lake": {
-        return "湖_" + current_layer.layer_infomation["lake"];
-      }
-
-      default:
-        break;
-    }
-    return "不明";
-  };
-
   parserLayer = async (layer_uuid: string) => {
     const current_layer = this.edit_data.layers[layer_uuid];
 
@@ -74,11 +52,13 @@ class Parser {
 
     const graph_coordinate_expression = await this.switchParserLayer(layer_uuid);
 
+    const layer_name = this.getLayerName(layer_uuid);
+
     // すでに同じ名前のレイヤーがある場合は追加
-    if (this.graph_coordinate_dict[this.getLayerName(layer_uuid)]) {
-      this.graph_coordinate_dict[this.getLayerName(layer_uuid)].push(...graph_coordinate_expression);
+    if (this.graph_coordinate_dict[layer_name]) {
+      this.graph_coordinate_dict[layer_name].push(...graph_coordinate_expression);
     } else {
-      this.graph_coordinate_dict[this.getLayerName(layer_uuid)] = graph_coordinate_expression;
+      this.graph_coordinate_dict[layer_name] = graph_coordinate_expression;
     }
 
     console.log("parserLayer", this.edit_data, this.graph_coordinate_dict, graph_coordinate_expression);
@@ -346,6 +326,38 @@ class Parser {
     return { x: x_max, y: y_max };
   };
 
+  getLayerName = (layer_uuid: string) => {
+    const current_layer = this.edit_data.layers[layer_uuid];
+
+    const unit_id = current_layer.unit_id;
+    const unit_type = this.gis_info.id_type[unit_id];
+
+    switch (unit_type) {
+      case "RailroadSection": {
+        return "鉄道_" + current_layer.layer_infomation["railway"] + "_" + current_layer.layer_infomation["line"];
+      }
+      case "Station": {
+        return "駅_" + current_layer.layer_infomation["railway"] + "_" + current_layer.layer_infomation["line"];
+      }
+      case "Coast": {
+        return "海岸線_" + current_layer.layer_infomation["pref"];
+      }
+      case "Lake": {
+        return "湖_" + current_layer.layer_infomation["lake"];
+      }
+      case "Administrative": {
+        return "行政_" + this.gis_info.adlist[current_layer.layer_infomation["administrative"]].name_b;
+      }
+      case "Administrative_pref": {
+        return "行政_" + current_layer.layer_infomation["pref"];
+      }
+
+      default:
+        break;
+    }
+    return "不明";
+  };
+
   switchParserLayer = async (layer_uuid: string) => {
     const current_layer = this.edit_data.layers[layer_uuid];
 
@@ -381,7 +393,7 @@ class Parser {
 
       case "Administrative": {
         const paraser_railroad_section = new ParserAd(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
-        const paths = await paraser_railroad_section.generatePath();
+        const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
         return paths;
       }
 

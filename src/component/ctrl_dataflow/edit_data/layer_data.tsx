@@ -33,6 +33,7 @@ class LayerData {
   setUnit = (unit_id: string) => {
     this.unit_id = unit_id;
   };
+
   updateLayerInfomation = (layer_infomation: { [key: string]: string }) => {
     this.layer_infomation = layer_infomation;
   };
