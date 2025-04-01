@@ -148,6 +148,8 @@ export const logicalAnd = (array1: Array<number>, array2: Array<number>): Array<
   return ans_array;
 };
 
+// 探索関数
+// たとえば getGisInfo(), unit_id, "N03_001", pref, "N03_003" とすると、N03_001がprefで指定される値のN03_003の値を取得する
 export const searchUniqueKeyBySearchKey = (
   gis_info: TypeGISInfo,
   unit_id: string,
@@ -155,7 +157,6 @@ export const searchUniqueKeyBySearchKey = (
   search_propertie_valuie: string,
   request_properties_key: string
 ): Array<string> => {
-  // const unit_id = gis_info.units[current_unit].unit_id;
   const current_gis = gis_info.gis_data[unit_id];
 
   const propertie_map = new Map();
@@ -175,6 +176,102 @@ export const searchUniqueKeyBySearchKey = (
     const search_propertie_value = properties[search_properties_key];
 
     if (search_propertie_value != search_propertie_valuie) {
+      continue;
+    }
+
+    const request_propertie_value = properties[request_properties_key];
+    pushPropertie(request_propertie_value);
+  }
+
+  console.log(propertie_list);
+
+  return propertie_list;
+};
+
+// 探索関数 政令指定都市などの検索
+// たとえば getGisInfo(), unit_id, "N03_001", pref, "N03_004" ,"N03_003" とすると、
+// N03_001がprefで指定される値のうち、N03_004が存在するN03_003の値を取得する
+// 存在しないものはnullが代入されているか、そもそも要素として存在しない
+export const hasUniqueKeyBySearchKey = (
+  gis_info: TypeGISInfo,
+  unit_id: string,
+  search_properties_key: string,
+  search_propertie_valuie: string,
+  check_properties_key: string,
+  request_properties_key: string
+): Array<string> => {
+  const current_gis = gis_info.gis_data[unit_id];
+
+  const propertie_map = new Map();
+  const propertie_list: Array<string> = [];
+
+  const pushPropertie = (propertie_value: string) => {
+    if (propertie_map.has(propertie_value)) {
+      return;
+    }
+
+    propertie_map.set(propertie_value, true);
+    propertie_list.push(propertie_value);
+  };
+
+  for (let i = 0; i < current_gis.features.length; i++) {
+    const properties = current_gis.features[i].properties as { [key: string]: string };
+    const search_propertie_value = properties[search_properties_key];
+
+    if (search_propertie_value != search_propertie_valuie) {
+      continue;
+    }
+
+    const check_propertie_value = properties[check_properties_key];
+    if (check_propertie_value == null || check_propertie_value == "") {
+      continue;
+    }
+
+    const request_propertie_value = properties[request_properties_key];
+    pushPropertie(request_propertie_value);
+  }
+
+  console.log(propertie_list);
+
+  return propertie_list;
+};
+
+export const searchUniqueKeyBySearchKeyArray = (
+  gis_info: TypeGISInfo,
+  unit_id: string,
+  search_properties: Array<Array<string>>, // [["N03_001", "pref"], ["N03_003", "city"]] のand検索 この場合、"N03_001"がprefで指定されるかつ、"M03_003"がcityで指定される値を取得する
+  request_properties_key: string
+): Array<string> => {
+  const current_gis = gis_info.gis_data[unit_id];
+
+  const propertie_map = new Map();
+  const propertie_list: Array<string> = [];
+
+  const pushPropertie = (propertie_value: string) => {
+    if (propertie_map.has(propertie_value)) {
+      return;
+    }
+
+    propertie_map.set(propertie_value, true);
+    propertie_list.push(propertie_value);
+  };
+
+  for (let i = 0; i < current_gis.features.length; i++) {
+    const properties = current_gis.features[i].properties as { [key: string]: string };
+
+    let search_conditional_flag = true;
+
+    for (let j = 0; j < search_properties.length; j++) {
+      const search_propertie_key = search_properties[j][0];
+      const search_propertie_value = search_properties[j][1];
+
+      if (properties[search_propertie_key] != search_propertie_value) {
+        search_conditional_flag = false;
+        break;
+      }
+    }
+
+    if (!search_conditional_flag) {
       continue;
     }
 

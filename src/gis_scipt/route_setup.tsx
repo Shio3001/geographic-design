@@ -14,7 +14,7 @@ import {
 const gis_info: TypeGISInfo = { adlist: {}, units: {}, gis_data: {}, id_type: {}, file_first: {} };
 let gis_info_load_flag = false;
 
-const prefectures = [
+const coast_prefectures = [
   "Hokkaido",
   "Aomori",
   "Iwate",
@@ -55,6 +55,8 @@ const prefectures = [
   "Kagoshima",
   "Okinawa",
 ];
+
+const prefectures = [...coast_prefectures, "Gunma", "Saitama", "Tochigi", "Gifu"];
 
 export const globalStore = new EventTarget(); // React へ通知するイベント管理
 
@@ -134,7 +136,7 @@ export const setupGisInfo = async () => {
 
   let coast23pref: Array<TypeJsonCoastPref> = [];
 
-  for (const pref of prefectures) {
+  for (const pref of coast_prefectures) {
     const fileName = `./GSI_GIS_NO_GEOM/coast/${pref}-23_Coast.json`;
     const data = await fetch(fileName);
     const json = (await data.json()) as Array<TypeJsonCoastPref>;
