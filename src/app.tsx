@@ -86,6 +86,7 @@ const App = () => {
           edit_data: app_state.edit_data as EditData,
           update: app_state.update as boolean,
           dispatchAppState: dispatchAppState,
+          fileExportCommon: fileExportCommon,
           fileExportText: fileExportText,
         }}
       >

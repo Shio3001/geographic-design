@@ -38,7 +38,7 @@ const CtrlGis = () => {
     console.log("[APPCTR] Update");
   }, [update]);
 
-  const getOutputFileName = () => {
+  const getOutputFileName = (pre: string = "GEO") => {
     const edit_data = AppContextValue.edit_data;
     const file_name = edit_data.filename;
 
@@ -81,10 +81,10 @@ const CtrlGis = () => {
 
       if (layer_order.length > 6) {
         const line = getLayerName(layer_order[0]);
-        return "GEO_" + line + "ほか" + layer_order.length + "データ";
+        return pre + "_" + line + "ほか" + layer_order.length + "データ";
       }
 
-      let lines = "GEO";
+      let lines = pre;
       for (let layer_id of layer_order) {
         const line = getLayerName(layer_id);
 
@@ -223,6 +223,34 @@ const CtrlGis = () => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpExportEditJson = () => {
+    const edit_data = AppContextValue.edit_data;
+    AppContextValue.fileExportCommon(JSON.stringify(edit_data.getLawData()), getOutputFileName("EDIT"), "application/json", "json");
+  };
+
+  const flowUpInportEditJson = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const text = event.target?.result;
+          if (text) {
+            flowUpLayerClear();
+            const edit_data: EditData = new EditData();
+            edit_data.setLawData(JSON.parse(text as string));
+            AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  };
+
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
@@ -231,6 +259,8 @@ const CtrlGis = () => {
         <div className="ctrl_gis_options">
           <Button flowUp={flowUpRendering} text={"描画"} />
           <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
+          <Button flowUp={flowUpExportEditJson} text={"編集データ出力"} />
+          <Button flowUp={flowUpInportEditJson} text={"編集データ入力"} />
           <TextBox flowUp={flowUpFileName} text={""} label_text="svg出力ファイル名" />
           <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
           <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
