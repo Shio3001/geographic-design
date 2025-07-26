@@ -9,21 +9,9 @@ import * as GEO from "./../../geographic_constant";
 
 import { RemoveLineMap } from "./../remove_line_map";
 
-class ParserAd {
-  edit_data: EditData;
-  gis_info: TypeGISInfo;
-  layer_uuid: string;
-  unit_id: string;
-  unit_type: string;
+import Parser from "./parser";
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
-    this.edit_data = edit_data;
-    this.gis_info = gis_info;
-    this.layer_uuid = layer_uuid;
-    this.unit_id = unit_id;
-    this.unit_type = unit_type;
-  }
-
+class ParserAd extends Parser {
   generatePath = async (remove_line: RemoveLineMap) => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
@@ -36,8 +24,6 @@ class ParserAd {
     const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
       N03_007: current_layer.layer_infomation["administrative"],
     });
-
-    console.log("generatePath", geometry_index, current_layer.layer_infomation);
 
     const duplicate = (line: GraphCoordinateExpression): Array<GraphCoordinateExpression> => {
       // lineの重複を削除する。必要に応じて分割する
@@ -87,11 +73,6 @@ class ParserAd {
             }
           }
         }
-      }
-      console.log("ParserCoast", path_join_flag, sort_paths_array);
-
-      for (let i = 0; i < sort_paths_array.length; i++) {
-        console.log("sort_paths_array", i, sort_paths_array[i].coordinates, sort_paths_array[i].pos_order.length);
       }
 
       const concat = () => {
@@ -185,31 +166,6 @@ class ParserAd {
       paths_array.push(gce);
     }
     return paths_array;
-  };
-
-  parseCoordinates = (coordinates: TypeJsonCoordinates) => {
-    const gce = new GraphCoordinateExpression("path");
-
-    for (let i = 0; i < coordinates.length; i++) {
-      const coordinate = coordinates[i];
-
-      const coordinate0 = new BigNumber(coordinate[0]);
-      const coordinate1 = new BigNumber(coordinate[1]);
-
-      const c0_exp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LONGITUDE_KM1_BIGNUMBER).toNumber();
-      const c1_exp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LATITUDE_KM1_BIGNUMBER).toNumber();
-
-      const c0_exp_dp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
-      const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
-
-      const id = c0_exp_dp + "p" + c1_exp_dp;
-      gce.pushPosIds(id);
-      gce.pushCoordinateId(id, c0_exp, c1_exp);
-
-      console.log("parseCoordinates", id, c0_exp, c1_exp, coordinate);
-    }
-
-    return gce;
   };
 }
 

@@ -227,6 +227,22 @@ const CtrlLayerAdd = () => {
         return;
       }
 
+      case "Administrative_pref": {
+        const prefs = searchUniqueKey(getGisInfo(), unit_id, "N03_001");
+        const edit_data = AppContextValue.edit_data;
+
+        for (let i in prefs) {
+          const nlayer: LayerData = new LayerData();
+          nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
+          nlayer.updateLayerElement("pref", prefs[i]);
+          nlayer.updateLayerElement("threshold", "10000");
+          nlayer.updateLayerElement("thinoout", "10");
+          edit_data.addLayer(nlayer);
+        }
+        AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+        return;
+      }
+
       default:
         return;
     }

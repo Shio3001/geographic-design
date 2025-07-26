@@ -115,6 +115,7 @@ class GraphCoordinateExpression {
     return np;
   };
 
+  // パスの指定した範囲の座標を取得し、新しいGraphCoordinateExpressionを生成し返す
   getSectionPath = (start: number, end: number) => {
     const np = new GraphCoordinateExpression("path", this.coordinate_name);
     for (let i = start; i <= end; i++) {
@@ -125,6 +126,7 @@ class GraphCoordinateExpression {
     return np;
   };
 
+  // 指定した範囲のパスを削除する
   removeSectionPath = (start: number, end: number) => {
     //このpathを削除する
 

@@ -2,11 +2,11 @@ import * as React from "react";
 const { useContext, useReducer, createContext, useState, useEffect } = React;
 import PulldownMenu from "../../../common/pulldown_menu/pulldown_menu";
 
-import CheckBox from "./../../../common/checkbox/checkbox";
-import NumberBox from "./../../../common/numberbox/numberbox";
+import CheckBox from "../../../common/checkbox/checkbox";
+import NumberBox from "../../../common/numberbox/numberbox";
 import SelectBox from "../../../common/selectbox/selectbox";
 
-import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../../gis_scipt/route_setup";
+import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "../../../gis_scipt/route_setup";
 import {
   searchUniqueKey,
   getArrayIndexNum,
@@ -15,22 +15,22 @@ import {
   logicalAnd,
   searchUniquePropertie,
   searchUniqueKeyBySearchKey,
-} from "./../../../gis_scipt/gis_unique_data";
+} from "../../../gis_scipt/gis_unique_data";
 
-import { AppContext } from "./../../../app_context";
+import { AppContext } from "../../../app_context";
 import LayerData from "../../ctrl_dataflow/edit_data/layer_data";
 import TextBox from "../../../common/textbox/textbox";
 
 import { PullRapper } from "./helper";
 
-const PullRapperCoast = (props: PullRapper) => {
+const PullRapperAdministrativePref = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
   const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
   const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
 
-  const pref = searchUniqueKey(getGisInfo(), layer.unit_id, "pref");
-  console.log("PullRapperCoast", getGisInfo(), pref, layer.unit_id, layer.layer_infomation);
+  const pref = searchUniqueKey(getGisInfo(), layer.unit_id, "N03_001");
+  console.log("PullRapperAdministrativePref", getGisInfo(), pref, layer.unit_id, layer.layer_infomation);
 
   useEffect(() => {
     return () => {
@@ -53,6 +53,9 @@ const PullRapperCoast = (props: PullRapper) => {
     }
     if (!layer.layer_infomation["thinoout"]) {
       flowUpUnitThinoout("10");
+    }
+    if (!layer.layer_infomation["remove_duplicate_lines"]) {
+      flowUpUnitRemoveDuplicateLines(true);
     }
   }, [props.unit_type, props.layer_uuid]);
 
@@ -87,7 +90,12 @@ const PullRapperCoast = (props: PullRapper) => {
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
-
+  const flowUpUnitRemoveDuplicateLines = (check: boolean) => {
+    layer.updateLayerElement("remove_duplicate_lines", check ? "ok" : "no");
+    const edit_data = AppContextValue.edit_data;
+    edit_data.setLayer(layer);
+    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  };
   const getCheckedPathJoin = () => {
     if (!("path_join" in layer.layer_infomation)) {
       return true;
@@ -102,8 +110,9 @@ const PullRapperCoast = (props: PullRapper) => {
       <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />{" "}
       <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
       <TextBox label_text="間引き" text={thinoout} flowUp={flowUpUnitThinoout}></TextBox>{" "}
+      <CheckBox flowUp={flowUpUnitRemoveDuplicateLines} label_text={"重複線削除対象"} checked={layer.getElement("remove_duplicate_lines") == "ok"} />{" "}
     </>
   );
 };
 
-export default PullRapperCoast;
+export default PullRapperAdministrativePref;

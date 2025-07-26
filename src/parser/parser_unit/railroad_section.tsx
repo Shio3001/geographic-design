@@ -163,9 +163,6 @@ class ParserRailroadSection {
       const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
       console.log("c0_10-c1_10", coordinate0, coordinate1, c0_exp_dp, c1_exp_dp);
 
-      // const c0_10 = String(coordinate0);
-      // const c1_10 = String(coordinate1);
-
       node.setIdByPos(c1_exp_dp, c0_exp_dp);
       node.setPos(c0_exp, c1_exp);
 

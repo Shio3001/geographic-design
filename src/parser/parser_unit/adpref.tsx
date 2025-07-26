@@ -1,46 +1,77 @@
 import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
-import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry } from "../../gis_scipt/route_type";
+import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry, TypeGeometry3D } from "../../gis_scipt/route_type";
 
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
-import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
-import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_scipt/gis_unique_data";
+import GraphCoordinateExpression from "../../graph/expression/coordinate_expression";
+import { CashGeometry, searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
 import BigNumber from "bignumber.js";
-import * as GEO from "./../../geographic_constant";
-
+import * as GEO from "../../geographic_constant";
+import { RemoveLineMap } from "./../remove_line_map";
 import Parser from "./parser";
-class ParserCoast extends Parser {
-  generatePath = async () => {
+
+class ParserAdPref extends Parser {
+  generatePath = async (remove_line: RemoveLineMap) => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
     const threshold = Number(current_layer.layer_infomation["threshold"]);
     const thinoout = Number(current_layer.layer_infomation["thinoout"]);
+    const remove_duplicate_lines = current_layer.layer_infomation["remove_duplicate_lines"] == "ok";
 
     const cg = new CashGeometry();
 
     const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
-      pref: current_layer.layer_infomation["pref"],
+      N03_001: current_layer.layer_infomation["pref"],
     });
+
+    const duplicate = (line: GraphCoordinateExpression): Array<GraphCoordinateExpression> => {
+      // lineの重複を削除する。必要に応じて分割する
+
+      const lines: Array<GraphCoordinateExpression> = [];
+      let latest = 0;
+
+      for (let i = 0; i < line.pos_order.length - 1; i++) {
+        const coordinate_id_0 = line.pos_order[i];
+        const coordinate_id_1 = line.pos_order[i + 1];
+
+        if (remove_line.hasRemoveLineMap(coordinate_id_0, coordinate_id_1)) {
+          const section_patn = line.getSectionPath(latest, i);
+          lines.push(section_patn);
+          latest = i + 1;
+        }
+
+        remove_line.pushRemoveLineMap(coordinate_id_0, coordinate_id_1);
+      }
+
+      const latest_section_patn = line.getSectionPath(latest, line.pos_order.length - 1);
+      lines.push(latest_section_patn);
+
+      return lines;
+    };
 
     const joinPath = async () => {
       const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
       for (let i = 0; i < geometry_index.length; i++) {
-        const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
-        const gce = this.parseCoordinates(current_geometry.coordinates);
-        const gce_length = gce.pos_order.length;
+        const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
 
-        //gce_lengthの数が多い順に挿入する
-        for (let j = 0; j <= sort_paths_array.length; j++) {
-          if (j >= sort_paths_array.length - 1) {
-            sort_paths_array.push(gce);
-            break;
-          }
-          if (sort_paths_array[j].pos_order.length <= gce_length) {
-            sort_paths_array.splice(j, 0, gce);
-            break;
+        const pcd = this.parseCoordinates(current_geometry.coordinates.flat());
+        const gced = remove_duplicate_lines ? duplicate(pcd) : [pcd];
+
+        for (let j = 0; j < gced.length; j++) {
+          const gce_length = gced[j].pos_order.length;
+
+          //gce_lengthの数が多い順に挿入する
+          for (let k = 0; k <= sort_paths_array.length; k++) {
+            if (k >= sort_paths_array.length - 1) {
+              sort_paths_array.push(gced[j]);
+              break;
+            }
+            if (sort_paths_array[k].pos_order.length <= gce_length) {
+              sort_paths_array.splice(k, 0, gced[j]);
+              break;
+            }
           }
         }
       }
-      console.log("ParserCoast", path_join_flag, sort_paths_array);
 
       const concat = () => {
         let cc = 0;
@@ -95,7 +126,6 @@ class ParserCoast extends Parser {
         if (sort_paths_array[i].pos_order.length < threshold) {
           sort_paths_array.splice(i, 1);
         } else {
-          console.log("sort_paths_array", i, threshold, sort_paths_array[i].pos_order.length);
           i++;
         }
       }
@@ -107,10 +137,6 @@ class ParserCoast extends Parser {
         }
       }
 
-      //   for (let i = 0; i < sort_paths_array.length; i++) {
-      //     console.log("sort_paths_array", i, sort_paths_array[i].pos_order.length);
-      //   }
-
       return sort_paths_array;
     };
 
@@ -121,9 +147,9 @@ class ParserCoast extends Parser {
 
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
-      const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
+      const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
 
-      const cord = current_geometry.coordinates;
+      const cord = current_geometry.coordinates.flat();
 
       if (cord.length < threshold) {
         continue;
@@ -136,4 +162,4 @@ class ParserCoast extends Parser {
   };
 }
 
-export default ParserCoast;
+export default ParserAdPref;

@@ -7,14 +7,15 @@ import ParserStation from "./parser_unit/station";
 import ParserCoast from "./parser_unit/coast";
 import ParserLake from "./parser_unit/lake";
 import ParserAd from "./parser_unit/ad";
+import ParserAdPref from "./parser_unit/adpref";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
 import SvgNode from "./sgml_kit/svg_kit/svg_node";
-import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
+import GraphCoordinateExpression from "../graph/expression/coordinate_expression";
 import path from "path";
 import BigNumber from "bignumber.js";
 import { RemoveLineMap } from "./remove_line_map";
 
-class Parser {
+class ParserController {
   edit_data: EditData;
   gis_info: TypeGISInfo;
   svg_kit: SvgKit;
@@ -400,10 +401,17 @@ class Parser {
         return paths;
       }
 
+      case "Administrative_pref": {
+        const paraser_railroad_section = new ParserAdPref(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
+
+        return paths;
+      }
+
       default:
         break;
     }
   };
 }
 
-export default Parser;
+export default ParserController;

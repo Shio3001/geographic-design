@@ -19,7 +19,7 @@ import LayerData from "./ctrl_dataflow/edit_data/layer_data";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
-import Parser from "./../parser/parser";
+import ParserController from "../parser/parser_controller";
 // import ParserWebWorker from "./../parser/parser_webworker";
 
 const CtrlGis = () => {
@@ -132,7 +132,7 @@ const CtrlGis = () => {
     if (edit_data.use_thread) {
       rendering(false);
     } else {
-      const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+      const parser: ParserController = new ParserController(AppContextValue.edit_data, AppContextValue.gis_info);
       parser.parser();
       parser.scaling();
       const svg = parser.toSVG();
@@ -148,7 +148,7 @@ const CtrlGis = () => {
     if (edit_data.use_thread) {
       rendering(true);
     } else {
-      const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+      const parser: ParserController = new ParserController(AppContextValue.edit_data, AppContextValue.gis_info);
       parser.parser();
       parser.scaling();
       const svg = parser.toSVG();

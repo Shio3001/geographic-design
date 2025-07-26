@@ -133,6 +133,7 @@ export const setupGisInfo = async () => {
 
     console.log("adPref", fileName);
   }
+  console.log("adPref-list", adPref);
 
   let coast23pref: Array<TypeJsonCoastPref> = [];
 
