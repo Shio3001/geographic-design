@@ -107,10 +107,6 @@ class ParserCoast extends Parser {
         }
       }
 
-      //   for (let i = 0; i < sort_paths_array.length; i++) {
-      //     console.log("sort_paths_array", i, sort_paths_array[i].pos_order.length);
-      //   }
-
       return sort_paths_array;
     };
 

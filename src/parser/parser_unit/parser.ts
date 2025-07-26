@@ -4,6 +4,7 @@ import { TypeGISInfo, TypeJsonCoordinates } from "../../gis_scipt/route_type";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
+import { RemoveLineMap } from "./../remove_line_map";
 
 class Parser {
   edit_data: EditData;
@@ -41,6 +42,31 @@ class Parser {
     }
 
     return gce;
+  };
+
+  duplicate = (line: GraphCoordinateExpression, remove_line: RemoveLineMap): Array<GraphCoordinateExpression> => {
+    // lineの重複を削除する。必要に応じて分割する
+
+    const lines: Array<GraphCoordinateExpression> = [];
+    let latest = 0;
+
+    for (let i = 0; i < line.pos_order.length - 1; i++) {
+      const coordinate_id_0 = line.pos_order[i];
+      const coordinate_id_1 = line.pos_order[i + 1];
+
+      if (remove_line.hasRemoveLineMap(coordinate_id_0, coordinate_id_1)) {
+        const section_patn = line.getSectionPath(latest, i);
+        lines.push(section_patn);
+        latest = i + 1;
+      }
+
+      remove_line.pushRemoveLineMap(coordinate_id_0, coordinate_id_1);
+    }
+
+    const latest_section_patn = line.getSectionPath(latest, line.pos_order.length - 1);
+    lines.push(latest_section_patn);
+
+    return lines;
   };
 }
 
