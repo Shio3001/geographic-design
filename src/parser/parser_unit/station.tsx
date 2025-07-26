@@ -5,27 +5,19 @@ import { CashGeometry, searchGisConditional, getGeometry, getProperties } from "
 
 import SvgKit from "../sgml_kit/svg_kit/svg_kit";
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
-import { toNumber } from "lodash";
+import { over, toNumber } from "lodash";
 import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
 import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
 
-class ParserStation {
-  edit_data: EditData;
-  gis_info: TypeGISInfo;
+import Parser from "./parser";
+class ParserStation extends Parser {
   svg_node: SvgNode;
-  layer_uuid: string;
-  unit_id: string;
-  unit_type: string;
   points: { [key: string]: GraphCoordinateExpression };
 
   constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
-    this.edit_data = edit_data;
-    this.gis_info = gis_info;
+    super(edit_data, gis_info, layer_uuid, unit_id, unit_type);
     this.svg_node = new SvgNode();
-    this.layer_uuid = layer_uuid;
-    this.unit_id = unit_id;
-    this.unit_type = unit_type;
     this.points = {};
   }
 
@@ -55,11 +47,11 @@ class ParserStation {
 
       const cord = current_geometry.coordinates;
 
-      this.parseCoordinates(cord, current_properties["N02_005"]);
+      this.parseCoordinatesByStation(cord, current_properties["N02_005"]);
     }
   };
 
-  parseCoordinates = (coordinates: TypeJsonCoordinates, station_name: string) => {
+  parseCoordinatesByStation = (coordinates: TypeJsonCoordinates, station_name: string) => {
     for (let i = 0; i < coordinates.length; i++) {
       const coordinate = coordinates[i];
       const coordinate0 = new BigNumber(coordinate[0]);
@@ -81,8 +73,6 @@ class ParserStation {
       } else {
         this.points[station_name].includePath(p);
       }
-
-      // this.points.push(p);
     }
   };
 }
