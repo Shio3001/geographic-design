@@ -112,7 +112,7 @@ const CtrlGis = () => {
         if (data.type === "progress") {
           setLayerOrderStatus(data.layer_order_status);
           setMainStatus(data.main_status);
-
+          console.log("setLayerOrderStatus", data.layer_order_status, data.main_status);
           // プログレスバーやログ更新
         } else if (data.type === "complete") {
           const svg = data.svg;
@@ -285,6 +285,7 @@ const CtrlGis = () => {
         {AppContextValue.gis_info ? (
           <div style={{ marginLeft: "10px" }}>
             <div>
+              <p> {main_status}</p>
               <h3>レイヤー</h3>
               <div
                 style={{

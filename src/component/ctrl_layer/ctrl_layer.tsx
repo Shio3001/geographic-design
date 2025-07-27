@@ -22,14 +22,10 @@ type props = {
   // progress_status : TypePostMessageLayerOrderStatus[string];
   layer_status: TypePostMessageLayerOrderStatus[string];
 
-  main_status?: TypePostMessageMainStatus;
+  main_status: TypePostMessageMainStatus;
 };
 
 const CtrlLayerStatus = (props: { layer_status?: TypePostMessageLayerOrderStatus[string] }) => {
-  if (!props.layer_status) {
-    return <></>;
-  }
-
   const backgroundColor = (() => {
     switch (props.layer_status.status) {
       case "待機中":
@@ -199,7 +195,7 @@ const CtrlLayer = (props: props) => {
                         minWidth: "60px",
                       }}
                     >
-                      エラー:
+                      エラー
                     </span>
                   ) : (
                     <></>

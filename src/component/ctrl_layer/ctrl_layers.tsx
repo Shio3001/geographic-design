@@ -10,7 +10,7 @@ import { TypePostMessageLayerOrderStatus, TypePostMessageMainStatus } from "../.
 
 type Props = {
   layer_order_status?: TypePostMessageLayerOrderStatus;
-  main_status?: TypePostMessageMainStatus;
+  main_status: TypePostMessageMainStatus;
 };
 
 const CtrlLayers = (props: Props) => {
@@ -29,7 +29,9 @@ const CtrlLayers = (props: Props) => {
     const component = [];
 
     for (let i = 0; i < layers_order.length; i++) {
-      component.push(<CtrlLayer key={i} layer_uuid={layers_order[i]} layer_status={props.layer_order_status[layers_order[i]]} />);
+      component.push(
+        <CtrlLayer key={i} layer_uuid={layers_order[i]} main_status={props.main_status} layer_status={props.layer_order_status[layers_order[i]]} />
+      );
     }
 
     return component;

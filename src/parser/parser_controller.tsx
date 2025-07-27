@@ -73,7 +73,7 @@ class ParserController {
 
       try {
         await this.parserLayer(layers_order[i]);
-        throw new Error("parserLayer error");
+        // throw new Error("parserLayer error");
       } catch (error) {
         // レイヤーに関する情報をできる限り取得してエラーを報告
         const message =
