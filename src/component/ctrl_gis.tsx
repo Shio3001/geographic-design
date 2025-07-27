@@ -20,12 +20,14 @@ import LayerData from "./ctrl_dataflow/edit_data/layer_data";
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
 import ParserController from "../parser/parser_controller";
+import { TypePostMessage, TypePostMessageLayerOrderStatus } from "../parser/parser_webworker_type";
 // import ParserWebWorker from "./../parser/parser_webworker";
 
 const CtrlGis = () => {
   const [update, setUpdata] = useState<boolean>(false);
 
   const [preview, setPreview] = useState<string>("<div></div>");
+  const [layers_progress_status, setLayersProgressStatus] = useState<TypePostMessageLayerOrderStatus>({});
 
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
@@ -104,13 +106,20 @@ const CtrlGis = () => {
       "message",
       (e) => {
         console.log("Workerから受け取ったデータは: ", e.data);
-        const svg = e.data;
-        setPreview(svg);
-        worker.terminate();
+        const data = e.data as TypePostMessage;
+        if (data.type === "progress") {
+          setLayersProgressStatus(data.layer_order_status);
+          // プログレスバーやログ更新
+        } else if (data.type === "complete") {
+          const svg = data.svg;
+          setPreview(svg);
+          worker.terminate();
 
-        if (file_output) {
-          const file_name = getOutputFileName();
-          AppContextValue.fileExportText(file_name, svg);
+          if (file_output) {
+            const file_name = getOutputFileName();
+            AppContextValue.fileExportText(file_name, svg);
+          }
+          setLayersProgressStatus({});
         }
       },
 
@@ -284,7 +293,7 @@ const CtrlGis = () => {
                     minHeight: "700px",
                   }}
                 >
-                  <CtrlLayers />
+                  <CtrlLayers layers_progress_status={layers_progress_status} />
                 </div>
               </div>
             </div>

@@ -1,14 +1,53 @@
 import ParserController from "./parser_controller";
+import { TypePostMessage, TypePostMessageLayerOrderStatus, TypeFunctionUpdateLayerProgress } from "./parser_webworker_type";
 
+import EditData from "./../component/ctrl_dataflow/edit_data/edit_data";
 self.addEventListener(
   "message",
   async (e) => {
     console.log("webworker");
-    const parser: ParserController = new ParserController(e.data.edit_data, e.data.gis_info);
+    const edit_data = e.data.edit_data as EditData;
+
+    const layer_order = edit_data.layers_order;
+
+    // layerid : statusのあらかじめ全IDで初期化 , 待機中にする
+    const layer_order_status: TypePostMessageLayerOrderStatus = layer_order.reduce((acc, layer) => {
+      acc[layer] = { status: "待機中", count: 0 }; // ノード数は初期化時は0
+      return acc;
+    }, {} as TypePostMessageLayerOrderStatus);
+
+    const postUpdateLayerProgress = (layer: string, status: string, count?: number) => {
+      //TypePostMessageLayerOrderStatus の型に合わせて更新
+      //TypePostMessageLayerOrderStatusのstatusのところをasで指定
+      layer_order_status[layer] = { status: status as TypePostMessageLayerOrderStatus[string]["status"], count: count || layer_order_status[layer].count };
+      console.log("postUpdateLayerProgress", layer_order_status);
+
+      // 更新する
+      self.postMessage({
+        type: "progress",
+        layer_order_status: layer_order_status,
+        main_status: "レイヤー処理中",
+      } as TypePostMessage);
+    };
+
+    const updateLayerRunning: TypeFunctionUpdateLayerProgress = (layer: string, count?: number) => {
+      postUpdateLayerProgress(layer, "実行中", count);
+    };
+
+    const updateLayerComplete: TypeFunctionUpdateLayerProgress = (layer: string) => {
+      postUpdateLayerProgress(layer, "完了");
+    };
+
+    // 取得中に変更する
+    const updateLayerGetting: TypeFunctionUpdateLayerProgress = (layer: string) => {
+      postUpdateLayerProgress(layer, "取得中");
+    };
+
+    const parser: ParserController = new ParserController(e.data.edit_data, e.data.gis_info, updateLayerRunning, updateLayerGetting, updateLayerComplete);
     await parser.parser();
     parser.scaling();
     const svg = parser.toSVG();
-    self.postMessage(svg);
+    self.postMessage({ type: "complete", svg });
   },
   false
 );

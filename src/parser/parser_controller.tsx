@@ -14,6 +14,8 @@ import GraphCoordinateExpression from "../graph/expression/coordinate_expression
 import path from "path";
 import BigNumber from "bignumber.js";
 import { RemoveLineMap } from "./remove_line_map";
+//TypeFunctionUpdateLayerProgress
+import { TypeFunctionUpdateLayerProgress } from "./parser_webworker_type";
 
 class ParserController {
   edit_data: EditData;
@@ -22,7 +24,17 @@ class ParserController {
   graph_coordinate_dict: { [key: string]: Array<GraphCoordinateExpression> };
   removeLineMap: RemoveLineMap;
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo) {
+  updateLayerRunning: TypeFunctionUpdateLayerProgress;
+  updateLayerGetting: TypeFunctionUpdateLayerProgress;
+  updateLayerComplete: TypeFunctionUpdateLayerProgress;
+
+  constructor(
+    edit_data: EditData,
+    gis_info: TypeGISInfo,
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress,
+    updateLayerGetting?: TypeFunctionUpdateLayerProgress,
+    updateLayerComplete?: TypeFunctionUpdateLayerProgress
+  ) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
     this.svg_kit = new SvgKit();
@@ -36,6 +48,9 @@ class ParserController {
 
     this.svg_kit.pushNode(new_svg_node);
     this.removeLineMap = new RemoveLineMap();
+    this.updateLayerRunning = updateLayerRunning || (() => {});
+    this.updateLayerGetting = updateLayerGetting || (() => {});
+    this.updateLayerComplete = updateLayerComplete || (() => {});
   }
 
   parser = async () => {
@@ -43,7 +58,9 @@ class ParserController {
     console.log("parser", layers_order);
 
     for (let i = 0; i < layers_order.length; i++) {
+      this.updateLayerRunning(layers_order[i], 0);
       await this.parserLayer(layers_order[i]);
+      this.updateLayerComplete(layers_order[i]);
     }
   };
 
@@ -373,37 +390,37 @@ class ParserController {
 
     switch (unit_type) {
       case "RailroadSection": {
-        const paraser_railroad_section = new ParserRailroadSection(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserRailroadSection(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type, this.updateLayerRunning);
         await paraser_railroad_section.coordinateAggregation();
         const paths = paraser_railroad_section.generatePath();
 
         return paths;
       }
       case "Station": {
-        const parser_station_section = new ParserStation(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const parser_station_section = new ParserStation(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type, this.updateLayerRunning);
         await parser_station_section.coordinateAggregation();
         const points = parser_station_section.generatePoint();
         return points;
       }
       case "Coast": {
-        const paraser_railroad_section = new ParserCoast(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserCoast(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type, this.updateLayerRunning);
         const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
       case "Lake": {
-        const paraser_railroad_section = new ParserLake(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserLake(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type, this.updateLayerRunning);
         const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
 
       case "Administrative": {
-        const paraser_railroad_section = new ParserAd(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserAd(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type, this.updateLayerRunning);
         const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
         return paths;
       }
 
       case "Administrative_pref": {
-        const paraser_railroad_section = new ParserAdPref(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserAdPref(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type, this.updateLayerRunning);
         const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
 
         return paths;

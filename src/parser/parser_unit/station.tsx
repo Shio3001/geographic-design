@@ -11,12 +11,20 @@ import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
 
 import Parser from "./parser";
+import { TypeFunctionUpdateLayerProgress } from "./../parser_webworker_type";
 class ParserStation extends Parser {
   svg_node: SvgNode;
   points: { [key: string]: GraphCoordinateExpression };
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
-    super(edit_data, gis_info, layer_uuid, unit_id, unit_type);
+  constructor(
+    edit_data: EditData,
+    gis_info: TypeGISInfo,
+    layer_uuid: string,
+    unit_id: string,
+    unit_type: string,
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress
+  ) {
+    super(edit_data, gis_info, layer_uuid, unit_id, unit_type, updateLayerRunning);
     this.svg_node = new SvgNode();
     this.points = {};
   }

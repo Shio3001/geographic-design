@@ -6,19 +6,30 @@ import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
 import { RemoveLineMap } from "./../remove_line_map";
 
+import { TypeFunctionUpdateLayerProgress } from "./../parser_webworker_type";
+
 class Parser {
   edit_data: EditData;
   gis_info: TypeGISInfo;
   layer_uuid: string;
   unit_id: string;
   unit_type: string;
+  updateLayerRunning?: TypeFunctionUpdateLayerProgress;
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
+  constructor(
+    edit_data: EditData,
+    gis_info: TypeGISInfo,
+    layer_uuid: string,
+    unit_id: string,
+    unit_type: string,
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress
+  ) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
     this.layer_uuid = layer_uuid;
     this.unit_id = unit_id;
     this.unit_type = unit_type;
+    this.updateLayerRunning = updateLayerRunning;
   }
 
   parseCoordinates = (coordinates: TypeJsonCoordinates) => {

@@ -18,24 +18,24 @@ import BigNumber from "bignumber.js";
 
 import * as GEO from "./../../geographic_constant";
 import { findLastKey } from "lodash";
+import Parser from "./parser";
 
-class ParserRailroadSection {
-  edit_data: EditData;
-  gis_info: TypeGISInfo;
+//TypeFunctionUpdateLayerProgress
+import { TypeFunctionUpdateLayerProgress } from "./../parser_webworker_type";
+class ParserRailroadSection extends Parser {
   svg_node: SvgNode;
-  layer_uuid: string;
-  unit_id: string;
-  unit_type: string;
-
   graph: Graph;
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
-    this.edit_data = edit_data;
-    this.gis_info = gis_info;
+  constructor(
+    edit_data: EditData,
+    gis_info: TypeGISInfo,
+    layer_uuid: string,
+    unit_id: string,
+    unit_type: string,
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress
+  ) {
+    super(edit_data, gis_info, layer_uuid, unit_id, unit_type, updateLayerRunning);
     this.svg_node = new SvgNode();
-    this.layer_uuid = layer_uuid;
-    this.unit_id = unit_id;
-    this.unit_type = unit_type;
     this.graph = new Graph();
   }
 

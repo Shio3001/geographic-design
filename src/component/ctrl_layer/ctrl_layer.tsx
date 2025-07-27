@@ -14,8 +14,64 @@ import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr } from "./../../gis
 
 import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 
+//parser_webworker_type
+import { TypePostMessageLayerOrderStatus } from "../../parser/parser_webworker_type";
+
 type props = {
   layer_uuid: string;
+  layer_progress_status?: TypePostMessageLayerOrderStatus[string];
+};
+
+const CtrlLayerStatus = (props: { layer_progress_status?: TypePostMessageLayerOrderStatus[string] }) => {
+  if (!props.layer_progress_status) {
+    return <></>;
+  }
+
+  const backgroundColor = (() => {
+    switch (props.layer_progress_status.status) {
+      case "待機中":
+        return "#f0f0f0"; // グレー
+      case "実行中":
+        return "#ffcc00"; // 黄色
+      case "取得中":
+        return "#00ccff"; // 青色
+      case "完了":
+        return "#00cc00"; // 緑色
+      default:
+        return "#f0f0f0"; // デフォルトはグレー
+    }
+  })();
+
+  // レイヤーの進捗状況を表示
+  return (
+    <div
+      className="ctrl_layer_status"
+      style={{
+        // Buttonのデザインに合わせる
+        backgroundColor: backgroundColor,
+
+        // 上下左右中央
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+
+        //  border-radius: 6px;
+        borderRadius: "6px",
+
+        // padding: 4px;
+        padding: "4px",
+        // margin: 2px;
+        margin: "2px",
+
+        minWidth: "120px",
+        // 高さを合わせる
+        // height: "100%",
+        // width: "80px",
+      }}
+    >
+      {props.layer_progress_status?.status} {/* デフォルトは「待機中」 */}
+    </div>
+  );
 };
 
 const CtrlLayer = (props: props) => {
@@ -60,6 +116,7 @@ const CtrlLayer = (props: props) => {
         {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
         <Button flowUp={flowUpDelete} text={"削除"}></Button>
         <Button flowUp={flowUpUnitCopy} text={"複製"}></Button>
+        <CtrlLayerStatus layer_progress_status={props.layer_progress_status} />
         <SelectBox
           flowUp={flowUpUnitName}
           view_options={getNamesGisUnitIDs()}
