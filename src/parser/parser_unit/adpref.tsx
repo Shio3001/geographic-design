@@ -30,6 +30,7 @@ class ParserAdPref extends Parser {
 
         for (let j = 0; j < current_geometry.coordinates.length; j++) {
           const pcd = this.parseCoordinates(current_geometry.coordinates[j]);
+          this.updateLayerRunningCount(this.layer_uuid);
           const gced = remove_duplicate_lines ? this.duplicate(pcd, remove_line) : [pcd];
 
           for (let k = 0; k < gced.length; k++) {
@@ -127,6 +128,7 @@ class ParserAdPref extends Parser {
 
       for (let j = 0; j < current_geometry.coordinates.length; j++) {
         const pcd = this.parseCoordinates(current_geometry.coordinates[j]);
+        this.updateLayerRunningCount(this.layer_uuid);
         const gced = remove_duplicate_lines ? this.duplicate(pcd, remove_line) : [pcd];
 
         for (let k = 0; k < gced.length; k++) {

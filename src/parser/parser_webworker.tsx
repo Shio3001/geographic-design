@@ -16,7 +16,7 @@ self.addEventListener(
       return acc;
     }, {} as TypePostMessageLayerOrderStatus);
 
-    const postUpdateLayerProgress = (layer: string, status: string, count?: number, message?: string) => {
+    const postUpdateLayerProgress = (layer: string, status: string, message?: string, count?: number) => {
       //TypePostMessageLayerOrderStatus の型に合わせて更新
       //TypePostMessageLayerOrderStatusのstatusのところをasで指定
       layer_order_status[layer] = {
@@ -34,8 +34,12 @@ self.addEventListener(
       } as TypePostMessage);
     };
 
-    const updateLayerRunning: TypeFunctionUpdateLayerProgress = (layer: string, count?: number) => {
-      postUpdateLayerProgress(layer, "実行中", count);
+    const updateLayerRunningCount: TypeFunctionUpdateLayerProgress = (layer: string) => {
+      postUpdateLayerProgress(layer, "実行中", undefined, layer_order_status[layer].count + 1);
+    };
+
+    const updateLayerRunning: TypeFunctionUpdateLayerProgress = (layer: string) => {
+      postUpdateLayerProgress(layer, "実行中");
     };
 
     const updateLayerComplete: TypeFunctionUpdateLayerProgress = (layer: string) => {
@@ -47,9 +51,9 @@ self.addEventListener(
       postUpdateLayerProgress(layer, "取得中");
     };
 
-    const updateLayerError: TypeFunctionUpdateLayerProgress = (layer: string, count?: number, message?: string) => {
-      layer_order_status[layer] = { status: "実行失敗", count: count || 0, message: message };
-      postUpdateLayerProgress(layer, "実行失敗", count, message);
+    const updateLayerError: TypeFunctionUpdateLayerProgress = (layer: string, message?: string) => {
+      layer_order_status[layer] = { status: "実行失敗", count: layer_order_status[layer].count || 0, message: message };
+      postUpdateLayerProgress(layer, "実行失敗", message);
     };
 
     self.postMessage({
@@ -62,6 +66,7 @@ self.addEventListener(
       e.data.edit_data,
       e.data.gis_info,
       updateLayerRunning,
+      updateLayerRunningCount,
       updateLayerGetting,
       updateLayerComplete,
       updateLayerError

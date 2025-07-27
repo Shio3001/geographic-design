@@ -26,6 +26,7 @@ class ParserCoast extends Parser {
       for (let i = 0; i < geometry_index.length; i++) {
         const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
         const gce = this.parseCoordinates(current_geometry.coordinates);
+        this.updateLayerRunningCount(this.layer_uuid);
         const gce_length = gce.pos_order.length;
 
         //gce_lengthの数が多い順に挿入する
@@ -126,6 +127,8 @@ class ParserCoast extends Parser {
       }
 
       const gce = this.parseCoordinates(cord);
+      this.updateLayerRunningCount(this.layer_uuid);
+
       paths_array.push(gce);
     }
     return paths_array;

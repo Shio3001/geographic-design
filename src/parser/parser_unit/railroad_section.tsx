@@ -32,9 +32,10 @@ class ParserRailroadSection extends Parser {
     layer_uuid: string,
     unit_id: string,
     unit_type: string,
-    updateLayerRunning?: TypeFunctionUpdateLayerProgress
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress,
+    updateLayerRunningCount?: TypeFunctionUpdateLayerProgress
   ) {
-    super(edit_data, gis_info, layer_uuid, unit_id, unit_type, updateLayerRunning);
+    super(edit_data, gis_info, layer_uuid, unit_id, unit_type, updateLayerRunning, updateLayerRunningCount);
     this.svg_node = new SvgNode();
     this.graph = new Graph();
   }

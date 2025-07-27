@@ -20,4 +20,4 @@ export type TypePostMessageMainStatus = "レイヤー処理中" | "SVG変換中"
 //   updateLayerGetting: (layer: string) => void;
 //   updateLayerComplete: (layer: string) => void;
 
-export type TypeFunctionUpdateLayerProgress = (layer: string, count?: number, message?: string) => void;
+export type TypeFunctionUpdateLayerProgress = (layer: string, message?: string, count?: number) => void;

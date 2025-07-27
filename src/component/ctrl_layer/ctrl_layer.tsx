@@ -63,6 +63,11 @@ const CtrlLayerStatus = (props: { layer_status?: TypePostMessageLayerOrderStatus
       }}
     >
       {props.layer_status?.status} {/* デフォルトは「待機中」 */}
+      {props.layer_status.status === "実行中" && props.layer_status.count > 0 ? (
+        <span style={{ marginLeft: "4px" }}>
+          / {props.layer_status.count} {/* 実行中のノード数 */}
+        </span>
+      ) : null}
     </div>
   );
 };

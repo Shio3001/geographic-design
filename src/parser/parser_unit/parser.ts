@@ -15,6 +15,7 @@ class Parser {
   unit_id: string;
   unit_type: string;
   updateLayerRunning?: TypeFunctionUpdateLayerProgress;
+  updateLayerRunningCount?: TypeFunctionUpdateLayerProgress;
 
   constructor(
     edit_data: EditData,
@@ -22,7 +23,8 @@ class Parser {
     layer_uuid: string,
     unit_id: string,
     unit_type: string,
-    updateLayerRunning?: TypeFunctionUpdateLayerProgress
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress,
+    updateLayerRunningCount?: TypeFunctionUpdateLayerProgress
   ) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
@@ -30,6 +32,7 @@ class Parser {
     this.unit_id = unit_id;
     this.unit_type = unit_type;
     this.updateLayerRunning = updateLayerRunning;
+    this.updateLayerRunningCount = updateLayerRunningCount;
   }
 
   parseCoordinates = (coordinates: TypeJsonCoordinates) => {
