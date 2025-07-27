@@ -37,7 +37,12 @@ class Parser {
       const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
 
       const id = c0_exp_dp + "p" + c1_exp_dp;
-      gce.pushPosIds(id);
+      // 直前の座標と同じ座標は無視する
+      // if (gce.getLastNodeId() == id) {
+      //   continue;
+      // }
+
+      // gce.pushPosIds(id);
       gce.pushCoordinateId(id, c0_exp, c1_exp);
     }
 
@@ -50,17 +55,21 @@ class Parser {
     const lines: Array<GraphCoordinateExpression> = [];
     let latest = 0;
 
+    let asCount = 0;
+
     for (let i = 0; i < line.pos_order.length - 1; i++) {
       const coordinate_id_0 = line.pos_order[i];
       const coordinate_id_1 = line.pos_order[i + 1];
 
-      if (remove_line.hasRemoveLineMap(coordinate_id_0, coordinate_id_1)) {
+      if (remove_line.hasRemoveLineMap(coordinate_id_0, coordinate_id_1, this.layer_uuid)) {
         const section_patn = line.getSectionPath(latest, i);
         lines.push(section_patn);
         latest = i + 1;
+
+        continue;
       }
 
-      remove_line.pushRemoveLineMap(coordinate_id_0, coordinate_id_1);
+      remove_line.pushRemoveLineMap(coordinate_id_0, coordinate_id_1, this.layer_uuid);
     }
 
     const latest_section_patn = line.getSectionPath(latest, line.pos_order.length - 1);

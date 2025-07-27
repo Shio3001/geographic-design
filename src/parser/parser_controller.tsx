@@ -40,6 +40,7 @@ class ParserController {
 
   parser = async () => {
     const layers_order = this.edit_data.layers_order;
+    console.log("parser", layers_order);
 
     for (let i = 0; i < layers_order.length; i++) {
       await this.parserLayer(layers_order[i]);

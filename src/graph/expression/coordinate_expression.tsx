@@ -82,6 +82,10 @@ class GraphCoordinateExpression {
     return this.type;
   };
 
+  countPosId = (id: string) => {
+    return this.pos_order.filter((pos_id) => pos_id === id).length;
+  };
+
   pushPosIdsIndex = (id: string, index: number) => {
     this.pos_order.splice(index, 0, id);
   };

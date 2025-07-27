@@ -49,25 +49,6 @@ class ParserAdPref extends Parser {
           }
         }
       }
-      // const coordinate = current_geometry.coordinates;
-      // const pcd = this.parseCoordinates(current_geometry.coordinates);
-      // const gced = remove_duplicate_lines ? this.duplicate(pcd, remove_line) : [pcd];
-
-      // for (let j = 0; j < gced.length; j++) {
-      //   const gce_length = gced[j].pos_order.length;
-
-      //   //gce_lengthの数が多い順に挿入する
-      //   for (let k = 0; k <= sort_paths_array.length; k++) {
-      //     if (k >= sort_paths_array.length - 1) {
-      //       sort_paths_array.push(gced[j]);
-      //       break;
-      //     }
-      //     if (sort_paths_array[k].pos_order.length <= gce_length) {
-      //       sort_paths_array.splice(k, 0, gced[j]);
-      //       break;
-      //     }
-      //   }
-
       const concat = () => {
         let cc = 0;
 
@@ -143,15 +124,6 @@ class ParserAdPref extends Parser {
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
       const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
-
-      // const cord = current_geometry.coordinates;
-
-      // if (cord.length < threshold) {
-      //   continue;
-      // }
-
-      // const gce = this.parseCoordinates(cord);
-      // paths_array.push(gce);
 
       for (let j = 0; j < current_geometry.coordinates.length; j++) {
         const pcd = this.parseCoordinates(current_geometry.coordinates[j]);
