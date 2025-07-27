@@ -20,14 +20,16 @@ import LayerData from "./ctrl_dataflow/edit_data/layer_data";
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
 import ParserController from "../parser/parser_controller";
-import { TypePostMessage, TypePostMessageLayerOrderStatus } from "../parser/parser_webworker_type";
+import { TypePostMessage, TypePostMessageLayerOrderStatus, TypePostMessageMainStatus } from "../parser/parser_webworker_type";
 // import ParserWebWorker from "./../parser/parser_webworker";
 
 const CtrlGis = () => {
   const [update, setUpdata] = useState<boolean>(false);
 
   const [preview, setPreview] = useState<string>("<div></div>");
-  const [layers_progress_status, setLayersProgressStatus] = useState<TypePostMessageLayerOrderStatus>({});
+  const [layer_order_status, setLayerOrderStatus] = useState<TypePostMessageLayerOrderStatus>({});
+
+  const [main_status, setMainStatus] = useState<TypePostMessageMainStatus>("編集中");
 
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
@@ -108,7 +110,9 @@ const CtrlGis = () => {
         console.log("Workerから受け取ったデータは: ", e.data);
         const data = e.data as TypePostMessage;
         if (data.type === "progress") {
-          setLayersProgressStatus(data.layer_order_status);
+          setLayerOrderStatus(data.layer_order_status);
+          setMainStatus(data.main_status);
+
           // プログレスバーやログ更新
         } else if (data.type === "complete") {
           const svg = data.svg;
@@ -119,7 +123,8 @@ const CtrlGis = () => {
             const file_name = getOutputFileName();
             AppContextValue.fileExportText(file_name, svg);
           }
-          setLayersProgressStatus({});
+
+          // setLayersProgressStatus({});
         }
       },
 
@@ -295,7 +300,7 @@ const CtrlGis = () => {
                     minHeight: "700px",
                   }}
                 >
-                  <CtrlLayers layers_progress_status={layers_progress_status} />
+                  <CtrlLayers layer_order_status={layer_order_status} main_status={main_status} />
                 </div>
               </div>
             </div>

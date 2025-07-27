@@ -6,10 +6,11 @@ import { AppContext } from "./../../app_context";
 import { CtrlGisContext } from "./../ctrl_gis_context";
 
 //parser_webworker_type
-import { TypePostMessageLayerOrderStatus } from "../../parser/parser_webworker_type";
+import { TypePostMessageLayerOrderStatus, TypePostMessageMainStatus } from "../../parser/parser_webworker_type";
 
 type Props = {
-  layers_progress_status?: TypePostMessageLayerOrderStatus;
+  layer_order_status?: TypePostMessageLayerOrderStatus;
+  main_status?: TypePostMessageMainStatus;
 };
 
 const CtrlLayers = (props: Props) => {
@@ -28,7 +29,7 @@ const CtrlLayers = (props: Props) => {
     const component = [];
 
     for (let i = 0; i < layers_order.length; i++) {
-      component.push(<CtrlLayer key={i} layer_uuid={layers_order[i]} layer_progress_status={props.layers_progress_status[layers_order[i]]} />);
+      component.push(<CtrlLayer key={i} layer_uuid={layers_order[i]} layer_status={props.layer_order_status[layers_order[i]]} />);
     }
 
     return component;

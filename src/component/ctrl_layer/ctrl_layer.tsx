@@ -15,20 +15,23 @@ import { searchUniqueKey, getArrayIndexNum, getArrayIndexStr } from "./../../gis
 import { getGisInfo, getKeysGisUnitIDs, getNamesGisUnitIDs, getGisUnitIDs } from "./../../gis_scipt/route_setup";
 
 //parser_webworker_type
-import { TypePostMessageLayerOrderStatus } from "../../parser/parser_webworker_type";
+import { TypePostMessageLayerOrderStatus, TypePostMessageMainStatus } from "../../parser/parser_webworker_type";
 
 type props = {
   layer_uuid: string;
-  layer_progress_status?: TypePostMessageLayerOrderStatus[string];
+  // progress_status : TypePostMessageLayerOrderStatus[string];
+  layer_status: TypePostMessageLayerOrderStatus[string];
+
+  main_status?: TypePostMessageMainStatus;
 };
 
-const CtrlLayerStatus = (props: { layer_progress_status?: TypePostMessageLayerOrderStatus[string] }) => {
-  if (!props.layer_progress_status) {
+const CtrlLayerStatus = (props: { layer_status?: TypePostMessageLayerOrderStatus[string] }) => {
+  if (!props.layer_status) {
     return <></>;
   }
 
   const backgroundColor = (() => {
-    switch (props.layer_progress_status.status) {
+    switch (props.layer_status.status) {
       case "待機中":
         return "#f0f0f0"; // グレー
       case "実行中":
@@ -37,6 +40,8 @@ const CtrlLayerStatus = (props: { layer_progress_status?: TypePostMessageLayerOr
         return "#00ccff"; // 青色
       case "完了":
         return "#00cc00"; // 緑色
+      case "実行失敗":
+        return "#e61f1fff"; // 赤色
       default:
         return "#f0f0f0"; // デフォルトはグレー
     }
@@ -55,22 +60,13 @@ const CtrlLayerStatus = (props: { layer_progress_status?: TypePostMessageLayerOr
         alignItems: "center",
         justifyContent: "center",
 
-        //  border-radius: 6px;
         borderRadius: "6px",
-
-        // padding: 4px;
         padding: "4px",
-        // margin: 2px;
         margin: "2px",
-
-        // minWidth: "120px",
         width: "100%",
-        // 高さを合わせる
-        // height: "100%",
-        // width: "80px",
       }}
     >
-      {props.layer_progress_status?.status} {/* デフォルトは「待機中」 */}
+      {props.layer_status?.status} {/* デフォルトは「待機中」 */}
     </div>
   );
 };
@@ -145,8 +141,8 @@ const CtrlLayer = (props: props) => {
             }}
           >
             {(() => {
-              if (props.layer_progress_status) {
-                return <CtrlLayerStatus layer_progress_status={props.layer_progress_status} />;
+              if (props.layer_status && props.layer_status.status && props.main_status !== "編集中") {
+                return <CtrlLayerStatus layer_status={props.layer_status} />;
               } else
                 return (
                   <>
@@ -181,6 +177,61 @@ const CtrlLayer = (props: props) => {
             />
             <CtrlLayerPull layer_uuid={props.layer_uuid} />
           </div>
+        </div>
+        <div>
+          {
+            // レイヤーの進捗状況を表示
+            props.layer_status && props.layer_status.message ? (
+              <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", justifyContent: "center" }}>
+                <div style={{}}>
+                  {props.layer_status.status === "実行失敗" ? (
+                    <span
+                      style={{
+                        backgroundColor: "#e61f1fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+
+                        borderRadius: "6px",
+                        padding: "4px",
+                        margin: "2px",
+                        fontSize: "14px",
+                        minWidth: "60px",
+                      }}
+                    >
+                      エラー:
+                    </span>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+                <p>
+                  <label>
+                    {/* クリップボードにコピーするボタン */}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                        color: "#007bff",
+                        textDecoration: "underline",
+                        marginRight: "4px",
+                        fontSize: "14px",
+                      }}
+                      onClick={() => {
+                        navigator.clipboard.writeText(props.layer_status.message);
+                      }}
+                    >
+                      クリップボードにコピー
+                    </button>
+                  </label>
+                  {props.layer_status.message}
+                </p>
+              </div>
+            ) : (
+              <></>
+            )
+          }
         </div>
       </div>
     </div>

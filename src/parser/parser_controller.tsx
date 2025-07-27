@@ -17,6 +17,14 @@ import { RemoveLineMap } from "./remove_line_map";
 //TypeFunctionUpdateLayerProgress
 import { TypeFunctionUpdateLayerProgress } from "./parser_webworker_type";
 
+async function sha256(text: string) {
+  const uint8 = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest("SHA-256", uint8);
+  return Array.from(new Uint8Array(digest))
+    .map((v) => v.toString(16).padStart(2, "0"))
+    .join("");
+}
+
 class ParserController {
   edit_data: EditData;
   gis_info: TypeGISInfo;
@@ -27,13 +35,15 @@ class ParserController {
   updateLayerRunning: TypeFunctionUpdateLayerProgress;
   updateLayerGetting: TypeFunctionUpdateLayerProgress;
   updateLayerComplete: TypeFunctionUpdateLayerProgress;
+  updateLayerError: TypeFunctionUpdateLayerProgress;
 
   constructor(
     edit_data: EditData,
     gis_info: TypeGISInfo,
     updateLayerRunning?: TypeFunctionUpdateLayerProgress,
     updateLayerGetting?: TypeFunctionUpdateLayerProgress,
-    updateLayerComplete?: TypeFunctionUpdateLayerProgress
+    updateLayerComplete?: TypeFunctionUpdateLayerProgress,
+    updateLayerError?: TypeFunctionUpdateLayerProgress
   ) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
@@ -51,6 +61,7 @@ class ParserController {
     this.updateLayerRunning = updateLayerRunning || (() => {});
     this.updateLayerGetting = updateLayerGetting || (() => {});
     this.updateLayerComplete = updateLayerComplete || (() => {});
+    this.updateLayerError = updateLayerError || (() => {});
   }
 
   parser = async () => {
@@ -59,7 +70,40 @@ class ParserController {
 
     for (let i = 0; i < layers_order.length; i++) {
       this.updateLayerRunning(layers_order[i], 0);
-      await this.parserLayer(layers_order[i]);
+
+      try {
+        await this.parserLayer(layers_order[i]);
+        throw new Error("parserLayer error");
+      } catch (error) {
+        // レイヤーに関する情報をできる限り取得してエラーを報告
+        const message =
+          String(error) +
+          "\n" +
+          String(error.stack) +
+          "\n" +
+          String(new Date()) +
+          "\n" +
+          "Layer UUID: " +
+          layers_order[i] +
+          "\n" +
+          //removeLineMap
+          "Remove Line Map Size: " +
+          this.removeLineMap.removeLineMap.size +
+          "\n" +
+          "Layer Data: " +
+          JSON.stringify(this.edit_data.layers[layers_order[i]], null, 2);
+        this.updateLayerError(
+          layers_order[i],
+          0,
+          message +
+            // 内容証明のため、hash化しておく
+            "\n" +
+            "Hash: " +
+            (await sha256(message))
+        );
+        continue;
+      }
+
       this.updateLayerComplete(layers_order[i]);
     }
   };
