@@ -1,5 +1,5 @@
 .fancy-button {
-  padding: 10px 16px;
+  padding: 4px 16px;
   font-size: 16px;
   background-color: #4a90e2;
   color: white;
@@ -9,6 +9,8 @@
   transition: background-color 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin: 2px;
+  height: 100%;
+  min-height: 36px;
 }
 
 .fancy-button:hover {

@@ -283,6 +283,7 @@ const CtrlGis = () => {
               <h3>レイヤー</h3>
               <div
                 style={{
+                  overflowX: "hidden",
                   overflowY: "scroll",
                   height: "700px",
                   backgroundColor: "#eeeeee",
@@ -290,6 +291,7 @@ const CtrlGis = () => {
               >
                 <div
                   style={{
+                    width: "100%",
                     minHeight: "700px",
                   }}
                 >

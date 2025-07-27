@@ -63,7 +63,8 @@ const CtrlLayerStatus = (props: { layer_progress_status?: TypePostMessageLayerOr
         // margin: 2px;
         margin: "2px",
 
-        minWidth: "120px",
+        // minWidth: "120px",
+        width: "100%",
         // 高さを合わせる
         // height: "100%",
         // width: "80px",
@@ -111,18 +112,76 @@ const CtrlLayer = (props: props) => {
   useEffect(() => {}, [AppContextValue.update]);
 
   return (
-    <div className="ctrl_layer" style={{ height: "42px" }}>
+    <div
+      className="ctrl_layer"
+      style={{
+        padding: "4px",
+        margin: "2px",
+        minHeight: "36px",
+      }}
+    >
       <div className="ctrl_layer_pull_down_lateral">
-        {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
-        <Button flowUp={flowUpDelete} text={"削除"}></Button>
-        <Button flowUp={flowUpUnitCopy} text={"複製"}></Button>
-        <CtrlLayerStatus layer_progress_status={props.layer_progress_status} />
-        <SelectBox
-          flowUp={flowUpUnitName}
-          view_options={getNamesGisUnitIDs()}
-          selected={getArrayIndexStr(getKeysGisUnitIDs(), AppContextValue.edit_data.layers[props.layer_uuid].unit_id)}
-        />
-        <CtrlLayerPull layer_uuid={props.layer_uuid} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {/* <Button flowUp={flowUpAdd} text={"下に追加"}></Button> */}
+          <div
+            style={{
+              width: "128px",
+              height: "100%",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "start",
+              justifyContent: "space-between",
+              marginLeft: "8px",
+              marginRight: "8px",
+            }}
+          >
+            {(() => {
+              if (props.layer_progress_status) {
+                return <CtrlLayerStatus layer_progress_status={props.layer_progress_status} />;
+              } else
+                return (
+                  <>
+                    <Button flowUp={flowUpDelete} text={"削除"}></Button>
+                    <Button flowUp={flowUpUnitCopy} text={"複製"}></Button>
+                  </>
+                );
+            })()}
+          </div>
+
+          {/* // 子要素が入りきらない場合は折り返す
+              // justifyContent: "flex-end",
+              // flexWrap: "wrap",
+
+              // 子要素が入りきる場合は
+              // justifyContent: "space-between", */}
+
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              flexWrap: "wrap",
+            }}
+          >
+            <SelectBox
+              flowUp={flowUpUnitName}
+              view_options={getNamesGisUnitIDs()}
+              selected={getArrayIndexStr(getKeysGisUnitIDs(), AppContextValue.edit_data.layers[props.layer_uuid].unit_id)}
+            />
+            <CtrlLayerPull layer_uuid={props.layer_uuid} />
+          </div>
+        </div>
       </div>
     </div>
   );
