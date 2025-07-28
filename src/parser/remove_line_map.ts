@@ -9,21 +9,21 @@ export class RemoveLineMap {
     const key1 = point_1 + "_" + point_2;
     const key2 = point_2 + "_" + point_1;
 
-    if (!this.removeLineMap.has(key1)) {
-      this.removeLineMap.set(key1, layer_uuid);
+    // 同じキーなら何もしない
+    if (key1 === key2) {
+      return;
     }
-    if (!this.removeLineMap.has(key2)) {
-      this.removeLineMap.set(key2, layer_uuid);
+
+    // どちらにも存在しないことを確認
+    if (!this.removeLineMap.has(key1) && !this.removeLineMap.has(key2)) {
+      this.removeLineMap.set(key1, layer_uuid);
+      return;
     }
   }
 
   hasRemoveLineMap(point_1: string, point_2: string, layer_uuid: string): boolean {
     const key1 = point_1 + "_" + point_2;
     const key2 = point_2 + "_" + point_1;
-
-    if (key1 == key2) {
-      return false; // 同じ座標は削除しない
-    }
 
     if (this.removeLineMap.has(key1)) {
       if (this.removeLineMap.get(key1)! !== layer_uuid) {
@@ -36,5 +36,25 @@ export class RemoveLineMap {
       }
     }
     return false;
+  }
+
+  deleteRemoveLineMap(point_1: string, point_2: string) {
+    const key1 = point_1 + "_" + point_2;
+    const key2 = point_2 + "_" + point_1;
+
+    if (this.removeLineMap.has(key1)) {
+      this.removeLineMap.delete(key1);
+    }
+    if (this.removeLineMap.has(key2)) {
+      this.removeLineMap.delete(key2);
+    }
+  }
+
+  deleteByLayerUuid(layer_uuid: string) {
+    for (const [key, value] of this.removeLineMap.entries()) {
+      if (value === layer_uuid) {
+        this.removeLineMap.delete(key);
+      }
+    }
   }
 }

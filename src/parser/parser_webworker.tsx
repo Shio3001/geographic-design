@@ -72,14 +72,13 @@ self.addEventListener(
       updateLayerError
     );
     await parser.parser();
-    parser.scaling();
 
     self.postMessage({
       type: "progress",
       layer_order_status: layer_order_status,
       main_status: "SVG変換中",
     } as TypePostMessage);
-
+    parser.scaling();
     const svg = parser.toSVG();
 
     self.postMessage({

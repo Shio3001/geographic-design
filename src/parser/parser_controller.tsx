@@ -76,6 +76,7 @@ class ParserController {
 
       try {
         await this.parserLayer(layers_order[i]);
+        this.removeLineMapCleanup(this.edit_data.layers[layers_order[i]], i);
         // throw new Error("parserLayer error");
       } catch (error) {
         // レイヤーに関する情報をできる限り取得してエラーを報告
@@ -128,6 +129,39 @@ class ParserController {
     }
 
     console.log("parserLayer", this.edit_data, this.graph_coordinate_dict, graph_coordinate_expression);
+  };
+
+  //
+  //removeLineMapが増えすぎないよう、現在の対象から30レイヤー以上前のものは削除
+  // ただし、current_layer.layer_infomation["remove_duplicate_lines"] == "ok";のみを対象とする
+  //「30レイヤー以上前」もcurrent_layer.layer_infomation["remove_duplicate_lines"] == "ok";のみを対象とする
+  removeLineMapCleanup = (current_layer: LayerData, current_layer_index: number) => {
+    if (current_layer.layer_infomation["remove_duplicate_lines"] != "ok") {
+      return;
+    }
+
+    //まずは、後ろから対象となるレイヤーを探す
+    const layers_order = this.edit_data.layers_order;
+
+    // 現在位置から愚直に探す。
+    //current_layer.layer_infomation["remove_duplicate_lines"] == "ok" の時だけカウントアップ
+
+    //8279529 ぐらいでエラーがでるので、要素数を5000以下に制限する（レイヤー関係なく）
+
+    let layer_count = 0;
+    let element_count = 0;
+    for (let i = current_layer_index - 1; i >= 0; i--) {
+      if (this.edit_data.layers[layers_order[i]].layer_infomation["remove_duplicate_lines"] == "ok") {
+        layer_count++;
+      }
+
+      if (layer_count >= 30) {
+        break;
+      }
+
+      // 30レイヤー以上前のものは削除
+      this.removeLineMap.deleteByLayerUuid(layers_order[i]);
+    }
   };
 
   toSVGPoint = (g_node: SvgNode, gce: GraphCoordinateExpression) => {

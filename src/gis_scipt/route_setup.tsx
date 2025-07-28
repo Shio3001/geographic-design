@@ -14,7 +14,7 @@ import {
 const gis_info: TypeGISInfo = { adlist: {}, units: {}, gis_data: {}, id_type: {}, file_first: {} };
 let gis_info_load_flag = false;
 
-const coast_prefectures = [
+const prefectures = [
   "Hokkaido",
   "Aomori",
   "Iwate",
@@ -23,6 +23,9 @@ const coast_prefectures = [
   "Yamagata",
   "Fukushima",
   "Ibaraki",
+  "Tochigi",
+  "Gunma",
+  "Saitama",
   "Chiba",
   "Tokyo",
   "Kanagawa",
@@ -30,12 +33,17 @@ const coast_prefectures = [
   "Toyama",
   "Ishikawa",
   "Fukui",
+  "Yamanashi",
+  "Nagano",
+  "Gifu",
   "Shizuoka",
   "Aichi",
   "Mie",
+  "Shiga",
   "Kyoto",
   "Osaka",
   "Hyogo",
+  "Nara",
   "Wakayama",
   "Tottori",
   "Shimane",
@@ -55,8 +63,10 @@ const coast_prefectures = [
   "Kagoshima",
   "Okinawa",
 ];
+const inland_prefecture = ["Tochigi", "Gunma", "Saitama", "Yamanashi", "Nagano", "Gifu", "Nara", "Shiga"];
 
-const prefectures = [...coast_prefectures, "Gunma", "Saitama", "Tochigi", "Gifu"];
+//fileterで除去
+const coast_prefectures = prefectures.filter((pref) => !inland_prefecture.includes(pref));
 
 export const globalStore = new EventTarget(); // React へ通知するイベント管理
 

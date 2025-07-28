@@ -69,8 +69,6 @@ class Parser {
     const lines: Array<GraphCoordinateExpression> = [];
     let latest = 0;
 
-    let asCount = 0;
-
     for (let i = 0; i < line.pos_order.length - 1; i++) {
       const coordinate_id_0 = line.pos_order[i];
       const coordinate_id_1 = line.pos_order[i + 1];
@@ -80,6 +78,7 @@ class Parser {
         lines.push(section_patn);
         latest = i + 1;
 
+        remove_line.deleteRemoveLineMap(coordinate_id_0, coordinate_id_1);
         continue;
       }
 
