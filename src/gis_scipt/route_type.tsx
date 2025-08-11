@@ -46,6 +46,17 @@ export type TypeJsonAd = {
   features: Array<TypeJsonAdPref>;
 };
 
+export type TypeJsonRiverPref = {
+  type: string;
+  properties: { pref: string; river: string };
+  geometry: TypeGeometry | string;
+};
+export type TypeJsonRiver = {
+  type: string;
+  name: string;
+  features: Array<TypeJsonRiverPref>;
+};
+
 //  "properties": { "N03_001": "北海道", "N03_002": null, "N03_003": null, "N03_004": null, "N03_005": null, "N03_007": "01000" } },
 
 // export type TypeJsonGISAdministrative = {
@@ -83,7 +94,7 @@ export type TypeJsonGISStation = {
 
 export type TypeGisUnit = { unit_id: string; name: string; grouping_size: number };
 export type TypeGisUnits = { [key: string]: TypeGisUnit };
-export type TypeGisData = { [key: string]: TypeJsonGISRailroadSection | TypeJsonGISStation | TypeJsonCoast | TypeJsonAd };
+export type TypeGisData = { [key: string]: TypeJsonGISRailroadSection | TypeJsonGISStation | TypeJsonCoast | TypeJsonAd | TypeJsonRiver };
 export type TypeGISInfo = {
   adlist: TypeMergedAdInfoyMap;
   units: TypeGisUnits;

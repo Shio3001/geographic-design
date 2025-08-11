@@ -1,0 +1,115 @@
+import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
+import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry } from "../../gis_scipt/route_type";
+
+import SvgNode from "../sgml_kit/svg_kit/svg_node";
+import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
+import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_scipt/gis_unique_data";
+import BigNumber from "bignumber.js";
+import * as GEO from "./../../geographic_constant";
+
+import Parser from "./parser";
+class ParserRiver extends Parser {
+  generatePath = async () => {
+    const current_layer = this.edit_data.layers[this.layer_uuid];
+    const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
+
+    const cg = new CashGeometry();
+
+    const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
+      river: current_layer.layer_infomation["river"],
+    });
+
+    const joinPath = async () => {
+      const sort_paths_array: Array<GraphCoordinateExpression> = []; //長い順にソートされたパス
+      for (let i = 0; i < geometry_index.length; i++) {
+        const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
+        const gce = this.parseCoordinates(current_geometry.coordinates);
+        this.updateLayerRunningCount(this.layer_uuid);
+        const gce_length = gce.pos_order.length;
+
+        //gce_lengthの数が多い順に挿入する
+        for (let j = 0; j <= sort_paths_array.length; j++) {
+          if (j >= sort_paths_array.length - 1) {
+            sort_paths_array.push(gce);
+            break;
+          }
+          if (sort_paths_array[j].pos_order.length <= gce_length) {
+            sort_paths_array.splice(j, 0, gce);
+            break;
+          }
+        }
+      }
+      console.log("ParserCoast", path_join_flag, sort_paths_array);
+
+      const concat = () => {
+        let cc = 0;
+
+        let i = 0;
+        while (i < sort_paths_array.length) {
+          let j = i + 1;
+          while (j < sort_paths_array.length) {
+            const path_1 = sort_paths_array[i];
+            const path_2 = sort_paths_array[j];
+
+            // 継 継
+            if (path_1.getLastNodeId() == path_2.getFirstNodeId()) {
+            }
+
+            // 継 反
+            else if (path_1.getLastNodeId() == path_2.getLastNodeId()) {
+              path_2.reversePosOrder();
+            }
+
+            // 反 継
+            else if (path_1.getFirstNodeId() == path_2.getFirstNodeId()) {
+              path_1.reversePosOrder();
+            }
+
+            // 反 反
+            else if (path_1.getFirstNodeId() == path_2.getLastNodeId()) {
+              path_1.reversePosOrder();
+              path_2.reversePosOrder();
+            } else {
+              j++;
+              continue;
+            }
+            console.log("concat", i, j, path_1.getFirstNodeId(), path_1.getLastNodeId(), path_2.getFirstNodeId(), path_2.getLastNodeId());
+            path_1.includePathOrder(path_2, 0);
+            sort_paths_array[i] = path_1;
+            sort_paths_array.splice(j, 1);
+            cc++;
+          }
+          i++;
+        }
+        return cc;
+      };
+
+      let concat_count = concat();
+      while (concat_count > 0) {
+        concat_count = concat();
+      }
+
+      return sort_paths_array;
+    };
+
+    //パスの結合処理を行う場合
+    if (path_join_flag) {
+      return await joinPath();
+    }
+
+    const paths_array: Array<GraphCoordinateExpression> = [];
+    for (let i = 0; i < geometry_index.length; i++) {
+      const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
+
+      const cord = current_geometry.coordinates;
+
+      const gce = this.parseCoordinates(cord);
+      this.updateLayerRunningCount(this.layer_uuid);
+
+      paths_array.push(gce);
+    }
+    return paths_array;
+  };
+}
+
+export default ParserRiver;

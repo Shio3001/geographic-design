@@ -69,6 +69,9 @@ const CtrlLayerAdd = () => {
       case "Administrative": {
         return searchUniqueKey(getGisInfo(), unit_id, "N03_001");
       }
+      case "River": {
+        return searchUniqueKey(getGisInfo(), unit_id, "pref");
+      }
 
       // case "Coast": {
       //   return searchUniqueKey(unit_id, "pref");
@@ -237,6 +240,23 @@ const CtrlLayerAdd = () => {
           nlayer.updateLayerElement("pref", prefs[i]);
           nlayer.updateLayerElement("threshold", "10000");
           nlayer.updateLayerElement("thinoout", "10");
+          edit_data.addLayer(nlayer);
+        }
+        AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+        return;
+      }
+
+      case "River": {
+        const pref = searchUniqueKey(getGisInfo(), unit_id, "pref")[ctrl_layer_add.classification1];
+        const river = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "pref", pref, "river");
+
+        const edit_data = AppContextValue.edit_data;
+        for (let i in river) {
+          const nlayer: LayerData = new LayerData();
+          nlayer.setUnit(getKeysGisUnitIDs()[ctrl_layer_add.unit_id_index]);
+          nlayer.updateLayerElement("pref", pref);
+          nlayer.updateLayerElement("river", river[i]);
+          nlayer.updateLayerElement("path_join", "ok");
           edit_data.addLayer(nlayer);
         }
         AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });

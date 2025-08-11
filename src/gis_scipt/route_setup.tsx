@@ -9,6 +9,8 @@ import {
   TypeJsonAd,
   TypeJsonAdPref,
   TypeMergedAdInfoyMap,
+  TypeJsonRiverPref,
+  TypeJsonRiver,
 } from "./route_type";
 
 const gis_info: TypeGISInfo = { adlist: {}, units: {}, gis_data: {}, id_type: {}, file_first: {} };
@@ -175,6 +177,22 @@ export const setupGisInfo = async () => {
   const ad24: TypeJsonAd = { type: "FeatureCollection", name: "ad-24", features: ad };
   const adPref24: TypeJsonAd = { type: "FeatureCollection", name: "adpref-24", features: adPref };
 
+  let river09pref: Array<TypeJsonRiverPref> = [];
+  for (const pref of ["Hyogo"]) {
+    const fileName = `./GSI_GIS_NO_GEOM/river/${pref}.json`;
+    const data = await fetch(fileName);
+    const json = (await data.json()) as Array<TypeJsonRiverPref>;
+
+    const len = river09pref.length;
+    river09pref = river09pref.concat(json);
+    if (json.length > 0) {
+      gis_info.file_first[json[0].geometry as string] = len;
+    }
+
+    console.log("river09pref", fileName);
+  }
+  const river09: TypeJsonRiver = { type: "FeatureCollection", name: "river-09", features: river09pref };
+
   gis_info.gis_data["2005_rail"] = N02_05_RailroadSection_json_type;
   gis_info.units["2005_rail"] = { unit_id: "2005_rail", name: "2005年路線データ", grouping_size: 2 };
 
@@ -211,6 +229,9 @@ export const setupGisInfo = async () => {
   gis_info.gis_data["2005_lake"] = lake23;
   gis_info.units["2005_lake"] = { unit_id: "2005_lake", name: "2005年湖沼データ", grouping_size: 2 };
 
+  gis_info.gis_data["2009_river"] = river09;
+  gis_info.units["2009_river"] = { unit_id: "2009_river", name: "2009年河川データ", grouping_size: 2 };
+
   gis_info.id_type["2005_rail"] = "RailroadSection";
   gis_info.id_type["2005_station"] = "Station";
 
@@ -225,6 +246,8 @@ export const setupGisInfo = async () => {
 
   gis_info.id_type["2024_ad"] = "Administrative";
   gis_info.id_type["2024_adpref"] = "Administrative_pref";
+
+  gis_info.id_type["2009_river"] = "River";
 
   console.log("gis_info_2023_rail", gis_info.gis_data["2023_rail"]);
   console.log("gis_info_2023_coast", gis_info.gis_data["2023_coast"]);

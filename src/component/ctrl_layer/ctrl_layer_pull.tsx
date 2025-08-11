@@ -11,6 +11,7 @@ import PullRapperCoast from "./Rapper/coast";
 import PullRapperLake from "./Rapper/lake";
 import PullRapperAdministrative from "./Rapper/ad";
 import PullRapperAdministrativePref from "./Rapper/adpref";
+import PullRapperRiver from "./Rapper/river";
 
 const CtrlLayerPull = (props: propsCtrlLayerPull) => {
   const AppContextValue = useContext(AppContext);
@@ -47,6 +48,10 @@ const CtrlLayerPull = (props: propsCtrlLayerPull) => {
 
     case "Administrative_pref": {
       return <PullRapperAdministrativePref unit_type={unit_type} layer_uuid={props.layer_uuid}></PullRapperAdministrativePref>;
+    }
+
+    case "River": {
+      return <PullRapperRiver unit_type={unit_type} layer_uuid={props.layer_uuid}></PullRapperRiver>;
     }
 
     default:

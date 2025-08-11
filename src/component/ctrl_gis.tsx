@@ -71,6 +71,9 @@ const CtrlGis = () => {
         case "Administrative_pref": {
           return "行政_" + current_layer.layer_infomation["pref"];
         }
+        case "River": {
+          return "河川_" + current_layer.layer_infomation["river"];
+        }
 
         default:
           break;

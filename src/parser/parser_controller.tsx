@@ -8,6 +8,7 @@ import ParserCoast from "./parser_unit/coast";
 import ParserLake from "./parser_unit/lake";
 import ParserAd from "./parser_unit/ad";
 import ParserAdPref from "./parser_unit/adpref";
+import ParserRiver from "./parser_unit/river";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
 import SvgNode from "./sgml_kit/svg_kit/svg_node";
 import GraphCoordinateExpression from "../graph/expression/coordinate_expression";
@@ -453,6 +454,9 @@ class ParserController {
       case "Administrative_pref": {
         return "行政_" + current_layer.layer_infomation["pref"];
       }
+      case "River": {
+        return "河川_" + current_layer.layer_infomation["pref"];
+      }
 
       default:
         break;
@@ -551,6 +555,20 @@ class ParserController {
         );
         const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
 
+        return paths;
+      }
+
+      case "River": {
+        const paraser_railroad_section = new ParserRiver(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
+        const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
 
