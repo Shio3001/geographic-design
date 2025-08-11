@@ -50,23 +50,29 @@ class ParserController {
   ) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
-    this.svg_kit = new SvgKit();
-    this.graph_coordinate_dict = {};
-    const new_svg_node = new SvgNode();
-    new_svg_node.setTag("svg");
-    new_svg_node.pushAttribute("xmlns", "http://www.w3.org/2000/svg");
-    new_svg_node.pushAttribute("xmlns:inkscape", "http://www.inkscape.org/namespaces/inkscape");
-    new_svg_node.pushAttributeNum("width", edit_data.width);
-    new_svg_node.pushAttributeNum("height", edit_data.height);
 
-    this.svg_kit.pushNode(new_svg_node);
+    this.graph_coordinate_dict = {};
+
     this.removeLineMap = new RemoveLineMap();
     this.updateLayerRunning = updateLayerRunning || (() => {});
     this.updateLayerRunningCount = updateLayerRunningCount || (() => {});
     this.updateLayerGetting = updateLayerGetting || (() => {});
     this.updateLayerComplete = updateLayerComplete || (() => {});
     this.updateLayerError = updateLayerError || (() => {});
+
+    this.setUpSvgKit();
   }
+
+  setUpSvgKit = () => {
+    this.svg_kit = new SvgKit();
+    const new_svg_node = new SvgNode();
+    new_svg_node.setTag("svg");
+    new_svg_node.pushAttribute("xmlns", "http://www.w3.org/2000/svg");
+    new_svg_node.pushAttribute("xmlns:inkscape", "http://www.inkscape.org/namespaces/inkscape");
+    new_svg_node.pushAttributeNum("width", this.edit_data.width);
+    new_svg_node.pushAttributeNum("height", this.edit_data.height);
+    this.svg_kit.pushNode(new_svg_node);
+  };
 
   parser = async () => {
     const layers_order = this.edit_data.layers_order;
@@ -120,13 +126,13 @@ class ParserController {
 
     const graph_coordinate_expression = await this.switchParserLayer(layer_uuid);
 
-    const layer_name = this.getLayerName(layer_uuid);
+    // const layer_name = this.getLayerName(layer_uuid);
 
     // すでに同じ名前のレイヤーがある場合は追加
-    if (this.graph_coordinate_dict[layer_name]) {
-      this.graph_coordinate_dict[layer_name].push(...graph_coordinate_expression);
+    if (this.graph_coordinate_dict[layer_uuid]) {
+      this.graph_coordinate_dict[layer_uuid].push(...graph_coordinate_expression);
     } else {
-      this.graph_coordinate_dict[layer_name] = graph_coordinate_expression;
+      this.graph_coordinate_dict[layer_uuid] = graph_coordinate_expression;
     }
 
     console.log("parserLayer", this.edit_data, this.graph_coordinate_dict, graph_coordinate_expression);
@@ -233,6 +239,38 @@ class ParserController {
 
     const new_svg_node_index = this.svg_kit.pushNode(new_svg_node_path);
     g_node.linkChild(new_svg_node_index);
+  };
+
+  //toSVGと同等の内容ををlayer名指定で行う
+  toSVGLayer = (layer_uuid: string) => {
+    const graph_coordinate_expression = this.graph_coordinate_dict[layer_uuid];
+    if (!graph_coordinate_expression) {
+      console.warn("toSVGLayer: Layer not found", layer_uuid, Object.keys(this.graph_coordinate_dict));
+      return "";
+    }
+
+    this.setUpSvgKit();
+
+    const g_node = new SvgNode();
+    g_node.setTag("g");
+    g_node.pushAttribute("id", layer_uuid);
+    g_node.pushAttribute("inkscape:label", layer_uuid);
+    g_node.pushAttribute("inkscape:groupmode", "layer");
+    const g_node_index = this.svg_kit.pushNode(g_node);
+    this.svg_kit.pushChild(0, g_node_index);
+
+    for (let j = 0; j < graph_coordinate_expression.length; j++) {
+      const gce = graph_coordinate_expression[j];
+      if (gce.getType() == "path") {
+        this.toSVGPath(g_node, gce);
+      }
+      if (gce.getType() == "point") {
+        this.toSVGPoint(g_node, gce);
+      }
+    }
+
+    const svg = this.svg_kit.svg_tree[0].generate(this.svg_kit.svg_tree);
+    return svg;
   };
 
   toSVG = () => {

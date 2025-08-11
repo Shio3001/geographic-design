@@ -4,6 +4,10 @@ export type TypePostMessage =
       type: "progress";
       layer_order_status: TypePostMessageLayerOrderStatus;
       main_status: TypePostMessageMainStatus;
+    }
+  | {
+      type: "complete_layer";
+      svgs: Array<{ layer_name: string; svg: string }>;
     };
 
 export type TypePostMessageLayerOrderStatus = Record<

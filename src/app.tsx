@@ -13,6 +13,7 @@ import EditData from "./component/ctrl_dataflow/edit_data/edit_data";
 import { AppContext, TypeAppState, TypeAppReducerAction } from "./app_context";
 import LayerData from "./component/ctrl_dataflow/edit_data/layer_data";
 import "./component/style/ctrl_gis.css";
+import JSZip from "jszip";
 
 const App = () => {
   // const [gis_info, setGisInfo] = useState<TypeGISInfo>(setupGisInfo());
@@ -73,6 +74,21 @@ const App = () => {
     fileExportCommon(text, filename, "text/svg", "svg");
   };
 
+  const fileExportTextToZip = (file_name: string, svgs: Array<{ layer_name: string; svg: string }>) => {
+    // svgsをzipにしてダウンロード
+    const zip = new JSZip();
+    svgs.forEach((data) => {
+      zip.file(data.layer_name + ".svg", data.svg);
+    });
+    zip.generateAsync({ type: "blob" }).then((content: Blob) => {
+      const aTag = document.createElement("a");
+      aTag.href = URL.createObjectURL(content);
+      aTag.download = file_name + ".zip";
+      aTag.click();
+      URL.revokeObjectURL(aTag.href);
+    });
+  };
+
   // const fileExportDataCentral = () => {
   //   const jsonDataCentral = JSON.stringify(this.DataCentral, null, "\t");
   //   fileExportCommon(jsonDataCentral, "animation.svg", "application/json", "json");
@@ -88,6 +104,7 @@ const App = () => {
           dispatchAppState: dispatchAppState,
           fileExportCommon: fileExportCommon,
           fileExportText: fileExportText,
+          fileExportTextToZip: fileExportTextToZip,
         }}
       >
         <CtrlGis />

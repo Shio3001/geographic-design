@@ -2,9 +2,17 @@ import ParserController from "./parser_controller";
 import { TypePostMessage, TypePostMessageLayerOrderStatus, TypeFunctionUpdateLayerProgress } from "./parser_webworker_type";
 
 import EditData from "./../component/ctrl_dataflow/edit_data/edit_data";
+
+import { TypeGISInfo } from "./../gis_scipt/route_type";
 self.addEventListener(
   "message",
-  async (e) => {
+  async (e: {
+    data: {
+      edit_data: EditData;
+      gis_info: TypeGISInfo;
+      mode: "all" | "layer";
+    };
+  }) => {
     console.log("webworker");
     const edit_data = e.data.edit_data as EditData;
 
@@ -79,6 +87,35 @@ self.addEventListener(
       main_status: "SVG変換中",
     } as TypePostMessage);
     parser.scaling();
+
+    // allと同等の内容を小出しに行う
+    if (e.data.mode === "layer") {
+      const layer_svgs: Array<{ layer_name: string; svg: string }> = [];
+      for (const layer of layer_order) {
+        const svg = parser.toSVGLayer(layer);
+        if (svg) {
+          console.log("toSVGLayer", layer, parser.getLayerName(layer));
+          layer_svgs.push({ layer_name: parser.getLayerName(layer), svg });
+          // self.postMessage({ type: "complete_layer", svg, layer_name: parser.getLayerName(layer) } as TypePostMessage);
+        } else {
+          console.warn("toSVGLayer returned empty for layer:", layer);
+        }
+      }
+
+      self.postMessage({
+        type: "progress",
+        layer_order_status: layer_order_status,
+        main_status: "編集中",
+      } as TypePostMessage);
+
+      self.postMessage({
+        type: "complete_layer",
+        svgs: layer_svgs,
+      } as TypePostMessage);
+
+      return;
+    }
+
     const svg = parser.toSVG();
 
     self.postMessage({

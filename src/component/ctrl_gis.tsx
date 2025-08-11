@@ -105,6 +105,32 @@ const CtrlGis = () => {
     return file_name;
   };
 
+  //複数のSVGにわけて出力する
+  const renderingSVGLayer = () => {
+    const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
+    worker.addEventListener(
+      "message",
+      (e) => {
+        console.log("Workerから受け取ったデータは: ", e.data);
+        const data = e.data as TypePostMessage;
+        if (data.type === "progress") {
+          setLayerOrderStatus(data.layer_order_status);
+          setMainStatus(data.main_status);
+          console.log("setLayerOrderStatus", data.layer_order_status, data.main_status);
+          // プログレスバーやログ更新
+        } else if (data.type === "complete_layer") {
+          AppContextValue.fileExportTextToZip(getOutputFileName(), data.svgs);
+          worker.terminate();
+        }
+      },
+
+      false
+    );
+    worker.postMessage({ mode: "layer", edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
+
+    console.log("renderingSVGLayer");
+  };
+
   const rendering = (file_output: boolean) => {
     const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
     worker.addEventListener(
@@ -126,14 +152,12 @@ const CtrlGis = () => {
             const file_name = getOutputFileName();
             AppContextValue.fileExportText(file_name, svg);
           }
-
-          // setLayersProgressStatus({});
         }
       },
 
       false
     );
-    worker.postMessage({ edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
+    worker.postMessage({ mode: "all", edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
 
     console.log("rendering");
 
@@ -175,6 +199,29 @@ const CtrlGis = () => {
     // const svg = rendering();
     // setPreview(svg);
     // AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+  };
+
+  const flowUpOutputMultiSVG = () => {
+    const edit_data = AppContextValue.edit_data;
+
+    if (edit_data.use_thread) {
+      renderingSVGLayer();
+    } else {
+      const parser: ParserController = new ParserController(AppContextValue.edit_data, AppContextValue.gis_info);
+      parser.parser();
+      parser.scaling();
+
+      const layer_order = edit_data.layers_order;
+      for (const layer of layer_order) {
+        const svg = parser.toSVGLayer(layer);
+        if (svg) {
+          // setPreview(svg);
+          AppContextValue.fileExportText(layer, svg);
+        } else {
+          console.warn("toSVGLayer returned empty for layer:", layer);
+        }
+      }
+    }
   };
 
   const flowUpWidth = (value: number) => {
@@ -276,6 +323,7 @@ const CtrlGis = () => {
         <div className="ctrl_gis_options">
           <Button flowUp={flowUpRendering} text={"描画"} />
           <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
+          <Button flowUp={flowUpOutputMultiSVG} text={"レイヤーごとにSVG出力"} />
           <Button flowUp={flowUpExportEditJson} text={"編集データ出力"} />
           <Button flowUp={flowUpInportEditJson} text={"編集データ入力"} />
           <TextBox flowUp={flowUpFileName} text={""} label_text="svg出力ファイル名" />

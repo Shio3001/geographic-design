@@ -13,6 +13,7 @@ export type AppContextValue = {
   fileExportCommon: Function;
 
   fileExportText: Function;
+  fileExportTextToZip: Function;
 };
 
 export type TypeAppState = {
