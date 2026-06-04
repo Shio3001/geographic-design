@@ -7,21 +7,8 @@ import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_sci
 import BigNumber from "bignumber.js";
 import * as GEO from "./../../geographic_constant";
 
-class ParserCoast {
-  edit_data: EditData;
-  gis_info: TypeGISInfo;
-  layer_uuid: string;
-  unit_id: string;
-  unit_type: string;
-
-  constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
-    this.edit_data = edit_data;
-    this.gis_info = gis_info;
-    this.layer_uuid = layer_uuid;
-    this.unit_id = unit_id;
-    this.unit_type = unit_type;
-  }
-
+import Parser from "./parser";
+class ParserCoast extends Parser {
   generatePath = async () => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
@@ -39,6 +26,7 @@ class ParserCoast {
       for (let i = 0; i < geometry_index.length; i++) {
         const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry;
         const gce = this.parseCoordinates(current_geometry.coordinates);
+        this.updateLayerRunningCount(this.layer_uuid);
         const gce_length = gce.pos_order.length;
 
         //gce_lengthの数が多い順に挿入する
@@ -120,10 +108,6 @@ class ParserCoast {
         }
       }
 
-      //   for (let i = 0; i < sort_paths_array.length; i++) {
-      //     console.log("sort_paths_array", i, sort_paths_array[i].pos_order.length);
-      //   }
-
       return sort_paths_array;
     };
 
@@ -143,32 +127,11 @@ class ParserCoast {
       }
 
       const gce = this.parseCoordinates(cord);
+      this.updateLayerRunningCount(this.layer_uuid);
+
       paths_array.push(gce);
     }
     return paths_array;
-  };
-
-  parseCoordinates = (coordinates: TypeJsonCoordinates) => {
-    const gce = new GraphCoordinateExpression("path");
-
-    for (let i = 0; i < coordinates.length; i++) {
-      const coordinate = coordinates[i];
-
-      const coordinate0 = new BigNumber(coordinate[0]);
-      const coordinate1 = new BigNumber(coordinate[1]);
-
-      const c0_exp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LONGITUDE_KM1_BIGNUMBER).toNumber();
-      const c1_exp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).div(GEO.LATITUDE_KM1_BIGNUMBER).toNumber();
-
-      const c0_exp_dp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
-      const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
-
-      const id = c0_exp_dp + "p" + c1_exp_dp;
-      gce.pushPosIds(id);
-      gce.pushCoordinateId(id, c0_exp, c1_exp);
-    }
-
-    return gce;
   };
 }
 

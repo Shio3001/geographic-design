@@ -35,6 +35,23 @@ class EditData {
     };
   };
 
+  setLawData = (data: any) => {
+    this.layers_order = data.layers_order;
+    this.layer_length = data.layer_length;
+    this.width = data.width;
+    this.height = data.height;
+    this.decimal_place = data.decimal_place;
+    this.filename = data.filename;
+    this.use_thread = data.use_thread;
+    this.layers = {};
+    for (let l_key of Object.keys(data.layers)) {
+      const layer = data.layers[l_key];
+      const layer_d: LayerData = new LayerData();
+      layer_d.setLawData(layer);
+      this.layers[layer_d.layer_uuid] = layer_d;
+    }
+  };
+
   constructor(layer_number?: number) {
     this.layer_length = 0;
     this.layers_order = [];

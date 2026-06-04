@@ -2,24 +2,21 @@ import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
 import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry } from "../../gis_scipt/route_type";
 
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
-import GraphCoordinateExpression from "../../graph/expression/coordinate_expression";
-import { CashGeometry, searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
+import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
+import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_scipt/gis_unique_data";
 import BigNumber from "bignumber.js";
-import * as GEO from "../../geographic_constant";
+import * as GEO from "./../../geographic_constant";
 
 import Parser from "./parser";
-
-class ParserLake extends Parser {
+class ParserRiver extends Parser {
   generatePath = async () => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
-    const threshold = Number(current_layer.layer_infomation["threshold"]);
-    const thinoout = Number(current_layer.layer_infomation["thinoout"]);
 
     const cg = new CashGeometry();
 
     const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
-      lake: current_layer.layer_infomation["lake"],
+      river: current_layer.layer_infomation["river"],
     });
 
     const joinPath = async () => {
@@ -42,8 +39,7 @@ class ParserLake extends Parser {
           }
         }
       }
-      console.log("ParserLake flag", path_join_flag);
-      console.log("ParserLake array", sort_paths_array);
+      console.log("ParserCoast", path_join_flag, sort_paths_array);
 
       const concat = () => {
         let cc = 0;
@@ -93,27 +89,6 @@ class ParserLake extends Parser {
         concat_count = concat();
       }
 
-      let i = 0;
-      while (i < sort_paths_array.length) {
-        if (sort_paths_array[i].pos_order.length < threshold) {
-          sort_paths_array.splice(i, 1);
-        } else {
-          console.log("sort_paths_array", i, threshold, sort_paths_array[i].pos_order.length);
-          i++;
-        }
-      }
-
-      if (thinoout > 0) {
-        for (let i = 0; i < sort_paths_array.length; i++) {
-          const last = sort_paths_array[i].pos_order.length - 1;
-          sort_paths_array[i].pos_order = sort_paths_array[i].pos_order.filter((element, index) => index % thinoout == 0 || index == last);
-        }
-      }
-
-      //   for (let i = 0; i < sort_paths_array.length; i++) {
-      //     console.log("sort_paths_array", i, sort_paths_array[i].pos_order.length);
-      //   }
-
       return sort_paths_array;
     };
 
@@ -128,16 +103,13 @@ class ParserLake extends Parser {
 
       const cord = current_geometry.coordinates;
 
-      if (cord.length < threshold) {
-        continue;
-      }
-
       const gce = this.parseCoordinates(cord);
       this.updateLayerRunningCount(this.layer_uuid);
+
       paths_array.push(gce);
     }
     return paths_array;
   };
 }
 
-export default ParserLake;
+export default ParserRiver;

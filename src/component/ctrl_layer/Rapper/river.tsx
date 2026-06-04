@@ -23,14 +23,11 @@ import TextBox from "../../../common/textbox/textbox";
 
 import { PullRapper } from "./helper";
 
-const PullRapperCoast = (props: PullRapper) => {
+const PullRapperRiver = (props: PullRapper) => {
   const AppContextValue = useContext(AppContext);
   const layer = AppContextValue.edit_data.getLayer(props.layer_uuid);
-  const [threshold, setThreshold] = useState(layer.getElement("threshold") ? layer.getElement("threshold") : "10000");
-  const [thinoout, setThinoout] = useState(layer.getElement("thinoout") ? layer.getElement("thinoout") : "10");
 
   const pref = searchUniqueKey(getGisInfo(), layer.unit_id, "pref");
-  console.log("PullRapperCoast", getGisInfo(), pref, layer.unit_id, layer.layer_infomation);
 
   useEffect(() => {
     return () => {
@@ -44,15 +41,11 @@ const PullRapperCoast = (props: PullRapper) => {
     if (!layer.layer_infomation["pref"]) {
       flowUpUnitPref(0);
     }
+    if (!layer.layer_infomation["river"]) {
+      flowUpUnitRiver(0);
+    }
     if (!layer.layer_infomation["path_join"]) {
       flowUpPathJoin(true);
-    }
-
-    if (!layer.layer_infomation["threshold"]) {
-      flowUpUnitThreshold("10000");
-    }
-    if (!layer.layer_infomation["thinoout"]) {
-      flowUpUnitThinoout("10");
     }
   }, [props.unit_type, props.layer_uuid]);
 
@@ -62,19 +55,22 @@ const PullRapperCoast = (props: PullRapper) => {
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+
+    flowUpUnitRiver(0);
   };
 
-  const flowUpUnitThreshold = (value: string) => {
-    layer.updateLayerElement("threshold", value);
-    setThreshold(value);
-    const edit_data = AppContextValue.edit_data;
-    edit_data.setLayer(layer);
-    AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+  const getRiverValueOptions = () => {
+    const unit_id = layer.getUnitId();
+    const view_lines = searchUniqueKeyBySearchKey(getGisInfo(), unit_id, "pref", layer.layer_infomation["pref"], "river");
+    return view_lines;
+  };
+  const getRiverViewOptions = () => {
+    return getRiverValueOptions();
   };
 
-  const flowUpUnitThinoout = (value: string) => {
-    layer.updateLayerElement("thinoout", value);
-    setThinoout(value);
+  const flowUpUnitRiver = (index: number) => {
+    const layer_river = getRiverValueOptions()[index];
+    layer.updateLayerElement("river", layer_river);
     const edit_data = AppContextValue.edit_data;
     edit_data.setLayer(layer);
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
@@ -99,11 +95,10 @@ const PullRapperCoast = (props: PullRapper) => {
   return (
     <>
       <SelectBox flowUp={flowUpUnitPref} view_options={pref} selected={getArrayIndexStr(pref, layer.getElement("pref"))} />{" "}
+      <SelectBox flowUp={flowUpUnitRiver} view_options={getRiverViewOptions()} selected={getArrayIndexStr(getRiverValueOptions(), layer.getElement("river"))} />
       <CheckBox flowUp={flowUpPathJoin} label_text={"パスの結合"} checked={getCheckedPathJoin()} />{" "}
-      <TextBox label_text="閾値" text={threshold} flowUp={flowUpUnitThreshold}></TextBox>{" "}
-      <TextBox label_text="間引き" text={thinoout} flowUp={flowUpUnitThinoout}></TextBox>{" "}
     </>
   );
 };
 
-export default PullRapperCoast;
+export default PullRapperRiver;

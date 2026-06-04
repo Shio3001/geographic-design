@@ -7,40 +7,114 @@ import ParserStation from "./parser_unit/station";
 import ParserCoast from "./parser_unit/coast";
 import ParserLake from "./parser_unit/lake";
 import ParserAd from "./parser_unit/ad";
+import ParserAdPref from "./parser_unit/adpref";
+import ParserRiver from "./parser_unit/river";
 import SvgKit from "./sgml_kit/svg_kit/svg_kit";
 import SvgNode from "./sgml_kit/svg_kit/svg_node";
-import GraphCoordinateExpression from "./../graph/expression/coordinate_expression";
+import GraphCoordinateExpression from "../graph/expression/coordinate_expression";
 import path from "path";
 import BigNumber from "bignumber.js";
 import { RemoveLineMap } from "./remove_line_map";
+//TypeFunctionUpdateLayerProgress
+import { TypeFunctionUpdateLayerProgress } from "./parser_webworker_type";
 
-class Parser {
+async function sha256(text: string) {
+  const uint8 = new TextEncoder().encode(text);
+  const digest = await crypto.subtle.digest("SHA-256", uint8);
+  return Array.from(new Uint8Array(digest))
+    .map((v) => v.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+class ParserController {
   edit_data: EditData;
   gis_info: TypeGISInfo;
   svg_kit: SvgKit;
   graph_coordinate_dict: { [key: string]: Array<GraphCoordinateExpression> };
   removeLineMap: RemoveLineMap;
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo) {
+  updateLayerRunning: TypeFunctionUpdateLayerProgress;
+  updateLayerRunningCount: TypeFunctionUpdateLayerProgress;
+  updateLayerGetting: TypeFunctionUpdateLayerProgress;
+  updateLayerComplete: TypeFunctionUpdateLayerProgress;
+  updateLayerError: TypeFunctionUpdateLayerProgress;
+
+  constructor(
+    edit_data: EditData,
+    gis_info: TypeGISInfo,
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress,
+    updateLayerRunningCount?: TypeFunctionUpdateLayerProgress,
+    updateLayerGetting?: TypeFunctionUpdateLayerProgress,
+    updateLayerComplete?: TypeFunctionUpdateLayerProgress,
+    updateLayerError?: TypeFunctionUpdateLayerProgress
+  ) {
     this.edit_data = edit_data;
     this.gis_info = gis_info;
-    this.svg_kit = new SvgKit();
+
     this.graph_coordinate_dict = {};
+
+    this.removeLineMap = new RemoveLineMap();
+    this.updateLayerRunning = updateLayerRunning || (() => {});
+    this.updateLayerRunningCount = updateLayerRunningCount || (() => {});
+    this.updateLayerGetting = updateLayerGetting || (() => {});
+    this.updateLayerComplete = updateLayerComplete || (() => {});
+    this.updateLayerError = updateLayerError || (() => {});
+
+    this.setUpSvgKit();
+  }
+
+  setUpSvgKit = () => {
+    this.svg_kit = new SvgKit();
     const new_svg_node = new SvgNode();
     new_svg_node.setTag("svg");
     new_svg_node.pushAttribute("xmlns", "http://www.w3.org/2000/svg");
-    new_svg_node.pushAttributeNum("width", edit_data.width);
-    new_svg_node.pushAttributeNum("height", edit_data.height);
-
+    new_svg_node.pushAttribute("xmlns:inkscape", "http://www.inkscape.org/namespaces/inkscape");
+    new_svg_node.pushAttributeNum("width", this.edit_data.width);
+    new_svg_node.pushAttributeNum("height", this.edit_data.height);
     this.svg_kit.pushNode(new_svg_node);
-    this.removeLineMap = new RemoveLineMap();
-  }
+  };
 
   parser = async () => {
     const layers_order = this.edit_data.layers_order;
+    console.log("parser", layers_order);
 
     for (let i = 0; i < layers_order.length; i++) {
-      await this.parserLayer(layers_order[i]);
+      this.updateLayerRunning(layers_order[i]);
+
+      try {
+        await this.parserLayer(layers_order[i]);
+        this.removeLineMapCleanup(this.edit_data.layers[layers_order[i]], i);
+        // throw new Error("parserLayer error");
+      } catch (error) {
+        // レイヤーに関する情報をできる限り取得してエラーを報告
+        const message =
+          String(error) +
+          "\n" +
+          String(error.stack) +
+          "\n" +
+          String(new Date()) +
+          "\n" +
+          "Layer UUID: " +
+          layers_order[i] +
+          "\n" +
+          //removeLineMap
+          "Remove Line Map Size: " +
+          this.removeLineMap.removeLineMap.size +
+          "\n" +
+          "Layer Data: " +
+          JSON.stringify(this.edit_data.layers[layers_order[i]], null, 2);
+        this.updateLayerError(
+          layers_order[i],
+          message +
+            // 内容証明のため、hash化しておく
+            "\n" +
+            "Hash: " +
+            (await sha256(message))
+        );
+        continue;
+      }
+
+      this.updateLayerComplete(layers_order[i]);
     }
   };
 
@@ -52,16 +126,49 @@ class Parser {
 
     const graph_coordinate_expression = await this.switchParserLayer(layer_uuid);
 
-    const layer_name = this.getLayerName(layer_uuid);
+    // const layer_name = this.getLayerName(layer_uuid);
 
     // すでに同じ名前のレイヤーがある場合は追加
-    if (this.graph_coordinate_dict[layer_name]) {
-      this.graph_coordinate_dict[layer_name].push(...graph_coordinate_expression);
+    if (this.graph_coordinate_dict[layer_uuid]) {
+      this.graph_coordinate_dict[layer_uuid].push(...graph_coordinate_expression);
     } else {
-      this.graph_coordinate_dict[layer_name] = graph_coordinate_expression;
+      this.graph_coordinate_dict[layer_uuid] = graph_coordinate_expression;
     }
 
     console.log("parserLayer", this.edit_data, this.graph_coordinate_dict, graph_coordinate_expression);
+  };
+
+  //
+  //removeLineMapが増えすぎないよう、現在の対象から30レイヤー以上前のものは削除
+  // ただし、current_layer.layer_infomation["remove_duplicate_lines"] == "ok";のみを対象とする
+  //「30レイヤー以上前」もcurrent_layer.layer_infomation["remove_duplicate_lines"] == "ok";のみを対象とする
+  removeLineMapCleanup = (current_layer: LayerData, current_layer_index: number) => {
+    if (current_layer.layer_infomation["remove_duplicate_lines"] != "ok") {
+      return;
+    }
+
+    //まずは、後ろから対象となるレイヤーを探す
+    const layers_order = this.edit_data.layers_order;
+
+    // 現在位置から愚直に探す。
+    //current_layer.layer_infomation["remove_duplicate_lines"] == "ok" の時だけカウントアップ
+
+    //8279529 ぐらいでエラーがでるので、要素数を5000以下に制限する（レイヤー関係なく）
+
+    let layer_count = 0;
+    let element_count = 0;
+    for (let i = current_layer_index - 1; i >= 0; i--) {
+      if (this.edit_data.layers[layers_order[i]].layer_infomation["remove_duplicate_lines"] == "ok") {
+        layer_count++;
+      }
+
+      if (layer_count >= 30) {
+        break;
+      }
+
+      // 30レイヤー以上前のものは削除
+      this.removeLineMap.deleteByLayerUuid(layers_order[i]);
+    }
   };
 
   toSVGPoint = (g_node: SvgNode, gce: GraphCoordinateExpression) => {
@@ -134,6 +241,38 @@ class Parser {
     g_node.linkChild(new_svg_node_index);
   };
 
+  //toSVGと同等の内容ををlayer名指定で行う
+  toSVGLayer = (layer_uuid: string) => {
+    const graph_coordinate_expression = this.graph_coordinate_dict[layer_uuid];
+    if (!graph_coordinate_expression) {
+      console.warn("toSVGLayer: Layer not found", layer_uuid, Object.keys(this.graph_coordinate_dict));
+      return "";
+    }
+
+    this.setUpSvgKit();
+
+    const g_node = new SvgNode();
+    g_node.setTag("g");
+    g_node.pushAttribute("id", layer_uuid);
+    g_node.pushAttribute("inkscape:label", layer_uuid);
+    g_node.pushAttribute("inkscape:groupmode", "layer");
+    const g_node_index = this.svg_kit.pushNode(g_node);
+    this.svg_kit.pushChild(0, g_node_index);
+
+    for (let j = 0; j < graph_coordinate_expression.length; j++) {
+      const gce = graph_coordinate_expression[j];
+      if (gce.getType() == "path") {
+        this.toSVGPath(g_node, gce);
+      }
+      if (gce.getType() == "point") {
+        this.toSVGPoint(g_node, gce);
+      }
+    }
+
+    const svg = this.svg_kit.svg_tree[0].generate(this.svg_kit.svg_tree);
+    return svg;
+  };
+
   toSVG = () => {
     const keys = Object.keys(this.graph_coordinate_dict);
 
@@ -145,6 +284,8 @@ class Parser {
 
       g_node.setTag("g");
       g_node.pushAttribute("id", key);
+      g_node.pushAttribute("inkscape:label", key);
+      g_node.pushAttribute("inkscape:groupmode", "layer");
       const g_node_index = this.svg_kit.pushNode(g_node);
       this.svg_kit.pushChild(0, g_node_index);
 
@@ -351,6 +492,9 @@ class Parser {
       case "Administrative_pref": {
         return "行政_" + current_layer.layer_infomation["pref"];
       }
+      case "River": {
+        return "河川_" + current_layer.layer_infomation["pref"];
+      }
 
       default:
         break;
@@ -368,32 +512,101 @@ class Parser {
 
     switch (unit_type) {
       case "RailroadSection": {
-        const paraser_railroad_section = new ParserRailroadSection(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserRailroadSection(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
         await paraser_railroad_section.coordinateAggregation();
         const paths = paraser_railroad_section.generatePath();
 
         return paths;
       }
       case "Station": {
-        const parser_station_section = new ParserStation(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const parser_station_section = new ParserStation(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
         await parser_station_section.coordinateAggregation();
         const points = parser_station_section.generatePoint();
         return points;
       }
       case "Coast": {
-        const paraser_railroad_section = new ParserCoast(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserCoast(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
         const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
       case "Lake": {
-        const paraser_railroad_section = new ParserLake(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserLake(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
         const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
 
       case "Administrative": {
-        const paraser_railroad_section = new ParserAd(this.edit_data, this.gis_info, layer_uuid, unit_id, unit_type);
+        const paraser_railroad_section = new ParserAd(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
         const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
+        return paths;
+      }
+
+      case "Administrative_pref": {
+        const paraser_railroad_section = new ParserAdPref(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
+        const paths = await paraser_railroad_section.generatePath(this.removeLineMap);
+
+        return paths;
+      }
+
+      case "River": {
+        const paraser_railroad_section = new ParserRiver(
+          this.edit_data,
+          this.gis_info,
+          layer_uuid,
+          unit_id,
+          unit_type,
+          this.updateLayerRunning,
+          this.updateLayerRunningCount
+        );
+        const paths = await paraser_railroad_section.generatePath();
         return paths;
       }
 
@@ -403,4 +616,4 @@ class Parser {
   };
 }
 
-export default Parser;
+export default ParserController;

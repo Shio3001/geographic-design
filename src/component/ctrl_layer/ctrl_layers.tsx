@@ -5,11 +5,15 @@ import CtrlLayer from "./ctrl_layer";
 import { AppContext } from "./../../app_context";
 import { CtrlGisContext } from "./../ctrl_gis_context";
 
-const Ctest = () => {
-  return <div className="test-C"></div>;
+//parser_webworker_type
+import { TypePostMessageLayerOrderStatus, TypePostMessageMainStatus } from "../../parser/parser_webworker_type";
+
+type Props = {
+  layer_order_status?: TypePostMessageLayerOrderStatus;
+  main_status: TypePostMessageMainStatus;
 };
 
-const CtrlLayers = () => {
+const CtrlLayers = (props: Props) => {
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
 
@@ -25,7 +29,9 @@ const CtrlLayers = () => {
     const component = [];
 
     for (let i = 0; i < layers_order.length; i++) {
-      component.push(<CtrlLayer key={i} layer_uuid={layers_order[i]} />);
+      component.push(
+        <CtrlLayer key={i} layer_uuid={layers_order[i]} main_status={props.main_status} layer_status={props.layer_order_status[layers_order[i]]} />
+      );
     }
 
     return component;

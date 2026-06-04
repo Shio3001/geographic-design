@@ -201,6 +201,10 @@ class Route {
     const node_1 = this.route.get(node_id_1);
     const path_contacts = node_1.get(node_id_2);
 
+    if (path_contacts == undefined || path_contacts.length == 0) {
+      return null;
+    }
+
     let min_distance = Number.MAX_SAFE_INTEGER;
     let min_path_contact;
     for (let i = 0; i < path_contacts.length; i++) {

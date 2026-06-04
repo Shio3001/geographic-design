@@ -18,24 +18,25 @@ import BigNumber from "bignumber.js";
 
 import * as GEO from "./../../geographic_constant";
 import { findLastKey } from "lodash";
+import Parser from "./parser";
 
-class ParserRailroadSection {
-  edit_data: EditData;
-  gis_info: TypeGISInfo;
+//TypeFunctionUpdateLayerProgress
+import { TypeFunctionUpdateLayerProgress } from "./../parser_webworker_type";
+class ParserRailroadSection extends Parser {
   svg_node: SvgNode;
-  layer_uuid: string;
-  unit_id: string;
-  unit_type: string;
-
   graph: Graph;
 
-  constructor(edit_data: EditData, gis_info: TypeGISInfo, layer_uuid: string, unit_id: string, unit_type: string) {
-    this.edit_data = edit_data;
-    this.gis_info = gis_info;
+  constructor(
+    edit_data: EditData,
+    gis_info: TypeGISInfo,
+    layer_uuid: string,
+    unit_id: string,
+    unit_type: string,
+    updateLayerRunning?: TypeFunctionUpdateLayerProgress,
+    updateLayerRunningCount?: TypeFunctionUpdateLayerProgress
+  ) {
+    super(edit_data, gis_info, layer_uuid, unit_id, unit_type, updateLayerRunning, updateLayerRunningCount);
     this.svg_node = new SvgNode();
-    this.layer_uuid = layer_uuid;
-    this.unit_id = unit_id;
-    this.unit_type = unit_type;
     this.graph = new Graph();
   }
 
@@ -162,9 +163,6 @@ class ParserRailroadSection {
       const c0_exp_dp = coordinate0.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
       const c1_exp_dp = coordinate1.times(GEO.EXPANSION_CONSTANT_BIGNUMBER).dp(0).toString();
       console.log("c0_10-c1_10", coordinate0, coordinate1, c0_exp_dp, c1_exp_dp);
-
-      // const c0_10 = String(coordinate0);
-      // const c1_10 = String(coordinate1);
 
       node.setIdByPos(c1_exp_dp, c0_exp_dp);
       node.setPos(c0_exp, c1_exp);

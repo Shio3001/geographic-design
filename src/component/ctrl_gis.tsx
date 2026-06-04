@@ -19,13 +19,17 @@ import LayerData from "./ctrl_dataflow/edit_data/layer_data";
 
 import EditData from "./ctrl_dataflow/edit_data/edit_data";
 
-import Parser from "./../parser/parser";
+import ParserController from "../parser/parser_controller";
+import { TypePostMessage, TypePostMessageLayerOrderStatus, TypePostMessageMainStatus } from "../parser/parser_webworker_type";
 // import ParserWebWorker from "./../parser/parser_webworker";
 
 const CtrlGis = () => {
   const [update, setUpdata] = useState<boolean>(false);
 
   const [preview, setPreview] = useState<string>("<div></div>");
+  const [layer_order_status, setLayerOrderStatus] = useState<TypePostMessageLayerOrderStatus>({});
+
+  const [main_status, setMainStatus] = useState<TypePostMessageMainStatus>("編集中");
 
   const AppContextValue = useContext(AppContext);
   const CtrlGisContextValue = useContext(CtrlGisContext);
@@ -38,7 +42,7 @@ const CtrlGis = () => {
     console.log("[APPCTR] Update");
   }, [update]);
 
-  const getOutputFileName = () => {
+  const getOutputFileName = (pre: string = "GEO") => {
     const edit_data = AppContextValue.edit_data;
     const file_name = edit_data.filename;
 
@@ -67,6 +71,9 @@ const CtrlGis = () => {
         case "Administrative_pref": {
           return "行政_" + current_layer.layer_infomation["pref"];
         }
+        case "River": {
+          return "河川_" + current_layer.layer_infomation["river"];
+        }
 
         default:
           break;
@@ -81,10 +88,10 @@ const CtrlGis = () => {
 
       if (layer_order.length > 6) {
         const line = getLayerName(layer_order[0]);
-        return "GEO_" + line + "ほか" + layer_order.length + "データ";
+        return pre + "_" + line + "ほか" + layer_order.length + "データ";
       }
 
-      let lines = "GEO";
+      let lines = pre;
       for (let layer_id of layer_order) {
         const line = getLayerName(layer_id);
 
@@ -98,25 +105,59 @@ const CtrlGis = () => {
     return file_name;
   };
 
+  //複数のSVGにわけて出力する
+  const renderingSVGLayer = () => {
+    const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
+    worker.addEventListener(
+      "message",
+      (e) => {
+        console.log("Workerから受け取ったデータは: ", e.data);
+        const data = e.data as TypePostMessage;
+        if (data.type === "progress") {
+          setLayerOrderStatus(data.layer_order_status);
+          setMainStatus(data.main_status);
+          console.log("setLayerOrderStatus", data.layer_order_status, data.main_status);
+          // プログレスバーやログ更新
+        } else if (data.type === "complete_layer") {
+          AppContextValue.fileExportTextToZip(getOutputFileName(), data.svgs);
+          worker.terminate();
+        }
+      },
+
+      false
+    );
+    worker.postMessage({ mode: "layer", edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
+
+    console.log("renderingSVGLayer");
+  };
+
   const rendering = (file_output: boolean) => {
     const worker = new Worker(new URL("./../parser/parser_webworker.tsx", import.meta.url));
     worker.addEventListener(
       "message",
       (e) => {
         console.log("Workerから受け取ったデータは: ", e.data);
-        const svg = e.data;
-        setPreview(svg);
-        worker.terminate();
+        const data = e.data as TypePostMessage;
+        if (data.type === "progress") {
+          setLayerOrderStatus(data.layer_order_status);
+          setMainStatus(data.main_status);
+          console.log("setLayerOrderStatus", data.layer_order_status, data.main_status);
+          // プログレスバーやログ更新
+        } else if (data.type === "complete") {
+          const svg = data.svg;
+          setPreview(svg);
+          worker.terminate();
 
-        if (file_output) {
-          const file_name = getOutputFileName();
-          AppContextValue.fileExportText(file_name, svg);
+          if (file_output) {
+            const file_name = getOutputFileName();
+            AppContextValue.fileExportText(file_name, svg);
+          }
         }
       },
 
       false
     );
-    worker.postMessage({ edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
+    worker.postMessage({ mode: "all", edit_data: AppContextValue.edit_data.getLawData(), gis_info: AppContextValue.gis_info });
 
     console.log("rendering");
 
@@ -132,7 +173,7 @@ const CtrlGis = () => {
     if (edit_data.use_thread) {
       rendering(false);
     } else {
-      const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+      const parser: ParserController = new ParserController(AppContextValue.edit_data, AppContextValue.gis_info);
       parser.parser();
       parser.scaling();
       const svg = parser.toSVG();
@@ -148,7 +189,7 @@ const CtrlGis = () => {
     if (edit_data.use_thread) {
       rendering(true);
     } else {
-      const parser: Parser = new Parser(AppContextValue.edit_data, AppContextValue.gis_info);
+      const parser: ParserController = new ParserController(AppContextValue.edit_data, AppContextValue.gis_info);
       parser.parser();
       parser.scaling();
       const svg = parser.toSVG();
@@ -158,6 +199,29 @@ const CtrlGis = () => {
     // const svg = rendering();
     // setPreview(svg);
     // AppContextValue.fileExportText(AppContextValue.edit_data.filename, svg);
+  };
+
+  const flowUpOutputMultiSVG = () => {
+    const edit_data = AppContextValue.edit_data;
+
+    if (edit_data.use_thread) {
+      renderingSVGLayer();
+    } else {
+      const parser: ParserController = new ParserController(AppContextValue.edit_data, AppContextValue.gis_info);
+      parser.parser();
+      parser.scaling();
+
+      const layer_order = edit_data.layers_order;
+      for (const layer of layer_order) {
+        const svg = parser.toSVGLayer(layer);
+        if (svg) {
+          // setPreview(svg);
+          AppContextValue.fileExportText(layer, svg);
+        } else {
+          console.warn("toSVGLayer returned empty for layer:", layer);
+        }
+      }
+    }
   };
 
   const flowUpWidth = (value: number) => {
@@ -223,6 +287,34 @@ const CtrlGis = () => {
     AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
   };
 
+  const flowUpExportEditJson = () => {
+    const edit_data = AppContextValue.edit_data;
+    AppContextValue.fileExportCommon(JSON.stringify(edit_data.getLawData()), getOutputFileName("EDIT"), "application/json", "json");
+  };
+
+  const flowUpInportEditJson = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const text = event.target?.result;
+          if (text) {
+            flowUpLayerClear();
+            const edit_data: EditData = new EditData();
+            edit_data.setLawData(JSON.parse(text as string));
+            AppContextValue.dispatchAppState({ action_type: "update_edit_data", update_state: edit_data });
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
+  };
+
   return (
     <div className="ctrl_gis">
       <CtrlGisContext.Provider value={{ updateDOM: updateDOM }}>
@@ -231,6 +323,9 @@ const CtrlGis = () => {
         <div className="ctrl_gis_options">
           <Button flowUp={flowUpRendering} text={"描画"} />
           <Button flowUp={flowUpOutputSVG} text={"SVG出力"} />
+          <Button flowUp={flowUpOutputMultiSVG} text={"レイヤーごとにSVG出力"} />
+          <Button flowUp={flowUpExportEditJson} text={"編集データ出力"} />
+          <Button flowUp={flowUpInportEditJson} text={"編集データ入力"} />
           <TextBox flowUp={flowUpFileName} text={""} label_text="svg出力ファイル名" />
           <NumberBox flowUp={flowUpWidth} number={AppContextValue.edit_data.width} label_text="出力サイズ 幅" />
           <NumberBox flowUp={flowUpHeight} number={AppContextValue.edit_data.height} label_text="出力サイズ 高さ" />
@@ -241,20 +336,23 @@ const CtrlGis = () => {
         {AppContextValue.gis_info ? (
           <div style={{ marginLeft: "10px" }}>
             <div>
+              <p> {main_status}</p>
               <h3>レイヤー</h3>
               <div
                 style={{
+                  overflowX: "hidden",
                   overflowY: "scroll",
-                  height: "500px",
+                  height: "700px",
                   backgroundColor: "#eeeeee",
                 }}
               >
                 <div
                   style={{
-                    minHeight: "500px",
+                    width: "100%",
+                    minHeight: "700px",
                   }}
                 >
-                  <CtrlLayers />
+                  <CtrlLayers layer_order_status={layer_order_status} main_status={main_status} />
                 </div>
               </div>
             </div>

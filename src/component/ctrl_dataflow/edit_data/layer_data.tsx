@@ -23,6 +23,12 @@ class LayerData {
     };
   };
 
+  setLawData = (data: any) => {
+    this.unit_id = data.unit_id;
+    this.layer_uuid = data.layer_uuid;
+    this.layer_infomation = data.layer_infomation;
+  };
+
   constructor() {
     // this.unit_type = "";
     this.unit_id = "";

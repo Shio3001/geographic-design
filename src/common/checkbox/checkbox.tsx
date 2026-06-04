@@ -29,8 +29,8 @@ const CheckBox = (props: props) => {
   return (
     <>
       <div className="checkbox-com">
-        <input type="checkbox" onChange={onChangeEvent} ref={checkbox_ref}></input>
         <label style={{ userSelect: "none" }} onClick={onChangeEvent}>
+          <input type="checkbox" onChange={onChangeEvent} ref={checkbox_ref}></input>
           {props.label_text}
         </label>
       </div>

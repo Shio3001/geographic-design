@@ -45,9 +45,17 @@ export const getGeometry = async (cg: CashGeometry, gis_info: TypeGISInfo, unit_
   const response = await fetch(path);
   const data = await response.json();
   cg.set(path, data);
+
   return resolve(data);
 };
 
+/**
+ *
+ * @param gis_info
+ * @param unit_id
+ * @param conditional
+ * @returns
+ */
 export const searchGisConditional = (gis_info: TypeGISInfo, unit_id: string, conditional: { [key: string]: string }): Array<number> => {
   const gis_unit = gis_info.gis_data[unit_id];
 
@@ -329,6 +337,7 @@ export const searchUniqueIndex = (gis_info: TypeGISInfo, unit_id: string, search
 
 export const searchUniqueKey = (gis_info: TypeGISInfo, unit_id: string, search_properties_key: string): Array<string> => {
   // const unit_id = gis_info.units[current_unit].unit_id;
+
   const current_gis = gis_info.gis_data[unit_id];
 
   const propertie_map = new Map();
@@ -346,10 +355,11 @@ export const searchUniqueKey = (gis_info: TypeGISInfo, unit_id: string, search_p
   for (let i = 0; i < current_gis.features.length; i++) {
     const properties = current_gis.features[i].properties as { [key: string]: string };
     const propertie_value = properties[search_properties_key];
+
     pushPropertie(propertie_value);
   }
 
-  console.log("propertie_list", propertie_list);
+  console.log("propertie_list", unit_id, propertie_list);
 
   return propertie_list;
 };

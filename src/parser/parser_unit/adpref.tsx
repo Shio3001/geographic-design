@@ -2,16 +2,14 @@ import EditData from "../../component/ctrl_dataflow/edit_data/edit_data";
 import { TypeGISInfo, TypeJsonCoordinates, TypeGeometry, TypeGeometry3D } from "../../gis_scipt/route_type";
 
 import SvgNode from "../sgml_kit/svg_kit/svg_node";
-import GraphCoordinateExpression from "./../../graph/expression/coordinate_expression";
-import { CashGeometry, searchGisConditional, getGeometry } from "./../../gis_scipt/gis_unique_data";
+import GraphCoordinateExpression from "../../graph/expression/coordinate_expression";
+import { CashGeometry, searchGisConditional, getGeometry } from "../../gis_scipt/gis_unique_data";
 import BigNumber from "bignumber.js";
-import * as GEO from "./../../geographic_constant";
-
+import * as GEO from "../../geographic_constant";
 import { RemoveLineMap } from "./../remove_line_map";
-
 import Parser from "./parser";
 
-class ParserAd extends Parser {
+class ParserAdPref extends Parser {
   generatePath = async (remove_line: RemoveLineMap) => {
     const current_layer = this.edit_data.layers[this.layer_uuid];
     const path_join_flag = current_layer.layer_infomation["path_join"] == "ok";
@@ -22,7 +20,7 @@ class ParserAd extends Parser {
     const cg = new CashGeometry();
 
     const geometry_index = searchGisConditional(this.gis_info, this.unit_id, {
-      N03_007: current_layer.layer_infomation["administrative"],
+      N03_001: current_layer.layer_infomation["pref"],
     });
 
     const joinPath = async () => {
@@ -84,7 +82,6 @@ class ParserAd extends Parser {
               j++;
               continue;
             }
-            console.log("concat", i, j, path_1.getFirstNodeId(), path_1.getLastNodeId(), path_2.getFirstNodeId(), path_2.getLastNodeId());
             path_1.includePathOrder(path_2, 0);
             sort_paths_array[i] = path_1;
             sort_paths_array.splice(j, 1);
@@ -105,7 +102,6 @@ class ParserAd extends Parser {
         if (sort_paths_array[i].pos_order.length < threshold) {
           sort_paths_array.splice(i, 1);
         } else {
-          console.log("sort_paths_array", i, threshold, sort_paths_array[i].pos_order.length);
           i++;
         }
       }
@@ -117,10 +113,7 @@ class ParserAd extends Parser {
         }
       }
 
-      //   for (let i = 0; i < sort_paths_array.length; i++) {
-      //     console.log("sort_paths_array", i, sort_paths_array[i].pos_order.length);
-      //   }
-
+      console.log("sort_paths_array", sort_paths_array.length);
       return sort_paths_array;
     };
 
@@ -132,15 +125,6 @@ class ParserAd extends Parser {
     const paths_array: Array<GraphCoordinateExpression> = [];
     for (let i = 0; i < geometry_index.length; i++) {
       const current_geometry = (await getGeometry(cg, this.gis_info, this.unit_id, geometry_index[i])) as TypeGeometry3D;
-
-      // const cord = current_geometry.coordinates.flat();
-
-      // if (cord.length < threshold) {
-      //   continue;
-      // }
-
-      // const gce = this.parseCoordinates(cord);
-      // paths_array.push(gce);
 
       for (let j = 0; j < current_geometry.coordinates.length; j++) {
         const pcd = this.parseCoordinates(current_geometry.coordinates[j]);
@@ -162,4 +146,4 @@ class ParserAd extends Parser {
   };
 }
 
-export default ParserAd;
+export default ParserAdPref;
